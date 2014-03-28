@@ -1,6 +1,5 @@
 <?php
 session_start();
-echo 'in index page';exit;
 /*
  * This is an example file for a public interface and a bookmarklet. It
  * is provided so you can build from it and customize to suit your needs.
