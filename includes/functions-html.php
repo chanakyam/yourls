@@ -92,10 +92,6 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 	<script src="<?php yourls_site_url(); ?>/js/jquery-1.8.2.min.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 	<script src="<?php yourls_site_url(); ?>/js/common.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 	<script src="<?php yourls_site_url(); ?>/js/jquery.notifybar.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
-	<script src="<?php yourls_site_url(); ?>/js/jquery.min.js"></script>
-    <script src="http://emotionloop.github.io/visualCaptcha-frontend-core/dist/visualcaptcha.jquery.js"></script>
-    <script src="<?php yourls_site_url(); ?>/js/main.js"></script>
-    <link href="http://emotionloop.github.io/visualCaptcha-frontend-core/dist/visualcaptcha.css" media="all" rel="stylesheet">
 	<?php if( yourls_is_admin() ) {?>
 	<link rel="stylesheet" href="<?php yourls_site_url(); ?>/css/adminstyle.css?v=<?php echo YOURLS_VERSION; ?>" type="text/css" media="screen" />
 	<?php }else{ ?>

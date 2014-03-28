@@ -19,17 +19,6 @@ $page = YOURLS_SITE . '/index.php';
 //$page = YOURLS_SITE . '/sample-public-front-page.php' ;
 
 // Part to be executed if FORM has been submitted
-// Validating captcha
-// $messages = array();
-// if(isset($_REQUEST) && !empty($_REQUEST)){
-// 	if($_REQUEST['captcha'] == ''){
-// 		$messages['0'] = 'Please enter captcha';
-// 	}
-// 	elseif($_SESSION['captcha']!==$_REQUEST['captcha']) {//check if ! correct
-// 	 	$messages['1'] = 'Please check the captcha entered';
-// 	 }
-// }
-//if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' && empty($messages)) {
 if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
 	// Get parameters -- they will all be sanitized in yourls_add_new_link()
 	$url     = $_REQUEST['url'];
@@ -71,40 +60,6 @@ yourls_html_head();
 // Display left hand menu
 //yourls_html_menu() ;
 
-// Part to be executed if FORM has been submitted
-//if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' && empty($messages)) {
-//if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' && empty($messages)) {
-	// Display result message of short link creation
-	// if( isset( $message ) ) {
-	// 	echo "<h2>$message</h2>";
-	// }
-	
-	// if( $status == 'success' ) {
-	// 	// Include the Copy box and the Quick Share box
-	// 	yourls_share_box( $url, $shorturl, $title, $text );
-		
-	// 	// Initialize clipboard -- requires js/share.js and js/jquery.zclip.min.js to be properly loaded in the <head>
-	// 	echo "<script>init_clipboard();</script>\n";
-	// }
-
-// Part to be executed when no form has been submitted
-// } else {
-// 		$site = YOURLS_SITE;
-		//Displaying errors
-		// for($i=0;$i<count($messages);$i++){
-		// 	echo $messages[$i];
-		// }
-		
-		// Display the form
-		/*echo <<<HTML
-		<h2>Enter a new URL to shorten</h2>
-		<form method="post" action="">
-		<p><label>URL: <input type="text" class="text" name="url" value="http://" /></label></p>
-		<p><label>CAPTCHA: $captcha<input type="text" class="text" name="captcha" /></label></p>
-		<!--<p><label>Optional title: <input type="text" class="text" name="title" /></label></p>-->
-		<p><input type="submit" class="button primary" value="Shorten" /></p>
-		</form>	
-HTML;*/
 ?>
 
 <div class="contentarea">
@@ -167,31 +122,6 @@ HTML;*/
     
 </div>
 <!--contentarea end-->
-
-<?//}?>
-
-
-
-<!-- <h2>Bookmarklets</h2>
-
-<p>Bookmark these links:</p>
-
-<p>
-
-<a href="javascript:(function()%7Bvar%20d=document,w=window,enc=encodeURIComponent,e=w.getSelection,k=d.getSelection,x=d.selection,s=(e?e():(k)?k():(x?x.createRange().text:0)),s2=((s.toString()=='')?s:enc(s)),f='<?php echo $page; ?>',l=d.location,p='?url='+enc(l.href)+'&title='+enc(d.title)+'&text='+s2,u=f+p;try%7Bthrow('ozhismygod');%7Dcatch(z)%7Ba=function()%7Bif(!w.open(u))l.href=u;%7D;if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();%7Dvoid(0);%7D)()" class="bookmarklet">Default</a>
-
-<a href="javascript:(function()%7Bvar%20d=document,w=window,enc=encodeURIComponent,e=w.getSelection,k=d.getSelection,x=d.selection,s=(e?e():(k)?k():(x?x.createRange().text:0)),s2=((s.toString()=='')?s:enc(s)),f='<?php echo $page; ?>',l=d.location,k=prompt(%22Custom%20URL%22),k2=(k?'&keyword='+k:%22%22),p='?url='+enc(l.href)+'&title='+enc(d.title)+'&text='+s2+k2,u=f+p;if(k!=null)%7Btry%7Bthrow('ozhismygod');%7Dcatch(z)%7Ba=function()%7Bif(!w.open(u))l.href=u;%7D;if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();%7Dvoid(0)%7D%7D)()" class="bookmarklet">Custom</a>
-
-<a href="javascript:(function()%7Bvar%20d=document,s=d.createElement('script');window.yourls_callback=function(r)%7Bif(r.short_url)%7Bprompt(r.message,r.short_url);%7Delse%7Balert('An%20error%20occured:%20'+r.message);%7D%7D;s.src='<?php echo $page; ?>?url='+encodeURIComponent(d.location.href)+'&jsonp=yourls';void(d.body.appendChild(s));%7D)();" class="bookmarklet">Popup</a>
-
-<a href="javascript:(function()%7Bvar%20d=document,k=prompt('Custom%20URL'),s=d.createElement('script');if(k!=null){window.yourls_callback=function(r)%7Bif(r.short_url)%7Bprompt(r.message,r.short_url);%7Delse%7Balert('An%20error%20occured:%20'+r.message);%7D%7D;s.src='<?php echo $page; ?>?url='+encodeURIComponent(d.location.href)+'&keyword='+k+'&jsonp=yourls';void(d.body.appendChild(s));%7D%7D)();" class="bookmarklet">Custom Popup</a>
-
-</p>
-
-<h2>Please note</h2>
-
-<p>Be aware that a public interface <strong>will</strong> attract spammers. You are strongly advised to install anti spam plugins and any appropriate counter measure to deal with this issue.</p> -->
-
 <?php
 
 // Display page footer
