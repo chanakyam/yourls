@@ -1,0 +1,71 @@
+/*lycos css*/
+* {padding:0; margin:0;}
+a {text-decoration: none;}
+body {padding:0; margin:0; font-family:Arial, Helvetica, sans-serif; font-size:13px; background:url(../images/bg.png) repeat 0 0;}
+
+.success, .warning {margin: 20px 0;}
+
+.success span {
+background: #60DB69;
+font-weight: normal;
+
+color: #1B1414;
+padding:10px;
+border-radius: 5px;
+}
+
+.warning span {
+background: #F8B2C0;
+font-weight: normal;
+color: #1B1414;
+padding:10px;
+border-radius: 5px;
+}
+
+.contentarea {margin:0;}
+
+.header {background:#343637 url(../images/headerbg.png) repeat-x 0 bottom; padding:10px 0; border-top:1px solid #0f1010;}
+
+.contentarea:after, .contentarea:before { display:table; content:"";}
+.contentarea:after {clear:both}
+
+.header a {color:#d4d7da; text-decoration:none; padding:0 5px; margin:5px; display:inline-block;}
+
+.menu {float:right;}
+
+.ltpannel {background:url(../images/bgTexture.png) repeat 0 0; float:left; width:70%; display:table;}
+
+.rtpannel {float:left; width:29%; height:300px; background:#fff; margin:5px 0 0 8px;}
+
+.content {vertical-align:middle; display:table-cell; text-align:center;}
+
+.module {padding:10px;}
+
+
+.footer {background:#343637; padding:10px 0; color:#919191; position:fixed; bottom:0; width:100%; text-align:center;}
+.footer a {color:#fff; text-decoration:none; margin:0 5px;}
+
+
+.text-right { text-align:right;}
+
+input[type="text"] {border:1px solid #cccccc; padding:10px;}
+.btn {background:#337291; border:1px solid #1e4456; color:#fff; padding:10px; cursor:pointer;}
+
+@-moz-document url-prefix() { 
+ .btn {padding:9px;}
+
+}
+
+.span6 {width:60%;}
+
+.left {float:left;}
+.right {float:right;}
+
+
+.margin10_T {margin-top:10px;}
+.margin20_T {margin-top:20px;}
+
+
+.margin20_L {margin-left:20px;}
+
+.clear {clear:both; display:block; overflow: hidden;}
