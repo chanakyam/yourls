@@ -1,4 +1,5 @@
 <?php
+echo 'testing';exit;
 /* This is a sample config file.
  * Edit this file with your own settings and save it as "config.php"
  */

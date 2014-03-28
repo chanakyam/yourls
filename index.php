@@ -12,7 +12,6 @@ session_start();
 
 // Start YOURLS engine
 require_once( dirname(__FILE__).'/includes/load-yourls.php' );
-require_once( dirname(__FILE__).'/includes/captcha.php' );
 
 // Change this to match the URL of your public interface. Something like: http://yoursite.com/index.php
 $page = YOURLS_SITE . '/index.php';
