@@ -67,7 +67,7 @@ yourls_html_head();
 		<div class="content">
 			<p><img src="images/lycsoLogo.png" align="absmiddle" /></p>
 			<?php
-			if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' && empty($messages)) {
+			if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
 				// Display result message of short link creation
 				($status == 'success')?$class = 'success':$class = 'warning';
 				if( isset( $message ) ) {					
