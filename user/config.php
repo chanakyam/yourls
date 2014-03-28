@@ -62,7 +62,7 @@ $yourls_user_passwords = array(
 
 /** Debug mode to output some internal information
  ** Default is false for live site. Enable when coding or before submitting a new issue */
-define( 'YOURLS_DEBUG', false );
+define( 'YOURLS_DEBUG', true );
 	
 /*
  ** URL Shortening settings
