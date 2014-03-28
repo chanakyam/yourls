@@ -11,7 +11,7 @@
 define( 'YOURLS_DB_USER', 'root' );
 
 /** MySQL database password */
-define( 'YOURLS_DB_PASS', '' );
+define( 'YOURLS_DB_PASS', 'p0o9i8u7y6' );
 
 /** The name of the database for YOURLS */
 define( 'YOURLS_DB_NAME', 'yourls' );
