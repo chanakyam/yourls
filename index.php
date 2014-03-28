@@ -1,5 +1,6 @@
 <?php
 session_start();
+echo 'in index page';exit;
 /*
  * This is an example file for a public interface and a bookmarklet. It
  * is provided so you can build from it and customize to suit your needs.
@@ -89,14 +90,12 @@ yourls_html_head();
 			<p class="margin20_T">
 			<input type="text" name="url" placeholder="Paste long URL here" class="span6"/>
 			<input type="submit" class="btn" value="Shorten"/></p>
-			<!-- <p class="margin20_T">captcha : <?php echo $captcha;?></p> -->
 			<div id="status-message"></div>
             <div id="sample-captcha"></div>
 			</form>	
 			<?php }?>
 		</div>
-	</div>
-	
+	</div>	
 	<div class="rtpannel">
 		<div class="module">
 		<p>
@@ -116,10 +115,8 @@ yourls_html_head();
 			</iframe>
 		</noscript>
 		</span> 
-		<!-- <span class="right">STAYfRLSHIORLlSS</span> -->
 		</div>
-	</div>
-    
+	</div>    
 </div>
 <!--contentarea end-->
 <?php
