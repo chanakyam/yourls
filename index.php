@@ -43,13 +43,7 @@ if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
 		
 		die();
 	}
-}else{
-	$cap = simple_php_captcha();
-	//echo '<pre>';print_r($cap);
-	$captcha = $_SESSION['captcha'] = $cap['code'];
-	$image_src = $_SESSION['image_src'] = $cap['image_src'];
 }
-
 // Insert <head> markup and all CSS & JS files
 yourls_html_head();
 
