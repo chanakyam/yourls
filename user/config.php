@@ -1,5 +1,4 @@
 <?php
-echo 'testing';exit;
 /* This is a sample config file.
  * Edit this file with your own settings and save it as "config.php"
  */
@@ -63,7 +62,7 @@ $yourls_user_passwords = array(
 
 /** Debug mode to output some internal information
  ** Default is false for live site. Enable when coding or before submitting a new issue */
-define( 'YOURLS_DEBUG', true );
+define( 'YOURLS_DEBUG', false );
 	
 /*
  ** URL Shortening settings
