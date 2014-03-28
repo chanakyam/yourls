@@ -1,5 +1,4 @@
 <?php
-die('this is it');
 session_start();
 /*
  * This is an example file for a public interface and a bookmarklet. It
