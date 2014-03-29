@@ -724,7 +724,7 @@ function yourls_login_screen( $error_msg = '' ) {
 	
 	$action = ( isset( $_GET['action'] ) && $_GET['action'] == 'logout' ? '?' : '' );
 
-	yourls_html_logo();
+	//yourls_html_logo();
 	?>
 	<div id="login">
 		<form method="post" action="<?php echo $action; ?>"> <?php // reset any QUERY parameters ?>
