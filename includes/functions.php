@@ -171,10 +171,7 @@ function yourls_url_exists( $url ) {
 	global $ydb;
 	$table = YOURLS_DB_TABLE_URL;
 	$url   = yourls_escape( yourls_sanitize_url( $url) );
-	$url_exists = $ydb->get_row( "SELECT * FROM `$table` WHERE `url` = '".$url."';" );
-	// echo '<pre>';print_r($url_exists);
-	// yourls_site_url().'/'.$url_exists->keyword;
-	// exit;
+	$url_exists = $ydb->get_row( "SELECT * FROM `$table` WHERE `url` = '".$url."';" );	
 	return yourls_apply_filter( 'url_exists', $url_exists, $url );
 }
 

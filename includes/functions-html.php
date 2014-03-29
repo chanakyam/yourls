@@ -145,7 +145,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 <body class="<?php echo $context; ?> <?php echo $bodyclass; ?>">
 <?php }else{?>
 <body class="<?php echo $context; ?> <?php echo $bodyclass; ?>">
-<?php }?>
+
 <div class="header">
 	<a href="#"><img src="images/headerDog.png" align="absmiddle"/></a> 
 	<a href="#">Home</a>
@@ -154,7 +154,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 	<a href="#">News</a>
 	<a href="#">Entertainment</a>
 	<a href="#">Tripod</a>
-
+<?php }?>
 	<span class="menu"><a href="#"><img src="images/headerMenuIcon.png" align="absmiddle"/></a></span>
 </div>
 <!--header end-->

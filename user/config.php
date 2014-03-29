@@ -11,7 +11,8 @@
 define( 'YOURLS_DB_USER', 'root' );
 
 /** MySQL database password */
-define( 'YOURLS_DB_PASS', 'p0o9i8u7y6' );
+//define( 'YOURLS_DB_PASS', 'p0o9i8u7y6' );
+define( 'YOURLS_DB_PASS', '' );
 
 /** The name of the database for YOURLS */
 define( 'YOURLS_DB_NAME', 'yourls' );
@@ -29,7 +30,8 @@ define( 'YOURLS_DB_PREFIX', 'yourls_' );
 
 /** YOURLS installation URL -- all lowercase and with no trailing slash.
  ** If you define it to "http://site.com", don't use "http://www.site.com" in your browser (and vice-versa) */
-define( 'YOURLS_SITE', 'http://lyc.so' );
+//define( 'YOURLS_SITE', 'http://lyc.so' );
+define( 'YOURLS_SITE', 'http://myyourls.com' );
 
 /** Timezone GMT offset */
 define( 'YOURLS_HOURS_OFFSET', 0 ); 
@@ -57,7 +59,8 @@ define( 'YOURLS_COOKIEKEY', 'xqT(WZ15@m}6|h#Pj(]NfXt_Y@nA$PzATpOZK[0B' );
  ** YOURLS will auto encrypt plain text passwords in this file
  ** Read http://yourls.org/userpassword for more information */
 $yourls_user_passwords = array(
-	'lycsoadmin' => 'kHUjtriJZpymyYPPkik4wcUbj9' /* Password encrypted by YOURLS */ 
+	'lycsoadmin' => 'kHUjtriJZpymyYPPkik4wcUbj9' ,/* Password encrypted by YOURLS */ 
+	'chanakya' => 'abc123'
 	);
 
 /** Debug mode to output some internal information
