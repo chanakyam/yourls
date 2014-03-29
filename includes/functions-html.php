@@ -84,10 +84,10 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 <head>
 	<title><?php echo $title ?></title>
 	<link rel="shortcut icon" href="<?php yourls_favicon(); ?>" />
-	<meta http-equiv="Content-Type" content="<?php echo yourls_apply_filters( 'html_head_meta_content-type', 'text/html; charset=utf-8' ); ?>" />
+	<!-- <meta http-equiv="Content-Type" content="<?php echo yourls_apply_filters( 'html_head_meta_content-type', 'text/html; charset=utf-8' ); ?>" />
 	<meta http-equiv="X-UA-Compatible" content="IE-9"/>
 	<meta name="author" content="Ozh RICHARD & Lester CHAN for http://yourls.org/" />
-	<meta name="generator" content="YOURLS <?php echo YOURLS_VERSION ?>" />
+	<meta name="generator" content="YOURLS <?php echo YOURLS_VERSION ?>" /> -->
 	<meta name="description" content="Insert URL &laquo; YOURLS &raquo; Your Own URL Shortener' | <?php yourls_site_url(); ?>" />
 	<script src="<?php yourls_site_url(); ?>/js/jquery-1.8.2.min.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 	<script src="<?php yourls_site_url(); ?>/js/common.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
@@ -190,7 +190,7 @@ function yourls_html_footer() {
 	?>
 	<div class="footer">
 		<a href="#">About</a> | <a href="#">Help</a> | <a href="#">Contact</a>
-		<span class="margin20_L">Short URL service devloped by lye.so</span> <span class="margin20_L">Copyright © 2014 Lyc.so</span>
+		<span class="margin20_L">Short URL service devloped by lyc.so</span> <span class="margin20_L">Copyright © 2014 Lyc.so</span>
 	</div>
 <!--footer end-->
 

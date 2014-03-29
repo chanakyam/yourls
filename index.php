@@ -64,7 +64,8 @@ yourls_html_head();
 				// Display result message of short link creation
 				($status == 'success')?$class = 'success':$class = 'warning';
 				if( isset( $message ) ) {					
-					echo "<h2 class='".$class."'><span>$message</span></h2>";
+					echo "<h2 class='".$class."'>Entered URL <span>$message</span></h2>";
+					echo "<h2 class='".$class."'>Shorten URL <span>$shorturl</span></h2>";
 				}
 				
 				if( $status == 'success' ) {

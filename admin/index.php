@@ -261,7 +261,7 @@ if ( isset( $_GET['u'] ) or isset( $_GET['up'] ) ) {
 // Begin output of the page
 $context = ( $is_bookmark ? 'bookmark' : 'index' );
 yourls_html_head( $context );
-yourls_html_logo();
+//yourls_html_logo();
 yourls_html_menu() ;
 
 yourls_do_action( 'admin_page_before_content' );
