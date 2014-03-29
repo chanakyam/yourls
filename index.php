@@ -65,7 +65,9 @@ yourls_html_head();
 				($status == 'success')?$class = 'success':$class = 'warning';
 				if( isset( $message ) ) {					
 					echo "<h2 class='".$class."'>Entered URL <span>$message</span></h2>";
-					echo "<h2 class='".$class."'>Shorten URL <span>$shorturl</span></h2>";
+					if( isset($shorturl) && $shorturl!=''){
+						echo "<h2 class='".$class."'>Shorten URL <span>$shorturl</span></h2>";
+					}
 				}
 				
 				if( $status == 'success' ) {
