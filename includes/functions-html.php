@@ -84,12 +84,13 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 <head>
 	<title><?php echo $title ?></title>
 	<link rel="shortcut icon" href="<?php yourls_favicon(); ?>" />
+	<meta charset="utf-8">
 	<!-- <meta http-equiv="Content-Type" content="<?php echo yourls_apply_filters( 'html_head_meta_content-type', 'text/html; charset=utf-8' ); ?>" />
 	<meta http-equiv="X-UA-Compatible" content="IE-9"/>
 	<meta name="author" content="Ozh RICHARD & Lester CHAN for http://yourls.org/" />
-	<meta name="generator" content="YOURLS <?php echo YOURLS_VERSION ?>" /> -->
-	<meta name="description" content="Insert URL &laquo; YOURLS &raquo; Your Own URL Shortener' | <?php yourls_site_url(); ?>" />
-	<script src="<?php yourls_site_url(); ?>/js/jquery-1.8.2.min.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
+	<meta name="generator" content="YOURLS <?php echo YOURLS_VERSION ?>" /> 
+	<meta name="description" content="Insert URL &laquo; YOURLS &raquo; Your Own URL Shortener' | <?php yourls_site_url(); ?>" />-->
+	<script src="<?php yourls_site_url(); ?>/js/jquery-1.10.1.min.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 	<script src="<?php yourls_site_url(); ?>/js/common.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 	<script src="<?php yourls_site_url(); ?>/js/jquery.notifybar.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 	<?php if( yourls_is_admin() ) {?>
@@ -724,7 +725,7 @@ function yourls_login_screen( $error_msg = '' ) {
 	
 	$action = ( isset( $_GET['action'] ) && $_GET['action'] == 'logout' ? '?' : '' );
 
-	yourls_html_logo();
+	//yourls_html_logo();
 	?>
 	<div id="login">
 		<form method="post" action="<?php echo $action; ?>"> <?php // reset any QUERY parameters ?>
