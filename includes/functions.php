@@ -2000,7 +2000,7 @@ function yourls_favicon( $echo = true ) {
 	if( $custom ) {
 		$favicon = yourls_site_url( false, YOURLS_USERURL . '/' . $custom );
 	} else {
-		$favicon = yourls_site_url( false ) . '/images/favicon.gif';
+		$favicon = yourls_site_url( false ) . '/images/favicon.ico';
 	}
 
 	if( $echo ) {

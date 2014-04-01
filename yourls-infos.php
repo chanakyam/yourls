@@ -202,7 +202,7 @@ if( yourls_do_log_redirect() ) {
 }
 
 yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keyword ) );
-yourls_html_logo();
+//yourls_html_logo();
 yourls_html_menu();
 ?>
 

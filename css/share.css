@@ -4,6 +4,7 @@
 
 #shareboxes{
 	padding:10px;
+	display: table;
 }
 p {padding:8px 0; font-size: 15px; line-height:22px; }
 h2 {padding: 10px 0;}
@@ -18,8 +19,9 @@ div.share {
 	background:#FAFAF7;
 	margin-left:1em;
 	padding:0 1em;
-	float:left;
-	height:140px;
+	/*float:left;
+	height:140px;*/
+	display: table-cell;
 }
 #origlink{
 	
@@ -31,7 +33,7 @@ div.share {
 	width:30%;
 }
 #sharebox {
-	width:58%;
+	/*width:58%;*/
 }
 #tweet_body {
 	float:left;

@@ -1,5 +1,36 @@
+<!-- start of visual captcha validation code -->
 <?php
 session_start();
+
+$_GLOBAL_MSG = '';
+
+if ( isset($_REQUEST['css_type']) && $_REQUEST['css_type'] === '1' ) {
+	$_FORM_TYPE = 1;// Vertical
+} else {
+	$_FORM_TYPE = 0;// Horizontal
+}
+
+// The fact we're not using the default visualCaptcha's fieldname is just to show part of visualCaptcha's flexibility
+$_FIELD_NAME = isset($_SESSION['visualCaptcha-fieldName']) ? $_SESSION['visualCaptcha-fieldName'] : uniqid();
+
+if ( isset($_REQUEST['form_submit']) && $_REQUEST['form_submit'] === '1' ) {
+	if ( ! validCaptcha('frm_sample', $_FORM_TYPE, $_FIELD_NAME) ) {
+		$_GLOBAL_MSG = 'Captcha error!';
+	} else {
+		//$_GLOBAL_MSG = 'Captcha valid!';
+		$_GLOBAL_MSG = '';
+	}
+
+	// Generate a new fieldName
+	$_FIELD_NAME = uniqid();
+}
+
+$_SESSION['visualCaptcha-fieldName'] = $_FIELD_NAME;
+
+?>
+<!-- end of visual captcha validation code -->
+<?php
+//session_start();
 /*
  * This is an example file for a public interface and a bookmarklet. It
  * is provided so you can build from it and customize to suit your needs.
@@ -18,7 +49,8 @@ $page = YOURLS_SITE . '/index.php';
 //$page = YOURLS_SITE . '/sample-public-front-page.php' ;
 
 // Part to be executed if FORM has been submitted
-if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
+//if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
+if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' && $_GLOBAL_MSG=='') {
 	// Get parameters -- they will all be sanitized in yourls_add_new_link()
 	$url     = $_REQUEST['url'];
 	$keyword = isset( $_REQUEST['keyword'] ) ? $_REQUEST['keyword'] : '' ;
@@ -27,7 +59,6 @@ if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
 
 	// Create short URL, receive array $return with various information
 	$return  = yourls_add_new_link( $url, $keyword, $title );
-	//echo '<pre>';print_r($return);exit();
 	
 	$shorturl = isset( $return['shorturl'] ) ? $return['shorturl'] : '';
 	$message  = isset( $return['message'] ) ? $return['message'] : '';
@@ -54,17 +85,20 @@ yourls_html_head();
 //yourls_html_menu() ;
 
 ?>
-
+<!-- Required CSS -->
+<link rel="stylesheet" href="inc/visualcaptcha.css" media="all" />	
+<link rel="stylesheet" href="sample.css" media="all" />
 <div class="contentarea">
 	<div class="ltpannel">
 		<div class="content">
 			<p><img src="images/lycsoLogo.png" align="absmiddle" /></p>
 			<?php
-			if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
+			//if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
+			if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' && $_GLOBAL_MSG=='') {
 				// Display result message of short link creation
 				($status == 'success')?$class = 'success':$class = 'warning';
 				if( isset( $message ) ) {					
-					echo "<h2 class='".$class."'>Entered URL <span>$message</span></h2>";
+					echo "<h2 class='".$class."'>Long URL <span>$message</span></h2>";
 					if( isset($shorturl) && $shorturl!=''){
 						echo "<h2 class='".$class."'>Shorten URL <span>$shorturl</span></h2>";
 					}
@@ -77,17 +111,29 @@ yourls_html_head();
 					// Initialize clipboard -- requires js/share.js and js/jquery.zclip.min.js to be properly loaded in the <head>
 					echo "<script>init_clipboard();</script>\n";
 				}
-				echo "<span class='clear'></span><div class='left margin20_L margin20_T'><a href='/'><input type='submit' class='btn' value='Create More'></a></div>";
+				echo "<span class='clear'></span><div><a href='/'><input type='submit' class='btn' value='Create More'></a></div>";
 
 			}else{
 			?>
-			<form method="post" action="">
-			<p class="margin20_T">
-			<input type="text" name="url" placeholder="Paste long URL here" class="span6"/>
-			<input type="submit" class="btn" value="Shorten"/></p>
-			<div id="status-message"></div>
-            <div id="sample-captcha"></div>
+			<?php
+			if ( ! empty($_GLOBAL_MSG) ) {
+			?>
+				<h3 class="warning"><span><?php echo $_GLOBAL_MSG; ?></span></h3>
+			<?php
+			}
+			?>			
+			<form name="frm_sample" id="frm_sample" method="post" action="">
+				<input type="hidden" name="form_submit" value="1" readonly="readonly" />
+				<input type="hidden" name="css_type" value="<?php echo $_FORM_TYPE; ?>" readonly="readonly" />
+				<p class="margin20_T">
+				<input type="text" name="url" placeholder="Paste long URL here" class="span6"/>
+				<input type="submit" name="submit-bt" class="btn" value="Shorten"/>
+				<?php printCaptcha( 'frm_sample', $_FORM_TYPE, $_FIELD_NAME ); ?>
+				</p>			
 			</form>	
+			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+			<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+			<script src="inc/visualcaptcha.js"></script>
 			<?php }?>
 		</div>
 	</div>	
@@ -95,6 +141,7 @@ yourls_html_head();
 		<div class="module">
 		<p>
 		<span class="left">
+
 		<script type="text/javascript">
 			if (!window.OX_ads) { OX_ads = []; }
 			OX_ads.push({ "auid" : "556161" });
@@ -117,4 +164,22 @@ yourls_html_head();
 <?php
 
 // Display page footer
-yourls_html_footer();	
+yourls_html_footer();
+
+// These functions aren't needed, but we recommend you to use them (or similar), so you can start/get multiple captcha instances with two simple functions.
+
+function printCaptcha( $formId = NULL, $type = NULL, $fieldName = NULL, $accessibilityFieldName = NULL ) {
+	require_once( 'inc/visualcaptcha.class.php' );
+	
+	$visualCaptcha = new \visualCaptcha\Captcha( $formId, $type, $fieldName, $accessibilityFieldName );
+	$visualCaptcha->show();
+}
+
+function validCaptcha( $formId = NULL, $type = NULL, $fieldName = NULL, $accessibilityFieldName = NULL ) {
+	require_once( 'inc/visualcaptcha.class.php' );
+	$visualCaptcha = new \visualCaptcha\Captcha( $formId, $type, $fieldName, $accessibilityFieldName );
+	return $visualCaptcha->isValid();
+}
+
+?>	
+

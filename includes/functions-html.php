@@ -22,6 +22,7 @@ function yourls_html_logo() {
  * @param string $title HTML title of the page
  */
 function yourls_html_head( $context = 'index', $title = '' ) {
+	//if( yourls_is_admin() || $context =='infos'){echo 'admin';	}exit;
 
 	yourls_do_action( 'pre_html_head', $context, $title );
 	
@@ -74,7 +75,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 	
 	// Page title
 	//$_title = 'YOURLS &mdash; Your Own URL Shortener | ' . yourls_link();
-	$_title = 'Lycos';
+	$_title = 'Lycos URL Short Service';
 	$title = $title ? $title . " &laquo; " . $_title : $_title;
 	$title = yourls_apply_filter( 'html_title', $title, $context );
 	
@@ -84,15 +85,16 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 <head>
 	<title><?php echo $title ?></title>
 	<link rel="shortcut icon" href="<?php yourls_favicon(); ?>" />
+	<meta charset="utf-8">
 	<!-- <meta http-equiv="Content-Type" content="<?php echo yourls_apply_filters( 'html_head_meta_content-type', 'text/html; charset=utf-8' ); ?>" />
 	<meta http-equiv="X-UA-Compatible" content="IE-9"/>
 	<meta name="author" content="Ozh RICHARD & Lester CHAN for http://yourls.org/" />
-	<meta name="generator" content="YOURLS <?php echo YOURLS_VERSION ?>" /> -->
-	<meta name="description" content="Insert URL &laquo; YOURLS &raquo; Your Own URL Shortener' | <?php yourls_site_url(); ?>" />
+	<meta name="generator" content="YOURLS <?php echo YOURLS_VERSION ?>" /> 
+	<meta name="description" content="Insert URL &laquo; YOURLS &raquo; Your Own URL Shortener' | <?php yourls_site_url(); ?>" />-->
 	<script src="<?php yourls_site_url(); ?>/js/jquery-1.8.2.min.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 	<script src="<?php yourls_site_url(); ?>/js/common.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 	<script src="<?php yourls_site_url(); ?>/js/jquery.notifybar.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
-	<?php if( yourls_is_admin() ) {?>
+	<?php if( yourls_is_admin() || $context == 'infos' ||$context == 'login') {?>
 	<link rel="stylesheet" href="<?php yourls_site_url(); ?>/css/adminstyle.css?v=<?php echo YOURLS_VERSION; ?>" type="text/css" media="screen" />
 	<?php }else{ ?>
 	<link rel="stylesheet" href="<?php yourls_site_url(); ?>/css/style.css?v=<?php echo YOURLS_VERSION; ?>" type="text/css" media="screen" />
@@ -130,22 +132,23 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 		var zclipurl = '<?php yourls_site_url(); ?>/js/ZeroClipboard.swf';
 	//]]>
 	</script>
-	<script>
+	 <!--<script>
 		$(document).ready(function(){
 			var pqr=$(window).height();
-			//alert(pqr);
+			alert(pqr);
 
 			$('.ltpannel').css('height', pqr-((pqr/100)*12) );
 			$('.rtpannel').css('height', pqr-((pqr/100)*13) );
 		});
-	</script>
+	</script>-->
 	<?php yourls_do_action( 'html_head', $context ); ?>
 </head>
 <?php if( yourls_is_admin() ) {?>
 <body class="<?php echo $context; ?> <?php echo $bodyclass; ?>">
 <?php }else{?>
 <body class="<?php echo $context; ?> <?php echo $bodyclass; ?>">
-
+<?php }?>
+<?php if(!yourls_is_admin() && $context!='login'){?>
 <div class="header">
 	<a href="#"><img src="images/headerDog.png" align="absmiddle"/></a> 
 	<a href="#">Home</a>
@@ -154,9 +157,10 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 	<a href="#">News</a>
 	<a href="#">Entertainment</a>
 	<a href="#">Tripod</a>
-<?php }?>
+
 	<span class="menu"><a href="#"><img src="images/headerMenuIcon.png" align="absmiddle"/></a></span>
 </div>
+<?php }?>
 <!--header end-->
 <div id="wrap">
 	<?php
@@ -193,7 +197,18 @@ function yourls_html_footer() {
 		<span class="margin20_L">Short URL service devloped by lyc.so</span> <span class="margin20_L">Copyright © 2014 Lyc.so</span>
 	</div>
 <!--footer end-->
+	<script>
+		$(document).ready(function(){
+			var pqr=$(window).height();
+			//alert(pqr);
 
+			$('.ltpannel').css('height', pqr-((pqr/100)*12) );
+			$('.rtpannel').css('height', pqr-((pqr/100)*13) );
+		});
+
+		
+
+	</script>
     
 </body>
 </html>
@@ -432,7 +447,7 @@ function yourls_share_box( $longurl, $shorturl, $title = '', $text='', $shortlin
 			<?php } ?>
 			</p>
 		</div>
-
+		<div style="display: table-cell; width: 15px;"></div>
 		<?php yourls_do_action( 'shareboxes_middle', $longurl, $shorturl, $title, $text ); ?>
 
 		<div id="sharebox" class="share">
@@ -444,7 +459,7 @@ function yourls_share_box( $longurl, $shorturl, $title = '', $text='', $shortlin
 			<p id="share_links"><?php yourls_e( 'Share with' ); ?> 
 				<a id="share_tw" href="http://twitter.com/home?status=<?php echo $_share; ?>" title="<?php yourls_e( 'Tweet this!' ); ?>" onclick="share('tw');return false">Twitter</a>
 				<a id="share_fb" href="http://www.facebook.com/share.php?u=<?php echo $_url; ?>" title="<?php yourls_e( 'Share on Facebook' ); ?>" onclick="share('fb');return false;">Facebook</a>
-				<a id="share_ff" href="http://friendfeed.com/share/bookmarklet/frame#title=<?php echo $_share; ?>" title="<?php yourls_e( 'Share on Friendfeed' ); ?>" onclick="share('ff');return false;">FriendFeed</a>
+				<!--<a id="share_ff" href="http://friendfeed.com/share/bookmarklet/frame#title=<?php echo $_share; ?>" title="<?php yourls_e( 'Share on Friendfeed' ); ?>" onclick="share('ff');return false;">FriendFeed</a>-->
 				<?php
 				yourls_do_action( 'share_links', $longurl, $shorturl, $title, $text );
 				// Note: on the main admin page, there are no parameters passed to the sharebox when it's drawn.
