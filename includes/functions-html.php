@@ -193,7 +193,7 @@ function yourls_html_footer() {
 	</html>*/
 	?>
 	<div class="footer">
-		<a href="#">About</a> | <a href="#">Help</a> | <a href="#">Contact</a>
+		<!-- <a href="#">About</a> | <a href="#">Help</a> | <a href="#">Contact</a> -->
 		<span class="margin20_L">Short URL service devloped by lycos.com</span> <span class="margin20_L">Copyright © 2014 lycos.com</span>
 	</div>
 <!--footer end-->
