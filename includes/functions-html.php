@@ -148,7 +148,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 <?php }else{?>
 <body class="<?php echo $context; ?> <?php echo $bodyclass; ?>">
 <?php }?>
-<?php if(!yourls_is_admin() && $context!='login'){?>
+<?php if(!yourls_is_admin() && $context!='infos'){?>
 <div class="header">
 	<a href="#"><img src="images/headerDog.png" align="absmiddle"/></a> 
 	<a href="#">Home</a>
