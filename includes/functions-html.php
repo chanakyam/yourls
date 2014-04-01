@@ -194,7 +194,7 @@ function yourls_html_footer() {
 	?>
 	<div class="footer">
 		<a href="#">About</a> | <a href="#">Help</a> | <a href="#">Contact</a>
-		<span class="margin20_L">Short URL service devloped by lyc.so</span> <span class="margin20_L">Copyright © 2014 Lyc.so</span>
+		<span class="margin20_L">Short URL service devloped by lycos.com</span> <span class="margin20_L">Copyright © 2014 lycos.com</span>
 	</div>
 <!--footer end-->
 	<script>
