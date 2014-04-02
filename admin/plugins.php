@@ -56,7 +56,7 @@ if( isset( $_GET['success'] ) && ( ( $_GET['success'] == 'activated' ) OR ( $_GE
 }
 
 yourls_html_head( 'plugins', yourls__( 'Manage Plugins' ) );
-yourls_html_logo();
+//yourls_html_logo();
 yourls_html_menu();
 ?>
 

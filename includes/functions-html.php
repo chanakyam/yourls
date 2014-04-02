@@ -791,10 +791,10 @@ function yourls_html_menu() {
 	);
 	
 	if( yourls_is_admin() ) {
-		$admin_links['tools'] = array(
+		/*$admin_links['tools'] = array(
 			'url'    => yourls_admin_url( 'tools.php' ),
 			'anchor' => yourls__( 'Tools' )
-		);
+		);*/
 		$admin_links['plugins'] = array(
 			'url'    => yourls_admin_url( 'plugins.php' ),
 			'anchor' => yourls__( 'Manage Plugins' )
@@ -831,7 +831,7 @@ function yourls_html_menu() {
 	}
 	
 	if ( isset( $help_link ) )
-		echo '<li id="admin_menu_help_link">' . $help_link .'</li>';
+		//echo '<li id="admin_menu_help_link">' . $help_link .'</li>';
 		
 	yourls_do_action( 'admin_menu' );
 	echo "</ul>\n";
