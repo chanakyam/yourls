@@ -52,15 +52,13 @@ if( isset( $_GET['success'] ) && ( ( $_GET['success'] == 'activated' ) OR ( $_GE
 	} elseif ( $_GET['success'] == 'deactivated' ) {
 		$message = yourls__( 'Plugin has been deactivated' );
 	}
-	yourls_add_notice( $message );
+	
 }
 
 yourls_html_head( 'plugins', yourls__( 'Manage Plugins' ) );
-//yourls_html_logo();
-yourls_html_menu();
 ?>
 
-	<h2><?php yourls_e( 'Plugins' ); ?></h2>
+	<h2><?php yourls_e( 'Plugins' ); ?></h2></br>
 	
 	<?php
 	$plugins = (array)yourls_get_plugins();
@@ -72,7 +70,8 @@ yourls_html_menu();
 	?>
 	
 	<p id="plugin_summary"><?php /* //translators: "you have '3 plugins' installed and '1' activated" */ yourls_se( 'You currently have <strong>%1$s</strong> installed, and <strong>%2$s</strong> activated', $plugins_count, $count_active ); ?></p>
-
+</br>
+<?php echo $message ;?>
 	<table id="main_table" class="tblSorter" cellpadding="0" cellspacing="1">
 	<thead>
 		<tr>
@@ -154,11 +153,11 @@ yourls_html_menu();
 	<?php } ?>
 	</script>
 	
-	<p><?php yourls_e( 'If something goes wrong after you activate a plugin and you cannot use YOURLS or access this page, simply rename or delete its directory, or rename the plugin file to something different than <code>plugin.php</code>.' ); ?></p>
+	<p><?php //yourls_e( 'If something goes wrong after you activate a plugin and you cannot use YOURLS or access this page, simply rename or delete its directory, or rename the plugin file to something different than <code>plugin.php</code>.' ); ?></p>
 	
-	<h3><?php yourls_e( 'More plugins' ); ?></h3>
+	<h3><?php //yourls_e( 'More plugins' ); ?></h3>
 	
-	<p><?php yourls_e( 'For more plugins, head to the official <a href="http://yourls.org/pluginlist">Plugin list</a>.' ); ?></p>
+	<p><?php //yourls_e( 'For more plugins, head to the official <a href="http://yourls.org/pluginlist">Plugin list</a>.' ); ?></p>
 
 	
 <?php yourls_html_footer(); ?>

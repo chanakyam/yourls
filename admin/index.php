@@ -262,19 +262,15 @@ if ( isset( $_GET['u'] ) or isset( $_GET['up'] ) ) {
 $context = ( $is_bookmark ? 'bookmark' : 'index' );
 yourls_html_head( $context );
 //yourls_html_logo();
-yourls_html_menu() ;
+// yourls_html_menu() ;
 
 yourls_do_action( 'admin_page_before_content' );
 
 if ( !$is_bookmark ) { ?>
 	<p><?php echo $search_sentence; ?></p>
-	<p><?php
-		printf( yourls__( 'Display <strong>%1$s</strong> to <strong class="increment">%2$s</strong> of <strong class="increment">%3$s</strong> URLs' ), $display_on_page, $max_on_page, $total_items );
-		if( $total_items_clicks !== false )
-			echo ", " . sprintf( yourls_n( 'counting <strong>1</strong> click', 'counting <strong>%s</strong> clicks', $total_items_clicks ), yourls_number_format_i18n( $total_items_clicks ) );
-	?>.</p>
+
 <?php } ?>
-<p><?php printf( yourls__( 'Overall, tracking <strong class="increment">%1$s</strong> links, <strong>%2$s</strong> clicks, and counting!' ), yourls_number_format_i18n( $total_urls ), yourls_number_format_i18n( $total_clicks ) ); ?></p>
+
 <?php
 
 yourls_do_action( 'admin_page_before_form' );

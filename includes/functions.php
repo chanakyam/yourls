@@ -1742,8 +1742,8 @@ function yourls_needs_ssl() {
  *
  */
 function yourls_admin_url( $page = '' ) {
-	//$admin = YOURLS_SITE . '/admin/' . $page;
-	$admin = YOURLS_SITE . '/administration/' . $page;
+	$admin = YOURLS_SITE . '/admin/' . $page;
+	//$admin = YOURLS_SITE . '/administration/' . $page;
 	if( yourls_is_ssl() or yourls_needs_ssl() )
         $admin = yourls_set_url_scheme( $admin, 'https' );
 	return yourls_apply_filter( 'admin_url', $admin, $page );

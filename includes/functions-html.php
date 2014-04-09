@@ -85,13 +85,9 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 <head>
 	<title><?php echo $title ?></title>
 	<link rel="shortcut icon" href="<?php yourls_favicon(); ?>" />
-	<meta charset="utf-8">
-	<!-- <meta http-equiv="Content-Type" content="<?php echo yourls_apply_filters( 'html_head_meta_content-type', 'text/html; charset=utf-8' ); ?>" />
-	<meta http-equiv="X-UA-Compatible" content="IE-9"/>
-	<meta name="author" content="Ozh RICHARD & Lester CHAN for http://yourls.org/" />
-	<meta name="generator" content="YOURLS <?php echo YOURLS_VERSION ?>" /> 
-	<meta name="description" content="Insert URL &laquo; YOURLS &raquo; Your Own URL Shortener' | <?php yourls_site_url(); ?>" />-->
+	<meta charset="utf-8">	
 	<script src="<?php yourls_site_url(); ?>/js/jquery-1.8.2.min.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
+	<script src="<?php yourls_site_url(); ?>/js/jquery.dataTables.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 	<script src="<?php yourls_site_url(); ?>/js/common.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 	<script src="<?php yourls_site_url(); ?>/js/jquery.notifybar.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 	<?php if( yourls_is_admin() || $context == 'infos' ||$context == 'login') {?>
@@ -141,11 +137,53 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 			$('.rtpannel').css('height', pqr-((pqr/100)*13) );
 		});
 	</script>-->
+	<script type="text/javascript" charset="utf-8">
+			$(document).ready(function() {
+				$.fn.dataTableExt.sErrMode = 'throw';
+				$('#main_table').dataTable();
+			} );
+		</script>
 	<?php yourls_do_action( 'html_head', $context ); ?>
 </head>
 <?php if( yourls_is_admin() ) {?>
+
 <body class="<?php echo $context; ?> <?php echo $bodyclass; ?>">
-<?php }else{?>
+ 
+<div class="header">
+	<a href="#"><img align="absmiddle" src="/images/headerDog.png"></a> 
+	
+<?php yourls_html_menu() ?>
+	<span class="menu">
+<?php 
+ if( defined( 'YOURLS_USER' ) ) {
+		$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('Hello <strong>%s</strong>'), YOURLS_USER ) . ' <a href="?action=logout" title="' . yourls_esc_attr__( 'Logout' ) . '"><img align="absmiddle" src="/images/logout-icon.png">' . '</a>' );
+	} else {
+		$logout_link = yourls_apply_filter( 'logout_link', '' );
+	}
+	echo "$logout_link";
+
+
+	$logout_link ?></span>
+</div>
+
+<?php }elseif(!yourls_is_admin() && $context ='infos'){?>
+		<div class="header">
+	<a href="#"><img align="absmiddle" src="/images/headerDog.png"></a> 
+	
+<?php yourls_html_menu() ?>
+	<span class="menu">
+<?php 
+ if( defined( 'YOURLS_USER' ) ) {
+		$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('Hello <strong>%s</strong>'), YOURLS_USER ) . ' <a href="?action=logout" title="' . yourls_esc_attr__( 'Logout' ) . '"><img align="absmiddle" src="/images/logout-icon.png">' . '</a>' );
+	} else {
+		$logout_link = yourls_apply_filter( 'logout_link', '' );
+	}
+	echo "$logout_link";
+
+	$logout_link ?></span>
+</div>
+
+	<?php }else { echo $context; exit;?>
 <body class="<?php echo $context; ?> <?php echo $bodyclass; ?>">
 <?php }?>
 <?php if(!yourls_is_admin() && $context!='infos'){?>
@@ -253,6 +291,40 @@ function yourls_html_tfooter( $params = array() ) {
 	<tfoot>
 		<tr>
 			<th colspan="6">
+
+<div id="pagination">
+				<span class="navigation">
+				<?php if( $total_pages > 1 ) { ?>
+					<span class="nav_total"><?php echo sprintf( yourls_n( '1 page', '%s pages', $total_pages ), $total_pages ); ?></span>
+					<?php
+					$base_page = yourls_admin_url( 'index.php' );
+					// Pagination offsets: min( max ( zomg! ) );
+					$p_start = max(  min( $total_pages - 4, $page - 2 ), 1 );
+					$p_end = min( max( 5, $page + 2 ), $total_pages );
+					if( $p_start >= 2 ) {
+						$link = yourls_add_query_arg( array_merge( $params, array( 'page' => 1 ) ), $base_page );
+						echo '<span class="nav_link nav_first"><a href="' . $link . '" title="' . yourls_esc_attr__('Go to First Page') . '">' . yourls__( '&laquo; First' ) . '</a></span>';
+						echo '<span class="nav_link nav_prev"></span>';
+					}
+					for( $i = $p_start ; $i <= $p_end; $i++ ) {
+						if( $i == $page ) {
+							echo "<span class='nav_link nav_current'>$i</span>";
+						} else {
+							$link = yourls_add_query_arg( array_merge( $params, array( 'page' => $i ) ), $base_page );
+							echo '<span class="nav_link nav_goto"><a href="' . $link . '" title="' . sprintf( yourls_esc_attr( 'Page %s' ), $i ) .'">'.$i.'</a></span>';
+						}
+					}
+					if( ( $p_end ) < $total_pages ) {
+						$link = yourls_add_query_arg( array_merge( $params, array( 'page' => $total_pages ) ), $base_page );
+						echo '<span class="nav_link nav_next"></span>';
+						echo '<span class="nav_link nav_last"><a href="' . $link . '" title="' . yourls_esc_attr__('Go to First Page') . '">' . yourls__( 'Last &raquo;' ) . '</a></span>';
+					}
+					?>
+				<?php } ?>
+				</span>
+			</div>
+
+
 			<div id="filter_form">
 				<form action="" method="get">
 					<div id="filter_options">
@@ -340,37 +412,7 @@ function yourls_html_tfooter( $params = array() ) {
 			}
 			?>
 			
-			<div id="pagination">
-				<span class="navigation">
-				<?php if( $total_pages > 1 ) { ?>
-					<span class="nav_total"><?php echo sprintf( yourls_n( '1 page', '%s pages', $total_pages ), $total_pages ); ?></span>
-					<?php
-					$base_page = yourls_admin_url( 'index.php' );
-					// Pagination offsets: min( max ( zomg! ) );
-					$p_start = max(  min( $total_pages - 4, $page - 2 ), 1 );
-					$p_end = min( max( 5, $page + 2 ), $total_pages );
-					if( $p_start >= 2 ) {
-						$link = yourls_add_query_arg( array_merge( $params, array( 'page' => 1 ) ), $base_page );
-						echo '<span class="nav_link nav_first"><a href="' . $link . '" title="' . yourls_esc_attr__('Go to First Page') . '">' . yourls__( '&laquo; First' ) . '</a></span>';
-						echo '<span class="nav_link nav_prev"></span>';
-					}
-					for( $i = $p_start ; $i <= $p_end; $i++ ) {
-						if( $i == $page ) {
-							echo "<span class='nav_link nav_current'>$i</span>";
-						} else {
-							$link = yourls_add_query_arg( array_merge( $params, array( 'page' => $i ) ), $base_page );
-							echo '<span class="nav_link nav_goto"><a href="' . $link . '" title="' . sprintf( yourls_esc_attr( 'Page %s' ), $i ) .'">'.$i.'</a></span>';
-						}
-					}
-					if( ( $p_end ) < $total_pages ) {
-						$link = yourls_add_query_arg( array_merge( $params, array( 'page' => $total_pages ) ), $base_page );
-						echo '<span class="nav_link nav_next"></span>';
-						echo '<span class="nav_link nav_last"><a href="' . $link . '" title="' . yourls_esc_attr__('Go to First Page') . '">' . yourls__( 'Last &raquo;' ) . '</a></span>';
-					}
-					?>
-				<?php } ?>
-				</span>
-			</div>
+			
 			</th>
 		</tr>
 		<?php yourls_do_action( 'html_tfooter' ); ?>
@@ -742,21 +784,23 @@ function yourls_login_screen( $error_msg = '' ) {
 	//yourls_html_logo();
 	?>
 	<div id="login">
+		<h3 class="logintitle">Please Login</h3>
 		<form method="post" action="<?php echo $action; ?>"> <?php // reset any QUERY parameters ?>
 			<?php
-				if( !empty( $error_msg ) ) {
+				//if( !empty( $error_msg ) ) {
+				if( !empty( $error_msg ) && $error_msg!='Please log in') {
 					echo '<p class="error">'.$error_msg.'</p>';
 				}
 			?>
 			<p>
-				<label for="username"><?php yourls_e( 'Username' ); ?></label><br />
+				<label for="username"><?php yourls_e( 'Username' ); ?></label>
 				<input type="text" id="username" name="username" size="30" class="text" />
 			</p>
 			<p>
-				<label for="password"><?php yourls_e( 'Password' ); ?></label><br />
+				<label for="password"><?php yourls_e( 'Password' ); ?></label>
 				<input type="password" id="password" name="password" size="30" class="text" />
 			</p>
-			<p style="text-align: right;">
+			<p>
 				<input type="submit" id="submit" name="submit" value="<?php yourls_e( 'Login' ); ?>" class="button" />
 			</p>
 		</form>
@@ -769,13 +813,13 @@ function yourls_login_screen( $error_msg = '' ) {
 
 /**
  * Display the admin menu
- *
+ *id="admin_menu_logout_link" class="topbar"
  */
 function yourls_html_menu() {
 
 	// Build menu links
 	if( defined( 'YOURLS_USER' ) ) {
-		$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('Hello <strong>%s</strong>'), YOURLS_USER ) . ' (<a href="?action=logout" title="' . yourls_esc_attr__( 'Logout' ) . '">' . yourls__( 'Logout' ) . '</a>)' );
+		$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('Hello <strong class="hellouser">%s</strong>'), YOURLS_USER ) . '<a class="logout" title="Logout" href="?action=logout"' . yourls_esc_attr__( 'Logout' ) . '">' . yourls__( 'Logout' ) . '</a>' );
 	} else {
 		$logout_link = yourls_apply_filter( 'logout_link', '' );
 	}
@@ -787,7 +831,7 @@ function yourls_html_menu() {
 	$admin_links['admin'] = array(
 		'url'    => yourls_admin_url( 'index.php' ),
 		'title'  => yourls__( 'Go to the admin interface' ),
-		'anchor' => yourls__( 'Admin interface' )
+		'anchor' => yourls__( 'Admin interface' ),
 	);
 	
 	if( yourls_is_admin() ) {
@@ -797,7 +841,8 @@ function yourls_html_menu() {
 		);*/
 		$admin_links['plugins'] = array(
 			'url'    => yourls_admin_url( 'plugins.php' ),
-			'anchor' => yourls__( 'Manage Plugins' )
+			'anchor' => yourls__( 'Manage Plugins' ),
+			
 		);
 		$admin_sublinks['plugins'] = yourls_list_plugin_admin_pages();
 	}
@@ -806,27 +851,27 @@ function yourls_html_menu() {
 	$admin_sublinks = yourls_apply_filter( 'admin_sublinks', $admin_sublinks );
 	
 	// Now output menu
-	echo '<ul id="admin_menu">'."\n";
+	//echo '<ul id="admin_menu">'."\n";
 	if ( yourls_is_private() && !empty( $logout_link ) )
-		echo '<li id="admin_menu_logout_link">' . $logout_link .'</li>';
+		//echo '<li id="admin_menu_logout_link" class="topbar">' . $logout_link .'</li>';
 
-	foreach( (array)$admin_links as $link => $ar ) {
+	foreach( (array)$admin_links as $link => $ar ) {//echo $ar['img'];
 		if( isset( $ar['url'] ) ) {
 			$anchor = isset( $ar['anchor'] ) ? $ar['anchor'] : $link;
 			$title  = isset( $ar['title'] ) ? 'title="' . $ar['title'] . '"' : '';
-			printf( '<li id="admin_menu_%s_link" class="admin_menu_toplevel"><a href="%s" %s>%s</a>', $link, $ar['url'], $title, $anchor );
+			printf( '<span id="admin_menu_%s_link"><a href="%s" %s>'.$ar['img'].'%s</a>', $link, $ar['url'], $title, $anchor );
 		}
 		// Output submenu if any. TODO: clean up, too many code duplicated here
 		if( isset( $admin_sublinks[$link] ) ) {
-			echo "<ul>\n";
+			
 			foreach( $admin_sublinks[$link] as $link => $ar ) {
 				if( isset( $ar['url'] ) ) {
 					$anchor = isset( $ar['anchor'] ) ? $ar['anchor'] : $link;
 					$title  = isset( $ar['title'] ) ? 'title="' . $ar['title'] . '"' : '';
-					printf( '<li id="admin_menu_%s_link" class="admin_menu_sublevel admin_menu_sublevel_%s"><a href="%s" %s>%s</a>', $link, $link, $ar['url'], $title, $anchor );
+					printf( '<a href="%s" %s>%s</a>', $link, $link, $ar['url'], $title, $anchor );
 				}
 			}
-			echo "</ul>\n";
+			
 		}
 	}
 	
@@ -834,7 +879,8 @@ function yourls_html_menu() {
 		//echo '<li id="admin_menu_help_link">' . $help_link .'</li>';
 		
 	yourls_do_action( 'admin_menu' );
-	echo "</ul>\n";
+
+
 	yourls_do_action( 'admin_notices' );
 	yourls_do_action( 'admin_notice' ); // because I never remember if it's 'notices' or 'notice'
 	/*

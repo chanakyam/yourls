@@ -24,14 +24,14 @@ border-radius: 5px;
 
 .contentarea {margin:0;}
 
-.header {background:#343637 url(../images/headerbg.png) repeat-x 0 bottom; padding:10px 0; border-top:1px solid #0f1010;}
+.header {background:#343637 url(../images/headerbg.png) repeat-x 0 bottom; padding-bottom:5px; border-top:1px solid #0f1010;}
 
 .contentarea:after, .contentarea:before { display:table; content:"";}
 .contentarea:after {clear:both}
 
 .header a {color:#d4d7da; text-decoration:none; padding:0 5px; margin:5px; display:inline-block;}
 
-.menu {float:right;}
+.menu {float:right; margin-top:5px; color:#fff;}
 
 .ltpannel {background:url(../images/bgTexture.png) repeat 0 0; float:left; width:70%; display:table;}
 

@@ -34,15 +34,15 @@ table.tblSorter tbody td a {color:#343637;}
 table.tblSorter tbody td small a {color:#999999;}
 
 
-table.tblSorter tbody tr.normal-row td {
+table.tblSorter tbody tr.inactive td {
 background:#eef2f5;
 }
-table.tblSorter tbody tr.alt-row td {
+table.tblSorter tbody tr.active td {
 }
-table.tblSorter tbody tr.normal-row:hover td {
+table.tblSorter tbody tr.inactive:hover td {
 background-color:#eef2f5;
 }
-table.tblSorter tbody tr.alt-row:hover td {
+table.tblSorter tbody tr.active:hover td {
 background-color:#eef2f5;
 }
 table.tblSorter thead tr .tablesorter-headerDesc {
