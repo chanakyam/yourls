@@ -25,7 +25,8 @@ cursor:default;
 }
 table.tblSorter tbody td {
 color:#999999;
-padding:5px;
+/*padding:5px;*/
+padding:4px;
 background-color:#fdfdfd;
 vertical-align:top;
 }
