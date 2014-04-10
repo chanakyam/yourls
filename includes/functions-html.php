@@ -138,11 +138,11 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 		});
 	</script>-->
 	<script type="text/javascript" charset="utf-8">
-			$(document).ready(function() {
-				$.fn.dataTableExt.sErrMode = 'throw';
-				$('#main_table').dataTable();
-			} );
-		</script>
+		// $(document).ready(function() {
+		// 	$.fn.dataTableExt.sErrMode = 'throw';
+		// 	$('#main_table').dataTable();
+		// } );
+	</script>
 	<?php yourls_do_action( 'html_head', $context ); ?>
 </head>
 <?php if( yourls_is_admin() ) {?>
