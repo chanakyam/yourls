@@ -24,9 +24,8 @@ background-image:none;
 cursor:default;
 }
 table.tblSorter tbody td {
-color:#999999;
-/*padding:5px;*/
-padding:4px;
+color:#333;
+padding:5px;
 background-color:#fdfdfd;
 vertical-align:top;
 }
@@ -92,11 +91,10 @@ padding:2px 2px;
 content:"...";
 }
 .navigation .nav_link a:hover {
-border:1px solid #0f98eb;
-background:#fff;
+color:#343637;
 text-decoration:none;
 }
-input[type="button"], input[type="submit"] {border:none; background:#0f98eb; cursor:pointer; color:#fff; padding:8px; min-width:80px;}
+input[type="button"], input[type="submit"] {border-bottom:1px solid #7096a9; background:#343637; box-shadow:none; cursor:pointer; min-width: 80px;}
 
 
 

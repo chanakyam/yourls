@@ -340,7 +340,7 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 				?>
 				<p><?php echo /* //translators: eg Short URL created on March 23rd 1972 */ yourls_s( 'Short URL created on %s', yourls_date_i18n( "F j, Y @ g:i a", ( strtotime( $timestamp ) + YOURLS_HOURS_OFFSET * 3600 ) ) ) . $daysago; ?></p>
 				<div class="wrap_unfloat">
-					<ul class="no_bullet toggle_display stat_line" id="historical_clicks">
+					<ol class="no_bullet toggle_display stat_line" id="historical_clicks">
 					<?php
 					foreach( $graphs as $graph => $graphtitle ) {
 						if ( ${'do_'.$graph} ) {
@@ -367,7 +367,7 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 						echo "<li><span class='historical_link'>$link</span> <span class='historical_count'>$hits</span> $stat</li>\n";
 					}
 					?>
-					</ul>
+					</ol>
 				</div>
 		
 				<h3><?php yourls_e( 'Best day' ); ?></h3>

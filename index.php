@@ -51,6 +51,7 @@ $page = YOURLS_SITE . '/index.php';
 // Part to be executed if FORM has been submitted
 //if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
 if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' && $_GLOBAL_MSG=='') {
+	
 	// Get parameters -- they will all be sanitized in yourls_add_new_link()
 	$url     = $_REQUEST['url'];
 	$keyword = isset( $_REQUEST['keyword'] ) ? $_REQUEST['keyword'] : '' ;

@@ -1,102 +1,134 @@
-h3 span.label {
-	width:100px;
-	display:inline-block;
-}
 
+h3 span.label {
+    display: inline-block;
+    width: 100px;
+}
 ul.toggle_display {
-	display:none;
-	list-style-type:none;
-	margin-left:0;
-	margin-right:23px;
-	padding:12px 5px 3px;
-	border-bottom:1px solid #C7E7FF;
+    border-bottom: 0 none;
+    display: none;
+    list-style-type: none;
+    margin-left: 0;
+    margin-right: 23px;
+    padding: 12px 5px 3px;
 }
 ul.toggle_display li {
-	padding:0;
+    padding: 0;
 }
- #tabs ul#headers li h2, #stats_lines li{
-	display: inline;
-	margin:0;
+#tabs ul#headers li h2, #stats_lines li {
+    display: inline;
+    margin: 0;
 }
 #tabs ul#headers {
-	border-bottom:0;
-	padding:0;
-	float:left;
-	width:100%;
-	background:#393b3c;
+    background: none repeat scroll 0 0 #393B3C;
+    border-bottom: 0 none;
+    float: left;
+    padding: 0;
+    width: 100%;
 }
-#tabs ul li{ border-left:2px solid #fff; float:left; margin-right:2px;}
-#tabs ul li:first-child{ border-left:0; margin-left:2px;}
-#tabs ul li a{ float:left;color:#fff; font-size:14px; font-family:Arial, Helvetica, sans-serif; text-decoration:none; padding:10px 20px; border-top:2px solid #393b3c;}
-#tabs ul li a h2{ font-size:14px; font-weight:normal; display:block; margin:0; padding:0;}
-
-
-#tabs ul li a:hover{ background:#000;}
-#tabs ul li.selected a{ color:#666;  background:#f6f6f6;}
-
-
+#tabs ul li {
+    border-left: 0 none;
+    float: left;
+    margin-right: 2px;
+}
+#tabs ul > li:first-child {
+    border-left: 0 none;
+    margin-left: 2px;
+}
+#tabs ul li a {
+    border-top: 2px solid #393B3C;
+    color: #FFFFFF;
+    float: left;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+#tabs ul li a h2 {
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+}
+#tabs ul li a:hover {
+    background: none repeat scroll 0 0 #000000;
+}
+#tabs ul li.selected a {
+    background: none repeat scroll 0 0 #DDDDDD;
+    color: #000000;
+}
 .wrap_unfloat {
-	overflow:hidden;
+    overflow: hidden;
 }
-
-
 #stats_lines li a {
-	-moz-border-radius:10px 10px 0 0;
-	-webkit-border-radius:10px 10px 0 0;
-	border-radius:10px 10px 0 0;
-	padding:3px 10px;
-	background:#E3F3FF;
-	border:1px solid #C7E7FF;
+    background: none repeat scroll 0 0 #E3F3FF;
+    border: 1px solid #C7E7FF;
+    border-radius: 10px 10px 0 0;
+    padding: 3px 10px;
 }
 #stats_lines li a:hover {
-	text-decoration:none;
-	background:#C7E7FF;
+    background: none repeat scroll 0 0 #C7E7FF;
+    text-decoration: none;
 }
 #stats_lines li a.selected {
-	background:#fff;
-	border:1px solid #C7E7FF;
-	border-bottom:1px solid white;
-}
-#stats_lines li a.selected:hover {
-	background:#fff;
+    background: none repeat scroll 0 0 #444444;
+    border: 1px solid #333333;
+    color: #FFFFFF;
 }
 .tab {
-	padding:10px;
+    padding: 10px;
 }
-li#sites_various { padding-left:22px; padding-top:4px;}
-
-li.sites_list img, #longurl img {width:16px; height: 16px; display:inline-block;}
-
-#referrer_cell { min-width: 300px;}
-
-#details_clicks li.bestday, #details_clicks li span.best_month, #details_clicks li span.best_year    {
-	font-weight:bold;
+li#sites_various {
+    padding-left: 22px;
+    padding-top: 4px;
 }
-
+li.sites_list img, #longurl img {
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+}
+#referrer_cell {
+    min-width: 300px;
+}
+#details_clicks li.bestday, #details_clicks li span.best_month, #details_clicks li span.best_year {
+    font-weight: bold;
+}
 ul.no_bullet {
-	list-style-type: none;
-	margin-left:0;
-	padding:0;
+    list-style-type: none;
+    margin-left: 0;
+    padding: 0;
 }
 ul.no_bullet li {
-	margin-bottom:5px;
+    margin-bottom: 5px;
 }
 #historical_clicks {
-	float:left;
-	margin:0;
+    color: #000000;
+    float: left;
+    margin: 0;
 }
 #historical_clicks li {
-	padding:2px 10px;
-	margin:0;
+    margin: 0;
+    padding: 2px 10px;
 }
+#historical_clicks li a{ color: #000;}
 #historical_clicks li:hover {
-	background:#C7E7FF !important;
+    background: none repeat scroll 0 0 #fff !important;
 }
 #historical_clicks span.historical_link {
-	min-width:130px;
-	display:inline-block;
+    display: inline-block;
+    min-width: 130px;
 }
 #historical_clicks span.historical_count {
-	min-width:100px;
-	display:inline-block;
+    display: inline-block;
+    min-width: 100px;
 }
+
+#stat_tab_stats {
+    background: none repeat scroll 0 0 #DDDDDD;
+}
+#stats_lines li a {
+    background: none repeat scroll 0 0 #666666;
+    border: 1px solid #555555 !important;
+    color: #FFFFFF;
+}
+.stats_line.line{ clear: both;}
