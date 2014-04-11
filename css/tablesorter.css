@@ -7,7 +7,7 @@ text-align:left;
 }
 table.tblSorter thead tr th, table.tblSorter th.header {
 background-color:#343637;
-padding:8px 5px;
+padding:8px 15px;
 color:#fff;
 }
 table.tblSorter tfoot tr th {}
@@ -34,15 +34,15 @@ table.tblSorter tbody td a {color:#343637;}
 table.tblSorter tbody td small a {color:#999999;}
 
 
-table.tblSorter tbody tr.normal-row td {
+table.tblSorter tbody tr.odd td {
 background:#eef2f5;
 }
-table.tblSorter tbody tr.alt-row td {
+table.tblSorter tbody tr.even td {
 }
-table.tblSorter tbody tr.normal-row:hover td {
+table.tblSorter tbody tr.odd:hover td {
 background-color:#eef2f5;
 }
-table.tblSorter tbody tr.alt-row:hover td {
+table.tblSorter tbody tr.even:hover td {
 background-color:#eef2f5;
 }
 table.tblSorter thead tr .tablesorter-headerDesc {
@@ -66,8 +66,25 @@ float:right;
 }
 
 
+/*
+ * Sorting
+ */
+.sorting { background: url('../images/sort_both.png') no-repeat center right; }
+.sorting_asc { background: url('../images/sort_asc.png') no-repeat center right; }
+.sorting_desc { background: url('../images/sort_desc.png') no-repeat center right; }
+
+.sorting_asc_disabled { background: url('../images/sort_asc_disabled.png') no-repeat center right; }
+.sorting_desc_disabled { background: url('../images/sort_desc_disabled.png') no-repeat center right; }
+ 
+table.dataTable thead th:active,
+table.dataTable thead td:active {
+	outline: none;
+}
+
+
+
 #pagination {
-text-align:center;
+text-align:center; margin-bottom: 10px;
 width:100%;
 }
 
@@ -91,11 +108,134 @@ padding:2px 2px;
 content:"...";
 }
 .navigation .nav_link a:hover {
-color:#343637;
+border:1px solid #0f98eb;
+background:#fff;
 text-decoration:none;
 }
 input[type="button"], input[type="submit"] {border-bottom:1px solid #7096a9; background:#343637; box-shadow:none; cursor:pointer; min-width: 80px;}
 
+
+
+
+/*
+ * Table information
+ */
+.dataTables_info {font-size:14px; color:#343637;
+	clear: both;
+	float: left; margin: 10px 0; line-height: 20px;
+}
+
+
+/*
+ * Pagination
+ */
+.dataTables_paginate {margin: 10px 0; line-height: 20px; font-size:14px; color:#343637;
+	float: right;
+	text-align: right;
+}
+
+/* Two button pagination - previous / next */
+.paginate_disabled_previous,
+.paginate_enabled_previous,
+.paginate_disabled_next,
+.paginate_enabled_next {
+	height: 19px;
+	float: left;
+	cursor: pointer;
+	*cursor: hand;
+	color: #343637 !important;
+}
+.paginate_disabled_previous:hover,
+.paginate_enabled_previous:hover,
+.paginate_disabled_next:hover,
+.paginate_enabled_next:hover {
+	text-decoration: none !important;
+}
+.paginate_disabled_previous:active,
+.paginate_enabled_previous:active,
+.paginate_disabled_next:active,
+.paginate_enabled_next:active {
+	outline: none;
+}
+
+.paginate_disabled_previous,
+.paginate_disabled_next {
+	color: #8c8d8d !important;
+}
+.paginate_disabled_previous,
+.paginate_enabled_previous {
+	padding-left: 23px;
+}
+.paginate_disabled_next,
+.paginate_enabled_next {
+	padding-right: 23px;
+	margin-left: 10px;
+}
+
+.paginate_enabled_previous { background: url('../images/back_enabled.png') no-repeat top left; }
+.paginate_enabled_previous:hover { background: url('../images/back_enabled_hover.png') no-repeat top left; }
+.paginate_disabled_previous { background: url('../images/back_disabled.png') no-repeat top left; }
+
+.paginate_enabled_next { background: url('../images/forward_enabled.png') no-repeat top right; }
+.paginate_enabled_next:hover { background: url('../images/forward_enabled_hover.png') no-repeat top right; }
+.paginate_disabled_next { background: url('../images/forward_disabled.png') no-repeat top right; }
+
+/* Full number pagination */
+.paging_full_numbers {
+	height: 22px;
+	line-height: 22px;
+}
+.paging_full_numbers a:active {
+	outline: none
+}
+.paging_full_numbers a:hover {
+	text-decoration: none;
+}
+
+.paging_full_numbers a.paginate_button,
+.paging_full_numbers a.paginate_active {
+	border: 1px solid #aaa;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding: 2px 5px;
+	margin: 0 3px;
+	cursor: pointer;
+	*cursor: hand;
+	color: #333 !important;
+}
+
+.paging_full_numbers a.paginate_button {
+	background-color: #ddd;
+}
+
+.paging_full_numbers a.paginate_button:hover {
+	background-color: #ccc;
+	text-decoration: none !important;
+}
+
+.paging_full_numbers a.paginate_active {
+	background-color: #99B3FF;
+}
+
+
+.dataTables_wrapper {
+	position: relative;
+	clear: both;
+	*zoom: 1;
+	content: "";
+    display: table;
+    padding-bottom: 20px; width: 100%;
+}
+
+.dataTables_length {
+	float: left; margin: 5px 0; font-weight: bold;
+}
+
+.dataTables_filter {
+	float: right;
+	text-align: right; margin-bottom: 5px; font-weight: bold;
+}
 
 
 

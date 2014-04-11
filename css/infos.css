@@ -53,7 +53,7 @@ ul.toggle_display li {
 #tabs ul li a:hover {
     background: none repeat scroll 0 0 #000000;
 }
-#tabs ul li.selected a {
+#tabs ul li a.selected {
     background: none repeat scroll 0 0 #DDDDDD;
     color: #000000;
 }
@@ -76,7 +76,7 @@ ul.toggle_display li {
     color: #FFFFFF;
 }
 .tab {
-    padding: 10px;
+    padding: 10px; background: #DDDDDD;
 }
 li#sites_various {
     padding-left: 22px;
@@ -131,4 +131,3 @@ ul.no_bullet li {
     border: 1px solid #555555 !important;
     color: #FFFFFF;
 }
-.stats_line.line{ clear: both;}

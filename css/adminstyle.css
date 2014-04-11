@@ -75,11 +75,11 @@ Input.text, select, textarea {font-family:Arial, Helvetica, sans-serif; font-siz
 select {
 font-family:Arial, Helvetica, sans-serif;
 font-size:12px;
-color:#fff;
-border:none;
+color:#000;
+
 padding:6px;
 margin:1px;
-background:#343637;
+background:#EEF2F5;
 }
 input.primary {
 border:1px solid #0d5f79 !important;
@@ -96,7 +96,7 @@ tr.edit-row td {
 background:#337291 !important;
 color: #fff !important;
 }
-#new_url {text-align:center; border:1px solid #0e607a; clear:both; background:url(../images/titlebg.jpg) repeat-x 0 0; padding:2px; color:#fff;}
+#new_url {text-align:center; border:1px solid #0e607a; clear:both; background:url(../images/titlebg.jpg) repeat-x 0 0; padding:2px; color:#fff; margin-bottom: 5px;}
 #new_url_form {padding:3px;}
 
 #new_url #feedback {
@@ -537,8 +537,3 @@ input[type="text"] {border:1px solid #cccccc; padding:8px 10px;}
 #main_table_filter { margin-top: 5px;}
 #main_table_filter input{ border: 1px solid #888888;
     padding: 2px 10px;}
-
-
-.margin10_R {margin-right: 10px;}
-
-

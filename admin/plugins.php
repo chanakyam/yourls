@@ -82,7 +82,7 @@ yourls_html_head( 'plugins', yourls__( 'Manage Plugins' ) );
 			<th><?php yourls_e( 'Action' ); ?></th>
 		</tr>
 	</thead>
-	<tbody>
+	<tbody >
 	<?php
 	
 	$nonce = yourls_create_nonce( 'manage_plugins' );

@@ -4,6 +4,7 @@
  * Display <h1> header and logo
  *
  */
+
 function yourls_html_logo() {
 	yourls_do_action( 'pre_html_logo' );
 	?>
@@ -87,9 +88,18 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 	<link rel="shortcut icon" href="<?php yourls_favicon(); ?>" />
 	<meta charset="utf-8">	
 	<script src="<?php yourls_site_url(); ?>/js/jquery-1.8.2.min.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
-	<script src="<?php yourls_site_url(); ?>/js/jquery.dataTables.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
+	
 	<script src="<?php yourls_site_url(); ?>/js/common.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 	<script src="<?php yourls_site_url(); ?>/js/jquery.notifybar.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
+<!-- my includes -->
+<script src="<?php yourls_site_url(); ?>/js/jquery.dataTables.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
+<!--<link rel="stylesheet" href="<?php yourls_site_url(); ?>/table/media/css/jquery.dataTables.css?v=<?php echo YOURLS_VERSION; ?>" type="text/css" media="screen" />
+<link rel="stylesheet" href="<?php yourls_site_url(); ?>/table/media/css/jquery.dataTables_themeroller.css?v=<?php echo YOURLS_VERSION; ?>" type="text/css" media="screen" />-->
+<link rel="stylesheet" href="<?php yourls_site_url(); ?>/css/tablesorter.css?v=<?php echo YOURLS_VERSION; ?>" type="text/css" media="screen" />
+
+<!-- end my includes -->
+
+
 	<?php if( yourls_is_admin() || $context == 'infos' ||$context == 'login') {?>
 	<link rel="stylesheet" href="<?php yourls_site_url(); ?>/css/adminstyle.css?v=<?php echo YOURLS_VERSION; ?>" type="text/css" media="screen" />
 	<?php }else{ ?>
@@ -98,10 +108,6 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 	<?php if ( $tabs ) { ?>
 		<link rel="stylesheet" href="<?php yourls_site_url(); ?>/css/infos.css?v=<?php echo YOURLS_VERSION; ?>" type="text/css" media="screen" />
 		<script src="<?php yourls_site_url(); ?>/js/infos.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
-	<?php } ?>
-	<?php if ( $tablesorter ) { ?>
-		<link rel="stylesheet" href="<?php yourls_site_url(); ?>/css/tablesorter.css?v=<?php echo YOURLS_VERSION; ?>" type="text/css" media="screen" />
-		<script src="<?php yourls_site_url(); ?>/js/jquery.tablesorter.min.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 	<?php } ?>
 	<?php if ( $insert ) { ?>
 		<script src="<?php yourls_site_url(); ?>/js/insert.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
@@ -138,11 +144,14 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 		});
 	</script>-->
 	<script type="text/javascript" charset="utf-8">
-		// $(document).ready(function() {
-		// 	$.fn.dataTableExt.sErrMode = 'throw';
-		// 	$('#main_table').dataTable();
-		// } );
-	</script>
+			$(document).ready(function() {
+				$('#main_table').dataTable();
+			} );
+		</script>
+
+
+
+
 	<?php yourls_do_action( 'html_head', $context ); ?>
 </head>
 <?php if( yourls_is_admin() ) {?>
@@ -556,7 +565,7 @@ function yourls_table_edit_row( $keyword ) {
 	
 	if( $url ) {
 		$return = <<<RETURN
-<tr id="edit-$id" class="edit-row"><td colspan="4" class="edit-row"><p><strong class="lable">%s:</strong> <input type="text" id="edit-url-$id" name="edit-url-$id" value="$safe_url" class="text" size="70" /></p><p><span class="lable"><strong>%s:</strong> $www</span><input type="text" id="edit-keyword-$id" name="edit-keyword-$id" value="$keyword" class="text" size="10" /></p><strong class="lable">%s:</strong> <input type="text" id="edit-title-$id" name="edit-title-$id" value="$safe_title" class="text" size="60" /></td><td colspan="2"><input type="button" id="edit-submit-$id" name="edit-submit-$id" value="%s" title="%s" class="button margin10_R" onclick="edit_link_save('$id');" />&nbsp;<input type="button" id="edit-close-$id" name="edit-close-$id" value="%s" title="%s" class="button" onclick="edit_link_hide('$id');" /><input type="hidden" id="old_keyword_$id" value="$keyword"/><input type="hidden" id="nonce_$id" value="$nonce"/></td></tr>
+<tr id="edit-$id" class="edit-row"><td colspan="5" class="edit-row"><strong>%s</strong>:<input type="text" id="edit-url-$id" name="edit-url-$id" value="$safe_url" class="text" size="70" /><br/><strong>%s</strong>: $www<input type="text" id="edit-keyword-$id" name="edit-keyword-$id" value="$keyword" class="text" size="10" /><br/><strong>%s</strong>: <input type="text" id="edit-title-$id" name="edit-title-$id" value="$safe_title" class="text" size="60" /></td><td colspan="1"><input type="button" id="edit-submit-$id" name="edit-submit-$id" value="%s" title="%s" class="button" onclick="edit_link_save('$id');" />&nbsp;<input type="button" id="edit-close-$id" name="edit-close-$id" value="%s" title="%s" class="button" onclick="edit_link_hide('$id');" /><input type="hidden" id="old_keyword_$id" value="$keyword"/><input type="hidden" id="nonce_$id" value="$nonce"/></td></tr>
 RETURN;
 		$return = sprintf( urldecode( $return ), yourls__( 'Long URL' ), yourls__( 'Short URL' ), yourls__( 'Title' ), yourls__( 'Save' ), yourls__( 'Save new values' ), yourls__( 'Cancel' ), yourls__( 'Cancel editing' ) );
 	} else {
@@ -740,7 +749,7 @@ function yourls_table_head() {
  *
  */
 function yourls_table_tbody_start() {
-	echo yourls_apply_filter( 'table_tbody_start', '<tbody>' );
+	echo yourls_apply_filter( 'table_tbody_start', '<tbody >' );
 }
 
 /**
