@@ -220,7 +220,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 <body class="<?php echo $context; ?> <?php echo $bodyclass; ?>">
  
 <div class="header">
-	<a href="#" class="h-logo"><img align="absmiddle" src="/images/headerDog.png"></a> 
+	<a href="<?php yourls_site_url(); ?>" class="h-logo"><img align="absmiddle" src="/images/headerDog.png"></a> 
 	
 <?php yourls_html_menu() ?>
 <li class="moremenu">
@@ -255,7 +255,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 
 <?php }elseif(!yourls_is_admin() && $context ='infos'){?>
 		<div class="header">
-	<a href="#"><img align="absmiddle" src="/images/headerDog.png"></a> 
+	<a href="<?php yourls_site_url(); ?>"><img align="absmiddle" src="/images/headerDog.png"></a> 
 	<span id="admin_menu_search_link"><a title="Lycos.com" href="http://search.lycos.com">Search</a></span>
 	<span id="admin_menu_mail_link"><a title="mail.lycos.com" href="http://mail.lycos.com">Mail</a></span>
 	<span id="admin_menu_tripod_link"><a title="Tripod" href="http://tripod.lycos.com">Tripod</a></span>
