@@ -223,6 +223,12 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 	<a href="<?php yourls_site_url(); ?>" class="h-logo"><img align="absmiddle" src="/images/headerDog.png"></a> 
 	
 <?php yourls_html_menu() ?>
+<?php if($context=='login'){?>
+<span id="admin_menu_search_link"><a title="Lycos.com" href="http://search.lycos.com">Search</a></span>
+	<span id="admin_menu_mail_link"><a title="mail.lycos.com" href="http://mail.lycos.com">Mail</a></span>
+	<span id="admin_menu_tripod_link"><a title="Tripod" href="http://tripod.lycos.com">Tripod</a></span>
+	<span id="admin_menu_gamesville_link"><a title="Gamesville.com" href="http://gamesville.com">Gamesville</a></span>
+<?php }?>
 <li class="moremenu">
         	<a class="dropDown" title="More Lycos Sites" href="#">More <span class="sprite"></span></a>
         	<ul class="hide ddMenu lyGrey boxShadow1" style="display: none;">
