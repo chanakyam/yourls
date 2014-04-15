@@ -58,7 +58,7 @@ if( isset( $_GET['success'] ) && ( ( $_GET['success'] == 'activated' ) OR ( $_GE
 yourls_html_head( 'plugins', yourls__( 'Manage Plugins' ) );
 ?>
 
-	<h2><?php yourls_e( 'Plugins' ); ?></h2></br>
+	<h2 class="title"><?php yourls_e( 'Plugins' ); ?></h2></br>
 	
 	<?php
 	$plugins = (array)yourls_get_plugins();

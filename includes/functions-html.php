@@ -91,12 +91,10 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 	
 	<script src="<?php yourls_site_url(); ?>/js/common.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 	<script src="<?php yourls_site_url(); ?>/js/jquery.notifybar.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
+
 <!-- my includes -->
 <script src="<?php yourls_site_url(); ?>/js/jquery.dataTables.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
-<!--<link rel="stylesheet" href="<?php yourls_site_url(); ?>/table/media/css/jquery.dataTables.css?v=<?php echo YOURLS_VERSION; ?>" type="text/css" media="screen" />
-<link rel="stylesheet" href="<?php yourls_site_url(); ?>/table/media/css/jquery.dataTables_themeroller.css?v=<?php echo YOURLS_VERSION; ?>" type="text/css" media="screen" />-->
 <link rel="stylesheet" href="<?php yourls_site_url(); ?>/css/tablesorter.css?v=<?php echo YOURLS_VERSION; ?>" type="text/css" media="screen" />
-
 <!-- end my includes -->
 
 
@@ -117,7 +115,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 		<script src="<?php yourls_site_url(); ?>/js/share.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 		<script src="<?php yourls_site_url(); ?>/js/jquery.zclip.min.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 	<?php } ?>
-	<?php if ( $cal ) { ?>
+	<?php if ( $cal && yourls_is_admin()) { ?>
 		<link rel="stylesheet" href="<?php yourls_site_url(); ?>/css/cal.css?v=<?php echo YOURLS_VERSION; ?>" type="text/css" media="screen" />
 		<?php yourls_l10n_calendar_strings(); ?>
 		<script src="<?php yourls_site_url(); ?>/js/jquery.cal.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
@@ -143,10 +141,73 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 			$('.rtpannel').css('height', pqr-((pqr/100)*13) );
 		});
 	</script>-->
+	<?php if (  yourls_is_admin()) { ?>
 	<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
-				$('#main_table').dataTable();
+				var oTable= $('#dashboard_main_table').dataTable({
+					
+					 "bProcessing": true,
+					 "bServerSide": true,
+					 "sPaginationType": "full_numbers",
+                     "sAjaxSource": '/ajax/server_processing.php',
+                     "aoColumnDefs": [
+
+								    { "fnRender": function ( oObj ) {
+								        if ( oObj.aData[3] != "" ) {
+								            return '<td id="actions-'+oObj.aData["id"]+'" class="actions "><a class="button button_stats" title="Stats" id="statlink-'+oObj.aData["id"]+'" href="/'+oObj.aData["keyword"]+'+">Stats</a><a onclick="toggle_share(\''+oObj.aData["id"]+'\');return false;" class="button button_share" title="Share" id="share-button-'+oObj.aData["id"]+'" href="">Share</a><a onclick="edit_link_display(\''+oObj.aData["id"]+'\');return false;" class="button button_edit" title="Edit" id="edit-button-'+oObj.aData["id"]+'" href="/admin/admin-ajax.php?id='+oObj.aData["id"]+'&amp;action=edit&amp;keyword='+oObj.aData["keyword"]+'&amp;nonce='+oObj.aData["nonce_edit"]+'">Edit</a><a onclick="remove_link(\''+oObj.aData["id"]+'\');return false;" class="button button_delete" title="Delete" id="delete-button-'+oObj.aData["id"]+'" href="/admin/admin-ajax.php?id='+oObj.aData["id"]+'&amp;action=delete&amp;keyword='+oObj.aData["keyword"]+'&amp;nonce='+oObj.aData["nonce_delete"]+'">Delete</a><input type="hidden" value="'+oObj.aData["keyword"]+'" id="keyword_'+oObj.aData["id"]+'"></td>';
+								            }
+								        else {
+								            return oObj.aData[5];
+								            }
+								        },
+								        "aTargets": [ 5 ]
+								    },
+								      { "fnRender": function ( oObj ) {
+								        if ( oObj.aData[1] != "" ) {
+								            return '<td id="url-'+oObj.aData["id"]+'" class="url "><a title="'+oObj.aData[1]+'" href="'+oObj.aData[1]+'">'+oObj.aData["short_title"]+'</a><br><small><a href="'+oObj.aData[1]+'">'+oObj.aData["short_url"]+'</a></small></td>';
+								            }
+								        else {
+								            return oObj.aData[1];
+								            }
+								        },
+								        "aTargets": [ 1 ]
+								    }
+								 ],
+                     "aoColumns": [
+				        { "bSearchable": true, "bSortable": true,"sClass": "keyword  sorting_1", "bVisible": true },
+				        { "bSearchable": true, "bSortable": true,"sClass": "url", "bVisible": true },
+				        { "bSearchable": true, "bSortable": true,"sClass": "timestamp", "bVisible": true },
+				        { "bSearchable": true, "bSortable": true,"sClass": "ip", "bVisible": true },
+				        { "bSearchable": true, "bSortable": true,"sClass": "clicks", "bVisible": true },
+				        { "bSearchable": false, "bSortable": false,"sClass": "actions", "bVisible": true, "sDefaultContent": 'Actions' }
+				        ],
+				     "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+			                
+			                $(nRow).attr("id",'id-' + aData["id"]);
+    						return nRow;
+			            }
+
+				});
+
 			} );
+		</script>
+		<?php }?>
+		<script type="text/javascript">
+			$(document).ready(function() {
+			// run drop down menus
+			$('.dropDown').click(function(){
+				$(this).parent().children('.ddMenu').toggle();
+				return false;
+			});
+			
+			// close drop downs
+			$(document).click(function(ev){
+				if (!$(ev.target).hasClass("dropDown")) {
+					$('.ddMenu').hide();
+					$('#topBar a').removeClass('selected');
+				}
+			});
+			});
 		</script>
 
 
@@ -159,9 +220,26 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 <body class="<?php echo $context; ?> <?php echo $bodyclass; ?>">
  
 <div class="header">
-	<a href="#"><img align="absmiddle" src="/images/headerDog.png"></a> 
+	<a href="#" class="h-logo"><img align="absmiddle" src="/images/headerDog.png"></a> 
 	
 <?php yourls_html_menu() ?>
+<li class="moremenu">
+        	<a class="dropDown" title="More Lycos Sites" href="#">More <span class="sprite"></span></a>
+        	<ul class="hide ddMenu lyGrey boxShadow1" style="display: none;">
+                <li class="mobileShow"><a title="Tripod" href="http://www.tripod.lycos.com">Tripod</a></li>
+                <li class="mobileShow"><a title="Gamesville.com" href="http://www.gamesville.com/">Gamesville</a></li>
+									<li><a title="Lycos Domains" href="http://domains.lycos.com/">Lycos Domains</a></li>
+					<li><a title="Lycos News" href="http://news.lycos.com">Lycos News</a></li>
+				                <li><a title="Lycos Shopping" href="http://shopping.lycos.com">Lycos Shopping</a></li>					
+					                <li><a title="Lycos Weather" href="http://weather.lycos.com">Lycos Weather</a></li>
+								
+               				   <li><a title="WhoWhere?" href="http://www.whowhere.com/">WhoWhere?</a></li>
+			   			   
+									<li><a title="Lycos Chat" href="http://chat.lycos.co.uk">Lycos Chat</a></li>
+								
+                <li><a id="viewAll" title="View All" href="http://info.lycos.com/about/products">View All</a></li>
+            </ul>
+</li>
 	<span class="menu">
 <?php 
  if( defined( 'YOURLS_USER' ) ) {
@@ -178,7 +256,27 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 <?php }elseif(!yourls_is_admin() && $context ='infos'){?>
 		<div class="header">
 	<a href="#"><img align="absmiddle" src="/images/headerDog.png"></a> 
-	
+	<span id="admin_menu_search_link"><a title="Lycos.com" href="http://search.lycos.com">Search</a></span>
+	<span id="admin_menu_mail_link"><a title="mail.lycos.com" href="http://mail.lycos.com">Mail</a></span>
+	<span id="admin_menu_tripod_link"><a title="Tripod" href="http://tripod.lycos.com">Tripod</a></span>
+	<span id="admin_menu_gamesville_link"><a title="Gamesville.com" href="http://gamesville.com">Gamesville</a></span>
+	<li class="moremenu">
+        <a href="#" title="More Lycos Sites" class="dropDown">More <span class="sprite"></span></a>
+        	<ul style="display: none;" class="hide ddMenu lyGrey boxShadow1">
+                <li class="mobileShow"><a href="http://www.tripod.lycos.com" title="Tripod">Tripod</a></li>
+                <li class="mobileShow"><a href="http://www.gamesville.com/" title="Gamesville.com">Gamesville</a></li>
+									<li><a href="http://domains.lycos.com/" title="Lycos Domains">Lycos Domains</a></li>
+					<li><a href="http://news.lycos.com" title="Lycos News">Lycos News</a></li>
+				                <li><a href="http://shopping.lycos.com" title="Lycos Shopping">Lycos Shopping</a></li>					
+					                <li><a href="http://weather.lycos.com" title="Lycos Weather">Lycos Weather</a></li>
+								
+               				   <li><a href="http://www.whowhere.com/" title="WhoWhere?">WhoWhere?</a></li>
+			   			   
+									<li><a href="http://chat.lycos.co.uk" title="Lycos Chat">Lycos Chat</a></li>
+								
+                <li><a href="http://info.lycos.com/about/products" title="View All" id="viewAll">View All</a></li>
+            </ul>
+	</li>
 <?php yourls_html_menu() ?>
 	<span class="menu">
 <?php 
@@ -420,8 +518,7 @@ function yourls_html_tfooter( $params = array() ) {
 				unset( $params['search_text'] );
 			}
 			?>
-			
-			
+
 			</th>
 		</tr>
 		<?php yourls_do_action( 'html_tfooter' ); ?>
@@ -725,7 +822,7 @@ class yourls_table_add_row_callback {
  *
  */
 function yourls_table_head() {
-	$start = '<table id="main_table" class="tblSorter" cellpadding="0" cellspacing="1"><thead><tr>'."\n";
+	$start = '<table id="dashboard_main_table" class="tblSorter" cellpadding="0" cellspacing="1"><thead><tr>'."\n";
 	echo yourls_apply_filter( 'table_head_start', $start );
 	
 	$cells = yourls_apply_filter( 'table_head_cells', array(
@@ -737,7 +834,7 @@ function yourls_table_head() {
 		'actions'  => yourls__( 'Actions' )
 	) );
 	foreach( $cells as $k => $v ) {
-		echo "<th id='main_table_head_$k'>$v</th>\n";
+		echo "<th id='dashboard_main_table_head_$k'>$v</th>\n";
 	}
 	
 	$end = "</tr></thead>\n";
@@ -853,7 +950,43 @@ function yourls_html_menu() {
 			'anchor' => yourls__( 'Manage Plugins' ),
 			
 		);
+		$admin_links['search'] = array(
+			'url'    => 'http://search.lycos.com',
+			'title'  => yourls__( 'Lycos.com' ),
+			'anchor' => yourls__( 'Search' ),
+			
+		);
+		$admin_links['mail'] = array(
+			'url'    => 'http://mail.lycos.com',
+			'title'  => yourls__( 'mail.lycos.com' ),
+			'anchor' => yourls__( 'Mail' ),
+			
+		);
+		$admin_links['tripod'] = array(
+			'url'    => 'http://tripod.lycos.com',
+			'title'  => yourls__( 'Tripod' ),
+			'anchor' => yourls__( 'Tripod' ),
+			
+		);
+		$admin_links['gamesville'] = array(
+			'url'    => 'http://gamesville.com',
+			'title'  => yourls__( 'Gamesville.com' ),
+			'anchor' => yourls__( 'Gamesville' ),
+			
+		);
+		// $admin_links['more'] = array(
+		// 	'url'    => 'http://domains.lycos.com',			
+		// 	'title'  => yourls__( 'More Lycos Sites' ),
+		// 	'anchor' => yourls__( 'More' ),
+			
+		// );
 		$admin_sublinks['plugins'] = yourls_list_plugin_admin_pages();
+		// $admin_sublinks['more'] = array(
+		// 	'url'	=> 'http://domains.lycos.com',
+		// 	'title'  => yourls__( 'Lycos Domains' ),
+		// 	'anchor' => yourls__( 'Lycos Domains' ),
+			
+		// );
 	}
 	
 	$admin_links    = yourls_apply_filter( 'admin_links',    $admin_links );

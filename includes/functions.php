@@ -1629,7 +1629,6 @@ function yourls_verify_nonce( $action, $nonce = false, $user = false, $return = 
 
 	// what nonce should be
 	$valid = yourls_create_nonce( $action, $user );
-	
 	if( $nonce == $valid ) {
 		return true;
 	} else {

@@ -199,12 +199,20 @@ function toggle_share(id) {
 	if( $('#share-button-'+id).hasClass('disabled') ) {
 		return false;
 	}
-	var link = $('#url-'+id+' a:first');
-	var longurl = link.attr('href');
-	var title = link.attr('title');
-	var shorturl = $('#keyword-'+id+' a:first').attr('href');
+	//var link =$('#url-'+id+' a: first');
+	var link = $('#id-'+id+' .url').html();
+	var short_link=$('#id-'+id+' .keyword').html();
 	
-	toggle_share_fill_boxes( longurl, shorturl, title );
+	
+	
+	var longurl = $(link).attr("href");//link.attr('href');
+	var title = $('#id-'+id+' .url a').html();//link.attr('title');
+	var url=window.location.href;
+	var host_url=url.split('admin')	
+	var shorturl = host_url[0]+short_link;//$('#keyword-'+id+' a:first').attr('href');
+	
+	
+	toggle_share_fill_boxes(longurl, shorturl, title );
 }
 
 // When "Search" is clicked, split search text to beat servers which don't like query string with "http://"

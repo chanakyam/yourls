@@ -17,7 +17,7 @@ $sort_by         = 'timestamp';
 $sort_order      = 'desc';
 $page            = ( isset( $_GET['page'] ) ? intval($_GET['page']) : 1 );
 $search          = yourls_get_search_text();
-$perpage         = ( isset( $_GET['perpage'] ) && intval( $_GET['perpage'] ) ? intval($_GET['perpage']) : yourls_apply_filter( 'admin_view_per_page', 15 ) );
+$perpage         = ( isset( $_GET['perpage'] ) && intval( $_GET['perpage'] ) ? intval($_GET['perpage']) : yourls_apply_filter( 'admin_view_per_page', $total_urls) );
 $click_limit     = ( isset( $_GET['click_limit'] ) && $_GET['click_limit'] !== '' ) ? intval( $_GET['click_limit'] ) : '' ;
 if ( $click_limit !== '' ) {
 	$click_filter   = ( isset( $_GET['click_filter'] ) && $_GET['click_filter'] == 'more' ? 'more' : 'less' ) ;
@@ -128,7 +128,6 @@ if ( $where ) {
 	$total_items        = $total_urls;
 	$total_items_clicks = false;
 }
-
 // This is a bookmarklet
 if ( isset( $_GET['u'] ) or isset( $_GET['up'] ) ) {
 	$is_bookmark = true;
@@ -233,7 +232,7 @@ if ( isset( $_GET['u'] ) or isset( $_GET['up'] ) ) {
 		$offset = 0;
 	}
 	if( empty($perpage) || $perpage == 0) {
-		$perpage = 50;
+		$perpage = $total_urls;
 	}
 
 	// Determine $offset
@@ -291,6 +290,7 @@ yourls_do_action( 'admin_page_before_table' );
 
 yourls_table_head();
 
+/*
 
 if ( !$is_bookmark ) {
 	$params = array(
@@ -332,8 +332,9 @@ if( $url_results ) {
 
 $display = $found_rows ? 'display:none' : '';
 //echo '<tr id="nourl_found" style="'.$display.'"><td colspan="6">' . yourls__('No URL') . '</td></tr>';
-
+*/
 yourls_table_tbody_end();
+
 
 
 yourls_table_end();

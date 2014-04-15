@@ -179,6 +179,7 @@ function yourls_apply_filters( $hook, $value = '' ) {
  */
 function yourls_do_action( $hook, $arg = '' ) {
 	global $yourls_actions;
+
 	
 	// Keep track of actions that are "done"
 	if ( !isset( $yourls_actions ) )
