@@ -296,7 +296,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 	$logout_link ?></span>
 </div>
 
-	<?php }else { echo $context; exit;?>
+	<?php }else { ?>
 <body class="<?php echo $context; ?> <?php echo $bodyclass; ?>">
 <?php }?>
 <?php if(!yourls_is_admin() && $context!='infos'){?>
