@@ -96,9 +96,9 @@ yourls_html_head();
 
 ?>
 <!-- Required CSS -->
-<link rel="stylesheet" href="inc/visualcaptcha.css" type="text/css" media="all" />	
-<link rel="stylesheet" href="sample.css" media="all" type="text/css" />
-<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<!-- <link rel="stylesheet" href="inc/visualcaptcha.css" type="text/css" media="all" />	
+<link rel="stylesheet" href="sample.css" media="all" type="text/css" /> -->
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'/>
 
 <div class="contentarea">
 	<div class="ltpannel">
