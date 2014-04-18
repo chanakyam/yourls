@@ -95,6 +95,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 <script src="<?php yourls_site_url(); ?>/js/jquery.dataTables.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 <link rel="stylesheet" href="<?php yourls_site_url(); ?>/css/tablesorter.css?v=<?php echo YOURLS_VERSION; ?>" type="text/css" media="screen" />
 <!-- end my includes -->
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
 
 
 	<?php if( yourls_is_admin() || $context == 'infos' ||$context == 'login') {?>
