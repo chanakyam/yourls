@@ -220,7 +220,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 	<span id="admin_menu_tripod_link"><a title="Tripod" href="http://tripod.lycos.com">Tripod</a></span>
 	<span id="admin_menu_gamesville_link"><a title="Gamesville.com" href="http://gamesville.com">Gamesville</a></span>
 <?php }?>
-<span class="moremenu">
+<div class="moremenu">
         	<a class="dropDown" title="More Lycos Sites" href="#">More <span class="sprite"></span></a>
         	<ul class="hide ddMenu lyGrey boxShadow1" style="display: none;">
                 <li class="mobileShow"><a title="Tripod" href="http://www.tripod.lycos.com">Tripod</a></li>
@@ -233,7 +233,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 			   	<li><a title="Lycos Chat" href="http://chat.lycos.co.uk">Lycos Chat</a></li>
 				<li><a id="viewAll" title="View All" href="http://info.lycos.com/about/products">View All</a></li>
             </ul>
-</span>
+</div>
 	<span class="menu">
 <?php 
  if( defined( 'YOURLS_USER' ) ) {
@@ -254,7 +254,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 	<span id="admin_menu_mail_link"><a title="mail.lycos.com" href="http://mail.lycos.com">Mail</a></span>
 	<span id="admin_menu_tripod_link"><a title="Tripod" href="http://tripod.lycos.com">Tripod</a></span>
 	<span id="admin_menu_gamesville_link"><a title="Gamesville.com" href="http://gamesville.com">Gamesville</a></span>
-	<span class="moremenu">
+	<div class="moremenu">
         <a href="#" title="More Lycos Sites" class="dropDown">More <span class="sprite"></span></a>
         	<ul style="display: none;" class="hide ddMenu lyGrey boxShadow1">
                 <li class="mobileShow"><a href="http://www.tripod.lycos.com" title="Tripod">Tripod</a></li>
@@ -267,7 +267,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 				<li><a href="http://chat.lycos.co.uk" title="Lycos Chat">Lycos Chat</a></li>
 				<li><a href="http://info.lycos.com/about/products" title="View All" id="viewAll">View All</a></li>
             </ul>
-	</span>
+	</div>
 <?php yourls_html_menu() ?>
 	<span class="menu">
 <?php 
