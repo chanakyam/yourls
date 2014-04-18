@@ -208,7 +208,7 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 
 <h2 id="informations"><?php echo yourls_esc_html( $title ); ?></h2></br>
 
-<h3><span class="label"><?php yourls_e( 'Short URL'); ?>:</span> <img src="<?php yourls_favicon() ?>"/>
+<div class="subtitle"><span class="label"><?php yourls_e( 'Short URL'); ?>:</span> <img src="<?php yourls_favicon() ?>"/>
 <?php if( $aggregate ) {
 	$i = 0;
 	foreach( $keyword_list as $k ) {
@@ -225,8 +225,8 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 	yourls_html_link( yourls_link($keyword) );
 	if( isset( $keyword_list ) && count( $keyword_list ) > 1 )
 		echo ' <a href="'. yourls_link($keyword).'+all" title="' . yourls_esc_attr__( 'Aggregate stats for duplicate short URLs' ) . '"><img src="' . yourls_match_current_protocol( YOURLS_SITE ) . '/images/chart_bar_add.png" border="0" /></a>';
-} ?></h3></br>
-<h3 id="longurl"><span class="label"><?php yourls_e( 'Long URL'); ?>:</span> <img class="fix_images" src="<?php echo yourls_get_favicon_url( $longurl );?>" /> <?php yourls_html_link( $longurl, yourls_trim_long_string( $longurl ), 'longurl' ); ?></h3></br>
+} ?></div>
+<div class="subtitle" id="longurl"><span class="label"><?php yourls_e( 'Long URL'); ?>:</span> <img class="fix_images" src="<?php echo yourls_get_favicon_url( $longurl );?>" /> <?php yourls_html_link( $longurl, yourls_trim_long_string( $longurl ), 'longurl' ); ?></div>
 
 <div id="tabs">
 	<div class="wrap_unfloat">
@@ -306,7 +306,7 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 					if( ${'do_'.$graph} == true ) {
 						$display = ( ${'display_'.$graph} === true ? 'display:block' : 'display:none' );
 						echo "<div id='stat_line_$graph' class='stats_line line' style='$display'>";
-						echo '<h3>' . yourls_s( 'Number of hits : %s' , $graphtitle ) . '</h3>';
+						echo '<div class="subtitle">' . yourls_s( 'Number of hits : %s' , $graphtitle ) . '</div>';
 						switch( $graph ) {
 							case '24':
 								yourls_stats_line( $last_24h, "stat_line_$graph" );
@@ -329,7 +329,7 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 				
 				</td>
 				<td valign="top">
-				<h3><?php yourls_e( 'Historical click count' ); ?></h3>
+				<div class="subtitle"><?php yourls_e( 'Historical click count' ); ?></div>
 				<?php
 				$ago = round( (date('U') - strtotime($timestamp)) / (24* 60 * 60 ) );
 				if( $ago <= 1 ) {
@@ -370,7 +370,7 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 					</ol>
 				</div>
 		
-				<h3><?php yourls_e( 'Best day' ); ?></h3>
+				<div class="subtitle"><?php yourls_e( 'Best day' ); ?></div>
 				<?php
 				$best = yourls_stats_get_best_day( $list_of_days );
 				$best_time['day']   = date( "d", strtotime( $best['day'] ) );
@@ -438,7 +438,7 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 			<table border="0" cellspacing="2">
 			<tr>
 				<td valign="top">
-					<h3><?php yourls_e( 'Top 5 countries' ); ?></h3>
+					<div class="subtitle"><?php yourls_e( 'Top 5 countries' ); ?></div>
 					<?php yourls_stats_pie( $countries, 5, '340x220', 'stat_tab_location_pie' ); ?>
 					<p><a href="" class='details hide-if-no-js' id="more_countries"><?php yourls_e( 'Click for more details' ); ?></a></p>
 					<ul id="details_countries" style="display:none" class="no_bullet">
@@ -451,7 +451,7 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 
 				</td>
 				<td valign="top">
-					<h3><?php yourls_e( 'Overall traffic' ); ?></h3>
+					<div class="subtitle"><?php yourls_e( 'Overall traffic' ); ?></div>
 					<?php yourls_stats_countries_map( $countries, 'stat_tab_location_map' ); ?>
 				</td>
 			</tr>
@@ -475,14 +475,14 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 			<table border="0" cellspacing="2">
 			<tr>
 				<td valign="top">
-					<h3><?php yourls_e( 'Referrer shares' ); ?></h3>
+					<div class="subtitle"><?php yourls_e( 'Referrer shares' ); ?></div>
 					<?php
 					if ( $number_of_sites > 1 )
 						$referrer_sort[ yourls__( 'Others' ) ] = count( $referrers );
 					yourls_stats_pie( $referrer_sort, 5, '440x220', 'stat_tab_source_ref' );
 					unset( $referrer_sort['Others'] );
 					?>
-					<h3><?php yourls_e( 'Referrers' ); ?></h3>
+					<div class="subtitle"><?php yourls_e( 'Referrers' ); ?></div>
 					<ul class="no_bullet">
 						<?php
 						$i = 0;
@@ -513,7 +513,7 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 				</td>
 				
 				<td valign="top">
-					<h3><?php yourls_e( 'Direct vs Referrer Traffic' ); ?></h3>
+					<div class="subtitle"><?php yourls_e( 'Direct vs Referrer Traffic' ); ?></div>
 					<?php
 					yourls_stats_pie( array( yourls__( 'Direct' ) => $direct, yourls__( 'Referrers' ) => $notdirect ), 5, '440x220', 'stat_tab_source_direct' );
 					?>
@@ -538,7 +538,7 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 	<div id="stat_tab_share" class="tab">
 		<h2><?php yourls_e( 'Share' ); ?></h2>
 		
-		<?php yourls_share_box( $longurl, yourls_link($keyword), $title, '', '<h3>' . yourls__( 'Short link' ) . '</h3>', '<h3>' . yourls__( 'Quick Share' ) . '</h3>'); ?>
+		<?php yourls_share_box( $longurl, yourls_link($keyword), $title, '', '<div class="subtitle">' . yourls__( 'Short link' ) . '</div>', '<div class="subtitle">' . yourls__( 'Quick Share' ) . '</div>'); ?>
 
 	</div>
 	

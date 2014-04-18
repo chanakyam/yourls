@@ -1,4 +1,4 @@
-body {font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#595441; background:url(../images/bgTexture.png) repeat 0 0; margin:0px; padding:0;}
+body {font-family: 'Source Sans Pro', sans-serif; font-size:14px; color:#595441; background:#fff; margin:0px; padding:0;}
 #wrap {
 max-width:950px;
 min-height:150px;
@@ -13,8 +13,8 @@ border:none;
 .hide-if-no-js {
 display:none;
 }
-div, p, td {
-font-family:Arial, Helvetica, sans-serif;
+p, td {
+font-family: 'Source Sans Pro', sans-serif;
 font-size:13px;
 margin-top: 5px;
 }
@@ -71,10 +71,10 @@ input, textarea {
 -webkit-border-radius:3px;
 border-radius:3px;
 }
-Input.text, select, textarea {font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#595441; border:1px solid #0470d6; padding:8px; margin:1px; background:#fff; border-radius:0;}
+Input.text, select, textarea {font-family: 'Source Sans Pro', sans-serif; font-size:12px; color:#595441; border:1px solid #0470d6; padding:8px; margin:1px; background:#fff; border-radius:0;}
 
 select {
-font-family:Arial, Helvetica, sans-serif;
+font-family: 'Source Sans Pro', sans-serif;
 font-size:12px;
 color:#000;
 
@@ -128,7 +128,7 @@ tr:hover td.actions input, tr:hover td.actions a {
 visibility:visible;
 }
 td.actions .button {
-font-family:Arial, Helvetica, sans-serif;
+font-family: 'Source Sans Pro', sans-serif;
 font-size:10px;
 color:#595441;
 font-weight:bold;
@@ -227,7 +227,7 @@ margin-top:70px;
 }
 #login .text {
 width:92%;
-font-family:Arial, Helvetica, sans-serif;
+font-family: 'Source Sans Pro', sans-serif;
 font-size:13px;
 background:#ddd;
 }
@@ -316,7 +316,7 @@ background-color:#efefef;
 font-size:18px;
 color:#000;
 text-align:center;
-font-family:Arial, Verdana, sans-serif;
+font-family: 'Source Sans Pro', sans-serif;
 padding:20px 0px;
 border-bottom:1px solid #bbb;
 filter:alpha(opacity=95);
@@ -405,10 +405,9 @@ padding:8px 0;
 .topbar a {
 color:#fff;
 }
-.logout {
-background:url(../images/logout-icon.jpg) no-repeat right top;
-padding:8px 45px 8px 0; float:right;
-}
+.logout {float:right;}
+.header .h-logo:hover, .header a.logout:hover {background: none;}
+
 .username {
 min-width:30%;
 display:inline-block;
@@ -434,9 +433,9 @@ font-size:12px;
 
 #submit-clear-filter{ background:#000; border-radius:3px; color:#fff; cursor:pointer; box-shadow:none; min-width:80px;}
 
-#informations{ background:#dddddd; border:1px solid #d2d2d2; border-top-color:#bcbcbc; padding:5px; color:#343637; font-size:15px; font-family:Arial, Helvetica, sans-serif;}
-.label{ font-size:12px; font-family:Arial, Helvetica, sans-serif;}
-.shorturl, .longurl{ color:#666; font-size:12px; font-family:Arial, Helvetica, sans-serif; font-weight:normal;}
+#informations{ background:#dddddd; border:1px solid #d2d2d2; border-top-color:#bcbcbc; padding:5px; color:#343637; font-size:15px; font-family: 'Source Sans Pro', sans-serif;}
+.label{ font-size:12px; font-family: 'Source Sans Pro', sans-serif;}
+.shorturl, .longurl{ color:#666; font-size:12px; font-family: 'Source Sans Pro', sans-serif; font-weight:normal;}
 .shorturl a{color:#666; text-decoration:none; background:url(../images/link-icon.png) no-repeat left top; padding:4px 0 3px 25px;}
 .shorturl img{ display:inline-block;}
 .longurl a{color:#666; text-decoration:none; background:url(../images/webicon.png) no-repeat left top; padding:0px 0 3px 25px;}
@@ -446,7 +445,7 @@ font-size:12px;
 /*lycos css*/
 * {padding:0; margin:0;}
 a {text-decoration: none;}
-body {padding:0; margin:0; font-family:Arial, Helvetica, sans-serif; font-size:13px;}
+body {padding:0; margin:0; font-family: 'Source Sans Pro', sans-serif; font-size:13px;}
 
 .success, .warning {margin: 20px 0;}
 
@@ -469,16 +468,16 @@ border-radius: 5px;
 
 .contentarea {margin:0;}
 
-.header {background:#343637 url(../images/headerbg.png) repeat-x 0 bottom; padding-bottom:5px; border-top:1px solid #0f1010;}
+.header {background:#343637 url(../images/headerbg.png) repeat-x 0 bottom; padding-bottom:10px; border-top:1px solid #0f1010;}
 
-.contentarea:after, .contentarea:before { display:table; content:"";}
-.contentarea:after {clear:both}
+.contentarea:after, .contentarea:before, .header:after, .header:before { display:table; content:"";}
+.contentarea:after, .header:after {clear:both}
 
-.header a {color:#d4d7da; text-decoration:none; padding:2px 5px 5px; margin:0 5px; display:inline-block;height: 25px;
-    line-height: 25px;}
+
+.header a {color:#d4d7da; text-decoration:none; padding:2px 5px; margin:8px 5px 0 5px; display:inline-block; line-height:22px;}
 .header a:hover{ background-color: #000; }
-.header .h-logo{ padding: 0; margin: 0;}
-.menu {float:right; margin-top:5px; color:#fff;}
+.header .h-logo{line-height:0; padding:0; margin-top:4px; float: left;}
+.menu {float:right; color:#fff; margin-top:1px;}
 
 .ltpannel {background:url(../images/bgTexture.png) repeat 0 0; float:left; width:70%; display:table;}
 
@@ -509,6 +508,7 @@ input[type="text"] {border:1px solid #cccccc; padding:5px 12px;}
 .right {float:right;}
 
 
+.margin12_T {margin-top:12px;}
 .margin10_T {margin-top:10px;}
 .margin20_T {margin-top:20px;}
 
@@ -582,8 +582,7 @@ input[type="text"] {border:1px solid #cccccc; padding:5px 12px;}
 
 .header .dropDown {
     padding-right: 25px;
-    height: 25px;
-    line-height: 25px;
+    line-height:22px;
     margin: 0;
     outline: none;
 
@@ -601,3 +600,8 @@ input[type="text"] {border:1px solid #cccccc; padding:5px 12px;}
     top: 1px;
     width: 10px;
 }
+.header a.logo {line-height:0; padding:0; margin-top:4px; float: left;}
+.subtitle {color: #0e607a; font-weight: bold; font-size: 15px; margin:10px 0;}
+
+.margin10_B {margin-bottom: 10px;}
+

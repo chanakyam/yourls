@@ -73,18 +73,21 @@ function edit_link_display(id) {
 	if( $('#edit-button-'+id).hasClass('disabled') ) {
 		return false;
 	}
-	add_loading('#actions-'+id+' .button');
-	var keyword = $('#keyword_'+id).val();
-	var nonce = get_var_from_query( $('#edit-button-'+id).attr('href'), 'nonce' );
-	$.getJSON(
-		ajaxurl,
-		{ action: "edit_display", keyword: keyword, nonce: nonce, id: id },
-		function(data){
-			$("#id-" + id).after( data.html );
-			$("#edit-url-"+ id).focus();
-			end_loading('#actions-'+id+' .button');
-		}
-	);
+	//new code
+	if( $('#edit-'+id).length ==0){	 	
+		add_loading('#actions-'+id+' .button');
+		var keyword = $('#keyword_'+id).val();
+		var nonce = get_var_from_query( $('#edit-button-'+id).attr('href'), 'nonce' );
+		$.getJSON(
+			ajaxurl,
+			{ action: "edit_display", keyword: keyword, nonce: nonce, id: id },
+			function(data){
+				$("#id-" + id).after( data.html );
+				$("#edit-url-"+ id).focus();
+				end_loading('#actions-'+id+' .button');
+			}
+		);
+	}
 }
 
 // Delete a link
@@ -125,9 +128,11 @@ function go_stats(link) {
 
 // Cancel edition of a link
 function edit_link_hide(id) {
-	$("#edit-" + id).fadeOut(200, function(){
-		end_disable('#actions-'+id+' .button');
-	});
+	//new code
+	$("#edit-" +id).remove();
+	// $("#edit-" + id).fadeOut(200, function(){
+	// 	end_disable('#actions-'+id+' .button');
+	// });
 }
 
 // Save edition of a link
@@ -162,7 +167,9 @@ function edit_link_save(id) {
 			}
 			feedback(data.message, data.status);
 			end_loading("#edit-close-" + id);
-			end_disable("#actions-" + id + ' .button');
+			//end_disable("#actions-" + id + ' .button');
+			//new code
+			$("#edit-" +id).remove();
 		}
 	);
 }

@@ -1,4 +1,3 @@
-<!-- start of visual captcha validation code -->
 <?php
 session_start();
 
@@ -11,24 +10,34 @@ if ( isset($_REQUEST['css_type']) && $_REQUEST['css_type'] === '1' ) {
 }
 
 // The fact we're not using the default visualCaptcha's fieldname is just to show part of visualCaptcha's flexibility
-$_FIELD_NAME = isset($_SESSION['visualCaptcha-fieldName']) ? $_SESSION['visualCaptcha-fieldName'] : uniqid();
-
-if ( isset($_REQUEST['form_submit']) && $_REQUEST['form_submit'] === '1' ) {
-	if ( ! validCaptcha('frm_sample', $_FORM_TYPE, $_FIELD_NAME) ) {
+//$_FIELD_NAME = isset($_SESSION['visualCaptcha-fieldName']) ? $_SESSION['visualCaptcha-fieldName'] : uniqid();
+require_once( dirname(__FILE__).'/includes/recaptchalib.php' );
+//if ( isset($_REQUEST['form_submit']) && $_REQUEST['form_submit'] === '1' ) {
+if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
+	//recaptcha code
+	 $privatekey = "6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
+	 $resp = recaptcha_check_answer ($privatekey,
+	                                 $_SERVER["REMOTE_ADDR"],
+	                                 $_POST["recaptcha_challenge_field"],
+	                                 $_POST["recaptcha_response_field"]);
+	 if (!$resp->is_valid) {
+	   // What happens when the CAPTCHA was entered incorrectly	   
+	   $_GLOBAL_MSG = "The CAPTCHA wasn't entered correctly. Try it again.";
+	 }else{$_GLOBAL_MSG = '';} 
+	/*if ( ! validCaptcha('frm_sample', $_FORM_TYPE, $_FIELD_NAME) ) {
 		$_GLOBAL_MSG = 'Captcha error!';
 	} else {
 		//$_GLOBAL_MSG = 'Captcha valid!';
 		$_GLOBAL_MSG = '';
-	}
+	}*/
 
 	// Generate a new fieldName
-	$_FIELD_NAME = uniqid();
+	//$_FIELD_NAME = uniqid();
 }
 
-$_SESSION['visualCaptcha-fieldName'] = $_FIELD_NAME;
+//$_SESSION['visualCaptcha-fieldName'] = $_FIELD_NAME;
 
 ?>
-<!-- end of visual captcha validation code -->
 <?php
 //session_start();
 /*
@@ -51,7 +60,7 @@ $page = YOURLS_SITE . '/index.php';
 // Part to be executed if FORM has been submitted
 //if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
 if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' && $_GLOBAL_MSG=='') {
-	
+	//echo '<pre>';print_r($_REQUEST);exit;
 	// Get parameters -- they will all be sanitized in yourls_add_new_link()
 	$url     = $_REQUEST['url'];
 	$keyword = isset( $_REQUEST['keyword'] ) ? $_REQUEST['keyword'] : '' ;
@@ -87,21 +96,23 @@ yourls_html_head();
 
 ?>
 <!-- Required CSS -->
-<link rel="stylesheet" href="inc/visualcaptcha.css" media="all" />	
-<link rel="stylesheet" href="sample.css" media="all" />
+<link rel="stylesheet" href="inc/visualcaptcha.css" type="text/css" media="all" />	
+<link rel="stylesheet" href="sample.css" media="all" type="text/css" />
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+
 <div class="contentarea">
 	<div class="ltpannel">
 		<div class="content">
-			<p><img src="images/lycsoLogo.png" align="absmiddle" /></p>
+			<p><img src="images/lycsoLogo.png" alt="lyc.so" /></p>
 			<?php
 			//if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
 			if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' && $_GLOBAL_MSG=='') {
 				// Display result message of short link creation
 				($status == 'success')?$class = 'success':$class = 'warning';
 				if( isset( $message ) ) {					
-					echo "<h2 class='".$class."'>Long URL <span>$message</span></h2>";
+					echo "<div class='".$class."'>Long URL <span>$message</span></div>";
 					if( isset($shorturl) && $shorturl!=''){
-						echo "<h2 class='".$class."'>Shorten URL <span>$shorturl</span></h2>";
+						echo "<div class='".$class."'>Shorten URL <span>$shorturl</span></div>";
 					}
 				}
 				
@@ -122,44 +133,53 @@ yourls_html_head();
 				<h3 class="warning"><span><?php echo $_GLOBAL_MSG; ?></span></h3>
 			<?php
 			}
-			?>			
-			<form name="frm_sample" id="frm_sample" method="post" action="">
-				<input type="hidden" name="form_submit" value="1" readonly="readonly" />
-				<input type="hidden" name="css_type" value="<?php echo $_FORM_TYPE; ?>" readonly="readonly" />
-				<p class="margin20_T">
-				<input type="text" name="url" placeholder="Paste long URL here" class="span6"/>
-				<input type="submit" name="submit-bt" class="btn" value="Shorten"/>
-				<?php printCaptcha( 'frm_sample', $_FORM_TYPE, $_FIELD_NAME ); ?>
-				</p>			
+			?>
+			<script type="text/javascript">
+			 var RecaptchaOptions = {
+			    theme : 'blackglass'
+			 };
+			</script>			
+			<form name="frm_sample" id="frm_sample" method="post" action="">				
+				<div class="margin20_T">
+					<label class="strong">Paste long URL here</label>
+					<input type="text" name="url" class="span6 margin5_L"/>
+					<input type="submit" name="submit-bt" class="btn" value="Shorten"/>
+					<?php //printCaptcha( 'frm_sample', $_FORM_TYPE, $_FIELD_NAME ); ?>					
+					<?php
+				     $publickey = "6LfQBPISAAAAAJ0d8mY53fRkGl1fpZCymvgnJ5Vg"; // you got this from the signup page
+				     echo recaptcha_get_html($publickey);
+				    ?>			
+				</div>			
 			</form>	
 			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 			<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 			<script src="inc/visualcaptcha.js"></script>
 			<?php }?>
 		</div>
-	</div>	
-	<div class="rtpannel">
-		<div class="module">
-		<p>
-		<span class="left">
+			<div class="moduler rightad">
+				<div class="add">
+					<script type="text/javascript">
+						if (!window.OX_ads) { OX_ads = []; }
+						OX_ads.push({ "auid" : "556161" });
+						document.write('<scr'+'ipt src="http://ox-d.lycos.com/w/1.0/jstag"><\/scr'+'ipt>');
+					</script>
+					<noscript>
+						<iframe id="5332eeccbb979" name="5332eeccbb979" src="http://ox-d.lycos.com/w/1.0/afr?auid=556161&cb=INSERT_RANDOM_NUMBER_HERE">
+							
+							<a href="http://ox-d.lycos.com/w/1.0/rc?cs=5332eeccbb979&cb=INSERT_RANDOM_NUMBER_HERE">
+								<img src="http://ox-d.lycos.com/w/1.0/ai?auid=556161&cs=5332eeccbb979&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt="">
+							</a>
 
-		<script type="text/javascript">
-			if (!window.OX_ads) { OX_ads = []; }
-			OX_ads.push({ "auid" : "556161" });
-		</script>
-		<script type="text/javascript">
-			document.write('<scr'+'ipt src="http://ox-d.lycos.com/w/1.0/jstag"><\/scr'+'ipt>');
-		</script>
-		<noscript>
-			<iframe id="5332eeccbb979" name="5332eeccbb979" src="http://ox-d.lycos.com/w/1.0/afr?auid=556161&cb=INSERT_RANDOM_NUMBER_HERE" frameborder="0" scrolling="no" width="300" height="600">
-				<a href="http://ox-d.lycos.com/w/1.0/rc?cs=5332eeccbb979&cb=INSERT_RANDOM_NUMBER_HERE" >
-					<img src="http://ox-d.lycos.com/w/1.0/ai?auid=556161&cs=5332eeccbb979&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt="">
-				</a>
-			</iframe>
-		</noscript>
-		</span> 
-		</div>
-	</div>    
+						</iframe>
+					</noscript>
+				</div>
+			</div>
+	</div>	
+
+
+	
+	
+	   
 </div>
 <!--contentarea end-->
 <?php
@@ -170,8 +190,7 @@ yourls_html_footer();
 // These functions aren't needed, but we recommend you to use them (or similar), so you can start/get multiple captcha instances with two simple functions.
 
 function printCaptcha( $formId = NULL, $type = NULL, $fieldName = NULL, $accessibilityFieldName = NULL ) {
-	require_once( 'inc/visualcaptcha.class.php' );
-	
+	require_once( 'inc/visualcaptcha.class.php' );	
 	$visualCaptcha = new \visualCaptcha\Captcha( $formId, $type, $fieldName, $accessibilityFieldName );
 	$visualCaptcha->show();
 }
