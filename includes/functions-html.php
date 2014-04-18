@@ -899,7 +899,7 @@ function yourls_html_menu() {
 	$admin_links['admin'] = array(
 		'url'    => yourls_admin_url( 'index.php' ),
 		'title'  => yourls__( 'Admin Interface' ),
-		'anchor' => yourls__( 'Admin IPnterface' ),
+		'anchor' => yourls__( 'Admin Interface' ),
 	);
 	
 	if( yourls_is_admin() ) {
