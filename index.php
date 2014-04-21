@@ -101,20 +101,42 @@ yourls_html_head();
 
 
 <div class="contentarea">
-	<div class="ltpannel">
-		<div class="content">
+	<div class="ltpannel center">
+		<div class="moduler center">
+				<div class="add">
+					<!-- new code -->
+					<script type="text/javascript">
+						if (!window.OX_ads)
+						{ OX_ads = []; }
+						OX_ads.push(
+						{ "auid" : "537094873" }
+						);
+					</script>
+					<script type="text/javascript">
+						document.write('<scr'+'ipt src="http://ox-d.lycos.com/w/1.0/jstag"><\/scr'+'ipt>');
+					</script>
+					<noscript><iframe id="14f66a6be9" name="14f66a6be9" src="http://ox-d.lycos.com/w/1.0/afr?auid=537094873&cb=INSERT_RANDOM_NUMBER_HERE"><a href="http://ox-d.lycos.com/w/1.0/rc?cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" ><img src="http://ox-d.lycos.com/w/1.0/ai?auid=537094873&cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt="Add Banner" class="banner"></a></iframe></noscript>
+					<!-- end -->
+				</div>
+			</div>
+
+		
 			<p><img src="images/lycsoLogo.png" alt="lyc.so" /></p>
 			<?php
 			//if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
 			if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' && $_GLOBAL_MSG=='') {
 				// Display result message of short link creation
 				($status == 'success')?$class = 'success':$class = 'warning';
-				if( isset( $message ) ) {					
-					echo "<div class='".$class."'>Long URL <span>$message</span></div>";
-					if( isset($shorturl) && $shorturl!=''){
-						echo "<div class='".$class."'>Shorten URL <span>$shorturl</span></div>";
-					}
+				if( isset( $message ) && $class=='success') {					
+					echo "<div class='success'>Long URL <span>$message</span></div>";
 				}
+				if( isset( $message ) && $class=='warning') {					
+					echo "<div class='success'>Long URL <span>$url</span></div>";
+				}
+				if( isset($shorturl) && $shorturl!=''){
+					echo "<div class='success'>Shorten URL <span>$shorturl</span></div>";
+				}
+				
 				
 				if( $status == 'success' ) {
 					// Include the Copy box and the Quick Share box
@@ -130,7 +152,7 @@ yourls_html_head();
 			<?php
 			if ( ! empty($_GLOBAL_MSG) ) {
 			?>
-				<h3 class="warning"><span><?php echo $_GLOBAL_MSG; ?></span></h3>
+				<div class="warning"><span><?php echo $_GLOBAL_MSG; ?></span></div>
 			<?php
 			}
 			?>
@@ -155,25 +177,8 @@ yourls_html_head();
 			<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 			<script src="inc/visualcaptcha.js"></script>
 			<?php }?>
-		</div>
-			<div class="moduler rightad">
-				<div class="add">
-					<script type="text/javascript">
-						if (!window.OX_ads) { OX_ads = []; }
-						OX_ads.push({ "auid" : "556161" });
-						document.write('<scr'+'ipt src="http://ox-d.lycos.com/w/1.0/jstag"><\/scr'+'ipt>');
-					</script>
-					<noscript>
-						<iframe id="5332eeccbb979" name="5332eeccbb979" src="http://ox-d.lycos.com/w/1.0/afr?auid=556161&cb=INSERT_RANDOM_NUMBER_HERE">
-							
-							<a href="http://ox-d.lycos.com/w/1.0/rc?cs=5332eeccbb979&cb=INSERT_RANDOM_NUMBER_HERE">
-								<img src="http://ox-d.lycos.com/w/1.0/ai?auid=556161&cs=5332eeccbb979&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt="">
-							</a>
-
-						</iframe>
-					</noscript>
-				</div>
-			</div>
+		
+			
 	</div>	
 
 

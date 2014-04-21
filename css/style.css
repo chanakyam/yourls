@@ -160,7 +160,7 @@ input[type="text"] {border:1px solid #cccccc; padding:10px;}
 
 .strong {font-weight: bold;}
 
-.add {background-color: #000; padding: 10px; line-height: 0;}
+.add {background-color: #000; padding:10px 0; width:100%; line-height:0; position:fixed; bottom:38px;}
 .red{color:#FF0000}
 
 iframe {
@@ -173,3 +173,24 @@ span#recaptcha_privacy {
     display:none;
 }
 
+.center {text-align: center;}
+
+@media (min-width:481px) and (max-width:650px) {
+
+.span6 {width:40%;}
+
+}
+
+
+@media (max-width:480px) {
+
+.span6 {width:auto; clear:both;}
+.footer > span {display:block; margin-top:5px; text-align:center;
+}
+
+@media (max-width:380px) {
+
+.span6 {display:block; width:80%; margin:10px;}
+}
+
+.banner {max-width:100%;}

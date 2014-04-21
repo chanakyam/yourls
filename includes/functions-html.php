@@ -269,7 +269,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 				<li><a href="http://info.lycos.com/about/products" title="View All" id="viewAll">View All</a></li>
             </ul>
 	</div>
-<?php yourls_html_menu() ?>
+<?php //yourls_html_menu() ?>
 	<span class="menu">
 <?php 
  if( defined( 'YOURLS_USER' ) ) {
@@ -277,7 +277,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 	} else {
 		$logout_link = yourls_apply_filter( 'logout_link', '' );
 	}
-	echo "$logout_link";
+	//echo "$logout_link";
 
 	$logout_link ?></span>
 </div>
@@ -904,22 +904,22 @@ function yourls_html_menu() {
 	);
 	
 	if( yourls_is_admin() ) {
-		/*$admin_links['tools'] = array(
+		$admin_links['tools'] = array(
 			'url'    => yourls_admin_url( 'tools.php' ),
 			'anchor' => yourls__( 'Tools' )
-		);*/		
+		);		
 		$admin_links['plugins'] = array(
 			'url'    => yourls_admin_url( 'plugins.php' ),
 			'title'  => yourls__( 'Manage Plugins' ),
 			'anchor' => yourls__( 'Manage Plugins' ),
 			
 		);
-		/*$admin_links['users'] = array(
+		$admin_links['users'] = array(
 			'url'    => yourls_admin_url( 'manage_users.php' ),
 			'title'  => yourls__( 'Manage Users' ),
 			'anchor' => yourls__( 'Manage Users' ),
 			
-		);*/
+		);
 		$admin_links['search'] = array(
 			'url'    => 'http://search.lycos.com',
 			'title'  => yourls__( 'Lycos.com' ),
