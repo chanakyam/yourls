@@ -1,3 +1,4 @@
+*{ outline: none;}
 body {font-family: 'Source Sans Pro', sans-serif; font-size:14px; color:#595441; background:#fff; margin:0px; padding:0;}
 #wrap {
 max-width:950px;
@@ -605,3 +606,15 @@ input[type="text"] {border:1px solid #cccccc; padding:5px 12px;}
 
 .margin10_B {margin-bottom: 10px;}
 
+.settingicon{ background:url(../images/setting.png) no-repeat left top; width: 16px; height: 16px;}
+.header .settingmenu > a{ background: no-repeat;}
+.settingmenu img {
+    margin-top: 9px;
+    opacity: 0.8;
+    width: 18px;
+}
+.settingmenu .ddMenu{
+    right: 20px;
+    top: 26px;
+    left: auto;
+}

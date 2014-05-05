@@ -8741,12 +8741,14 @@
 				"url":  sUrl,
 				"data": aoData,
 				"success": function (json) {
-					if ( json.sError ) {
-						oSettings.oApi._fnLog( oSettings, 0, json.sError );
+					if(json !== null) {
+						if ( json.sError ) {
+							oSettings.oApi._fnLog( oSettings, 0, json.sError );
+						}
+						
+						$(oSettings.oInstance).trigger('xhr', [oSettings, json]);
+						fnCallback( json );
 					}
-					
-					$(oSettings.oInstance).trigger('xhr', [oSettings, json]);
-					fnCallback( json );
 				},
 				"dataType": "json",
 				"cache": false,

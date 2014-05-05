@@ -194,3 +194,10 @@ span#recaptcha_privacy {
 }
 
 .banner {max-width:100%;}
+
+
+/* 22-04-2014 */
+
+input[type="password"] {border:1px solid #cccccc; padding:10px;}
+
+

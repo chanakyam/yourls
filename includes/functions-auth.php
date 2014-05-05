@@ -23,6 +23,9 @@ function yourls_is_valid_user() {
 	if( isset( $_GET['action'] ) && $_GET['action'] == 'logout' ) {
 		yourls_do_action( 'logout' );
 		yourls_store_cookie( null );
+		//new code for validating username & pwd from db
+		 session_start();
+	     session_unset();
 		return yourls__( 'Logged out successfully' );
 	}
 	
@@ -66,11 +69,11 @@ function yourls_is_valid_user() {
 	
 	elseif
 		// Normal only: cookies
-		( !yourls_is_API() && 
-		  isset( $_COOKIE['yourls_username'] ) )
+		( !yourls_is_API() && isset( $_COOKIE['yourls_username'] ) )
 		{
 			yourls_do_action( 'pre_login_cookie' );
 			$unfiltered_valid = yourls_check_auth_cookie();
+			$unfiltered_valid = true;
 		}
 	
 	// Regardless of validity, allow plugins to filter the boolean and have final word
@@ -83,10 +86,10 @@ function yourls_is_valid_user() {
 		// (Re)store encrypted cookie if needed
 		if ( !yourls_is_API() ) {
 			yourls_store_cookie( YOURLS_USER );
-			
+
 			// Login form : redirect to requested URL to avoid re-submitting the login form on page reload
 			if( isset( $_REQUEST['username'] ) && isset( $_REQUEST['password'] ) && isset( $_SERVER['REQUEST_URI'] ) ) {
-				$url = $_SERVER['REQUEST_URI'];
+				$url = $_SERVER['REQUEST_URI'];				
 				yourls_redirect( $url );
 			}
 		}
@@ -111,11 +114,33 @@ function yourls_is_valid_user() {
  */
 function yourls_check_username_password() {
 	global $yourls_user_passwords;
-	if( isset( $yourls_user_passwords[ $_REQUEST['username'] ] ) && yourls_check_password_hash( $_REQUEST['username'], $_REQUEST['password'] ) ) {
+	global $ydb;
+	//new code for validating username & pwd from db
+	// require_once( YOURLS_INC.'/class-mysql.php' );
+	// $ydb = yourls_db_connect();
+	// $table_url = YOURLS_DB_TABLE_URL;
+	$_REQUEST['password'] = md5($_REQUEST['password']);
+	//echo "SELECT * FROM yourls_users WHERE email='".$_REQUEST['username']."' AND password='".$_REQUEST['password']."' AND status='Active'" ;exit;
+	$user_results = $ydb->get_results( "SELECT * FROM yourls_users WHERE email='".$_REQUEST['username']."' AND password='".$_REQUEST['password']."' AND status='Active'" );	
+	if($user_results[0]->email == $_REQUEST['username'] && $user_results[0]->password == $_REQUEST['password']){
+		//assigning username to session
+		$_SESSION['username'] = $_REQUEST['username'];
+		$_SESSION['name'] = $user_results[0]->firstname.' '.$user_results[0]->lastname;
+		//$_SESSION['lastname'] = $user_results[0]->lastname;		
 		yourls_set_user( $_REQUEST['username'] );
+		//yourls_set_name( $user_results[0]->firstname.''.$user_results[0]->lastname);
+		//yourls_set_user( $user_results[0]->firstname);
+		//print_r($_SESSION);exit;
 		return true;
+	}else{
+		return false;
 	}
-	return false;
+	//end
+	// if( isset( $yourls_user_passwords[ $_REQUEST['username'] ] ) && yourls_check_password_hash( $_REQUEST['username'], $_REQUEST['password'] ) ) {
+	// 	yourls_set_user( $_REQUEST['username'] );
+	// 	return true;
+	// }
+	// return false;
 }
 
 /**
@@ -305,14 +330,22 @@ function yourls_has_phpass_password( $user ) {
  *
  */
 function yourls_check_auth_cookie() {
-	global $yourls_user_passwords;
-	foreach( $yourls_user_passwords as $valid_user => $valid_password ) {
-		if ( yourls_salt( $valid_user ) == $_COOKIE['yourls_username'] ) {
-			yourls_set_user( $valid_user );
-			return true;
-		}
-	}
-	return false;
+	// global $yourls_user_passwords;
+	// foreach( $yourls_user_passwords as $valid_user => $valid_password ) {
+	// 	if ( yourls_salt( $valid_user ) == $_COOKIE['yourls_username'] ) {
+	// 		yourls_set_user( $valid_user );
+	// 		return true;
+	// 	}
+	// }
+	// return false;
+
+	//new code for validating username & pwd from db	
+	//if(yourls_check_username_password())
+		//yourls_set_user( $_COOKIE['yourls_username'] );
+		session_start();
+		yourls_set_user( $_SESSION['username'] );
+		return true;
+	//return false;
 }
 
 /**
@@ -346,23 +379,41 @@ function yourls_check_signature_timestamp() {
  */
 function yourls_check_signature() {
 	global $yourls_user_passwords;
-	foreach( $yourls_user_passwords as $valid_user => $valid_password ) {
+	global $ydb;
+	//new code for validating user signature from db	
+	//echo "SELECT signature FROM yourls_users WHERE signature='".$_REQUEST['signature']."'  AND active='A' LIMIT 0,1";exit;
+	$signature_results = $ydb->get_results( "SELECT signature FROM yourls_users WHERE signature='".$_REQUEST['signature']."'  AND active='A' LIMIT 0,1" );	
+	if($signature_results[0]->signature == $_REQUEST['signature'] ){
+		//yourls_set_user( $_REQUEST['username'] );
+		return true;
+	}else{
+		return false;
+	}
+
+	/*foreach( $yourls_user_passwords as $valid_user => $valid_password ) {
 		if ( yourls_auth_signature( $valid_user ) == $_REQUEST['signature'] ) {
 			yourls_set_user( $valid_user );
 			return true;
 		}
 	}
 	return false;
+	*/
 }
 
 /**
  * Generate secret signature hash
  *
  */
-function yourls_auth_signature( $username = false ) {
+function yourls_auth_signature( $username = true ) {
 	if( !$username && defined('YOURLS_USER') ) {
 		$username = YOURLS_USER;
 	}
+	return ( $username ? substr( yourls_salt( $username ), 0, 10 ) : 'Cannot generate auth signature: no username' );
+}
+
+
+// Signature for new user for API
+function yourls_auth_signature_new_user( $username) {
 	return ( $username ? substr( yourls_salt( $username ), 0, 10 ) : 'Cannot generate auth signature: no username' );
 }
 
@@ -385,12 +436,14 @@ function yourls_store_cookie( $user = null ) {
 		$pass = null;
 		$time = time() - 3600;
 	} else {
-		global $yourls_user_passwords;
-		if( isset($yourls_user_passwords[$user]) ) {
-			$pass = $yourls_user_passwords[$user];
-		} else {
-			die( 'Stealing cookies?' ); // This should never happen
-		}
+		// global $yourls_user_passwords;
+		// if( isset($yourls_user_passwords[$user]) ) {
+		// 	$pass = $yourls_user_passwords[$user];
+		// } else {
+		// 	die( 'Stealing cookies?' ); // This should never happen
+		// }
+		//new code for validating username & pwd from db
+		$pass = $_REQUEST['username'];
 		$time = time() + YOURLS_COOKIE_LIFE;
 	}
 	
@@ -423,4 +476,10 @@ function yourls_set_user( $user ) {
 	if( !defined( 'YOURLS_USER' ) )
 		define( 'YOURLS_USER', $user );
 }
+
+// function yourls_set_name( $name ) {
+// 	if( !defined( 'YOURLS_NAME' ) ){
+// 		define( 'YOURLS_NAME', $name );
+// 	}
+// }
 

@@ -1,4 +1,5 @@
 <?php
+session_start();
 define( 'YOURLS_ADMIN', true );
 require_once( dirname( dirname( __FILE__ ) ).'/includes/load-yourls.php' );
 yourls_maybe_require_auth();
@@ -289,6 +290,7 @@ if ( !$is_bookmark ) {
 yourls_do_action( 'admin_page_before_table' );
 
 yourls_table_head();
+//echo "SELECT * FROM `$table_url` WHERE 1=1 $where ORDER BY `$sort_by` $sort_order LIMIT $offset, $perpage;";
 
 /*
 

@@ -90,6 +90,8 @@ jQuery.notifyBar = function(settings) {
     // If taken from DOM dot not remove just hide
     if( bar.attr("id") == "__notifyBar") {
       setTimeout("jQuery('#" + id + "').slideUp(" + asTime +", function() {jQuery('#" + id + "').remove()});", notifyBarNS.delay + asTime);
+      // $('#dashboard_main_table').load('user.php #dashboard_main_table').fadeIn();
+      //location.reload();
     } else {
       setTimeout("jQuery('#" + id + "').slideUp(" + asTime +", function() {jQuery('#" + id + "')});", notifyBarNS.delay + asTime);
     }

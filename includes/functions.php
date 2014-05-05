@@ -3,7 +3,8 @@
  * YOURLS
  * Function library
  */
-
+//require_once( dirname( dirname( __FILE__ ) ) .'/includes/load-yourls.php' );
+require_once(__DIR__."/../user.class.php");
 /**
  * Determine the allowed character set in short URLs
  * 
@@ -151,7 +152,14 @@ function yourls_insert_link_in_db( $url, $keyword, $title = '' ) {
 	$table = YOURLS_DB_TABLE_URL;
 	$timestamp = date('Y-m-d H:i:s');
 	$ip = yourls_get_IP();
-	$insert = $ydb->query("INSERT INTO `$table` (`keyword`, `url`, `title`, `timestamp`, `ip`, `clicks`) VALUES('$keyword', '$url', '$title', '$timestamp', '$ip', 0);");
+	if(isset($_SESSION['username']) && $_SESSION['username'] != "") {
+		$obj_user = new user();
+		$user_data = $obj_user->getUserDetails();
+		$user_id = $user_data['user_id'];
+	}else{
+		$user_id = "";
+	}
+	$insert = $ydb->query("INSERT INTO `$table` (`user_id`,`keyword`, `url`, `title`, `timestamp`, `ip`, `clicks`) VALUES('$user_id','$keyword', '$url', '$title', '$timestamp', '$ip', 0);");
 	
 	yourls_do_action( 'insert_link', (bool)$insert, $url, $keyword, $title, $timestamp, $ip );
 	
@@ -1716,6 +1724,19 @@ function yourls_is_admin() {
 	if ( defined( 'YOURLS_ADMIN' ) && YOURLS_ADMIN == true )
 		return true;
 	return false;
+}
+
+/**
+ * Check if we're in the user area.
+ *
+ */
+function yourls_check_user() {
+	$obj_user = new user();
+	$user_data = $obj_user->getUserDetails();
+	if(!empty($user_data) && $user_data['role'] == "User")
+		return true;
+	else
+		return false;
 }
 
 /**

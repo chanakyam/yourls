@@ -59,6 +59,9 @@ function add_link() {
 
 function toggle_share_fill_boxes( url, shorturl, title ) {
 	$('#copylink').val( shorturl );
+	console.log(url);
+	console.log(shorturl);
+	console.log(title);
 	$('#titlelink').val( title );
 	$('#origlink').attr( 'href', url ).html( url );
 	$('#statlink').attr( 'href', shorturl+'+' ).html( shorturl+'+' );
@@ -214,11 +217,15 @@ function toggle_share(id) {
 	
 	var longurl = $(link).attr("href");//link.attr('href');
 	var title = $('#id-'+id+' .url a').html();//link.attr('title');
-	var url=window.location.href;
-	var host_url=url.split('admin')	
-	var shorturl = host_url[0]+short_link;//$('#keyword-'+id+' a:first').attr('href');
+	// var url=window.location.href;
+	// var host_url=url.split('admin')	
+	// var shorturl = host_url[0]+short_link;//$('#keyword-'+id+' a:first').attr('href');
 	
-	
+	pathArray = window.location.href.split( '/' );
+	protocol = pathArray[0];
+	host = pathArray[2];
+	url = protocol + '//' + host + '/';
+	var shorturl = url+short_link;//$('#keyword-'+id+' a:first').attr('href');
 	toggle_share_fill_boxes(longurl, shorturl, title );
 }
 

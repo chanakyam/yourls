@@ -3,8 +3,7 @@
 }
 
 #shareboxes{
-	padding:10px;
-	display: table;
+	padding:10px 0; width:60%; margin: 0 auto;
 }
 p {padding:8px 0; font-size: 14px; line-height:20px; }
 h2 {padding: 10px 0;}

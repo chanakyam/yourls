@@ -7,7 +7,7 @@
 	yourls_maybe_require_auth();
 
 	include(__DIR__."/../user/config.php");
-
+	
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	 * Easy set variables
 	 */
@@ -131,7 +131,19 @@
 			$sWhere .= "`".$aColumns[$i]."` LIKE '%".mysql_real_escape_string($_GET['sSearch_'.$i])."%' ";
 		}
 	}
-	
+
+	//For user
+	if(isset($_SESSION['username']) && $_SESSION['username'] != ""){
+		$obj_user = new user();
+		$user_data = $obj_user->getUserDetails();
+		if($user_data['role'] == "User") {
+			$user_id = $user_data['user_id'];
+			if($sWhere != "")
+				$sWhere .= " AND user_id='".$user_id."'";
+			else
+				$sWhere = "WHERE user_id='".$user_id."'";
+		}
+	}
 	
 	/*
 	 * SQL queries

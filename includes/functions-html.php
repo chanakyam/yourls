@@ -87,7 +87,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 	<link rel="shortcut icon" href="<?php yourls_favicon(); ?>" />
 	<meta charset="utf-8">	
 	<script src="<?php yourls_site_url(); ?>/js/jquery-1.8.2.min.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
-	
+	<script src="<?php yourls_site_url(); ?>/js/validation.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 	<script src="<?php yourls_site_url(); ?>/js/common.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 	<script src="<?php yourls_site_url(); ?>/js/jquery.notifybar.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 
@@ -137,7 +137,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 	<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
 				var oTable= $('#dashboard_main_table').dataTable({
-					
+					 aaSorting : [[2, 'desc']],
 					 "bProcessing": true,
 					 "bServerSide": true,
 					 "sPaginationType": "full_numbers",
@@ -146,7 +146,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 
 								    { "fnRender": function ( oObj ) {
 								        if ( oObj.aData[3] != "" ) {
-								            return '<td id="actions-'+oObj.aData["id"]+'" class="actions "><a class="button button_stats" title="Stats" id="statlink-'+oObj.aData["id"]+'" href="/'+oObj.aData["keyword"]+'+">Stats</a><a onclick="toggle_share(\''+oObj.aData["id"]+'\');return false;" class="button button_share" title="Share" id="share-button-'+oObj.aData["id"]+'" href="">Share</a><a onclick="edit_link_display(\''+oObj.aData["id"]+'\');return false;" class="button button_edit" title="Edit" id="edit-button-'+oObj.aData["id"]+'" href="/admin/admin-ajax.php?id='+oObj.aData["id"]+'&amp;action=edit&amp;keyword='+oObj.aData["keyword"]+'&amp;nonce='+oObj.aData["nonce_edit"]+'">Edit</a><a onclick="remove_link(\''+oObj.aData["id"]+'\');return false;" class="button button_delete" title="Delete" id="delete-button-'+oObj.aData["id"]+'" href="/admin/admin-ajax.php?id='+oObj.aData["id"]+'&amp;action=delete&amp;keyword='+oObj.aData["keyword"]+'&amp;nonce='+oObj.aData["nonce_delete"]+'">Delete</a><input type="hidden" value="'+oObj.aData["keyword"]+'" id="keyword_'+oObj.aData["id"]+'"></td>';
+								            return '<td id="actions-'+oObj.aData["id"]+'" class="actions "><a target="blank" class="button button_stats" title="Stats" id="statlink-'+oObj.aData["id"]+'" href="/'+oObj.aData["keyword"]+'+">Stats</a><a onclick="toggle_share(\''+oObj.aData["id"]+'\');return false;" class="button button_share" title="Share" id="share-button-'+oObj.aData["id"]+'" href="">Share</a><a onclick="edit_link_display(\''+oObj.aData["id"]+'\');return false;" class="button button_edit" title="Edit" id="edit-button-'+oObj.aData["id"]+'" href="/admin/admin-ajax.php?id='+oObj.aData["id"]+'&amp;action=edit&amp;keyword='+oObj.aData["keyword"]+'&amp;nonce='+oObj.aData["nonce_edit"]+'">Edit</a><a onclick="remove_link(\''+oObj.aData["id"]+'\');return false;" class="button button_delete" title="Delete" id="delete-button-'+oObj.aData["id"]+'" href="/admin/admin-ajax.php?id='+oObj.aData["id"]+'&amp;action=delete&amp;keyword='+oObj.aData["keyword"]+'&amp;nonce='+oObj.aData["nonce_delete"]+'">Delete</a><input type="hidden" value="'+oObj.aData["keyword"]+'" id="keyword_'+oObj.aData["id"]+'"></td>';
 								            }
 								        else {
 								            return oObj.aData[5];
@@ -216,29 +216,38 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 	
 <?php yourls_html_menu() ?>
 <?php if($context=='login'){?>
-<span id="admin_menu_search_link"><a title="Lycos.com" href="http://search.lycos.com">Search</a></span>
-	<span id="admin_menu_mail_link"><a title="mail.lycos.com" href="http://mail.lycos.com">Mail</a></span>
-	<span id="admin_menu_tripod_link"><a title="Tripod" href="http://tripod.lycos.com">Tripod</a></span>
-	<span id="admin_menu_gamesville_link"><a title="Gamesville.com" href="http://gamesville.com">Gamesville</a></span>
+	<span id="admin_menu_search_link"><a target="blank" title="Lycos.com" href="http://search.lycos.com">Search</a></span>
+	<span id="admin_menu_mail_link"><a target="blank" title="mail.lycos.com" href="http://mail.lycos.com">Mail</a></span>
+	<span id="admin_menu_tripod_link"><a target="blank" title="Tripod" href="http://tripod.lycos.com">Tripod</a></span>
+	<span id="admin_menu_gamesville_link"><a target="blank" title="Gamesville.com" href="http://gamesville.com">Gamesville</a></span>
 <?php }?>
 <div class="moremenu">
         	<a class="dropDown" title="More Lycos Sites" href="#">More <span class="sprite"></span></a>
-        	<ul class="hide ddMenu lyGrey boxShadow1" style="display: none;">
-                <li class="mobileShow"><a title="Tripod" href="http://www.tripod.lycos.com">Tripod</a></li>
-                <li class="mobileShow"><a title="Gamesville.com" href="http://www.gamesville.com/">Gamesville</a></li>
-				<li><a title="Lycos Domains" href="http://domains.lycos.com/">Lycos Domains</a></li>
-				<li><a title="Lycos News" href="http://news.lycos.com">Lycos News</a></li>
-				<li><a title="Lycos Shopping" href="http://shopping.lycos.com">Lycos Shopping</a></li>					
-				<li><a title="Lycos Weather" href="http://weather.lycos.com">Lycos Weather</a></li>
-				<li><a title="WhoWhere?" href="http://www.whowhere.com/">WhoWhere?</a></li>
-			   	<li><a title="Lycos Chat" href="http://chat.lycos.co.uk">Lycos Chat</a></li>
-				<li><a id="viewAll" title="View All" href="http://info.lycos.com/about/products">View All</a></li>
+        	<ul style="display: none;" class="hide ddMenu lyGrey boxShadow1">
+                <li class="mobileShow"><a target="blank" href="http://www.tripod.lycos.com" title="Tripod">Tripod</a></li>
+                <li class="mobileShow"><a target="blank" href="http://www.gamesville.com/" title="Gamesville.com">Gamesville</a></li>
+				<li><a target="blank" href="http://domains.lycos.com/" title="Lycos Domains">Lycos Domains</a></li>
+				<li><a target="blank" href="http://news.lycos.com" title="Lycos News">Lycos News</a></li>
+				<li><a target="blank" href="http://shopping.lycos.com" title="Lycos Shopping">Lycos Shopping</a></li>					
+				<li><a target="blank" href="http://weather.lycos.com" title="Lycos Weather">Lycos Weather</a></li>
+				<li><a target="blank" href="http://www.whowhere.com/" title="WhoWhere?">WhoWhere?</a></li>
+				<li><a target="blank" href="http://chat.lycos.co.uk" title="Lycos Chat">Lycos Chat</a></li>
+				<li><a target="blank" href="http://info.lycos.com/about/products" title="View All" id="viewAll">View All</a></li>
             </ul>
 </div>
 	<span class="menu">
 <?php 
  if( defined( 'YOURLS_USER' ) ) {
-		$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('<span class="left margin12_T">Hello <strong>%s</strong>'), YOURLS_USER ) . '</span><a href="?action=logout" title="' . yourls_esc_attr__( 'Logout' ) . '" class="logout"><img src="/images/logout-icon.png">' . '</a>' );
+		$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('<span class="left margin12_T">Hello <strong>%s</strong>'), $_SESSION['name'] ) . '</span><a href="?action=logout" title="' . yourls_esc_attr__( 'Logout' ) . '" class="logout"><img src="/images/logout-icon.png">' . '</a>
+			
+        	<div class="moremenu settingmenu">
+        	<a  class="dropDown" title="' . yourls_esc_attr__( 'Settings' ) . '"><img src="/images/setting.png"> </a>
+        	<ul style="display: none;" class="hide ddMenu lyGrey boxShadow1">
+                <li><a href="myprofile.php" title="My Profile">My Profile</a></li>
+                <li><a href="user.php" title="My Account">My Account</a></li>
+				<li><a href="changepwd.php" title="Change Password" id="changepwd">Change Password</a></li>
+            </ul>
+	</div>' );
 	} else {
 		$logout_link = yourls_apply_filter( 'logout_link', '' );
 	}
@@ -251,26 +260,28 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 <?php }elseif(!yourls_is_admin() && $context ='infos'){?>
 		<div class="header">
 	<a href="<?php yourls_site_url(); ?>" class="logo" title="lyc.so"><img alt="lyc.so" src="/images/headerDog.png"></a> 
-	<span id="admin_menu_search_link"><a title="Lycos.com" href="http://search.lycos.com">Search</a></span>
-	<span id="admin_menu_mail_link"><a title="mail.lycos.com" href="http://mail.lycos.com">Mail</a></span>
-	<span id="admin_menu_tripod_link"><a title="Tripod" href="http://tripod.lycos.com">Tripod</a></span>
-	<span id="admin_menu_gamesville_link"><a title="Gamesville.com" href="http://gamesville.com">Gamesville</a></span>
+	<span id="admin_menu_search_link"><a target="blank" title="Lycos.com" href="http://search.lycos.com">Search</a></span>
+	<span id="admin_menu_mail_link"><a target="blank" title="mail.lycos.com" href="http://mail.lycos.com">Mail</a></span>
+	<span id="admin_menu_tripod_link"><a target="blank" title="Tripod" href="http://tripod.lycos.com">Tripod</a></span>
+	<span id="admin_menu_gamesville_link"><a target="blank" title="Gamesville.com" href="http://gamesville.com">Gamesville</a></span>
 	<div class="moremenu">
         <a href="#" title="More Lycos Sites" class="dropDown">More <span class="sprite"></span></a>
         	<ul style="display: none;" class="hide ddMenu lyGrey boxShadow1">
-                <li class="mobileShow"><a href="http://www.tripod.lycos.com" title="Tripod">Tripod</a></li>
-                <li class="mobileShow"><a href="http://www.gamesville.com/" title="Gamesville.com">Gamesville</a></li>
-				<li><a href="http://domains.lycos.com/" title="Lycos Domains">Lycos Domains</a></li>
-				<li><a href="http://news.lycos.com" title="Lycos News">Lycos News</a></li>
-				<li><a href="http://shopping.lycos.com" title="Lycos Shopping">Lycos Shopping</a></li>					
-				<li><a href="http://weather.lycos.com" title="Lycos Weather">Lycos Weather</a></li>
-				<li><a href="http://www.whowhere.com/" title="WhoWhere?">WhoWhere?</a></li>
-				<li><a href="http://chat.lycos.co.uk" title="Lycos Chat">Lycos Chat</a></li>
-				<li><a href="http://info.lycos.com/about/products" title="View All" id="viewAll">View All</a></li>
+                <li class="mobileShow"><a target="blank" href="http://www.tripod.lycos.com" title="Tripod">Tripod</a></li>
+                <li class="mobileShow"><a target="blank" href="http://www.gamesville.com/" title="Gamesville.com">Gamesville</a></li>
+				<li><a target="blank" href="http://domains.lycos.com/" title="Lycos Domains">Lycos Domains</a></li>
+				<li><a target="blank" href="http://news.lycos.com" title="Lycos News">Lycos News</a></li>
+				<li><a target="blank" href="http://shopping.lycos.com" title="Lycos Shopping">Lycos Shopping</a></li>					
+				<li><a target="blank" href="http://weather.lycos.com" title="Lycos Weather">Lycos Weather</a></li>
+				<li><a target="blank" href="http://www.whowhere.com/" title="WhoWhere?">WhoWhere?</a></li>
+				<li><a target="blank" href="http://chat.lycos.co.uk" title="Lycos Chat">Lycos Chat</a></li>
+				<li><a target="blank" href="http://info.lycos.com/about/products" title="View All" id="viewAll">View All</a></li>
             </ul>
 	</div>
 <?php //yourls_html_menu() ?>
 	<span class="menu">
+		<a href="register.php">Sign Up</a>
+		<a href="user.php" >Login</a>
 <?php 
  if( defined( 'YOURLS_USER' ) ) {
 		$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('Hello <strong>%s</strong>'), YOURLS_USER ) . ' <a href="?action=logout" title="' . yourls_esc_attr__( 'Logout' ) . '"><img align="absmiddle" src="/images/logout-icon.png">' . '</a>' );
@@ -302,7 +313,8 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 <div id="wrap">
 	<?php
 }
-
+//echo sprintf( yourls__('Hello <strong>%s</strong>'), sushma );
+//Echo YOURLS_USER ;
 /**
  * Display HTML footer (including closing body & html tags)
  *
@@ -854,6 +866,14 @@ function yourls_login_screen( $error_msg = '' ) {
 	?>
 	<div id="login">
 		<h3 class="logintitle">Please Login</h3>
+	
+		  <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 1 ){
+          echo "<center><strong>Activated Successfully. Please login.</strong></center>";
+          }?>
+
+          <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 0 ){
+          echo "<center><strong>Activation Failed. Please try again.</strong></center>";
+          }?>
 		<form method="post" action="<?php echo $action; ?>"> <?php // reset any QUERY parameters ?>
 			<?php
 				//if( !empty( $error_msg ) ) {
@@ -872,6 +892,9 @@ function yourls_login_screen( $error_msg = '' ) {
 			<p>
 				<input type="submit" id="submit" name="submit" value="<?php yourls_e( 'Login' ); ?>" class="button" />
 			</p>
+			<p>
+				<a href="forgotpassword.php" name="forgotpassword" value="forgotpassword">Forgot Password</a>
+			</p>
 		</form>
 		<script type="text/javascript">$('#username').focus();</script>
 	</div>
@@ -888,7 +911,7 @@ function yourls_html_menu() {
 
 	// Build menu links
 	if( defined( 'YOURLS_USER' ) ) {
-		$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('Hello <strong class="hellouser">%s</strong>'), YOURLS_USER ) . '<a class="logout" title="Logout" href="?action=logout"' . yourls_esc_attr__( 'Logout' ) . '">' . yourls__( 'Logout' ) . '</a>' );
+		$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('Hello <strong class="hellouser">%s</strong>'), $firstname ) . '<a class="logout" title="Logout" href="?action=logout"' . yourls_esc_attr__( 'Logout' ) . '">' . yourls__( 'Logout' ) . '</a>' );
 	} else {
 		$logout_link = yourls_apply_filter( 'logout_link', '' );
 	}
@@ -897,29 +920,53 @@ function yourls_html_menu() {
 	$admin_links    = array();
 	$admin_sublinks = array();
 	
-	$admin_links['admin'] = array(
-		'url'    => yourls_admin_url( 'index.php' ),
-		'title'  => yourls__( 'Admin Interface' ),
-		'anchor' => yourls__( 'Admin Interface' ),
-	);
-	
-	if( yourls_is_admin() ) {
-		/*$admin_links['tools'] = array(
-			'url'    => yourls_admin_url( 'tools.php' ),
-			'anchor' => yourls__( 'Tools' )
-		);*/		
+	if(yourls_check_user()) {
+		$admin_links['search'] = array(
+			'url'    => 'http://search.lycos.com',
+			'title'  => yourls__( 'Lycos.com' ),
+			'anchor' => yourls__( 'Search' ),
+			
+		);
+		$admin_links['mail'] = array(
+			'url'    => 'http://mail.lycos.com',
+			'title'  => yourls__( 'mail.lycos.com' ),
+			'anchor' => yourls__( 'Mail' ),
+			
+		);
+		$admin_links['tripod'] = array(
+			'url'    => 'http://tripod.lycos.com',
+			'title'  => yourls__( 'Tripod' ),
+			'anchor' => yourls__( 'Tripod' ),
+			
+		);
+		$admin_links['gamesville'] = array(
+			'url'    => 'http://gamesville.com',
+			'title'  => yourls__( 'Gamesville.com' ),
+			'anchor' => yourls__( 'Gamesville' ),
+			
+		);
+	}else{
+		$admin_links['admin'] = array(
+			'url'    => yourls_admin_url( 'index.php' ),
+			'title'  => yourls__( 'Admin Interface' ),
+			'anchor' => yourls__( 'Admin Interface' ),
+		);
+		// $admin_links['tools'] = array(
+		// 	'url'    => yourls_admin_url( 'tools.php' ),
+		// 	'anchor' => yourls__( 'Tools' )
+		// );		
 		$admin_links['plugins'] = array(
 			'url'    => yourls_admin_url( 'plugins.php' ),
 			'title'  => yourls__( 'Manage Plugins' ),
 			'anchor' => yourls__( 'Manage Plugins' ),
 			
 		);
-		/*$admin_links['users'] = array(
+		$admin_links['users'] = array(
 			'url'    => yourls_admin_url( 'manage_users.php' ),
 			'title'  => yourls__( 'Manage Users' ),
 			'anchor' => yourls__( 'Manage Users' ),
 			
-		);*/
+		);
 		$admin_links['search'] = array(
 			'url'    => 'http://search.lycos.com',
 			'title'  => yourls__( 'Lycos.com' ),
@@ -958,6 +1005,61 @@ function yourls_html_menu() {
 			
 		// );
 	}
+	// if( yourls_check_admin() ) {
+	// 	$admin_links['tools'] = array(
+	// 		'url'    => yourls_admin_url( 'tools.php' ),
+	// 		'anchor' => yourls__( 'Tools' )
+	// 	);		
+	// 	$admin_links['plugins'] = array(
+	// 		'url'    => yourls_admin_url( 'plugins.php' ),
+	// 		'title'  => yourls__( 'Manage Plugins' ),
+	// 		'anchor' => yourls__( 'Manage Plugins' ),
+			
+	// 	);
+	// 	$admin_links['users'] = array(
+	// 		'url'    => yourls_admin_url( 'manage_users.php' ),
+	// 		'title'  => yourls__( 'Manage Users' ),
+	// 		'anchor' => yourls__( 'Manage Users' ),
+			
+	// 	);
+	// 	$admin_links['search'] = array(
+	// 		'url'    => 'http://search.lycos.com',
+	// 		'title'  => yourls__( 'Lycos.com' ),
+	// 		'anchor' => yourls__( 'Search' ),
+			
+	// 	);
+	// 	$admin_links['mail'] = array(
+	// 		'url'    => 'http://mail.lycos.com',
+	// 		'title'  => yourls__( 'mail.lycos.com' ),
+	// 		'anchor' => yourls__( 'Mail' ),
+			
+	// 	);
+	// 	$admin_links['tripod'] = array(
+	// 		'url'    => 'http://tripod.lycos.com',
+	// 		'title'  => yourls__( 'Tripod' ),
+	// 		'anchor' => yourls__( 'Tripod' ),
+			
+	// 	);
+	// 	$admin_links['gamesville'] = array(
+	// 		'url'    => 'http://gamesville.com',
+	// 		'title'  => yourls__( 'Gamesville.com' ),
+	// 		'anchor' => yourls__( 'Gamesville' ),
+			
+	// 	);
+	// 	// $admin_links['more'] = array(
+	// 	// 	'url'    => 'http://domains.lycos.com',			
+	// 	// 	'title'  => yourls__( 'More Lycos Sites' ),
+	// 	// 	'anchor' => yourls__( 'More' ),
+			
+	// 	// );
+	// 	$admin_sublinks['plugins'] = yourls_list_plugin_admin_pages();
+	// 	// $admin_sublinks['more'] = array(
+	// 	// 	'url'	=> 'http://domains.lycos.com',
+	// 	// 	'title'  => yourls__( 'Lycos Domains' ),
+	// 	// 	'anchor' => yourls__( 'Lycos Domains' ),
+			
+	// 	// );
+	// }
 	
 	$admin_links    = yourls_apply_filter( 'admin_links',    $admin_links );
 	$admin_sublinks = yourls_apply_filter( 'admin_sublinks', $admin_sublinks );
@@ -971,7 +1073,11 @@ function yourls_html_menu() {
 		if( isset( $ar['url'] ) ) {
 			$anchor = isset( $ar['anchor'] ) ? $ar['anchor'] : $link;
 			$title  = isset( $ar['title'] ) ? 'title="' . $ar['title'] . '"' : '';
+			if($ar['title']!='Admin Interface' && $ar['title']!='Manage Plugins' && $ar['title']!='Manage Users'){
+			printf( '<span id="admin_menu_%s_link"><a target="blank" href="%s" %s>'.$ar['img'].'%s</a></span>', $link, $ar['url'], $title, $anchor );
+			}else{
 			printf( '<span id="admin_menu_%s_link"><a href="%s" %s>'.$ar['img'].'%s</a></span>', $link, $ar['url'], $title, $anchor );
+			}
 		}
 		// Output submenu if any. TODO: clean up, too many code duplicated here
 		if( isset( $admin_sublinks[$link] ) ) {
@@ -980,7 +1086,7 @@ function yourls_html_menu() {
 				if( isset( $ar['url'] ) ) {
 					$anchor = isset( $ar['anchor'] ) ? $ar['anchor'] : $link;
 					$title  = isset( $ar['title'] ) ? 'title="' . $ar['title'] . '"' : '';
-					printf( '<a href="%s" %s>%s</a>', $link, $link, $ar['url'], $title, $anchor );
+					printf( '<a target="blank" href="%s" %s>%s</a>', $link, $link, $ar['url'], $title, $anchor );
 				}
 			}
 			

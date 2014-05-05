@@ -170,7 +170,8 @@ yourls_html_head();
 					<?php
 				     $publickey = "6LfQBPISAAAAAJ0d8mY53fRkGl1fpZCymvgnJ5Vg"; // you got this from the signup page
 				     echo recaptcha_get_html($publickey);
-				    ?>			
+				    ?>	
+				    <p><strong>Please enter the captcha <span class="red">*</span></strong></p>		
 				</div>			
 			</form>	
 			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
