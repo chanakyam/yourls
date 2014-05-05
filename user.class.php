@@ -40,7 +40,7 @@ class user{
 	// register
 	public function signup($data){
 
-		$domain     = "http://local.lycos.com/";
+		$domain     = yourls_site_url();
 
 		$firstname    = $data["firstname"];
 		$lastname     = $data["lastname"];
