@@ -1,8 +1,5 @@
 <?php
 require_once( dirname(__FILE__).'/includes/load-yourls.php' );
-	/* 
-	 * MySQL connection
-	 */
 
 	$gaSql= array();
 	$gaSql['user']       = YOURLS_DB_USER;
@@ -10,7 +7,9 @@ require_once( dirname(__FILE__).'/includes/load-yourls.php' );
 	$gaSql['db']         = YOURLS_DB_NAME;
 	$gaSql['server']     = YOURLS_DB_HOST;
 	
-	
+	/* 
+	 * MySQL connection
+	 */
 	if ( ! $gaSql['link'] = mysql_pconnect( $gaSql['server'], $gaSql['user'], $gaSql['password']  ) )
 	{
 		fatal_error( 'Could not open connection to server' );
@@ -40,7 +39,7 @@ class user{
 	// register
 	public function signup($data){
 
-		$domain     = yourls_site_url();
+		$domain     = "http://local.lycos.com/";
 
 		$firstname    = $data["firstname"];
 		$lastname     = $data["lastname"];
@@ -211,7 +210,7 @@ class user{
 		    	$messages.= "Admin <br>";
 		    	// send email 
 		    	$sentmail = mail($to,$subject,$messages,$header);
-	    	// else if $count not equal 1 
+		    	
 		    	header('location: forgotpassword.php?status=1');exit;
 
 	    	}else {
@@ -266,14 +265,14 @@ class user{
 
 	//ajax showUser with class showuser for editprofile.php
 	public function showuser(){
-		$user_id	  = $_SESSION['username'];
+		$user_name	  = $_SESSION['username'];
 		$firstname    = $_POST['firstname'];
 		$lastname     = $_POST['lastname'];
 		$email        = $_POST['email'];
 		//$password     = $_POST['password'];
 		//$status		  = "active";
 
-		$query = "UPDATE yourls_users SET firstname= '".$firstname."', lastname ='".$lastname."', email ='".$email."' WHERE email = '".$user_id."'";
+		$query = "UPDATE yourls_users SET firstname= '".$firstname."', lastname ='".$lastname."', email ='".$email."' WHERE email = '".$user_name."'";
 		$result = mysql_query($query);
 		return $result;
 	}

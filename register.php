@@ -31,6 +31,9 @@ yourls_html_head();
  <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 1 ){
  echo "<center><strong>Please Check your Email to Activate your account.</strong></center>";
  }?>
+ <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 2 ){
+ echo "<center><strong>User Already Exist</strong></center>";
+ }?>
  <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 0 ){
  echo "<center><strong>Signup failed. Please try again.</strong></center>";
  }?>

@@ -9,7 +9,7 @@ $obj_user = new user();
 //var_dump($_POST);
 
 // if request comes from registration form
-if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="Signup"){	
+if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="Signup"){
 	// prepare data array
 	$data['firstname'] 	  = $_POST['firstname'];
  	$data['lastname']	  = $_POST['lastname'];
@@ -22,15 +22,30 @@ if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="Signup"){
 	$response        	  = $obj_user-> signup($data);
 	if($response){
 		$obj_user->send_email($response, $data['email'], $data['firstname']);
-	}else if($response==-1){
-		// failed to signup
-		$message = "Signup Failed!!";
 	}else{
 		// already exist
-		$message = "User Already Exist";
+		header('location: register.php?status=2');exit;
 	}	
-	echo $message;
-	//return $response;
+	// echo $message;
+	// return $response;
+	
+	//edited
+
+	// if($response){
+		
+	// 	if($obj_user->send_email($response, $data['email'], $data['firstname'])){
+	// 		header('location: register.php?status=1');exit;
+	// 		//echo "Activated Succesfully.";
+	// 	}else{
+	// 		header('location: register.php?status=0');exit;
+	// 		//echo "Failed to activate.";
+	// 	}
+	// }else{
+	// 	// already exist
+	// 	$message = "User Already Exist";
+	// }	
+	// echo $message;
+	// return $response;
 }	
 
 // authenticate
@@ -64,11 +79,11 @@ if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="Add"){
 
 // if request comes from login form
 //print_r($_POST);
-if(isset($_POST['form_type']) && $_POST['form_type']=="Login"){
-	$email=$_POST['email'];
- 	$password=md5($_POST['password']);
-	$response = $obj_user->login($email, $password);
-}	
+// if(isset($_POST['form_type']) && $_POST['form_type']=="Login"){
+// 	$email=$_POST['email'];
+//  	$password=md5($_POST['password']);
+// 	$response = $obj_user->login($email, $password);
+// }	
 
 //Edit
 if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="Update"){

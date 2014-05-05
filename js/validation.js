@@ -99,6 +99,75 @@ var iChars = "!@#$%^&*()+=-[]\\\';,./{}|\":<>?";
 	}
   
   //validate login.php
+
+  //myprofile validation
+
+  function validateMyProfileForm(){
+    var iChars = "!@#$%^&*()+=-[]\\\';,./{}|\":<>?";
+    //validate firstname
+    var firstname=document.forms["Registration"]["firstname"].value;  
+    if (firstname==null || firstname=="")
+      {
+        errorMessage("label_firstname", "(This field is required)");
+        invalid = true;
+    }
+    else{
+      errorMessage("label_firstname", "");
+    }
+
+  //special characters validation for firstname
+  for (var i = 0; i < document.Registration.firstname.value.length; i++) {
+    if (iChars.indexOf(document.Registration.firstname.value.charAt(i)) != -1)
+    {
+      errorMessage("label_firstname", "(Special characters are not allowed)");
+    return false;
+    }
+  }
+
+    //validate lastname
+    var lastname=document.forms["Registration"]["lastname"].value;
+    if (lastname==null || lastname=="")
+      {
+        errorMessage("label_lastname", "(This field is required)");
+        invalid = true;
+    }else{
+      errorMessage("label_lastname", "");
+    }
+  //special characters validation for firstname
+      for (var i = 0; i < document.Registration.lastname.value.length; i++) {
+        if (iChars.indexOf(document.Registration.lastname.value.charAt(i)) != -1) 
+          {
+            errorMessage("label_lastname", "(Special characters are not allowed)");
+            return false;
+          }
+      }
+
+
+    //email validation
+    if(document.forms["Registration"]["email"]){
+      var email=document.forms["Registration"]["email"].value;
+      if (email==null || email=="")
+        {
+          errorMessage("label_email", "(This field is required)");
+          invalid = true;
+      }else if(!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
+        errorMessage("label_email", "Please enter valid Email");
+        invalid = true;
+      }else{
+        errorMessage("label_email", "");
+      }
+    }
+
+  
+
+    if(invalid){
+      // console.log("validation failed");
+      return false;
+    }
+
+    return true;
+
+  }
   
 
 	//dynamic error message 
@@ -110,7 +179,7 @@ var iChars = "!@#$%^&*()+=-[]\\\';,./{}|\":<>?";
   // Ajax Edit
 function showUser()
 {
-  var form_validation = validateForm();
+  var form_validation = validateMyProfileForm();
   
   if(form_validation==false){
     return false;
@@ -120,6 +189,7 @@ function showUser()
 // return false;
   var firstname     = document.getElementById("firstname").value;
   var lastname      = document.getElementById("lastname").value;
+  var email      = document.getElementById("email").value;
  
 if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -140,7 +210,7 @@ xmlhttp.onreadystatechange=
 xmlhttp.open("POST","process.php?form_type=Update",true);
 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 
-xmlhttp.send("title="+title+"&firstname="+firstname+"&lastname="+lastname+"&dob="+dob+"&gender="+gender+"&maritalstatus="+maritalstatus+"&home="+home+"&mobile="+mobile+"&address="+address+"&city="+city+"&state="+state+"&pincode="+pincode);
+xmlhttp.send("firstname="+firstname+"&lastname="+lastname+"&email="+email);
 
 return false;
 }

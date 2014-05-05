@@ -100,6 +100,12 @@ if( defined( 'YOURLS_DEBUG' ) && YOURLS_DEBUG == true ) {
 	error_reporting( E_ERROR | E_PARSE );
 }
 
+//defining public key for google captcha
+define('CAPTCHA_PUB_KEY','6LfQBPISAAAAAJ0d8mY53fRkGl1fpZCymvgnJ5Vg');
+
+//defining private key for google captcha
+define('CAPTCHA_PVT_KEY','6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK');
+
 // Include all functions
 require_once( YOURLS_INC.'/version.php' );
 require_once( YOURLS_INC.'/functions.php');

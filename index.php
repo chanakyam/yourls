@@ -15,7 +15,7 @@ require_once( dirname(__FILE__).'/includes/recaptchalib.php' );
 //if ( isset($_REQUEST['form_submit']) && $_REQUEST['form_submit'] === '1' ) {
 if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
 	//recaptcha code
-	 $privatekey = "6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
+	 $privatekey = CAPTCHA_PVT_KEY;
 	 $resp = recaptcha_check_answer ($privatekey,
 	                                 $_SERVER["REMOTE_ADDR"],
 	                                 $_POST["recaptcha_challenge_field"],
@@ -168,7 +168,7 @@ yourls_html_head();
 					<input type="submit" name="submit-bt" class="btn" value="Shorten"/>
 					<?php //printCaptcha( 'frm_sample', $_FORM_TYPE, $_FIELD_NAME ); ?>					
 					<?php
-				     $publickey = "6LfQBPISAAAAAJ0d8mY53fRkGl1fpZCymvgnJ5Vg"; // you got this from the signup page
+				     $publickey = CAPTCHA_PUB_KEY;
 				     echo recaptcha_get_html($publickey);
 				    ?>	
 				    <p><strong>Please enter the captcha <span class="red">*</span></strong></p>		
