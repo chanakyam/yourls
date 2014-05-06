@@ -677,6 +677,7 @@ function yourls_table_add_row( $keyword, $url, $title = '', $ip, $clicks, $times
 			'id'      => "statlink-$id",
 			'title'   => yourls_esc_attr__( 'Stats' ),
 			'anchor'  => yourls__( 'Stats' ),
+			
 		),
 		'share' => array(
 			'href'    => '',
