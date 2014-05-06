@@ -242,14 +242,14 @@ class user{
 
 	//change password
 	public function changepassword($oldpassword,$newpassword){
-	
+		
 		$query="SELECT user_id, password FROM yourls_users WHERE password='".$oldpassword."'";
 		$result=mysql_query($query);
 		$count=mysql_num_rows($result);
 		if($count==true){
 			$rows=mysql_fetch_array($result);
 			$user_id=$rows['user_id'];
-			$update_query= "UPDATE yourls_users set password= '".$newpassword."' WHERE user_id='".$user_id."'";
+			echo$update_query= "UPDATE yourls_users set password= '".$newpassword."' WHERE user_id='".$user_id."'";
 			$results=mysql_query($update_query);
 			
 			if($results){

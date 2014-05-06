@@ -677,7 +677,7 @@ function yourls_table_add_row( $keyword, $url, $title = '', $ip, $clicks, $times
 			'id'      => "statlink-$id",
 			'title'   => yourls_esc_attr__( 'Stats' ),
 			'anchor'  => yourls__( 'Stats' ),
-			
+
 		),
 		'share' => array(
 			'href'    => '',
@@ -707,9 +707,15 @@ function yourls_table_add_row( $keyword, $url, $title = '', $ip, $clicks, $times
 	$action_links = '';
 	foreach( $actions as $key => $action ) {
 		$onclick = isset( $action['onclick'] ) ? 'onclick="' . $action['onclick'] . '"' : '' ;
-		$action_links .= sprintf( '<a href="%s" id="%s" title="%s" class="%s" %s>%s</a>',
+		if($action['title']=='Stats'){
+			$action_links .= sprintf( '<a target="blank" href="%s" id="%s" title="%s" class="%s" %s>%s</a>',
 			$action['href'], $action['id'], $action['title'], 'button button_'.$key, $onclick, $action['anchor']
 		);
+		}else{
+			$action_links .= sprintf( '<a href="%s" id="%s" title="%s" class="%s" %s>%s</a>',
+			$action['href'], $action['id'], $action['title'], 'button button_'.$key, $onclick, $action['anchor']
+		);
+		}
 	}
 	$action_links = yourls_apply_filter( 'action_links', $action_links, $keyword, $url, $ip, $clicks, $timestamp );
 
@@ -949,7 +955,7 @@ function yourls_html_menu() {
 		);
 	}else{
 		$admin_links['admin'] = array(
-			'url'    => yourls_admin_url( 'index.php' ),
+			'url'    => yourls__( 'user.php' ),
 			'title'  => yourls__( 'Admin Interface' ),
 			'anchor' => yourls__( 'Admin Interface' ),
 		);
@@ -958,13 +964,13 @@ function yourls_html_menu() {
 		// 	'anchor' => yourls__( 'Tools' )
 		// );		
 		$admin_links['plugins'] = array(
-			'url'    => yourls_admin_url( 'plugins.php' ),
+			'url'    => yourls__( 'plugins.php' ),
 			'title'  => yourls__( 'Manage Plugins' ),
 			'anchor' => yourls__( 'Manage Plugins' ),
 			
 		);
 		$admin_links['users'] = array(
-			'url'    => yourls_admin_url( 'manage_users.php' ),
+			'url'    => yourls__( 'manage_users.php' ),
 			'title'  => yourls__( 'Manage Users' ),
 			'anchor' => yourls__( 'Manage Users' ),
 			

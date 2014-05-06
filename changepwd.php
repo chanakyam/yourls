@@ -36,13 +36,13 @@ yourls_html_head();
     	}
     	//special characters validation for password
       
-      for (var i = 0; i < document.changepwd.newpwd.value.length; i++) {
-        if (iChars.indexOf(document.changepwd.newpwd.value.charAt(i)) != -1) 
-          {
-            errorMessage("label_newpwd", "(Special characters are not allowed)");
-            return false;
-          }
-      }
+      // for (var i = 0; i < document.changepwd.newpwd.value.length; i++) {
+      //   if (iChars.indexOf(document.changepwd.newpwd.value.charAt(i)) != -1) 
+      //     {
+      //       errorMessage("label_newpwd", "(Special characters are not allowed)");
+      //       return false;
+      //     }
+      // }
 
  		//confirm password validation (cnew)
     	if(document.forms["changepwd"]["cnew"]){

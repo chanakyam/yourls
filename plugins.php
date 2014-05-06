@@ -1,7 +1,7 @@
 <?php
 session_start();
 define( 'YOURLS_ADMIN', true );
-require_once( dirname( dirname( __FILE__ ) ).'/includes/load-yourls.php' );
+require_once(  dirname( __FILE__ ) .'/includes/load-yourls.php' );
 yourls_maybe_require_auth();
 
 // Handle plugin administration pages
@@ -59,12 +59,9 @@ if( isset( $_GET['success'] ) && ( ( $_GET['success'] == 'activated' ) OR ( $_GE
 yourls_html_head( 'plugins', yourls__( 'Manage Plugins' ) );
 ?>
 
-	<h2 class="title"><?php yourls_e( 'Manage Users' .' '. '<a href="../add_user.php" style="color:white; float:right;">Add User</a>'); ?></h2></br>
+	<h2 class="title"><?php yourls_e( 'Plugins' ); ?></h2></br>
 	
 	<?php
-	// Main Query
-	$where = yourls_apply_filter( 'admin_list_where', $where );
-	$user_results = $ydb->get_results( "SELECT * FROM `yourls_users`;" );
 	$plugins = (array)yourls_get_plugins();
 	uasort( $plugins, 'yourls_plugins_sort_callback' );
 	
@@ -73,16 +70,16 @@ yourls_html_head( 'plugins', yourls__( 'Manage Plugins' ) );
 	$count_active = yourls_has_active_plugins();
 	?>
 	
-	<!--<p id="plugin_summary">-->
-		<?php /* //translators: "you have '3 plugins' installed and '1' activated" */ //yourls_se( 'You currently have <strong>%1$s</strong> installed, and <strong>%2$s</strong> activated', $plugins_count, $count_active ); ?>
-	<!--</p>-->
+	<p id="plugin_summary"><?php /* //translators: "you have '3 plugins' installed and '1' activated" */ yourls_se( 'You currently have <strong>%1$s</strong> installed, and <strong>%2$s</strong> activated', $plugins_count, $count_active ); ?></p>
+</br>
 <?php echo $message ;?>
 	<table id="main_table" class="tblSorter" cellpadding="0" cellspacing="1">
 	<thead>
 		<tr>
-			<th><?php yourls_e( 'User Name' ); ?></th>
-			<th><?php yourls_e( 'Email' ); ?></th>
-			<th><?php yourls_e( 'Role' ); ?></th>
+			<th><?php yourls_e( 'Plugin Name' ); ?></th>
+			<th><?php yourls_e( 'Version' ); ?></th>
+			<th><?php yourls_e( 'Description' ); ?></th>
+			<th><?php yourls_e( 'Author' ); ?></th>
 			<th><?php yourls_e( 'Action' ); ?></th>
 		</tr>
 	</thead>
@@ -91,17 +88,52 @@ yourls_html_head( 'plugins', yourls__( 'Manage Plugins' ) );
 	
 	$nonce = yourls_create_nonce( 'manage_plugins' );
 	
-	foreach( $user_results as $users ) {		
+	foreach( $plugins as $file=>$plugin ) {
+		
+		// default fields to read from the plugin header
+		$fields = array(
+			'name'       => 'Plugin Name',
+			'uri'        => 'Plugin URI',
+			'desc'       => 'Description',
+			'version'    => 'Version',
+			'author'     => 'Author',
+			'author_uri' => 'Author URI'
+		);
+		
+		// Loop through all default fields, get value if any and reset it
+		foreach( $fields as $field=>$value ) {
+			if( isset( $plugin[ $value ] ) ) {
+				$data[ $field ] = $plugin[ $value ];
+			} else {
+				$data[ $field ] = '(no info)';
+			}
+			unset( $plugin[$value] );
+		}
+		
+		$plugindir = trim( dirname( $file ), '/' );
+		
+		if( yourls_is_active_plugin( $file ) ) {
+			$class = 'active';
+			$action_url = yourls_nonce_url( 'manage_plugins', yourls_add_query_arg( array('action' => 'deactivate', 'plugin' => $plugindir ) ) );
+			$action_anchor = yourls__( 'Deactivate' );
+		} else {
+			$class = 'inactive';
+			$action_url = yourls_nonce_url( 'manage_plugins', yourls_add_query_arg( array('action' => 'activate', 'plugin' => $plugindir ) ) );
+			$action_anchor = yourls__( 'Activate' );
+		}
+			
+		// Other "Fields: Value" in the header? Get them too
+		if( $plugin ) {
+			foreach( $plugin as $extra_field=>$extra_value ) {
+				$data['desc'] .= "<br/>\n<em>$extra_field</em>: $extra_value";
+				unset( $plugin[$extra_value] );
+			}
+		}
 		
 		$data['desc'] .= '<br/><small>' . yourls_s( 'plugin file location: %s', $file) . '</small>';
 		
-		printf( "<tr class='plugin %s'>
-					<td class='plugin_name'><a href='%s'>%s</a></td>
-					<td class='plugin_version'>%s</td>
-					<td class='plugin_desc'>%s</td>
-					<td class='plugin_actions actions'><a href='%s'>%s</a></td>
-				</tr>",
-			$class, $data['uri'], $users->firstname, $users->email, $users->role, $users->username, $action_url, $action_anchor
+		printf( "<tr class='plugin %s'><td class='plugin_name'><a href='%s'>%s</a></td><td class='plugin_version'>%s</td><td class='plugin_desc'>%s</td><td class='plugin_author'><a href='%s'>%s</a></td><td class='plugin_actions actions'><a href='%s'>%s</a></td></tr>",
+			$class, $data['uri'], $data['name'], $data['version'], $data['desc'], $data['author_uri'], $data['author'], $action_url, $action_anchor
 			);
 		
 	}

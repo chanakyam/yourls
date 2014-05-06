@@ -26,7 +26,8 @@ function yourls_is_valid_user() {
 		//new code for validating username & pwd from db
 		 session_start();
 	     session_unset();
-		return yourls__( 'Logged out successfully' );
+		//return yourls__( 'Logged out successfully' );
+		header('location: index.php');exit;
 	}
 	
 	// Check cookies or login request. Login form has precedence.

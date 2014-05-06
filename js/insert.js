@@ -41,7 +41,7 @@ function add_link() {
 		{action:'add', url: newurl, keyword: keyword, nonce: nonce},
 		function(data){
 			if(data.status == 'success') {
-				$('#main_table tbody').prepend( data.html ).trigger("update");
+				$('#dashboard_main_table tbody').prepend( data.html ).trigger("update");
 				$('#nourl_found').css('display', 'none');
 				zebra_table();
 				increment_counter();
@@ -77,7 +77,7 @@ function edit_link_display(id) {
 		return false;
 	}
 	
-	//new code
+	//new code for show/hide for edit
 	var hid_val = $('#show_row').val()
 	if($('#edit-'+hid_val).length ==1){
 		$('#edit-'+hid_val).remove()
@@ -91,12 +91,30 @@ function edit_link_display(id) {
 			ajaxurl,
 			{ action: "edit_display", keyword: keyword, nonce: nonce, id: id },
 			function(data){
+				//new code displaying action icons
+				$('#statlink-'+id).removeAttr("disabled")
+				$('#statlink-'+id).removeClass("button button_stats disabled")
+				$('#statlink-'+id).addClass("button button_stats")
+
+				$('#share-button-'+id).removeAttr("disabled")
+				$('#share-button-'+id).removeClass("button button_share disabled")
+				$('#share-button-'+id).addClass("button button_share")
+
+				$('#edit-button-'+id).removeAttr("disabled")
+				$('#edit-button-'+id).removeClass("button button_edit disabled")
+				$('#edit-button-'+id).addClass("button button_edit")
+
+				$('#delete-button-'+id).removeAttr("disabled")
+				$('#delete-button-'+id).removeClass("button button_delete disabled")
+				$('#delete-button-'+id).addClass("button button_delete")
+
 				$("#id-" + id).after( data.html );
 				$("#edit-url-"+ id).focus();
 				end_loading('#actions-'+id+' .button');
 			}
 		);
 	}
+	//new code for show/hide for edit
 	$('#show_row').val(id);
 }
 
