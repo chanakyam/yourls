@@ -246,7 +246,7 @@ class user{
 		$query="SELECT user_id, password FROM yourls_users WHERE password='".$oldpassword."'";
 		$result=mysql_query($query);
 		$count=mysql_num_rows($result);
-		if($count==1){
+		if($count==true){
 			$rows=mysql_fetch_array($result);
 			$user_id=$rows['user_id'];
 			$update_query= "UPDATE yourls_users set password= '".$newpassword."' WHERE user_id='".$user_id."'";
