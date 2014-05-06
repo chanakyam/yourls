@@ -2,6 +2,7 @@
 
 // Start YOURLS engine
 require_once( dirname(__FILE__).'/includes/load-yourls.php' );
+require_once( dirname(__FILE__).'/includes/recaptchalib.php' );
 
 // Change this to match the URL of your public interface. Something like: http://yoursite.com/index.php
 $page = YOURLS_SITE . '/index.php';
@@ -16,34 +17,41 @@ yourls_html_head();
  
 <script type="text/javascript" src="js/validation.js"></script>
 
-
+<script type="text/javascript">
+       var RecaptchaOptions = {
+          theme : 'blackglass'
+       };
+      </script>
 
 <!-- Required CSS -->	
 <div class="contentarea">
 	
 
 
-<div id="myDiv" class="signup">
+<div id="myDiv" class="signup userside">
 
 <form  method="post" name="Registration" action="process.php" onsubmit="return validateForm();">
 <div class="title">Sign Up</div>
 
  <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 1 ){
- echo "<center><strong>Please Check your Email to Activate your account.</strong></center>";
+ echo "<div class='success'>Please Check your Email to Activate your account.</div>";
  }?>
  <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 2 ){
- echo "<center><strong>User Already Exist</strong></center>";
+ echo "<div class='errormessage'>User Already Exist</div>";
  }?>
  <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 0 ){
- echo "<center><strong>Signup failed. Please try again.</strong></center>";
+ echo "<div class='errormessage'>Signup failed. Please try again.</div>";
+ }?>
+ <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 3 ){
+ echo "<div class='errormessage'>The CAPTCHA wasn't entered correctly. Try it again.</div>";
  }?>
 
 
-<table border="0" cellpadding="3" cellspacing="0" width="100%">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
-  <td width="25%">First Name<span class="error_message" >*</span>:</td>
+  <td width="22%">First Name<span class="error_message" >*</span>:</td>
   <td>
-    <input type="text" name="firstname" id="firstname" placeholder="Enter Firstname">
+    <input class="width50" type="text" name="firstname" id="firstname" placeholder="Enter Firstname">
     
   
 		<span class="error_message" id="label_firstname"></span>
@@ -53,7 +61,7 @@ yourls_html_head();
 <tr>
   <td>Last Name<span class="error_message" >*</span>:</td>
   <td>
-    <input type="text" name="lastname" id="lastname" placeholder="Enter Lastname">
+    <input class="width50" type="text" name="lastname" id="lastname" placeholder="Enter Lastname">
  
     	<span class="error_message" id="label_lastname"></span>	
 	</td>
@@ -62,7 +70,7 @@ yourls_html_head();
 <tr>
   <td>Email Address<span class="error_message" >*</span>:</td>
   <td>
-    <input type="text" name="email"  id="email" placeholder="example@gmail.com">
+    <input class="width50" type="text" name="email"  id="email" placeholder="example@gmail.com">
   
     	<span class="error_message" id="label_email"></span>
 	</td>
@@ -71,7 +79,7 @@ yourls_html_head();
 <tr>
   <td>Password<span class="error_message" >*</span>:</td>
   <td>
-    <input type="password" name="password" id="password" placeholder="Enter Password">
+    <input class="width50" type="password" name="password" id="password" placeholder="Enter Password">
   
     	<span class="error_message" id="label_password"></span>
 	</td>
@@ -80,13 +88,23 @@ yourls_html_head();
 <tr>
   <td>Confirm Password<span class="error_message" >*</span>:</td>
   <td>
-    <input type="password" name="confpassword" id="confpassword" placeholder="Confirm Password">
+    <input class="width50" type="password" name="confpassword" id="confpassword" placeholder="Confirm Password">
   
     	<span class="error_message" id="label_confpassword"></span>
-	</td>
+	</td>  
 </tr>
 
 <tr>
+  <td></td>
+  <td>
+    <?php
+     $publickey = CAPTCHA_PUB_KEY;
+     echo recaptcha_get_html($publickey);
+    ?>
+  </td>
+</tr>
+
+<tr>    
   <td></td>
   <td>
   	<input  type="submit" value="Signup" name="form_type" id="submit">

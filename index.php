@@ -15,7 +15,8 @@ require_once( dirname(__FILE__).'/includes/recaptchalib.php' );
 //if ( isset($_REQUEST['form_submit']) && $_REQUEST['form_submit'] === '1' ) {
 if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
 	//recaptcha code
-	 $privatekey = CAPTCHA_PVT_KEY;
+	 //$privatekey = CAPTCHA_PVT_KEY;
+	 $privatekey ="6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
 	 $resp = recaptcha_check_answer ($privatekey,
 	                                 $_SERVER["REMOTE_ADDR"],
 	                                 $_POST["recaptcha_challenge_field"],
@@ -126,15 +127,15 @@ yourls_html_head();
 			//if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
 			if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' && $_GLOBAL_MSG=='') {
 				// Display result message of short link creation
-				($status == 'success')?$class = 'success':$class = 'warning';
+				($status == 'success')?$class = 'successtext':$class = 'warning';
 				if( isset( $message ) && $class=='success') {					
-					echo "<div class='success'>Long URL <span>$message</span></div>";
+					echo "<div class='successtext'>Long URL <span>$message</span></div>";
 				}
 				if( isset( $message ) && $class=='warning') {					
-					echo "<div class='success'>Long URL <span>$url</span></div>";
+					echo "<div class='successtext'>Long URL <span>$url</span></div>";
 				}
 				if( isset($shorturl) && $shorturl!=''){
-					echo "<div class='success'>Shorten URL <span>$shorturl</span></div>";
+					echo "<div class='successtext'>Shorten URL <span>$shorturl</span></div>";
 				}
 				
 				

@@ -11,23 +11,23 @@ yourls_html_head();
 <script type="text/javascript" src="js/validation.js"></script>
 <div class="contentarea">
 
-    <div id="myDiv" class="signup span5">
+    <div id="myDiv" class="signup">
 
         <form  method="post" name="Registration" action="process.php" onsubmit="return validateForm();">
         <div class="title">Add User</div> 
           <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 1 ){
-          echo "<center><strong>Added Successfully</strong></center>";
+          echo "<div class='success'>Added Successfully</div>";
           }?>
 
           <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 0 ){
-          echo "<center><strong>Failed to add user.</strong></center>";
+          echo "<div class='errormessage'>Failed to add user.</div>";
           }?>      
         
-        <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <tr>
-          <td width="25%">First Name<span class="error_message" >*</span>:</td>
+          <td width="20%">First Name<span class="error_message" >*</span>:</td>
           <td>
-            <input type="text" name="firstname" id="firstname" placeholder="Enter Firstname">
+            <input class="width50" type="text" name="firstname" id="firstname" placeholder="Enter Firstname">
             
           
         		<span class="error_message" id="label_firstname"></span>
@@ -37,7 +37,7 @@ yourls_html_head();
         <tr>
           <td>Last Name<span class="error_message" >*</span>:</td>
           <td>
-            <input type="text" name="lastname" id="lastname" placeholder="Enter Lastname">
+            <input class="width50" type="text" name="lastname" id="lastname" placeholder="Enter Lastname">
          
             	<span class="error_message" id="label_lastname"></span>	
         	</td>
@@ -46,7 +46,7 @@ yourls_html_head();
         <tr>
           <td>Email Address<span class="error_message" >*</span>:</td>
           <td>
-            <input type="text" name="email"  id="email" placeholder="example@gmail.com">
+            <input class="width50" type="text" name="email"  id="email" placeholder="example@gmail.com">
           
             	<span class="error_message" id="label_email"></span>
         	</td>
@@ -55,7 +55,7 @@ yourls_html_head();
         <tr>
           <td>Password<span class="error_message" >*</span>:</td>
           <td>
-            <input type="password" name="password" id="password" placeholder="Enter Password">
+            <input class="width50" type="password" name="password" id="password" placeholder="Enter Password">
           
             	<span class="error_message" id="label_password"></span>
         	</td>
@@ -64,7 +64,7 @@ yourls_html_head();
         <tr>
           <td>Confirm Password<span class="error_message" >*</span>:</td>
           <td>
-            <input type="password" name="confpassword" id="confpassword" placeholder="Confirm Password">
+            <input class="width50" type="password" name="confpassword" id="confpassword" placeholder="Confirm Password">
           
             	<span class="error_message" id="label_confpassword"></span>
         	</td>

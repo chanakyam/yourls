@@ -76,7 +76,13 @@ function edit_link_display(id) {
 	if( $('#edit-button-'+id).hasClass('disabled') ) {
 		return false;
 	}
+	
 	//new code
+	var hid_val = $('#show_row').val()
+	if($('#edit-'+hid_val).length ==1){
+		$('#edit-'+hid_val).remove()
+		$('#show_row').val('');
+	}
 	if( $('#edit-'+id).length ==0){	 	
 		add_loading('#actions-'+id+' .button');
 		var keyword = $('#keyword_'+id).val();
@@ -91,6 +97,7 @@ function edit_link_display(id) {
 			}
 		);
 	}
+	$('#show_row').val(id);
 }
 
 // Delete a link

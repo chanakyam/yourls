@@ -5,7 +5,7 @@ $(document).ready(function(){
 });
 
 // Change an element text an revert in a smooth pulse. el is an element id like '#copybox h2'
-function html_pulse( el, newtext ){alert('testing')
+function html_pulse( el, newtext ){
 	var oldtext = $(el).html();
 	// Fast pulse to "Copied" and revert
 	$(el).fadeTo(

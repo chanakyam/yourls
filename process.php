@@ -3,28 +3,41 @@ session_start();
 define( 'YOURLS_USER', true );	
 // Start YOURLS engine
 require_once( dirname(__FILE__).'/includes/load-yourls.php' );	
+require_once( dirname(__FILE__).'/includes/recaptchalib.php' );
 /* this file is to process submitted data */
 include_once "user.class.php";	
 $obj_user = new user();
 //var_dump($_POST);
-
+$_GLOBAL_MSG = '';
 // if request comes from registration form
 if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="Signup"){
-	// prepare data array
-	$data['firstname'] 	  = $_POST['firstname'];
- 	$data['lastname']	  = $_POST['lastname'];
- 	$data['email'] 		  = $_POST['email'];
-    $data['password'] 	  = $_POST['password'];
-	$data['signature']	  = yourls_auth_signature_new_user( $data['email']);
-							
-	 
-	
-	$response        	  = $obj_user-> signup($data);
-	if($response){
-		$obj_user->send_email($response, $data['email'], $data['firstname']);
+	//valdating captcha
+	$privatekey ="6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
+	 $resp = recaptcha_check_answer ($privatekey,
+	                                 $_SERVER["REMOTE_ADDR"],
+	                                 $_POST["recaptcha_challenge_field"],
+	                                 $_POST["recaptcha_response_field"]);
+	 if (!$resp->is_valid) {
+	   // What happens when the CAPTCHA was entered incorrectly	   
+	   $_GLOBAL_MSG = "The CAPTCHA wasn't entered correctly. Try it again.";
+	 }else{$_GLOBAL_MSG = '';}
+	 if($_GLOBAL_MSG == ''){
+		// prepare data array
+		$data['firstname'] 	  = $_POST['firstname'];
+	 	$data['lastname']	  = $_POST['lastname'];
+	 	$data['email'] 		  = $_POST['email'];
+	    $data['password'] 	  = $_POST['password'];
+		$data['signature']	  = yourls_auth_signature_new_user( $data['email']);	
+		$response        	  = $obj_user-> signup($data);
+		if($response){
+			$obj_user->send_email($response, $data['email'], $data['firstname']);
+		}else{
+			// already exist
+			header('location: register.php?status=2');exit;
+		}
 	}else{
 		// already exist
-		header('location: register.php?status=2');exit;
+		header('location: register.php?status=3');exit;
 	}	
 	// echo $message;
 	// return $response;

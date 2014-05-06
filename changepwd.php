@@ -75,31 +75,31 @@ yourls_html_head();
 <form name="changepwd" method="post" action="process.php" onsubmit="return validatechangepwd();">
 <div class="title">Change Password</div>
           <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 1 ){
-          echo "<center><strong>Changed Password succesfully.</strong></center>";
+          echo "<div class='success'>Changed Password succesfully.</div>";
           }?>
 
           <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 0 ){
-          echo "<center><strong>Changing Password Failed.</strong></center>";
+          echo "<div class='errormessage'>Changing Password Failed.</div>";
           }?> 
-				<table  width="100%" border="0">
+				<table  width="100%" border="0" cellpadding="0" cellspacing="0"e>
 				<tr>
-					<td>Old Password<span class="error_message" >*</span>:</td>
+					<td width="28%">Old Password<span class="error_message" >*</span>:</td>
 					<td>
-						<input type="password" id="password" name="password" placeholder="Enter Old Password">
+						<input class="width50" type="password" id="password" name="password" placeholder="Enter Old Password">
 						<span class="error_message" id="label_password"></span>
 					</td>
 				</tr>
 				<tr>
 					<td>New Password<span class="error_message" >*</span>:</td>
 					<td>
-						<input type="password" id="newpwd" name="newpwd" placeholder="Enter New Password">
+						<input class="width50" type="password" id="newpwd" name="newpwd" placeholder="Enter New Password">
 						<span class="error_message" id="label_newpwd"></span>
 					</td>
 				</tr>
 				<tr>
 					<td>Confirm New Password<span class="error_message" >*</span>:</td>
 					<td>
-						<input type="password" id="cnew" name="cnew" placeholder="Re-Enter New Password">
+						<input class="width50" type="password" id="cnew" name="cnew" placeholder="Re-Enter New Password">
 						<span class="error_message" id="label_cnew"></span>
 					</td>
 				</tr>
@@ -145,18 +145,3 @@ yourls_html_head();
 yourls_html_footer();
 
 ?>	
-
-<style>
-#wrap{ width: 100%; max-width: 100%; padding: 0;}
-.add {
-    background-color: #000000;
-    bottom: 37px;
-    line-height: 0;
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
-}
-.center {
-    text-align: center;
-}
-</style>

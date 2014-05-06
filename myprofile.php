@@ -26,37 +26,37 @@ $user_data = $obj_user->getUserDetails();
 <div class="title">My Profile</div>
 		<?php 
 			if (isset($_REQUEST['status']) && $_REQUEST['status']== 1 ){
-	        	echo "<center><strong>Updated succesfully.</strong></center>";
+	        	echo "<div class='success'>Updated succesfully.</div>";
 	        }
 	    ?>
 
 		<?php 
 			if (isset($_REQUEST['status']) && $_REQUEST['status']== 0 ){
-	        	echo "<center><strong>Please try again.</strong></center>";
+	        	echo "<div class='errormessage'>Please try again.</div>";
 	        }
 	    ?>
 
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
 
 <tr>
-	<td>First Name<span class="error_message" >*</span>:</td>
+	<td width="20%">First Name<span class="error_message" >*</span>:</td>
 	<td>
-		<input type="text" name="firstname" id="firstname" placeholder="Enter Firstname" value="<?php echo $user_data['firstname']; ?>">
+		<input class="width50" type="text" name="firstname" id="firstname" placeholder="Enter Firstname" value="<?php echo $user_data['firstname']; ?>">
 		<span class="error_message" id="label_firstname"></span>	
 	</td>
 </tr>
 <tr>
 	<td>Last Name<span class="error_message" >*</span>:</td>
 	<td>
-		<input type="text" name="lastname" id="lastname" placeholder="Enter Lastname" value="<?php echo $user_data['lastname']; ?>">
+		<input class="width50" type="text" name="lastname" id="lastname" placeholder="Enter Lastname" value="<?php echo $user_data['lastname']; ?>">
 		<span class="error_message" id="label_lastname"></span>
 	</td>
 </tr>
 <tr>
 	<td>Email<span class="error_message" >*</span>:</td>
 	<td>
-		<input type="text" name="email" id="email" placeholder="Enter Lastname" value="<?php echo $user_data['email']; ?>">
+		<input class="width50" type="text" name="email" id="email" placeholder="Enter Lastname" value="<?php echo $user_data['email']; ?>">
 		<span class="error_message" id="label_email"></span>
 	</td>
 </tr>
@@ -102,17 +102,3 @@ yourls_html_footer();
 
 ?>	
 
-<style>
-#wrap{ width: 100%; max-width: 100%; padding: 0;}
-.add {
-    background-color: #000000;
-    bottom: 37px;
-    line-height: 0;
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
-}
-.center {
-    text-align: center;
-}
-</style>

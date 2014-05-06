@@ -320,6 +320,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
  *
  */
 function yourls_html_footer() {
+	$year = date('Y');
 	//global $ydb;
 	
 	//$num_queries = sprintf( yourls_n( '1 query', '%s queries', $ydb->num_queries ), $ydb->num_queries );
@@ -327,7 +328,7 @@ function yourls_html_footer() {
 	</div> 	
 	<div class="footer">
 		<!-- <a href="#">About</a> | <a href="#">Help</a> | <a href="#">Contact</a> -->
-		<span class="margin20_L">Lycos URL Shortener developed by lycos.com</span> <span class="margin20_L">Copyright © 2014 lycos.com</span>
+		<span class="margin20_L">Lycos URL Shortener developed by lycos.com</span> <span class="margin20_L">Copyright © <?php echo $year;?> lycos.com</span>
 	</div>
 <!--footer end-->
     
@@ -348,7 +349,7 @@ function yourls_html_addnew( $url = '', $keyword = '' ) {
 		<div>
 			<form id="new_url_form" action="" method="get">
 				<div><strong><?php yourls_e( 'Enter the URL' ); ?></strong>:<input type="text" id="add-url" name="url" value="<?php echo $url; ?>" class="text" size="80" />
-				<?php yourls_e( 'Optional '); ?>: <strong><?php yourls_e('Custom short URL'); ?></strong>:<input type="text" id="add-keyword" name="keyword" value="<?php echo $keyword; ?>" class="text" size="8" />
+				<?php yourls_e( 'Optional '); ?>: <strong><?php yourls_e('Custom short URL'); ?> : </strong><input type="text" id="add-keyword" name="keyword" value="<?php echo $keyword; ?>" class="text" size="8" />
 				<?php yourls_nonce_field( 'add_url', 'nonce-add' ); ?>
 				<input type="button" id="add-button" name="add-button" value="<?php yourls_e( 'Shorten The URL' ); ?>" class="button" onclick="add_link();" /></div>
 			</form>
@@ -637,7 +638,7 @@ function yourls_table_edit_row( $keyword ) {
 	
 	if( $url ) {
 		$return = <<<RETURN
-<tr id="edit-$id" class="edit-row"><td colspan="5" class="edit-row"><strong>%s</strong>:<input type="text" id="edit-url-$id" name="edit-url-$id" value="$safe_url" class="text" size="70" /><br/><strong>%s</strong>: $www<input type="text" id="edit-keyword-$id" name="edit-keyword-$id" value="$keyword" class="text" size="10" /><br/><strong>%s</strong>: <input type="text" id="edit-title-$id" name="edit-title-$id" value="$safe_title" class="text" size="60" /></td><td colspan="1"><input type="button" id="edit-submit-$id" name="edit-submit-$id" value="%s" title="%s" class="button" onclick="edit_link_save('$id');" />&nbsp;<input type="button" id="edit-close-$id" name="edit-close-$id" value="%s" title="%s" class="button" onclick="edit_link_hide('$id');" /><input type="hidden" id="old_keyword_$id" value="$keyword"/><input type="hidden" id="nonce_$id" value="$nonce"/></td></tr>
+<tr id="edit-$id" class="edit-row"><td colspan="5" class="edit-row"><div class="row"><div class="width10">%s : </div><input type="text" id="edit-url-$id" name="edit-url-$id" value="$safe_url" class="text" size="70" /></div><div class="row"><div class="width10">%s : </div> <div class="width90">$www<input type="text" id="edit-keyword-$id" name="edit-keyword-$id" value="$keyword" class="text" size="10" /></div></div><div class="row"><div class="width10">%s : </div> <input type="text" id="edit-title-$id" name="edit-title-$id" value="$safe_title" class="text" size="60" /></div></td><td colspan="1"><input type="button" id="edit-submit-$id" name="edit-submit-$id" value="%s" title="%s" class="button" onclick="edit_link_save('$id');" />&nbsp;<input type="button" id="edit-close-$id" name="edit-close-$id" value="%s" title="%s" class="button" onclick="edit_link_hide('$id');" /><input type="hidden" id="old_keyword_$id" value="$keyword"/><input type="hidden" id="nonce_$id" value="$nonce"/></td></tr>
 RETURN;
 		$return = sprintf( urldecode( $return ), yourls__( 'Long URL' ), yourls__( 'Short URL' ), yourls__( 'Title' ), yourls__( 'Save' ), yourls__( 'Save new values' ), yourls__( 'Cancel' ), yourls__( 'Cancel editing' ) );
 	} else {
@@ -797,7 +798,7 @@ class yourls_table_add_row_callback {
  *
  */
 function yourls_table_head() {
-	$start = '<table id="dashboard_main_table" class="tblSorter" cellpadding="0" cellspacing="1"><thead><tr>'."\n";
+	$start = '<table id="dashboard_main_table" class="tblSorter" cellpadding="0" cellspacing="1"><input type="hidden" name="show_row" id="show_row" value="" /><thead><tr>'."\n";
 	echo yourls_apply_filter( 'table_head_start', $start );
 	
 	$cells = yourls_apply_filter( 'table_head_cells', array(

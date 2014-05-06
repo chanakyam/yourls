@@ -9431,7 +9431,8 @@
 			 *      } );
 			 *    } );
 			 */
-			"sLoadingRecords": "Loading...",
+			// "sLoadingRecords": "Loading...",
+			"sLoadingRecords": "",
 		
 		
 			/**
@@ -9450,7 +9451,8 @@
 			 *      } );
 			 *    } );
 			 */
-			"sProcessing": "Processing...",
+			// "sProcessing": "Processing...",
+			"sProcessing": "",
 		
 		
 			/**
