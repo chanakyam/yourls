@@ -18,10 +18,10 @@ yourls_html_head();
 <script type="text/javascript" src="js/validation.js"></script>
 
 <script type="text/javascript">
-       var RecaptchaOptions = {
-          theme : 'blackglass'
-       };
-      </script>
+   var RecaptchaOptions = {
+      theme : 'blackglass'
+   };
+</script>
 
 <!-- Required CSS -->	
 <div class="contentarea">

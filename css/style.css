@@ -175,6 +175,8 @@ span#recaptcha_privacy {
     display:none;
 }
 
+.userside #recaptcha_area, .userside #recaptcha_table {margin:10px 0;}
+
 .center {text-align: center;}
 
 @media (min-width:481px) and (max-width:650px) {
