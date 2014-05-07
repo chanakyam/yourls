@@ -51,24 +51,68 @@ function add_link() {
 			add_link_reset();
 			end_loading("#add-button");
 			end_disable("#add-button");
-
-			feedback(data.message, data.status);
+			//new code for displaying shorturl if already exists
+			if(data.status=='fail'){
+				feedback(data.shorturl, 'success');				
+			}else{
+				feedback(data.message, data.status);
+			}
 		}
 	);
 }
 
-function toggle_share_fill_boxes( url, shorturl, title ) {
+// function toggle_share_fill_boxes( url, shorturl, title ) {
+// 	$('#copylink').val( shorturl );
+// 	// console.log(url);
+// 	// console.log(shorturl);
+// 	// console.log(title);
+// 	$('#titlelink').val( title );
+// 	$('#origlink').attr( 'href', url ).html( url );
+// 	$('#statlink').attr( 'href', shorturl+'+' ).html( shorturl+'+' );
+// 	var tweet = ( title ? title + ' ' + shorturl : shorturl );
+// 	$('#tweet_body').val( tweet ).keypress();
+// 	$('#shareboxes').slideDown( '300', function(){ init_clipboard(); } ); // clipboard re-initialized after slidedown to make sure the invisible Flash element is correctly positionned
+// 	$('#tweet_body').keypress();
+// }
+
+function toggle_share_fill_boxes( url, shorturl, title, id ) {
+	//new code for show/hide for edit
+	var hid_val = $('#show_share').val()
+	if($('#share-'+hid_val).length ==1){
+		$('#share-'+hid_val).remove()
+		$('#show_share').val('');
+	}
+	var hid_val2 = $('#show_row').val()
+	if($('#edit-'+hid_val2).length ==1){
+		$('#edit-'+hid_val2).remove()
+		//$('#show_share').val('');
+	}
 	$('#copylink').val( shorturl );
-	// console.log(url);
-	// console.log(shorturl);
-	// console.log(title);
 	$('#titlelink').val( title );
 	$('#origlink').attr( 'href', url ).html( url );
 	$('#statlink').attr( 'href', shorturl+'+' ).html( shorturl+'+' );
-	var tweet = ( title ? title + ' ' + shorturl : shorturl );
+	var tweet = "";//( title ? "Title"title + ' ' + shorturl : shorturl );
+	if(shorturl != "")
+		tweet += "Short URL: "+ shorturl;
+	if(title != "")
+		tweet += "\r\n Long URL: "+ title;
 	$('#tweet_body').val( tweet ).keypress();
-	$('#shareboxes').slideDown( '300', function(){ init_clipboard(); } ); // clipboard re-initialized after slidedown to make sure the invisible Flash element is correctly positionned
+	//$('#shareboxes').slideDown( '300', function(){ init_clipboard(); } ); // clipboard re-initialized after slidedown to make sure the invisible Flash element is correctly positionned
+	if(id !== undefined && id != ""){
+		var share_html = "<tr id='share-"+id+"'><td colspan='6'>"+$('#shareboxes').html()+" <a href='javascript:void(0)' onclick='close_sharebox();'>close[X]</a></td></tr>";
+		$("#id-" + id).after( share_html );
+		var share_id = "#share-"+id; 
+		$(share_id).find("#copylink").val(shorturl);
+		$(share_id).find("#tweet_body").val(tweet);
+				//$("#edit-url-"+ id).focus();
+	}
 	$('#tweet_body').keypress();
+	$('#show_share').val(id);	
+}
+
+function close_sharebox(){
+	var s_id = $('#show_share').val();
+	$('#share-'+s_id).remove()
 }
 
 // Display the edition interface
@@ -82,6 +126,11 @@ function edit_link_display(id) {
 	if($('#edit-'+hid_val).length ==1){
 		$('#edit-'+hid_val).remove()
 		$('#show_row').val('');
+	}
+	var hid_val1 = $('#show_share').val()
+	if($('#share-'+hid_val1).length ==1){
+		$('#share-'+hid_val1).remove()
+		//$('#show_share').val('');
 	}
 	if( $('#edit-'+id).length ==0){	 	
 		add_loading('#actions-'+id+' .button');
@@ -253,7 +302,7 @@ function toggle_share(id) {
 	host = pathArray[2];
 	url = protocol + '//' + host + '/';
 	var shorturl = url+short_link;//$('#keyword-'+id+' a:first').attr('href');
-	toggle_share_fill_boxes(longurl, shorturl, title );
+	toggle_share_fill_boxes(longurl, shorturl, title ,id);
 }
 
 // When "Search" is clicked, split search text to beat servers which don't like query string with "http://"
