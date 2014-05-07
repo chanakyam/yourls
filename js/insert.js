@@ -135,7 +135,7 @@ function remove_link(id) {
 			if (data.success == 1) {
 				$("#id-" + id).fadeOut(function(){
 					$(this).remove();
-					if( $('#main_table tbody tr').length  == 1 ) {
+					if( $('#dashboard_main_table tbody tr').length  == 1 ) {
 						$('#nourl_found').css('display', '');
 					}
 
@@ -177,7 +177,6 @@ function edit_link_save(id) {
 		{action:'edit_save', url: newurl, id: id, keyword: keyword, newkeyword: newkeyword, title: title, nonce: nonce },
 		function(data){
 			if(data.status == 'success') {
-			
 				if( data.url.title != '' ) {
 					var display_link = '<a href="' + data.url.url + '" title="' + data.url.url + '">' + data.url.display_title + '</a><br/><small><a href="' + data.url.url + '">' + data.url.display_url + '</a></small>';
 				} else {
@@ -188,25 +187,28 @@ function edit_link_save(id) {
 				$("#keyword-" + id).html('<a href="' + data.url.shorturl + '" title="' + data.url.shorturl + '">' + data.url.keyword + '</a>');
 				$("#timestamp-" + id).html(data.url.date);
 				$("#edit-" + id).fadeOut(200, function(){
-					$('#main_table tbody').trigger("update");
+				$('#dashboard_main_table tbody').trigger("update");
 				});
 				$('#keyword_'+id).val( newkeyword );
 				$('#statlink-'+id).attr( 'href', data.url.shorturl+'+' );
 			}
+			window.setTimeout('location.reload()', 1000); //reloads after 1 seconds
 			feedback(data.message, data.status);
 			end_loading("#edit-close-" + id);
 			//end_disable("#actions-" + id + ' .button');
 			//new code
 			$("#edit-" +id).remove();
+
+			//location.reload();
 		}
 	);
 }
 
 // Prettify table with odd & even rows
 function zebra_table() {
-	$("#main_table tbody tr:even").removeClass('odd').addClass('even');
-	$("#main_table tbody tr:odd").removeClass('even').addClass('odd');
-	$('#main_table tbody').trigger("update");
+	$("#dashboard_main_tablemain_table tbody tr:even").removeClass('odd').addClass('even');
+	$("#dashboard_main_tablemain_table tbody tr:odd").removeClass('even').addClass('odd');
+	$('#dashboard_main_table tbody').trigger("update");
 }
 
 // Ready to add another URL

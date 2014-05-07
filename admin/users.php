@@ -149,7 +149,7 @@ yourls_html_head( 'plugins', yourls__( 'Manage Plugins' ) );
 	$('#toggle_plugins').css({'background':'transparent url("../images/filter.gif") top left no-repeat','display':'inline-block','text-indent':'-9999px','width':'16px','height':'16px','margin-left':'3px','cursor':'pointer'})
 		.attr('title', '<?php echo yourls_esc_attr__( 'Toggle active/inactive plugins' ); ?>')
 		.click(function(){
-			$('#main_table tr.inactive').toggle();
+			$('#dashboard_main_table tr.inactive').toggle();
 		});
 	<?php } ?>
 	</script>

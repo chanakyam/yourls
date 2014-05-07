@@ -126,6 +126,7 @@ function yourls_check_username_password() {
 	if($user_results[0]->email == $_REQUEST['username'] && $user_results[0]->password == $_REQUEST['password']){
 		//assigning username to session
 		$_SESSION['username'] = $_REQUEST['username'];
+		$_SESSION['role'] = $user_results[0]->role;
 		$_SESSION['name'] = $user_results[0]->firstname.' '.$user_results[0]->lastname;
 		//$_SESSION['lastname'] = $user_results[0]->lastname;		
 		yourls_set_user( $_REQUEST['username'] );

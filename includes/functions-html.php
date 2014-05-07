@@ -243,8 +243,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
         	<div class="moremenu settingmenu">
         	<a  class="dropDown" title="' . yourls_esc_attr__( 'Settings' ) . '"><img src="/images/setting.png"> </a>
         	<ul style="display: none;" class="hide ddMenu lyGrey boxShadow1">
-                <li><a href="myprofile.php" title="My Profile">My Profile</a></li>
-                <li><a href="user.php" title="My Account">My Account</a></li>
+                <li><a href="myprofile.php" title="My Profile">My Profile</a></li>                
 				<li><a href="changepwd.php" title="Change Password" id="changepwd">Change Password</a></li>
             </ul>
 	</div>' );
@@ -258,8 +257,18 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 </div>
 
 <?php }elseif(!yourls_is_admin() && $context ='infos'){?>
-		<div class="header">
+	<div class="header">
 	<a href="<?php yourls_site_url(); ?>" class="logo" title="lyc.so"><img alt="lyc.so" src="/images/headerDog.png"></a> 
+	<?php 
+		if(isset($_SESSION['role']) && $_SESSION['role']=='User'){?>
+			<span id="admin_menu_user_link"><a href="<?php yourls_site_url(); ?>/user.php" title="User Interface">User Interface</a></span>
+	<?php }	?>
+	<?php 
+		if(isset($_SESSION['role']) && $_SESSION['role']=='admin'){?>
+			<span id="admin_menu_admin_link"><a href="<?php yourls_site_url(); ?>/user.php" title="Admin Interface">Admin Interface</a></span>
+			<span id="admin_menu_plugins_link"><a href="<?php yourls_site_url(); ?>/plugins.php" title="Manage Plugins">Manage Plugins</a></span>
+			<span id="admin_menu_users_link"><a href="<?php yourls_site_url(); ?>/manage_users.php" title="Manage Users">Manage Users</a></span>
+	<?php }	?>
 	<span id="admin_menu_search_link"><a target="blank" title="Lycos.com" href="http://search.lycos.com">Search</a></span>
 	<span id="admin_menu_mail_link"><a target="blank" title="mail.lycos.com" href="http://mail.lycos.com">Mail</a></span>
 	<span id="admin_menu_tripod_link"><a target="blank" title="Tripod" href="http://tripod.lycos.com">Tripod</a></span>
@@ -278,10 +287,28 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 				<li><a target="blank" href="http://info.lycos.com/about/products" title="View All" id="viewAll">View All</a></li>
             </ul>
 	</div>
-<?php //yourls_html_menu() ?>
+<?php //yourls_html_menu() 
+//echo '<pre>';print_r($_SESSION);?>
 	<span class="menu">
+		<?php
+		if(isset($_SESSION['username']) && $_SESSION['username']!=''){
+			//$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('Hello <strong>%s</strong>'), $_SESSION['name'] ) . ' <a href="?action=logout" title="' . yourls_esc_attr__( 'Logout' ) . '"><img align="absmiddle" src="/images/logout-icon.png">' . '</a>' );
+		?>
+		  <span class="menu">
+		  <div class="moremenu settingmenu">		  
+        		<a class="dropDown" title="Settings"><img src="/images/setting.png"> </a>
+        		<ul style="display: none;" class="hide ddMenu lyGrey boxShadow1">
+                	<li><a href="myprofile.php" title="My Profile">My Profile</a></li>                
+					<li><a href="changepwd.php" title="Change Password" id="changepwd">Change Password</a></li>
+            	</ul>
+		  </div>
+		  <span class="left margin12_T">Hello <strong><?php echo $_SESSION['name'];?></strong></span><a href="<?php yourls_site_url(); ?>/user.php?action=logout" title="Logout" class="logout"><img src="/images/logout-icon.png"></a>
+		 </span>
+		<?php }else{
+		?>
 		<a href="register.php">Sign Up</a>
 		<a href="user.php" >Login</a>
+		<?php }?>
 <?php 
  if( defined( 'YOURLS_USER' ) ) {
 		$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('Hello <strong>%s</strong>'), YOURLS_USER ) . ' <a href="?action=logout" title="' . yourls_esc_attr__( 'Logout' ) . '"><img align="absmiddle" src="/images/logout-icon.png">' . '</a>' );
@@ -929,6 +956,11 @@ function yourls_html_menu() {
 	$admin_sublinks = array();
 	
 	if(yourls_check_user()) {
+		$admin_links['user'] = array(
+			'url'    => yourls__( 'user.php' ),
+			'title'  => yourls__( 'User Interface' ),
+			'anchor' => yourls__( 'User Interface' ),
+		);
 		$admin_links['search'] = array(
 			'url'    => 'http://search.lycos.com',
 			'title'  => yourls__( 'Lycos.com' ),
@@ -1081,7 +1113,7 @@ function yourls_html_menu() {
 		if( isset( $ar['url'] ) ) {
 			$anchor = isset( $ar['anchor'] ) ? $ar['anchor'] : $link;
 			$title  = isset( $ar['title'] ) ? 'title="' . $ar['title'] . '"' : '';
-			if($ar['title']!='Admin Interface' && $ar['title']!='Manage Plugins' && $ar['title']!='Manage Users'){
+			if($ar['title']!='Admin Interface' && $ar['title']!='Manage Plugins' && $ar['title']!='Manage Users' && $ar['title']!='User Interface'){
 			printf( '<span id="admin_menu_%s_link"><a target="blank" href="%s" %s>'.$ar['img'].'%s</a></span>', $link, $ar['url'], $title, $anchor );
 			}else{
 			printf( '<span id="admin_menu_%s_link"><a href="%s" %s>'.$ar['img'].'%s</a></span>', $link, $ar['url'], $title, $anchor );

@@ -581,7 +581,7 @@ input[type="text"] {border:1px solid #cccccc; padding:6px;}
 }
 
 .header .dropDown {
-    padding-right: 25px;
+    /*padding-right: 25px;*/
     line-height:22px;
     margin: 0;
     outline: none;
