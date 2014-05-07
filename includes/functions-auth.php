@@ -27,7 +27,7 @@ function yourls_is_valid_user() {
 		 session_start();
 	     session_unset();
 		//return yourls__( 'Logged out successfully' );
-		header('location: index.php');exit;
+		header('location: '.yourls_site_url());exit;
 	}
 	
 	// Check cookies or login request. Login form has precedence.
