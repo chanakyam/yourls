@@ -59,9 +59,9 @@ function add_link() {
 
 function toggle_share_fill_boxes( url, shorturl, title ) {
 	$('#copylink').val( shorturl );
-	console.log(url);
-	console.log(shorturl);
-	console.log(title);
+	// console.log(url);
+	// console.log(shorturl);
+	// console.log(title);
 	$('#titlelink').val( title );
 	$('#origlink').attr( 'href', url ).html( url );
 	$('#statlink').attr( 'href', shorturl+'+' ).html( shorturl+'+' );

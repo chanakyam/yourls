@@ -129,13 +129,13 @@ yourls_html_head();
 				// Display result message of short link creation
 				($status == 'success')?$class = 'successtext':$class = 'warning';
 				if( isset( $message ) && $class=='success') {					
-					echo "<div class='successtext'>Long URL <span>$message</span></div>";
+					echo "<div class='successtext lurl'>Long URL <span>$message</span></div><br>";
 				}
 				if( isset( $message ) && $class=='warning') {					
-					echo "<div class='successtext'>Long URL <span>$url</span></div>";
+					echo "<div class='successtext lurl'>Long URL <span>$url</span></div>";
 				}
 				if( isset($shorturl) && $shorturl!=''){
-					echo "<div class='successtext'>Shorten URL <span>$shorturl</span></div>";
+					echo "<div class='successtext lurl'>Shorten URL <span>$shorturl</span></div><br>";
 				}
 				
 				
