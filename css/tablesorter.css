@@ -304,4 +304,12 @@ margin-bottom:10px;
 
 .userside form {width: 50%;}
 
+.tablecell {display:table-cell; position: relative;}
+.close-btn {
+	background:url(../images/close.png) no-repeat 0 0; 
+	width: 26px; height: 26px; display: inline-block; text-indent: -9999em;
+	font-size: 0; line-height: 0;
+	cursor:pointer; position: absolute; left: 10px;
 
+	
+}

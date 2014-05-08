@@ -39,8 +39,7 @@ class user{
 	// register
 	public function signup($data){
 
-		$domain     = yourls_site_url();
-
+		//$domain     = yourls_site_url();
 		$firstname    = $data["firstname"];
 		$lastname     = $data["lastname"];
 		$email        = $data["email"];
@@ -50,7 +49,6 @@ class user{
 		$role		  = "User";
 		$signature	  = $data["signature"];
 
-
 		// If user already exist skip registration.
 		$q1 = "SELECT user_id from yourls_users WHERE email = '".$email."' ";
 		$sql = mysql_query($q1);
@@ -58,19 +56,12 @@ class user{
 		if (mysql_num_rows($sql) == 0){
 			// insert query
 			$query="INSERT INTO yourls_users (firstname, lastname, email, password, status, signature, role) VALUES ('".$firstname."','".$lastname."','".$email."','".$md5."','".$status."','".$signature."','".$role."')";
-			//var_dump($query);
 			$result=mysql_query($query) ;
-			$user_id= mysql_insert_id();
-
-		 	if($result){
-				//return $user_id;
-					if($user_id){
-			 		header('location: register.php?status=1');exit;
-					//return $user_id;
-		    		}else{
-		    		header('location: register.php?status=0');exit;
-		    		//return -1;
-		    		}
+			$user_id= mysql_insert_id();		 	
+			if($result){
+				if($user_id){
+				return $user_id;
+	    		}
 	    	}else{
 	    		return -1;
 	    	}
@@ -84,11 +75,13 @@ class user{
 	//send email to user activate account
 	public function send_email($user_id, $email, $firstname){
 		// send email to validate email
+		$domain = '';
+		$domain = $_SERVER['SERVER_NAME'];
  	    $to=$email;
 		$name=$firstname; 
     	$subject="Activate your account"; 
-    	$header="from: Admin <admin@xyz.com>"; 
-    	$link ="<a href='".$domain."process.php?form_type=authenticate&id=".base64_encode($user_id)."'>Please Click Here To Activate Your Account.</a>";
+    	$header="from: Admin <noreply-lycso@lycos-inc.com>"; 
+    	$link ="<a href='http://".$domain."/process.php?form_type=authenticate&id=".base64_encode($user_id)."'>Please Click Here To Activate Your Account.</a>";
     	$messages = "Hi ".$name.",<br><br>";
     	$messages .= $link."<br><br><br>";
     	$messages .= "Thanks,<br>";
@@ -109,7 +102,7 @@ class user{
 		// register
 	public function Add($user){
 
-		$domain     = yourls_site_url();
+		//$domain     = yourls_site_url();
 
 		$firstname    = $user["firstname"];
 		$lastname     = $user["lastname"];

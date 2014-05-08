@@ -99,7 +99,7 @@ function toggle_share_fill_boxes( url, shorturl, title, id ) {
 	$('#tweet_body').val( tweet ).keypress();
 	//$('#shareboxes').slideDown( '300', function(){ init_clipboard(); } ); // clipboard re-initialized after slidedown to make sure the invisible Flash element is correctly positionned
 	if(id !== undefined && id != ""){
-		var share_html = "<tr id='share-"+id+"'><td colspan='6'>"+$('#shareboxes').html()+" <a href='javascript:void(0)' onclick='close_sharebox();'>close[X]</a></td></tr>";
+		var share_html = "<tr id='share-"+id+"'><td colspan='6'>"+$('#shareboxes').html()+" <div class='tablecell'><a href='javascript:void(0)' onclick='close_sharebox();' class='close-btn' title='Close'>close[X]</a></div></td></tr>";
 		$("#id-" + id).after( share_html );
 		var share_id = "#share-"+id; 
 		$(share_id).find("#copylink").val(shorturl);

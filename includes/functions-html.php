@@ -590,7 +590,7 @@ function yourls_share_box( $longurl, $shorturl, $title = '', $text='', $shortlin
 
 		<div id="copybox" class="share">
 		<?php echo $shortlink_title; ?>
-			<p><input id="copylink" class="text"  value="<?php echo yourls_esc_url( $shorturl ); ?>" /></p>
+			<p><input id="copylink" class="text width90"  value="<?php echo yourls_esc_url( $shorturl ); ?>" /></p>
 			<p><small><?php yourls_e( 'Long link' ); ?>: <a id="origlink" href="<?php echo yourls_esc_url( $longurl ); ?>"><?php echo yourls_esc_url( $longurl ); ?></a></small>
 			<?php if( yourls_do_log_redirect() ) { ?>
 			<br/><small><?php yourls_e( 'Stats' ); ?>: <a id="statlink" href="<?php echo yourls_esc_url( $shorturl ); ?>+"><?php echo yourls_esc_url( $shorturl ); ?>+</a></small>
@@ -598,7 +598,7 @@ function yourls_share_box( $longurl, $shorturl, $title = '', $text='', $shortlin
 			<?php } ?>
 			</p>
 		</div>
-		<div style="display: table-cell; width: 15px;"></div>
+		<!-- <div style="display: table-cell; width: 15px;"></div> -->
 		<?php yourls_do_action( 'shareboxes_middle', $longurl, $shorturl, $title, $text ); ?>
 
 		<div id="sharebox" class="share">
@@ -903,11 +903,11 @@ function yourls_login_screen( $error_msg = '' ) {
 		<h3 class="logintitle">Please Login</h3>
 	
 		  <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 1 ){
-          echo "<center><strong>Activated Successfully. Please login.</strong></center>";
+          echo "<div class='success'>Activated Successfully. Please login.</div>";
           }?>
 
           <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 0 ){
-          echo "<center><strong>Activation Failed. Please try again.</strong></center>";
+          echo "<div class='errormessage'>Activation Failed. Please try again.</div>";
           }?>
 		<form method="post" action="<?php echo $action; ?>"> <?php // reset any QUERY parameters ?>
 			<?php

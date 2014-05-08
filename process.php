@@ -3,11 +3,11 @@ session_start();
 define( 'YOURLS_USER', true );	
 // Start YOURLS engine
 require_once( dirname(__FILE__).'/includes/load-yourls.php' );	
+// include captcha library
 require_once( dirname(__FILE__).'/includes/recaptchalib.php' );
 /* this file is to process submitted data */
 include_once "user.class.php";	
 $obj_user = new user();
-//var_dump($_POST);
 $_GLOBAL_MSG = '';
 // if request comes from registration form
 if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="Signup"){
@@ -29,36 +29,25 @@ if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="Signup"){
 	    $data['password'] 	  = $_POST['password'];
 		$data['signature']	  = yourls_auth_signature_new_user( $data['email']);	
 		$response        	  = $obj_user-> signup($data);
-		if($response){
-			$obj_user->send_email($response, $data['email'], $data['firstname']);
+		if(is_numeric($response) && $response!='' && $response>0) {
+			$sent = $obj_user->send_email($response, $data['email'], $data['firstname']);
+			if($sent){
+				//please check your mail
+				header('location: register.php?status=1');exit;
+				//return $user_id;
+			}else{
+				//signup failed
+			    header('location: register.php?status=0');exit;
+			}
 		}else{
 			// already exist
 			header('location: register.php?status=2');exit;
 		}
 	}else{
-		// already exist
+		// captcha error
 		header('location: register.php?status=3');exit;
 	}	
-	// echo $message;
-	// return $response;
 	
-	//edited
-
-	// if($response){
-		
-	// 	if($obj_user->send_email($response, $data['email'], $data['firstname'])){
-	// 		header('location: register.php?status=1');exit;
-	// 		//echo "Activated Succesfully.";
-	// 	}else{
-	// 		header('location: register.php?status=0');exit;
-	// 		//echo "Failed to activate.";
-	// 	}
-	// }else{
-	// 	// already exist
-	// 	$message = "User Already Exist";
-	// }	
-	// echo $message;
-	// return $response;
 }	
 
 // authenticate

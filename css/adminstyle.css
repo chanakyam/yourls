@@ -627,3 +627,19 @@ input[type="text"] {border:1px solid #cccccc; padding:6px;}
 .row {overflow: hidden;}
 .width10 {width: 10%; float: left;}
 .width90 {width:90%; float: left;}
+
+#login .success {margin: 0;}
+
+#copybox {
+    float: left;
+    width: 30%;
+    word-wrap: break-word; margin:0;
+}
+
+#sharebox {
+width:58%; float: left;
+}
+
+.tablecell {float: left;}
+.width90 {width: 90%;}
+div.share {min-height: 180px;}
