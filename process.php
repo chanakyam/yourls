@@ -37,7 +37,9 @@ if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="Signup"){
 				//return $user_id;
 			}else{
 				//signup failed
-			    header('location: register.php?status=0');exit;
+			    //header('location: register.php?status=0');exit;
+			    //need to change status to 0 when mail functionality is working
+			    header('location: register.php?status=1');exit;
 			}
 		}else{
 			// already exist
