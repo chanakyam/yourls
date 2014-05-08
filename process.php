@@ -70,7 +70,7 @@ if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="authenticate"){
 }	
 
 //if request comes from admin user to add_user
-if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="Add"){	
+if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="Add"){
 	// prepare user array
 	$user['firstname'] 	  = $_POST['firstname'];
  	$user['lastname']	  = $_POST['lastname'];
@@ -79,6 +79,13 @@ if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="Add"){
 	$user['signature']	  = yourls_auth_signature_new_user( $user['email']);
 							
 	$response        	  = $obj_user-> Add($user);
+	if($response){
+ 		header('location: add_user.php?status=1');exit;
+		//echo "Added Succesfully.";
+	}else{
+		header('location: add_user.php?status=0');exit;
+		//return -1;
+	}
 }	
 
 // if request comes from login form

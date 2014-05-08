@@ -581,7 +581,7 @@ input[type="text"] {border:1px solid #cccccc; padding:6px;}
 }
 
 .header .dropDown {
-    /*padding-right: 25px;*/
+    padding-right: 25px;
     line-height:22px;
     margin: 0;
     outline: none;
@@ -626,6 +626,7 @@ input[type="text"] {border:1px solid #cccccc; padding:6px;}
 }
 .row {overflow: hidden;}
 .width10 {width: 10%; float: left;}
+.userwidth11 {width: 11%; float: left;}
 .width90 {width:90%; float: left;}
 
 #login .success {margin: 0;}
@@ -643,3 +644,7 @@ width:58%; float: left;
 .tablecell {float: left;}
 .width90 {width: 90%;}
 div.share {min-height: 180px;}
+.settingmenu .dropDown {padding-right: 0;}
+
+.doglogo {float: left; margin: -7px 5px 0 5px;}
+.fix_images {margin:1px 5px; float: left;}

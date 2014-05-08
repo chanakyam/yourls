@@ -202,6 +202,49 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 			});
 		</script>
 
+		<!-- added for manage users -->
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function() {
+				var oTable= $('#users_main_table').dataTable({
+					aaSorting : [[0, 'desc']],
+					"bProcessing": true,
+					"bServerSide": true,
+					//"sPaginationType": "iFullNumbersShowPages",
+					//"sPaginationType": "two_button",
+					"sPaginationType": "full_numbers",
+                    "sAjaxSource": '../ajax/server_users.php',
+                    "aoColumnDefs": [
+
+								    { "fnRender": function ( oObj ) {
+								        if ( oObj.aData[6] != "" ) {
+								            return '<td id="actions-'+oObj.aData["id"]+'" class="actions "><a onclick="edit_user_display(\''+oObj.aData["user_id"]+'\');return false;" class="button button_edit" title="Edit" id="edit-button-'+oObj.aData["user_id"]+'" action=edit&amp;nonce='+oObj.aData["nonce_edit"]+'">Edit</a><a onclick="remove_user_link(\''+oObj.aData["user_id"]+'\');return false;" class="button button_delete" title="Delete" id="delete-button-'+oObj.aData["user_id"]+'" href="/admin/admin-ajax.php?id='+oObj.aData["user_id"]+'&amp;action=delete_user&amp;keyword='+oObj.aData["keyword"]+'&amp;nonce='+oObj.aData["nonce_delete"]+'">Delete</a><input type="hidden" value="'+oObj.aData["user_id"]+'" id="userid'+oObj.aData["user_id"]+'"></td>';
+								            }
+								        else {
+								            return oObj.aData[5];
+								            }
+								        },
+								        "aTargets": [ 6 ]
+								    }
+								 ],
+								 "aoColumns": [
+						{ "bSearchable": true, "aTargets": 0,"bSortable": true,"sClass": "user_id", "bVisible": true },
+				        { "bSearchable": true, "bSortable": true,"sClass": "first_name", "bVisible": true },
+				        { "bSearchable": true, "bSortable": true,"sClass": "last_name", "bVisible": true },
+				        { "bSearchable": true, "bSortable": true,"sClass": "user_email", "bVisible": true },
+				        { "bSearchable": true, "bSortable": true,"sClass": "user_role", "bVisible": true },
+				        { "bSearchable": true, "bSortable": true,"sClass": "user_status", "bVisible": true },
+				        { "bSearchable": false, "bSortable": false,"sClass": "actions", "bVisible": true, "sDefaultContent": 'Actions' }
+				        ],
+				        "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+			                
+			                $(nRow).attr("id",'id-' + aData["user_id"]);
+    						return nRow;
+			            }
+				});
+
+			} );
+		</script>
+
 
 
 
@@ -291,23 +334,22 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 //echo '<pre>';print_r($_SESSION);?>
 	<span class="menu">
 		<?php
-		if(isset($_SESSION['username']) && $_SESSION['username']!=''){
-			//$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('Hello <strong>%s</strong>'), $_SESSION['name'] ) . ' <a href="?action=logout" title="' . yourls_esc_attr__( 'Logout' ) . '"><img align="absmiddle" src="/images/logout-icon.png">' . '</a>' );
-		?>
-		  <span class="menu">
-		  <div class="moremenu settingmenu">		  
-        		<a class="dropDown" title="Settings"><img src="/images/setting.png"> </a>
-        		<ul style="display: none;" class="hide ddMenu lyGrey boxShadow1">
-                	<li><a href="myprofile.php" title="My Profile">My Profile</a></li>                
+		if(isset($_SESSION['username']) && $_SESSION['username']!=''){?>
+			<span class="left margin12_T">Hello <strong><?php echo $_SESSION['name'];?></strong></span>		  
+			 <div class="moremenu settingmenu">		  
+	        	<a class="dropDown" title="Settings"><img src="/images/setting.png"> </a>
+	        	<ul style="display: none;" class="hide ddMenu lyGrey boxShadow1">
+	               	<li><a href="myprofile.php" title="My Profile">My Profile</a></li>                
 					<li><a href="changepwd.php" title="Change Password" id="changepwd">Change Password</a></li>
-            	</ul>
-		  </div>
-		  <span class="left margin12_T">Hello <strong><?php echo $_SESSION['name'];?></strong></span><a href="<?php yourls_site_url(); ?>/user.php?action=logout" title="Logout" class="logout"><img src="/images/logout-icon.png"></a>
-		 </span>
+	           	</ul>
+			 </div>
+			 <a href="<?php yourls_site_url(); ?>/user.php?action=logout" title="Logout"><img src="/images/logout-icon.png"></a>
+		  
+		 
 		<?php }else{
 		?>
-		<a href="register.php">Sign Up</a>
-		<a href="user.php" >Login</a>
+		<a href="register.php" title="Sign Up">Sign Up</a>
+		<a href="user.php" title="Login">Login</a>
 		<?php }?>
 <?php 
  if( defined( 'YOURLS_USER' ) ) {

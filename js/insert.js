@@ -167,6 +167,36 @@ function edit_link_display(id) {
 	$('#show_row').val(id);
 }
 
+// Display the edition interface
+function edit_user_display(id) {
+	if( $('#edit-button-'+id).hasClass('disabled') ) {
+		return false;
+	}
+	//new code for show/hide for edit
+	var hid_val = $('#user_hid').val()
+	if($('#edit-'+hid_val).length ==1){
+		$('#edit-'+hid_val).remove()
+		$('#user_hid').val('');
+	}
+	//new code
+	if( $('#edit-'+id).length ==0){	 	
+		add_loading('#actions-'+id+' .button');
+		//var keyword = $('#keyword_'+id).val();
+		//var nonce = get_var_from_query( $('#edit-button-'+id).attr('href'), 'nonce' );
+		$.getJSON(
+			ajaxurl,
+			{ action: "edit_user", id: id },
+			function(data){
+				$("#id-" + id).after( data.html );
+				$("#edit-url-"+ id).focus();
+				end_loading('#actions-'+id+' .button');
+			}
+		);
+	}
+	//new code for show/hide for edit
+	$('#user_hid').val(id);
+}
+
 // Delete a link
 function remove_link(id) {
 	if( $('#delete-button-'+id).hasClass('disabled') ) {
@@ -198,6 +228,38 @@ function remove_link(id) {
 	);
 }
 
+// Delete a user link
+function remove_user_link(id) {
+	if( $('#delete-button-'+id).hasClass('disabled') ) {
+		return false;
+	}
+	if (!confirm('Really delete?')) {
+		return;
+	}
+	//var keyword = $('#keyword_'+id).val();
+	//var nonce = get_var_from_query( $('#delete-button-'+id).attr('href'), 'nonce' );
+	$.getJSON(
+		ajaxurl,
+		{ action: "delete_user", id: id },
+		function(data){
+			if (data.status == 'success') {
+				$("#id-" + id).fadeOut(function(){
+					$(this).remove();
+					if( $('#dashboard_main_table tbody tr').length  == 1 ) {
+						$('#nourl_found').css('display', '');
+					}
+
+					zebra_table();
+				});
+				decrement_counter();
+			} 
+			//window.setTimeout('location.reload()', 3000); //reloads after 1 seconds
+			feedback(data.message, data.status);
+			
+		}
+	);
+}
+
 // Redirect to stat page
 function go_stats(link) {
 	window.location=link;
@@ -205,6 +267,15 @@ function go_stats(link) {
 
 // Cancel edition of a link
 function edit_link_hide(id) {
+	//new code
+	$("#edit-" +id).remove();
+	// $("#edit-" + id).fadeOut(200, function(){
+	// 	end_disable('#actions-'+id+' .button');
+	// });
+}
+
+// Cancel edition of a link
+function edit_user_hide(id) {
 	//new code
 	$("#edit-" +id).remove();
 	// $("#edit-" + id).fadeOut(200, function(){
@@ -249,6 +320,48 @@ function edit_link_save(id) {
 			$("#edit-" +id).remove();
 
 			//location.reload();
+		}
+	);
+}
+
+// Save edition of a link
+function edit_user_save(id) {
+	add_loading("#edit-close-" + id);
+	var fname = $("#edit-fname-" + id).val();
+	var lname = $("#edit-lname-" + id).val();
+	var email = $("#edit-email-" + id).val();
+	//var role = $("#edit-role-" + id).val();
+	//var status = $("#edit-role-" + id).val();
+	$.getJSON(
+		ajaxurl,
+		{action:'edit_user_save', fname: fname, id: id, lname: lname, email: email  },
+		function(data){
+			if(data.status == 'success') {
+				$("tr-#id"+id+" td.first_name").text(fname);
+				$("tr-#id"+id+" td.last_name").text(lname);
+				$("tr-#id"+id+" td.email").text(email);
+
+				// $("#url-" + id).html(display_link);
+				// $("#keyword-" + id).html('<a href="' + data.url.shorturl + '" title="' + data.url.shorturl + '">' + data.url.keyword + '</a>');
+				// $("#timestamp-" + id).html(data.url.date);
+				var table = $('#users_main_table').dataTable();
+				var pos = table.fnGetPosition( $("#id-"+id)[0] );
+				// table.fnUpdate([id,fname,lname,email],pos);
+				// to update a cell
+				table.fnUpdate(fname,1,pos);
+				table.fnUpdate(lname,2,pos);
+				table.fnUpdate(email,3,pos);
+
+				$('#users_main_table tbody').trigger("update");
+				$("#edit-" + id).fadeOut(200, function(){
+					$('#users_main_table tbody').trigger("update");
+				});
+			}
+			feedback(data.message, data.status);
+			end_loading("#edit-close-" + id);
+			//end_disable("#actions-" + id + ' .button');
+			//new code
+			$("#edit-" +id).remove();
 		}
 	);
 }

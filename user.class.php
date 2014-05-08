@@ -113,7 +113,6 @@ class user{
 		$role		  = "User";
 		$signature	  = $user["signature"];
 
-
 		// If user already exist skip registration.
 		$q1 = "SELECT user_id from yourls_users WHERE email = '".$email."' ";
 		$sql = mysql_query($q1);
@@ -121,23 +120,11 @@ class user{
 		if (mysql_num_rows($sql) == 0){
 			// insert query
 			$query="INSERT INTO yourls_users (firstname, lastname, email, password, status, signature, role) VALUES ('".$firstname."','".$lastname."','".$email."','".$md5."','".$status."','".$signature."','".$role."')";
-			//var_dump($query);
-			$result=mysql_query($query) ;
-			
-			// mysql last inset id
-			//$user_id = 67;
-			//$user_id= mysql_insert_id();
-			// if($user_id){
-
-			// }
-
-		 	if($result){
-		 		header('location: add_user.php?status=1');exit;
-				//echo "Added Succesfully.";
-	    	}else{
-	    		header('location: add_user.php?status=0');exit;
-	    		//return -1;
-	    	}
+			$result=mysql_query($query);
+			if($result)
+				return true;
+			else
+				return false;		 	
 		}else{
 			return FALSE;
 		}

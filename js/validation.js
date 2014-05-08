@@ -3,6 +3,7 @@
 //  validation 
 function validateForm(){
 var iChars = "!@#$%^&*()+=-[]\\\';,./{}|\":<>?";
+var invlid = '';
     //validate firstname
     var firstname=document.forms["Registration"]["firstname"].value;  
     if (firstname==null || firstname=="")
@@ -90,7 +91,7 @@ var iChars = "!@#$%^&*()+=-[]\\\';,./{}|\":<>?";
     }
 
     if(invalid){
-      // console.log("validation failed");
+       console.log("validation failed");
       return false;
     }
 

@@ -1,7 +1,7 @@
 <?php
 session_start();
 define( 'YOURLS_ADMIN', true );
-require_once(  dirname( __FILE__ ).'/includes/load-yourls.php' );
+require_once( dirname( __FILE__ ).'/includes/load-yourls.php' );
 yourls_maybe_require_auth();
 
 // Handle plugin administration pages
@@ -56,11 +56,86 @@ if( isset( $_GET['success'] ) && ( ( $_GET['success'] == 'activated' ) OR ( $_GE
 	
 }
 
-yourls_html_head( 'plugins', yourls__( 'Manage Plugins' ) );
+yourls_html_head( 'index', yourls__( 'Manage Users' ) );
+
+/* To Edit and Delete Users*/
+function edit_user_data($userid) {
+	$user_results = $ydb->get_results( "SELECT * FROM `yourls_users` WHERE user_id='".$userid."';" );
+			if(!empty($user_results)) {
+				$user_data = current($user_results);
+				if( !empty($user_data) ) {
+					$id = $user_data->user_id;
+					$fname = $user_data->firstname;
+					$lname = $user_data->lastname;
+					$email = $user_data->email;
+					$role = $user_data->role;
+					$status = $user_data->status;
+		$return = <<<RETURN
+<tr id="edit-$id" class="edit-row"><td colspan="5" class="edit-row"><strong>%s</strong>:<input type="text" id="edit-url-$id" name="edit-fname-$id" value="$fname" class="text" size="70" /><br/><strong>%s</strong>:<input type="text" id="edit-lname-$id" name="edit-lname-$id" value="$lname" class="text" size="10" /><br/><strong>%s</strong>: <input type="text" id="edit-email-$id" name="edit-email-$id" value="$email" class="text" size="60" /><br/><strong>%s</strong>: <input type="text" id="edit-role-$id" name="edit-role-$id" value="$role" class="text" size="60" /><br/><strong>%s</strong>: <input type="text" id="edit-status-$id" name="edit-status-$id" value="$status" class="text" size="60" /></td><td colspan="1"><input type="button" id="edit-submit-$id" name="edit-submit-$id" value="%s" title="%s" class="button" onclick="edit_user_save('$id');" />&nbsp;<input type="button" id="edit-close-$id" name="edit-close-$id" value="%s" title="%s" class="button" onclick="edit_link_hide('$id');" /><input type="hidden" id="user_id_$id" value="$id"/></td></tr>
+RETURN;
+		$return = sprintf( urldecode( $return ), yourls__( 'First Name' ), yourls__( 'Last Name' ), yourls__( 'Email' ), yourls__( 'Role' ), yourls__( 'Status' ), yourls__( 'Save' ), yourls__( 'Cancel' ) );
+	} else {
+		$return = '<tr class="edit-row notfound"><td colspan="6" class="edit-row notfound">' . yourls__( 'Error, URL not found' ) . '</td></tr>';
+	}
+	//echo json_encode( array('html' => $return) );
+	// $return = yourls_apply_filter( 'table_edit_row', $return, $keyword, $url, $title );
+
+	return $return;
+			}
+}
+if( isset( $_GET['user_action'] ) ) {
+	switch ($_GET['user_action']) {
+		case 'edit':
+			$userid = $_GET['id'];
+			$user_results = $ydb->get_results( "SELECT * FROM `yourls_users` WHERE user_id='".$userid."';" );
+			if(!empty($user_results)) {
+				$user_data = current($user_results);
+				if( !empty($user_data) ) {
+					$id = $user_data->user_id;
+					$fname = $user_data->firstname;
+					$lname = $user_data->lastname;
+					$email = $user_data->email;
+					$role = $user_data->role;
+					$status = $user_data->status;
+		$return = <<<RETURN
+<tr id="edit-$id" class="edit-row"><td colspan="5" class="edit-row"><strong>%s</strong>:<input type="text" id="edit-url-$id" name="edit-fname-$id" value="$fname" class="text" size="70" /><br/><strong>%s</strong>:<input type="text" id="edit-lname-$id" name="edit-lname-$id" value="$lname" class="text" size="10" /><br/><strong>%s</strong>: <input type="text" id="edit-email-$id" name="edit-email-$id" value="$email" class="text" size="60" /><br/><strong>%s</strong>: <input type="text" id="edit-role-$id" name="edit-role-$id" value="$role" class="text" size="60" /><br/><strong>%s</strong>: <input type="text" id="edit-status-$id" name="edit-status-$id" value="$status" class="text" size="60" /></td><td colspan="1"><input type="button" id="edit-submit-$id" name="edit-submit-$id" value="%s" title="%s" class="button" onclick="edit_user_save('$id');" />&nbsp;<input type="button" id="edit-close-$id" name="edit-close-$id" value="%s" title="%s" class="button" onclick="edit_link_hide('$id');" /><input type="hidden" id="user_id_$id" value="$id"/></td></tr>
+RETURN;
+		$return = sprintf( urldecode( $return ), yourls__( 'First Name' ), yourls__( 'Last Name' ), yourls__( 'Email' ), yourls__( 'Role' ), yourls__( 'Status' ), yourls__( 'Save' ), yourls__( 'Cancel' ) );
+	} else {
+		$return = '<tr class="edit-row notfound"><td colspan="6" class="edit-row notfound">' . yourls__( 'Error, URL not found' ) . '</td></tr>';
+	}
+	echo json_encode( array('html' => $return) );
+	// $return = yourls_apply_filter( 'table_edit_row', $return, $keyword, $url, $title );
+
+	// return $return;
+			}
+			break;
+	}
+
+}
+
 ?>
 
 	<h2 class="title"><?php yourls_e( 'Manage Users' .' '. '<a href="../add_user.php" style="color:white; float:right;">Add User</a>'); ?></h2></br>
 	
+		<?php 
+			if (isset($_REQUEST['status']) && $_REQUEST['status']== 1 ){
+	        	echo "<center><strong>Added succesfully.</strong></center>";
+	        }
+	    ?>
+
+		<?php 
+			if (isset($_REQUEST['status']) && $_REQUEST['status']== 0 ){
+	        	echo "<center><strong>Please try again.</strong></center>";
+	        }
+	    ?>
+	    <?php 
+			if (isset($_REQUEST['status']) && $_REQUEST['status']== 2 ){
+	        	echo "<center><strong>User Already Exists.</strong></center>";
+	        }
+	    ?>
+
+
 	<?php
 	// Main Query
 	$where = yourls_apply_filter( 'admin_list_where', $where );
@@ -77,36 +152,19 @@ yourls_html_head( 'plugins', yourls__( 'Manage Plugins' ) );
 		<?php /* //translators: "you have '3 plugins' installed and '1' activated" */ //yourls_se( 'You currently have <strong>%1$s</strong> installed, and <strong>%2$s</strong> activated', $plugins_count, $count_active ); ?>
 	<!--</p>-->
 <?php echo $message ;?>
-	<table id="main_table" class="tblSorter" cellpadding="0" cellspacing="1">
+	<table id="users_main_table" class="tblSorter" cellpadding="0" cellspacing="1">
+	<input type="hidden" name="user_hid" id="user_hid" value="" />
 	<thead>
 		<tr>
-			<th><?php yourls_e( 'User Name' ); ?></th>
+			<th>ID</th>
+			<th><?php yourls_e( 'First Name' ); ?></th>
+			<th><?php yourls_e( 'Last Name' ); ?></th>
 			<th><?php yourls_e( 'Email' ); ?></th>
 			<th><?php yourls_e( 'Role' ); ?></th>
+			<th><?php yourls_e( 'Status' ); ?></th>
 			<th><?php yourls_e( 'Action' ); ?></th>
 		</tr>
 	</thead>
-	<tbody >
-	<?php
-	
-	$nonce = yourls_create_nonce( 'manage_plugins' );
-	
-	foreach( $user_results as $users ) {		
-		
-		$data['desc'] .= '<br/><small>' . yourls_s( 'plugin file location: %s', $file) . '</small>';
-		
-		printf( "<tr class='plugin %s'>
-					<td class='plugin_name'><a href='%s'>%s</a></td>
-					<td class='plugin_version'>%s</td>
-					<td class='plugin_desc'>%s</td>
-					<td class='plugin_actions actions'><a href='%s'>%s</a></td>
-				</tr>",
-			$class, $data['uri'], $users->firstname, $users->email, $users->role, $users->username, $action_url, $action_anchor
-			);
-		
-	}
-	?>
-	</tbody>
 	</table>
 	
 	<script type="text/javascript">
