@@ -93,11 +93,17 @@ class user{
 
 	//useractive
 	public function useractive($user_id){
-		// $status="active";
-		$update_query="UPDATE yourls_users SET status='active' WHERE user_id='".$user_id."'" ;
-
-		$result=mysql_query($update_query);
-		return true;
+		//checking if already activated
+		$chk_act_qry = "SELECT user_id FROM yourls_users WHERE user_id='".$user_id."' AND status='Active'";
+		$act_res=mysql_query($chk_act_qry);
+		if(mysql_num_rows($act_res)==0){
+			// $status="active";
+			$update_query="UPDATE yourls_users SET status='Active' WHERE user_id='".$user_id."'" ;
+			$result=mysql_query($update_query);
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 		// register

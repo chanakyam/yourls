@@ -949,7 +949,8 @@ function yourls_login_screen( $error_msg = '' ) {
           }?>
 
           <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 0 ){
-          echo "<div class='errormessage'>Activation Failed. Please try again.</div>";
+          //echo "<div class='errormessage'>Activation Failed/. Please try again.</div>";
+          echo "<div class='errormessage'>Activation Link Expired.</div>";
           }?>
 		<form method="post" action="<?php echo $action; ?>"> <?php // reset any QUERY parameters ?>
 			<?php

@@ -54,7 +54,8 @@ if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="Signup"){
 
 // authenticate
 if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="authenticate"){
-	$user_id = base64_decode($_REQUEST["id"]);
+	//$user_id = base64_decode($_REQUEST["id"]);
+	$user_id = $_REQUEST["id"];
 	if($user_id){
 		$response = $obj_user-> useractive($user_id);
 		if($response){
