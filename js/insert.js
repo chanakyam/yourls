@@ -229,6 +229,7 @@ function remove_link(id) {
 			}
 		}
 	);
+	window.setTimeout('location.reload()', 2000); //reloads after 1 seconds
 }
 
 // Delete a user link
