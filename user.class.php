@@ -175,7 +175,8 @@ class user{
 
 	//forgotpassword
 	public function forgotpassword($email_to=""){
-
+			$domain = '';
+			$domain = $_SERVER['SERVER_NAME'];
 			$email_to=$_POST['email'];
 			$query="SELECT user_id, password, firstname FROM yourls_users WHERE email='".$email_to."'";
 			$result=mysql_query($query);
@@ -190,7 +191,7 @@ class user{
 		    	$subject="Reset Password";
 		    	$header = "Content-Type: text/html; charset=ISO-8859-1\r\n"; 
     			$header.="from: Admin <noreply-lycso@lycos-inc.com>";  
-		    	$link ="<a href='".$domain."resetpwd.php?user_id=".base64_encode($user_id)."'>Please Click Here To Reset Your Password.</a>";
+		    	$link ="<a href='".$domain."/resetpwd.php?user_id=".base64_encode($user_id)."'>Please Click Here To Reset Your Password.</a>";
 		    	$messages= "Hi ".$name.",<br><br>";
 		    	//echo $messages=	"Your Password is:".$your_password.".<br><br><br>";
 		    	$messages.= $link."<br><br><br>";
