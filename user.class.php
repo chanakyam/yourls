@@ -79,7 +79,8 @@ class user{
 		$domain = $_SERVER['SERVER_NAME'];
  	    $to=$email;
 		$name=$firstname; 
-    	$subject="Activate your account"; 
+    	$subject="Activate your account";
+    	$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n"; 
     	$header="from: Admin <noreply-lycso@lycos-inc.com>"; 
     	$link ="<a href='http://".$domain."/process.php?form_type=authenticate&id=".base64_encode($user_id)."'>Please Click Here To Activate Your Account.</a>";
     	$messages = "Hi ".$name.",<br><br>";
