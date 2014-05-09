@@ -57,6 +57,7 @@ function add_link() {
 			}else{
 				feedback(data.message, data.status);
 			}
+			window.setTimeout('location.reload()', 2000); //reloads after 1 seconds
 		}
 	);
 }
