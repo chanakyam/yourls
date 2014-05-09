@@ -217,7 +217,7 @@ class user{
 	public function resetpassword($newpassword=""){
 			$newpassword=$_POST['newpwd'];
 			$user_id = base64_decode($_POST['user_id']);
-			$update_query= "UPDATE yourls_users set password= '".$newpassword."' WHERE user_id='".$user_id."'";
+			$update_query= "UPDATE yourls_users set password= '".md5($newpassword)."' WHERE user_id='".$user_id."'";
 			$result=mysql_query($update_query);
 			
 			if($result){
