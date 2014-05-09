@@ -125,9 +125,7 @@ if(isset($_POST["form_type"]) && $_POST["form_type"]=="Reset"){
 
 //if request comes from changepwd.php
 if(isset($_POST["form_type"]) && $_POST["form_type"]=="Change"){
-	if(isset($_POST["form_type"])){
-		$response = $obj_user-> changepassword(md5($_POST['password']), md5($_POST['newpwd']));
-	}
+	$response = $obj_user-> changepassword(md5($_POST['password']), md5($_POST['newpwd']));
 }
 
 ?>

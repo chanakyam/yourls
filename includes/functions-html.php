@@ -244,6 +244,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 
 			} );
 		</script>
+		<script>init_clipboard();</script>
 
 
 

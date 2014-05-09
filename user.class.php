@@ -187,8 +187,9 @@ class user{
 				$name=$rows['firstname'];
 				$user_id=$rows['user_id'];
 				$to=$email_to; 
-		    	$subject="Reset Password"; 
-		    	$header="from: Admin <admin@xyz.com>"; 
+		    	$subject="Reset Password";
+		    	$header = "Content-Type: text/html; charset=ISO-8859-1\r\n"; 
+    			$header.="from: Admin <noreply-lycso@lycos-inc.com>";  
 		    	$link ="<a href='".$domain."resetpwd.php?user_id=".base64_encode($user_id)."'>Please Click Here To Reset Your Password.</a>";
 		    	$messages= "Hi ".$name.",<br><br>";
 		    	//echo $messages=	"Your Password is:".$your_password.".<br><br><br>";
@@ -228,15 +229,14 @@ class user{
 	}
 
 	//change password
-	public function changepassword($oldpassword,$newpassword){
-		
+	public function changepassword($oldpassword,$newpassword){		
 		$query="SELECT user_id, password FROM yourls_users WHERE password='".$oldpassword."'";
 		$result=mysql_query($query);
 		$count=mysql_num_rows($result);
 		if($count==true){
 			$rows=mysql_fetch_array($result);
 			$user_id=$rows['user_id'];
-			echo$update_query= "UPDATE yourls_users set password= '".$newpassword."' WHERE user_id='".$user_id."'";
+			$update_query= "UPDATE yourls_users set password= '".$newpassword."' WHERE user_id='".$user_id."'";
 			$results=mysql_query($update_query);
 			
 			if($results){
