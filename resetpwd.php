@@ -22,6 +22,7 @@ yourls_html_head();
 
 				function validatePassword(){		
 					//validate new password
+					invalid = false;
 			    	if(document.forms["resetpwd"]["newpwd"]){
 			   			var newpwd=document.forms["resetpwd"]["newpwd"].value;
 			  			if (newpwd==null || newpwd==""){
@@ -41,11 +42,14 @@ yourls_html_head();
 			          		invalid = true;
 			      		}else{
 			        		errorMessage("label_cnew", "");
+
 			      		}
 			    	}			
 
 			    	if(invalid){
 			 			return false;
+			 		}else{
+			 			return true;
 			 		}
 				}			
 
