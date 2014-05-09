@@ -126,6 +126,12 @@ if(isset($_POST["form_type"]) && $_POST["form_type"]=="Reset"){
 //if request comes from changepwd.php
 if(isset($_POST["form_type"]) && $_POST["form_type"]=="Change"){
 	$response = $obj_user-> changepassword(md5($_POST['password']), md5($_POST['newpwd']));
+	if($response){//successfully changed the pwd
+		header('location: changepwd.php?status=1');exit;
+	}else{//error in changing the password
+		header('location: changepwd.php?status=0');exit;
+	}
+
 }
 
 ?>

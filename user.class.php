@@ -231,7 +231,7 @@ class user{
 
 	//change password
 	public function changepassword($oldpassword,$newpassword){		
-		$query="SELECT user_id, password FROM yourls_users WHERE password='".$oldpassword."'";
+		$query="SELECT user_id, password FROM yourls_users WHERE password='".$oldpassword."' and email='".$_SESSION['username']."'";
 		$result=mysql_query($query);
 		$count=mysql_num_rows($result);
 		if($count==true){
@@ -239,16 +239,9 @@ class user{
 			$user_id=$rows['user_id'];
 			$update_query= "UPDATE yourls_users set password= '".$newpassword."' WHERE user_id='".$user_id."'";
 			$results=mysql_query($update_query);
-			
-			if($results){
-		 		header('location: changepwd.php?status=1');exit;
-				//echo "Added Succesfully.";
-	    	}else{
-	    		header('location: changepwd.php?status=0');exit;
-	    		//return -1;
-	    	}
+			return true;
 		}
-	
+		return false;
 	}
 
 	//ajax showUser with class showuser for editprofile.php

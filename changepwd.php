@@ -79,7 +79,8 @@ yourls_html_head();
           }?>
 
           <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 0 ){
-          echo "<div class='errormessage'>Changing Password Failed.</div>";
+          //echo "<div class='errormessage'>Changing Password Failed.</div>";
+          echo "<div class='errormessage'>Your Old Password Doesnt Match.</div>";
           }?> 
 				<table  width="100%" border="0" cellpadding="0" cellspacing="0"e>
 				<tr>

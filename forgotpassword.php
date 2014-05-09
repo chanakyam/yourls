@@ -39,10 +39,13 @@ yourls_html_head();
 			 			invalid = true;
 			 		}else{
 			 			errorMessage("label_email", "");
+			 			invalid = false;
 			 		}				
 
 			 		if(invalid){
 			 			return false;
+			 		}else{
+			 			return true;
 			 		}				
 
 			 }				
@@ -60,10 +63,10 @@ yourls_html_head();
 				<div class="title">Forgot Password</div>
 				
 				<?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 1 ){
-				 echo "<center><strong>Please Check your email to reset your password.</strong></center>";
+				 echo "<div class='success'>Please Check your email to reset your password.</div>";
 				 }?>
 				 <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 0 ){
-				 echo "<center><strong>Email not found in our database.</strong></center>";
+				 echo "<div class='errormessage'>Email not found in our database.</div>";
 				 }?>
 
 				<table>
