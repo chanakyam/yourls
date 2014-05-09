@@ -183,25 +183,6 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 
 			} );
 		</script>
-		<?php }?>
-		<script type="text/javascript">
-			$(document).ready(function() {
-			// run drop down menus
-			$('.dropDown').click(function(){
-				$(this).parent().children('.ddMenu').toggle();
-				return false;
-			});
-			
-			// close drop downs
-			$(document).click(function(ev){
-				if (!$(ev.target).hasClass("dropDown")) {
-					$('.ddMenu').hide();
-					$('#topBar a').removeClass('selected');
-				}
-			});
-			});
-		</script>
-
 		<!-- added for manage users -->
 		<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
@@ -244,7 +225,26 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 
 			} );
 		</script>
-		<script>init_clipboard();</script>
+		<?php }?>
+		<script type="text/javascript">
+			$(document).ready(function() {
+			// run drop down menus
+			$('.dropDown').click(function(){
+				$(this).parent().children('.ddMenu').toggle();
+				return false;
+			});
+			
+			// close drop downs
+			$(document).click(function(ev){
+				if (!$(ev.target).hasClass("dropDown")) {
+					$('.ddMenu').hide();
+					$('#topBar a').removeClass('selected');
+				}
+			});
+			});
+		</script>
+
+		
 
 
 
