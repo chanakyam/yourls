@@ -208,3 +208,10 @@ input[type="password"] {border:1px solid #cccccc; padding:10px;}
 
 .lurl{ padding-top: 20px;}
 .settingmenu .dropDown {padding-right: 0;}
+
+/**/
+.homecontent {display: table; height: 80%; width: 100%;}
+.homeinner {display: table-cell; float: none; vertical-align: middle;}
+
+.width90 {width: 90%;}
+

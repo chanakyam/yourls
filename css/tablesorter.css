@@ -244,7 +244,7 @@ input[type="button"], input[type="submit"] {border-bottom:1px solid #7096a9; bac
 /* 22-04-2014 */
 .error_message {color:red; font-size: 13px;}
 
-.signup {padding-bottom:180px;}
+.signup {padding-bottom:150px;}
 .signup form {margin:10px auto; width:65%;}
 
 .signup td {padding:5px 3px; font-size: 14px;}

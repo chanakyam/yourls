@@ -101,25 +101,9 @@ yourls_html_head();
 <link rel="stylesheet" href="sample.css" media="all" type="text/css" /> -->
 
 
-<div class="contentarea">
-	<div class="ltpannel center">
-		<div class="moduler center">
-				<div class="add">
-					<!-- new code -->
-					<script type="text/javascript">
-						if (!window.OX_ads)
-						{ OX_ads = []; }
-						OX_ads.push(
-						{ "auid" : "537094873" }
-						);
-					</script>
-					<script type="text/javascript">
-						document.write('<scr'+'ipt src="http://ox-d.lycos.com/w/1.0/jstag"><\/scr'+'ipt>');
-					</script>
-					<noscript><iframe id="14f66a6be9" name="14f66a6be9" src="http://ox-d.lycos.com/w/1.0/afr?auid=537094873&cb=INSERT_RANDOM_NUMBER_HERE"><a href="http://ox-d.lycos.com/w/1.0/rc?cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" ><img src="http://ox-d.lycos.com/w/1.0/ai?auid=537094873&cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt="Add Banner" class="banner"></a></iframe></noscript>
-					<!-- end -->
-				</div>
-			</div>
+<div class="contentarea homecontent">
+	<div class="ltpannel homeinner center">
+		
 
 		
 			<p><a href="<?php yourls_site_url(); ?>" title="lyc.so"><img src="images/lycsoLogo.png" alt="lyc.so" title="lyc.so" /></a></p>
@@ -189,6 +173,25 @@ yourls_html_head();
 	   
 </div>
 <!--contentarea end-->
+<div class="moduler center">
+	<div class="add">
+		<!-- new code -->
+		<script type="text/javascript">
+			if (!window.OX_ads)
+			{ OX_ads = []; }
+			OX_ads.push(
+			{ "auid" : "537094873" }
+			);
+		</script>
+		<script type="text/javascript">
+			document.write('<scr'+'ipt src="http://ox-d.lycos.com/w/1.0/jstag"><\/scr'+'ipt>');
+		</script>
+		<noscript><iframe id="14f66a6be9" name="14f66a6be9" src="http://ox-d.lycos.com/w/1.0/afr?auid=537094873&cb=INSERT_RANDOM_NUMBER_HERE"><a href="http://ox-d.lycos.com/w/1.0/rc?cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" ><img src="http://ox-d.lycos.com/w/1.0/ai?auid=537094873&cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt="Add Banner" class="banner"></a></iframe></noscript>
+		<!-- end -->
+	</div>
+</div>
+
+
 <?php
 
 // Display page footer

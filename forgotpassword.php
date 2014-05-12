@@ -16,7 +16,8 @@ yourls_html_head();
 ?>
 
 <!-- content start -->	
-<div class="contentarea">
+<div class="contentarea homecontent">
+	<div class="homeinner">
 		
 
 		<div class="signup">
@@ -57,7 +58,7 @@ yourls_html_head();
 			    }				
 
 			</script>	
-
+			<p class="center"><a href="<?php yourls_site_url(); ?>" title="lyc.so"><img src="images/lycsoLogo.png" alt="lyc.so" title="lyc.so" /></a></p>
 			
 			<form name="forgotpassword" method="post" action="process.php" onsubmit="return emailvalidation();">
 				<div class="title">Forgot Password</div>
@@ -69,11 +70,11 @@ yourls_html_head();
 				 echo "<div class='errormessage'>Email not found in our database.</div>";
 				 }?>
 
-				<table>
+				<table width="100%">
 					<tr>
-						<td>Please Enter your Email id<span class="error_message" >*</span>:</td>
+						<td width="25%">Please Enter your Email id<span class="error_message" >*</span>:</td>
 						<td>
-							<input type="text" name="email" id="email">
+							<input type="text" name="email" id="email" class="width90">
 							<span class="error_message" id="label_email"></span>
 						</td>
 					</tr>
@@ -85,6 +86,7 @@ yourls_html_head();
 				</table>
 			</form>
 		
+	</div>
 	</div>
 
 	<div class="add center">

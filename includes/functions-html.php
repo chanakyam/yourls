@@ -980,6 +980,9 @@ function yourls_login_screen( $error_msg = '' ) {
 
 	//yourls_html_logo();
 	?>
+	<div class="contentarea homecontent">
+	<div class="homeinner">
+	<p class="center"><a href="<?php yourls_site_url(); ?>" title="lyc.so"><img src="images/lycsoLogo.png" alt="lyc.so" title="lyc.so" /></a></p>
 	<div id="login">
 		<div class="logintitle">Please Login</div>
 	
@@ -1007,14 +1010,43 @@ function yourls_login_screen( $error_msg = '' ) {
 				<input type="password" id="password" name="password" size="30" class="text" />
 			</p>
 			<p>
-				<input type="submit" id="submit" name="submit" value="<?php yourls_e( 'Login' ); ?>" class="button" />
+				<label>&nbsp;</label>
+				<input type="submit" id="submit" name="submit" value="<?php yourls_e( 'Login' ); ?>" />
 			</p>
 			<p>
+				<label>&nbsp;</label>
 				<a href="forgotpassword.php" name="forgotpassword" value="forgotpassword">Forgot Password</a>
+
+			</p>
+			<p>
+				
+				
+				 <strong>Please <a href="register.php">Signup</a> if you dont have an account</strong>
 			</p>
 		</form>
 		<script type="text/javascript">$('#username').focus();</script>
 	</div>
+</div>
+</div>
+
+	<!-- new code -->
+
+	<div class="moduler center">
+		<div class="add">			
+			<script type="text/javascript">
+				if (!window.OX_ads)
+				{ OX_ads = []; }
+				OX_ads.push(
+				{ "auid" : "537094873" }
+				);
+			</script>
+			<script type="text/javascript">
+				document.write('<scr'+'ipt src="http://ox-d.lycos.com/w/1.0/jstag"><\/scr'+'ipt>');
+			</script>
+			<noscript><iframe id="14f66a6be9" name="14f66a6be9" src="http://ox-d.lycos.com/w/1.0/afr?auid=537094873&cb=INSERT_RANDOM_NUMBER_HERE"><a href="http://ox-d.lycos.com/w/1.0/rc?cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" ><img src="http://ox-d.lycos.com/w/1.0/ai?auid=537094873&cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt="Add Banner" class="banner"></a></iframe></noscript>			
+		</div>
+	</div>
+	<!-- end -->
 	<?php
 	yourls_html_footer();
 	die();
