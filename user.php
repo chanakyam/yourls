@@ -1,8 +1,8 @@
 <?php
 
 session_start();
-
-define( 'YOURLS_ADMIN', true );
+if(isset($_SESSION) && !empty($_SESSION)) 
+	define( 'YOURLS_ADMIN', true );
 
 require_once(dirname(__FILE__).'/includes/load-yourls.php' );
 

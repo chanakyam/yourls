@@ -296,11 +296,10 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 	}
 	echo "$logout_link";
 
-
 	$logout_link ?></span>
 </div>
 
-<?php }elseif(!yourls_is_admin() && $context ='infos'){?>
+<?php }elseif(!yourls_is_admin() && $context!='infos'){?>
 	<div class="header">
 	<a href="<?php yourls_site_url(); ?>" class="logo" title="lyc.so"><img alt="lyc.so" title="lyc.so" src="/images/headerDog_2x.png"></a> 
 	<?php 
@@ -353,21 +352,21 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 		<a href="user.php" title="Login">Login</a>
 		<?php }?>
 <?php 
- if( defined( 'YOURLS_USER' ) ) {
-		$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('Hello <strong>%s</strong>'), YOURLS_USER ) . ' <a href="?action=logout" title="' . yourls_esc_attr__( 'Logout' ) . '"><img align="absmiddle" src="/images/logout-icon.png">' . '</a>' );
-	} else {
-		$logout_link = yourls_apply_filter( 'logout_link', '' );
-	}
+ // if( defined( 'YOURLS_USER' ) ) {
+	// 	$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('Hello <strong>%s</strong>'), YOURLS_USER ) . ' <a href="?action=logout" title="' . yourls_esc_attr__( 'Logout' ) . '"><img align="absmiddle" src="/images/logout-icon.png">' . '</a>' );
+	// } else {
+	// 	$logout_link = yourls_apply_filter( 'logout_link', '' );
+	// }
 	//echo "$logout_link";
 
-	$logout_link ?></span>
+	//$logout_link ?></span>
 </div>
 
 	<?php }else { ?>
 <body class="<?php echo $context; ?> <?php echo $bodyclass; ?>">
 <?php }?>
 <?php if(!yourls_is_admin() && $context!='infos'){?>
-<div class="header">
+<!-- <div class="header">
 	<a href="<?php yourls_site_url(); ?>"><img src="images/headerDog_2x.png" alt="lyc.so" title="lyc.so"/></a> 
 	<span id="admin_menu_search_link"><a target="blank" title="Lycos.com" href="http://search.lycos.com">Search</a></span>
 	<span id="admin_menu_mail_link"><a target="blank" title="mail.lycos.com" href="http://mail.lycos.com">Mail</a></span>
@@ -388,8 +387,8 @@ function yourls_html_head( $context = 'index', $title = '' ) {
             </ul>
 	</div>
 
-	<!-- <span class="menu"><a href="#"><img src="images/headerMenuIcon.png" /></a></span> -->
-</div>
+	<span class="menu"><a href="#"><img src="images/headerMenuIcon.png" /></a></span>
+</div> -->
 <?php }?>
 <!--header end-->
 <div id="wrap">
