@@ -256,7 +256,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 <body class="<?php echo $context; ?> <?php echo $bodyclass; ?>">
  
 <div class="header">
-	<a href="<?php yourls_site_url(); ?>" class="h-logo" title="lyc.so"><img alt="lyc.so" src="/images/headerDog.png"></a> 
+	<a href="<?php yourls_site_url(); ?>" class="h-logo" title="lyc.so"><img alt="lyc.so" title="lyc.so" src="/images/headerDog_2x.png"></a> 
 	
 <?php yourls_html_menu() ?>
 <?php if($context=='login'){?>
@@ -302,7 +302,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 
 <?php }elseif(!yourls_is_admin() && $context ='infos'){?>
 	<div class="header">
-	<a href="<?php yourls_site_url(); ?>" class="logo" title="lyc.so"><img alt="lyc.so" src="/images/headerDog.png"></a> 
+	<a href="<?php yourls_site_url(); ?>" class="logo" title="lyc.so"><img alt="lyc.so" title="lyc.so" src="/images/headerDog_2x.png"></a> 
 	<?php 
 		if(isset($_SESSION['role']) && $_SESSION['role']=='User'){?>
 			<span id="admin_menu_user_link"><a href="<?php yourls_site_url(); ?>/user.php" title="User Interface">User Interface</a></span>
@@ -368,23 +368,34 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 <?php }?>
 <?php if(!yourls_is_admin() && $context!='infos'){?>
 <div class="header">
-	<a href="#"><img src="images/headerDog.png" align="absmiddle"/></a> 
-	<a href="#">Home</a>
-	<a href="#">Shopping</a>
-	<a href="#">Gamesville</a>
-	<a href="#">News</a>
-	<a href="#">Entertainment</a>
-	<a href="#">Tripod</a>
+	<a href="<?php yourls_site_url(); ?>"><img src="images/headerDog_2x.png" alt="lyc.so" title="lyc.so"/></a> 
+	<span id="admin_menu_search_link"><a target="blank" title="Lycos.com" href="http://search.lycos.com">Search</a></span>
+	<span id="admin_menu_mail_link"><a target="blank" title="mail.lycos.com" href="http://mail.lycos.com">Mail</a></span>
+	<span id="admin_menu_tripod_link"><a target="blank" title="Tripod" href="http://tripod.lycos.com">Tripod</a></span>
+	<span id="admin_menu_gamesville_link"><a target="blank" title="Gamesville.com" href="http://gamesville.com">Gamesville</a></span>
+	<div class="moremenu">
+        <a href="#" title="More Lycos Sites" class="dropDown">More <span class="sprite"></span></a>
+        	<ul style="display: none;" class="hide ddMenu lyGrey boxShadow1">
+                <li class="mobileShow"><a target="blank" href="http://www.tripod.lycos.com" title="Tripod">Tripod</a></li>
+                <li class="mobileShow"><a target="blank" href="http://www.gamesville.com/" title="Gamesville.com">Gamesville</a></li>
+				<li><a target="blank" href="http://domains.lycos.com/" title="Lycos Domains">Lycos Domains</a></li>
+				<li><a target="blank" href="http://news.lycos.com" title="Lycos News">Lycos News</a></li>
+				<li><a target="blank" href="http://shopping.lycos.com" title="Lycos Shopping">Lycos Shopping</a></li>					
+				<li><a target="blank" href="http://weather.lycos.com" title="Lycos Weather">Lycos Weather</a></li>
+				<li><a target="blank" href="http://www.whowhere.com/" title="WhoWhere?">WhoWhere?</a></li>
+				<li><a target="blank" href="http://chat.lycos.co.uk" title="Lycos Chat">Lycos Chat</a></li>
+				<li><a target="blank" href="http://info.lycos.com/about/products" title="View All" id="viewAll">View All</a></li>
+            </ul>
+	</div>
 
-	<span class="menu"><a href="#"><img src="images/headerMenuIcon.png" align="absmiddle"/></a></span>
+	<!-- <span class="menu"><a href="#"><img src="images/headerMenuIcon.png" /></a></span> -->
 </div>
 <?php }?>
 <!--header end-->
 <div id="wrap">
 	<?php
 }
-//echo sprintf( yourls__('Hello <strong>%s</strong>'), sushma );
-//Echo YOURLS_USER ;
+
 /**
  * Display HTML footer (including closing body & html tags)
  *
@@ -708,7 +719,7 @@ function yourls_table_edit_row( $keyword ) {
 	
 	if( $url ) {
 		$return = <<<RETURN
-<tr id="edit-$id" class="edit-row"><td colspan="5" class="edit-row"><div class="row"><div class="width10">%s : </div><input type="text" id="edit-url-$id" name="edit-url-$id" value="$safe_url" class="text" size="70" /></div><div class="row"><div class="width10">%s : </div> <div class="width90">$www<input type="text" id="edit-keyword-$id" name="edit-keyword-$id" value="$keyword" class="text" size="10" /></div></div><div class="row"><div class="width10">%s : </div> <input type="text" id="edit-title-$id" name="edit-title-$id" value="$safe_title" class="text" size="60" /></div></td><td colspan="1"><input type="button" id="edit-submit-$id" name="edit-submit-$id" value="%s" title="%s" class="button" onclick="edit_link_save('$id');" />&nbsp;<input type="button" id="edit-close-$id" name="edit-close-$id" value="%s" title="%s" class="button" onclick="edit_link_hide('$id');" /><input type="hidden" id="old_keyword_$id" value="$keyword"/><input type="hidden" id="nonce_$id" value="$nonce"/></td></tr>
+<tr id="edit-$id" class="edit-row"><td colspan="5" class="edit-row"><div class="row"><div class="width10 margin7_T">%s : </div><input type="text" id="edit-url-$id" name="edit-url-$id" value="$safe_url" class="text" size="70" /></div><div class="row"><div class="width10 margin7_T">%s : </div> <div class="width90">$www<input type="text" id="edit-keyword-$id" name="edit-keyword-$id" value="$keyword" class="text" size="10" /></div></div><div class="row"><div class="width10 margin7_T">%s : </div> <input type="text" id="edit-title-$id" name="edit-title-$id" value="$safe_title" class="text" size="60" /></div></td><td colspan="1" align="center"><input type="button" id="edit-submit-$id" name="edit-submit-$id" value="%s" title="%s" class="button" onclick="edit_link_save('$id');" />&nbsp;<input type="button" id="edit-close-$id" name="edit-close-$id" value="%s" title="%s" class="button" onclick="edit_link_hide('$id');" /><input type="hidden" id="old_keyword_$id" value="$keyword"/><input type="hidden" id="nonce_$id" value="$nonce"/></td></tr>
 RETURN;
 		$return = sprintf( urldecode( $return ), yourls__( 'Long URL' ), yourls__( 'Short URL' ), yourls__( 'Title' ), yourls__( 'Save' ), yourls__( 'Save new values' ), yourls__( 'Cancel' ), yourls__( 'Cancel editing' ) );
 	} else {
@@ -943,7 +954,7 @@ function yourls_login_screen( $error_msg = '' ) {
 	//yourls_html_logo();
 	?>
 	<div id="login">
-		<h3 class="logintitle">Please Login</h3>
+		<div class="logintitle">Please Login</div>
 	
 		  <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 1 ){
           echo "<div class='success'>Activated Successfully. Please login.</div>";

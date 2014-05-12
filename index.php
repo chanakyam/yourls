@@ -122,7 +122,7 @@ yourls_html_head();
 			</div>
 
 		
-			<p><img src="images/lycsoLogo.png" alt="lyc.so" /></p>
+			<p><a href="<?php yourls_site_url(); ?>" title="lyc.so"><img src="images/lycsoLogo.png" alt="lyc.so" title="lyc.so" /></a></p>
 			<?php
 			//if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
 			if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' && $_GLOBAL_MSG=='') {

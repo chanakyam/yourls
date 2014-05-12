@@ -51,7 +51,7 @@ yourls_html_head();
 <tr>
   <td width="22%">First Name<span class="error_message" >*</span>:</td>
   <td>
-    <input class="width50" type="text" name="firstname" id="firstname" placeholder="Enter Firstname">
+    <input class="width50" type="text" name="firstname" id="firstname" >
     
   
 		<span class="error_message" id="label_firstname"></span>
@@ -61,7 +61,7 @@ yourls_html_head();
 <tr>
   <td>Last Name<span class="error_message" >*</span>:</td>
   <td>
-    <input class="width50" type="text" name="lastname" id="lastname" placeholder="Enter Lastname">
+    <input class="width50" type="text" name="lastname" id="lastname" >
  
     	<span class="error_message" id="label_lastname"></span>	
 	</td>
@@ -70,7 +70,7 @@ yourls_html_head();
 <tr>
   <td>Email Address<span class="error_message" >*</span>:</td>
   <td>
-    <input class="width50" type="text" name="email"  id="email" placeholder="example@gmail.com">
+    <input class="width50" type="text" name="email"  id="email" >
   
     	<span class="error_message" id="label_email"></span>
 	</td>
@@ -79,7 +79,7 @@ yourls_html_head();
 <tr>
   <td>Password<span class="error_message" >*</span>:</td>
   <td>
-    <input class="width50" type="password" name="password" id="password" placeholder="Enter Password">
+    <input class="width50" type="password" name="password" id="password" >
   
     	<span class="error_message" id="label_password"></span>
 	</td>
@@ -88,7 +88,7 @@ yourls_html_head();
 <tr>
   <td>Confirm Password<span class="error_message" >*</span>:</td>
   <td>
-    <input class="width50" type="password" name="confpassword" id="confpassword" placeholder="Confirm Password">
+    <input class="width50" type="password" name="confpassword" id="confpassword" >
   
     	<span class="error_message" id="label_confpassword"></span>
 	</td>  

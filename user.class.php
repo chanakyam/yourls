@@ -87,6 +87,7 @@ class user{
     	$messages .= $link."<br><br><br>";
     	$messages .= "Thanks,<br>";
     	$messages .= "Admin <br>";
+    	$messages .= "lyc.so <br>";
     	// send email 
     	$sentmail = mail($to,$subject,$messages,$header);
 	}
@@ -197,6 +198,7 @@ class user{
 		    	$messages.= $link."<br><br><br>";
 		    	$messages.= "Thanks,<br>";
 		    	$messages.= "Admin <br>";
+		    	$messages.= "lyc.so <br>";
 		    	// send email 
 		    	$sentmail = mail($to,$subject,$messages,$header);
 		    	
