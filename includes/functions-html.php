@@ -188,8 +188,9 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 		<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
 				var oTable= $('#users_main_table').dataTable({
-					aaSorting : [[0, 'desc']],
+					aaSorting : [[0, 'desc']],					
 					"bStateSave": true,
+					stateSave: true,
 					"bProcessing": true,
 					"bServerSide": true,
 					//"sPaginationType": "iFullNumbersShowPages",

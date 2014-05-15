@@ -197,7 +197,7 @@ if( yourls_do_log_redirect() ) {
 	echo "last_24h: "; print_r( $last_24h );
 	echo "countries: "; print_r( $countries );
 	die();
-	/**/
+	**/
 
 }
 
@@ -235,6 +235,8 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 		<li class="selected"><a href="#stat_tab_stats"><h2><?php yourls_e( 'Traffic statistics'); ?></h2></a></li>
 		<li><a href="#stat_tab_location"><h2><?php yourls_e( 'Traffic location'); ?></h2></a></li>
 		<li><a href="#stat_tab_sources"><h2><?php yourls_e( 'Traffic sources'); ?></h2></a></li>
+		<li><a href="#stat_tab_fbcount"><h2><?php yourls_e( 'Facebook Count'); ?></h2></a></li>
+		<li><a href="#stat_tab_twittercount"><h2><?php yourls_e( 'Twitter Count'); ?></h2></a></li>
 		<?php } ?>
 		<li><a href="#stat_tab_share"><h2><?php yourls_e( 'Share'); ?></h2></a></li>
 	</ul>
@@ -529,6 +531,43 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 		<?php } else {
 			echo '<p>' . yourls__( 'No referrer data.' ) . '</p>';
 		} ?>
+			
+	</div>
+	<div id="stat_tab_fbcount" class="tab">
+		<h2><?php yourls_e( 'Facebook Count' ); ?></h2>
+
+		<?php
+		//echo 'url-->'.$longurl.'<br>';
+			//echo '<p>' . yourls__( 'No referrer data.' ) . '</p>';
+			$fquery  = "SELECT share_count FROM link_stat WHERE url = '".yourls_link($longurl)."'";
+//http://api.facebook.com/restserver.php?method=links.getStats&urls=$keyword&format=json
+			//$facebook_api="https://api.facebook.com/method/fql.query?format=json&query=".urlencode($fquery);
+//echo "<br>http://api.facebook.com/restserver.php?method=links.getStats&urls=".$longurl."&format=json";			
+//$facebook_api="http://api.facebook.com/restserver.php?method=links.getStats&urls=".$longurl."&format=json";
+$facebook_api='http://api.facebook.com/restserver.php?method=links.getStats&urls='.$longurl.'&format=json';
+
+			$json=file_get_contents($facebook_api);
+			//echo $json;
+			$facebook = json_decode($json,true);
+			//echo '<pre>';print_r($facebook);exit;
+			
+			echo ("Facebook Share Count is : " .$facebook[0]['share_count']);
+		?>
+			
+	</div>
+
+			<div id="stat_tab_twittercount" class="tab">
+		<h2><?php yourls_e( 'Twitter Count' ); ?></h2>
+
+		<?php
+		//echo 'url-->'.$longurl;
+			//echo '<p>' . yourls__( 'No referrer data.' ) . '</p>';
+//http://urls.api.twitter.com/1/urls/count.json?url=http://css-tricks.com
+		$twitter_api = file_get_contents('http://urls.api.twitter.com/1/urls/count.json?url='.$longurl);
+    	$twitter = json_decode($twitter_api, true);
+ 		//echo '<pre>';print_r($twitter);exit;
+    	echo ("Twitter Share Count is : " .$twitter['count'] );
+		?>
 			
 	</div>
 
