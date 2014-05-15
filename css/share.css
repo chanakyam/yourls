@@ -27,10 +27,10 @@ div.share {
 	
 }
 #copybox {
-	width:30%;
+	width:30%; float: left;
 }
 #sharebox {
-	/*width:58%;*/
+	/*width:58%;*/float: left;
 }
 #tweet_body {
 	float:left;
@@ -50,7 +50,7 @@ div.share {
 	font-weight:bold
 }
 #share_links a:hover {
-	background-position:2px center;
+	background-position:0 center;
 }
 #share_tw {background:transparent url(../images/twitter.png) left center no-repeat;}
 #share_fb {background:transparent url(../images/facebook.png) left center no-repeat;}
@@ -58,7 +58,7 @@ div.share {
 
 #copylink{
 	cursor:pointer;
-	background:transparent url(../images/copy.png) 130% center no-repeat;
+	background:transparent url(../images/copy.png) 130% center no-repeat; padding:8px;
 }
 
 #copylink:hover, #copylink.hover {

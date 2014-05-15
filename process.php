@@ -134,6 +134,20 @@ if(isset($_POST["form_type"]) && $_POST["form_type"]=="Change"){
 
 }
 
+//if request comes from signature.php(through email)
+if(isset($_POST["form_type"]) && $_POST["form_type"]=="Reset Key"){
+	$response = $obj_user-> generateRandomString(10);
+	if(!empty($response)) {//successfully changed the pwd
+		//updating newly generated signature
+		$update_sig = $obj_user->update_user_signature($response);
+		if($update_sig)
+			header('location: reset_signature.php?status=1');exit;
+		header('location: reset_signature.php?status=0');exit;
+	}else{//error in changing the password
+		header('location: reset_signature.php?status=0');exit;
+	}
+}
+
 ?>
 
 

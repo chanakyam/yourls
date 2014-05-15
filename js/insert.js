@@ -92,25 +92,33 @@ function toggle_share_fill_boxes( url, shorturl, title, id ) {
 	$('#titlelink').val( title );
 	$('#origlink').attr( 'href', url ).html( url );
 	$('#statlink').attr( 'href', shorturl+'+' ).html( shorturl+'+' );
-	var tweet = ( title ? title + ' ' + shorturl : shorturl );
+	var tweet = ( title ? title + '  ' + shorturl : shorturl );
+	$('#tweet_body').val( tweet ).keypress();
+	// for updating twitter and facebook links start
+	update_share();	
+	// end
+
 	// if(shorturl != "")
 	// 	tweet += "Short URL: "+ shorturl;
 	// if(title != "")
 	// 	tweet += "\r\n Long URL: "+ title;
-	$('#tweet_body').val( tweet ).keypress();
+	//$('#tweet_body').val( tweet ).keypress();
 	//$('#shareboxes').slideDown( '300', function(){ init_clipboard(); } ); // clipboard re-initialized after slidedown to make sure the invisible Flash element is correctly positionned
 	if(id !== undefined && id != ""){
-		var share_html = "<tr id='share-"+id+"'><td colspan='6'>"+$('#shareboxes').html()+" <div class='tablecell'><a href='javascript:void(0)' onclick='close_sharebox();' class='close-btn' title='Close'>close[X]</a></div></td></tr>";
-		init_clipboard();
-		$("#id-" + id).after( share_html );
+		//var share_content = $('#shareboxes').html();
+		//var share_content = '<div id="shareboxes" style="display:none;"><div id="copybox" class="share"><h2>Your short link</h2><p><input id="copylink" class="text width90"  value="" /></p><p><small>Long link: <a id="origlink" href=""></a></small><br/><small>Stats: <a id="statlink" href="+">+</a></small><input type="hidden" id="titlelink" value="" /></p></div><div id="sharebox" class="share"><h2>Quick Share</h2><div id="tweet"><span id="charcount" class="hide-if-no-js">140</span><textarea id="tweet_body"></textarea></div><p id="share_links">Share with <a id="share_tw" href="http://twitter.com/home?status=" title="Tweet this!" onclick="share("tw");return false">Twitter</a><a id="share_fb" href="http://www.facebook.com/share.php?u=" title="Share on Facebook" onclick="share("fb");return false;">Facebook</a><!--<a id="share_ff" href="http://friendfeed.com/share/bookmarklet/frame#title=" title="Share on Friendfeed" onclick="share("ff");return false;">FriendFeed</a>--></p></div></div>';
 
+		
+		var share_html = "<tr id='share-"+id+"'><td colspan='6'>"+$('#shareboxes').html()+" <div class='tablecell'><a href='javascript:void(0)' onclick='close_sharebox();' class='close-btn' title='Close'>close[X]</a></div></td></tr>";
+		$("#id-" + id).after( share_html );
 		var share_id = "#share-"+id; 
 		$(share_id).find("#copylink").val(shorturl);
 		$(share_id).find("#tweet_body").val(tweet);
 				//$("#edit-url-"+ id).focus();
 	}
+
 	$('#tweet_body').keypress();
-	$('#show_share').val(id);	
+	$('#show_share').val(id);//assigning id to hidden value	
 }
 
 function close_sharebox(){
@@ -191,7 +199,11 @@ function edit_user_display(id) {
 			{ action: "edit_user", id: id },
 			function(data){
 				$("#id-" + id).after( data.html );
-				$("#edit-url-"+ id).focus();
+				var role = $('#id-'+id+' .user_role').html();
+				$('select[name="edit-role-'+id+'"]').find('option[value="'+role+'"]').attr("selected",true);
+				var status = $('#id-'+id+' .user_status').html();
+				$('select[name="edit-status-'+id+'"]').find('option[value="'+status+'"]').attr("selected",true);
+				$("#edit-fname-"+ id).focus();
 				end_loading('#actions-'+id+' .button');
 			}
 		);
@@ -315,6 +327,23 @@ function edit_link_save(id) {
 				});
 				$('#keyword_'+id).val( newkeyword );
 				$('#statlink-'+id).attr( 'href', data.url.shorturl+'+' );
+
+				//for updating the table start
+				//var link = $('#id-'+id+' .url').html();
+				$('#id-'+id+' .keyword').html(newkeyword);
+				$('#id-'+id+' .url a').html(title);//link.attr('title');
+				var anchor_val = '<a href="'+newurl+'">'+newurl+'</a>'
+				$('#longurl-'+id).html(anchor_val);//link.attr('title');
+				//end
+
+				//var table = $('#dashboard_main_table').dataTable();
+				//var pos = table.fnGetPosition( $("#id-"+id)[0] );
+				//$('#dashboard_main_table').dataTable().fnUpdate('Zebra' , $('#id-'+id+)[0], 1 );
+				//table.fnUpdate(keyword,10,pos);
+				// to update a cell
+				//table.fnUpdate(keyword);
+				//table.fnUpdate(url,2,pos);
+				//table.fnUpdate(email,3,pos);
 			}
 			window.setTimeout('location.reload()', 1000); //reloads after 1 seconds
 			feedback(data.message, data.status);
@@ -329,32 +358,79 @@ function edit_link_save(id) {
 }
 
 // Save edition of a link
+// function edit_user_save(id) {
+// 	add_loading("#edit-close-" + id);
+// 	var fname = $("#edit-fname-" + id).val();
+// 	var lname = $("#edit-lname-" + id).val();
+// 	var email = $("#edit-email-" + id).val();
+// 	//var role = $("#edit-role-" + id).val();
+// 	//var status = $("#edit-role-" + id).val();
+// 	$.getJSON(
+// 		ajaxurl,
+// 		{action:'edit_user_save', fname: fname, id: id, lname: lname, email: email  },
+// 		function(data){
+// 			if(data.status == 'success') {
+// 				$("tr-#id"+id+" td.first_name").text(fname);
+// 				$("tr-#id"+id+" td.last_name").text(lname);
+// 				$("tr-#id"+id+" td.email").text(email);
+
+// 				// $("#url-" + id).html(display_link);
+// 				// $("#keyword-" + id).html('<a href="' + data.url.shorturl + '" title="' + data.url.shorturl + '">' + data.url.keyword + '</a>');
+// 				// $("#timestamp-" + id).html(data.url.date);
+// 				// var table = $('#users_main_table').dataTable();
+// 				// var pos = table.fnGetPosition( $("#id-"+id)[0] );
+// 				// // table.fnUpdate([id,fname,lname,email],pos);
+// 				// // to update a cell
+// 				// table.fnUpdate(fname,1,pos);
+// 				// table.fnUpdate(lname,2,pos);
+// 				// table.fnUpdate(email,3,pos);
+// 				//new code for updating values to reflect start
+// 				$('#id-'+id+' .first_name').html(fname);
+// 				$('#id-'+id+' .last_name').html(lname);
+// 				$('#id-'+id+' .user_email').html(email);
+// 				//end
+// 				$('#users_main_table tbody').trigger("update");
+// 				$("#edit-" + id).fadeOut(200, function(){
+// 					$('#users_main_table tbody').trigger("update");
+// 				});
+// 			}
+// 			window.setTimeout('location.reload()', 1000); //reloads after 1 seconds
+// 			feedback(data.message, data.status);
+// 			end_loading("#edit-close-" + id);
+// 			//end_disable("#actions-" + id + ' .button');
+// 			//new code
+// 			$("#edit-" +id).remove();
+// 		}
+// 	);
+// }
+
+
 function edit_user_save(id) {
 	add_loading("#edit-close-" + id);
-	var fname = $("#edit-fname-" + id).val();
-	var lname = $("#edit-lname-" + id).val();
-	var email = $("#edit-email-" + id).val();
-	//var role = $("#edit-role-" + id).val();
-	//var status = $("#edit-role-" + id).val();
+	var fname  = $("#edit-fname-" + id).val();
+	var lname  = $("#edit-lname-" + id).val();
+	var email  = $("#edit-email-" + id).val();
+	var role   = $("#edit-role-" + id).val();
+	var status = $("#edit-status-" + id).val();
 	$.getJSON(
 		ajaxurl,
-		{action:'edit_user_save', fname: fname, id: id, lname: lname, email: email  },
+		{action:'edit_user_save', fname: fname, id: id, lname: lname, email: email, role: role, status: status},
 		function(data){
 			if(data.status == 'success') {
 				$("tr-#id"+id+" td.first_name").text(fname);
 				$("tr-#id"+id+" td.last_name").text(lname);
 				$("tr-#id"+id+" td.email").text(email);
-
-				// $("#url-" + id).html(display_link);
-				// $("#keyword-" + id).html('<a href="' + data.url.shorturl + '" title="' + data.url.shorturl + '">' + data.url.keyword + '</a>');
-				// $("#timestamp-" + id).html(data.url.date);
+				$("tr-#id"+id+" td.role").text(role);
+				$("tr-#id"+id+" td.status").val(status);
 				var table = $('#users_main_table').dataTable();
 				var pos = table.fnGetPosition( $("#id-"+id)[0] );
-				// table.fnUpdate([id,fname,lname,email],pos);
+				// table.fnUpdate([id,fname,lname,email,role,status],pos);
 				// to update a cell
 				table.fnUpdate(fname,1,pos);
 				table.fnUpdate(lname,2,pos);
 				table.fnUpdate(email,3,pos);
+				table.fnUpdate(role,4,pos);
+				table.fnUpdate(status,5,pos);
 
 				$('#users_main_table tbody').trigger("update");
 				$("#edit-" + id).fadeOut(200, function(){

@@ -116,33 +116,20 @@ function yourls_is_valid_user() {
 function yourls_check_username_password() {
 	global $yourls_user_passwords;
 	global $ydb;
-	//new code for validating username & pwd from db
-	// require_once( YOURLS_INC.'/class-mysql.php' );
-	// $ydb = yourls_db_connect();
-	// $table_url = YOURLS_DB_TABLE_URL;
+	//new code for validating username & pwd from db	
 	$_REQUEST['password'] = md5($_REQUEST['password']);
-	//echo "SELECT * FROM yourls_users WHERE email='".$_REQUEST['username']."' AND password='".$_REQUEST['password']."' AND status='Active'" ;exit;
 	$user_results = $ydb->get_results( "SELECT * FROM yourls_users WHERE email='".$_REQUEST['username']."' AND password='".$_REQUEST['password']."' AND status='Active'" );	
 	if($user_results[0]->email == $_REQUEST['username'] && $user_results[0]->password == $_REQUEST['password']){
 		//assigning username to session
 		$_SESSION['username'] = $_REQUEST['username'];
 		$_SESSION['role'] = $user_results[0]->role;
 		$_SESSION['name'] = $user_results[0]->firstname.' '.$user_results[0]->lastname;
-		//$_SESSION['lastname'] = $user_results[0]->lastname;		
-		yourls_set_user( $_REQUEST['username'] );
-		//yourls_set_name( $user_results[0]->firstname.''.$user_results[0]->lastname);
-		//yourls_set_user( $user_results[0]->firstname);
-		//print_r($_SESSION);exit;
+		yourls_set_user( $_REQUEST['username'] );		
 		return true;
 	}else{
 		return false;
 	}
-	//end
-	// if( isset( $yourls_user_passwords[ $_REQUEST['username'] ] ) && yourls_check_password_hash( $_REQUEST['username'], $_REQUEST['password'] ) ) {
-	// 	yourls_set_user( $_REQUEST['username'] );
-	// 	return true;
-	// }
-	// return false;
+	//end	
 }
 
 /**
@@ -384,7 +371,7 @@ function yourls_check_signature() {
 	global $ydb;
 	//new code for validating user signature from db	
 	//echo "SELECT signature FROM yourls_users WHERE signature='".$_REQUEST['signature']."'  AND active='A' LIMIT 0,1";exit;
-	$signature_results = $ydb->get_results( "SELECT signature FROM yourls_users WHERE signature='".$_REQUEST['signature']."'  AND active='A' LIMIT 0,1" );	
+	$signature_results = $ydb->get_results( "SELECT signature FROM yourls_users WHERE signature='".$_REQUEST['signature']."'  AND status='Active' LIMIT 0,1" );	
 	if($signature_results[0]->signature == $_REQUEST['signature'] ){
 		//yourls_set_user( $_REQUEST['username'] );
 		return true;

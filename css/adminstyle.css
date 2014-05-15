@@ -662,3 +662,59 @@ div.share {min-height: 180px;}
     vertical-align: middle;
 }
 
+#copylink{
+    cursor:pointer;
+    background:none;
+}
+
+#copylink:hover, #copylink.hover {
+    background:none;
+}
+
+
+/* May 15th API*/
+
+.heading {
+font-size: 16pt;
+color: #000;
+font-weight: bold;
+text-align: center;
+}
+
+.subheading {
+font-size: 15pt;
+color: #000;
+font-weight: bold;
+
+}
+
+.innertitle {
+font-size:11pt;
+color: #000;
+font-weight: bold;
+}
+
+.smallheading {
+font-size:10pt;
+color: #000;
+font-weight: bold; margin:0;
+
+}
+
+.intro {text-indent: 1.27cm;}
+.subintro {text-indent:.5cm;}
+
+.bulletlist {margin: 10px 0 10px 40px; padding:0;}
+.bulletlist li {font-size: 11pt; color: #000; margin:0; padding:0;}
+
+.listcontent {margin:0 0 10px 50px; padding:0; list-style-type: none;}
+.listcontent li {font-size: 11pt; color: #000; margin:0; padding:3px 0;}
+
+.margin10_L {margin-left:10px}
+
+.margin50_L {margin-left:50px}
+.white {color: #fff;}
+
+/*added for user edit 155-05-2014*/
+.margin5_T {margin-top:5px;}
+.margin10_L {margin-left:10px;}

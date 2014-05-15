@@ -156,7 +156,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 								    },
 								      { "fnRender": function ( oObj ) {
 								        if ( oObj.aData[1] != "" ) {
-								            return '<td id="url-'+oObj.aData["id"]+'" class="url "><a title="'+oObj.aData[1]+'" href="'+oObj.aData[1]+'">'+oObj.aData["short_title"]+'</a><br><small><a href="'+oObj.aData[1]+'">'+oObj.aData["short_url"]+'</a></small></td>';
+								            return '<td id="url-'+oObj.aData["id"]+'" class="url "><a title="'+oObj.aData[1]+'" href="'+oObj.aData[1]+'">'+oObj.aData["short_title"]+'</a><br><small id="longurl-'+oObj.aData["id"]+'"><a href="'+oObj.aData[1]+'">'+oObj.aData["short_url"]+'</a></small></td>';
 								            }
 								        else {
 								            return oObj.aData[1];
@@ -180,6 +180,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 			            }
 
 				});
+
 
 			} );
 		</script>
@@ -305,12 +306,15 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 	<?php 
 		if(isset($_SESSION['role']) && $_SESSION['role']=='User'){?>
 			<span id="admin_menu_user_link"><a href="<?php yourls_site_url(); ?>/user.php" title="User Interface">User Interface</a></span>
+			<span id="admin_menu_user_link"><a href="<?php yourls_site_url(); ?>/signature.php" title="API Interface">API Interface</a></span>
+
 	<?php }	?>
 	<?php 
 		if(isset($_SESSION['role']) && $_SESSION['role']=='admin'){?>
 			<span id="admin_menu_admin_link"><a href="<?php yourls_site_url(); ?>/user.php" title="Admin Interface">Admin Interface</a></span>
 			<span id="admin_menu_plugins_link"><a href="<?php yourls_site_url(); ?>/plugins.php" title="Manage Plugins">Manage Plugins</a></span>
 			<span id="admin_menu_users_link"><a href="<?php yourls_site_url(); ?>/manage_users.php" title="Manage Users">Manage Users</a></span>
+			<span id="admin_menu_user_link"><a href="<?php yourls_site_url(); ?>/signature.php" title="API Interface">API Interface</a></span>
 	<?php }	?>
 	<span id="admin_menu_search_link"><a target="_blank" title="Lycos.com" href="http://search.lycos.com">Search</a></span>
 	<span id="admin_menu_mail_link"><a target="_blank" title="mail.lycos.com" href="http://mail.lycos.com">Mail</a></span>
@@ -1075,6 +1079,12 @@ function yourls_html_menu() {
 			'title'  => yourls__( 'User Interface' ),
 			'anchor' => yourls__( 'User Interface' ),
 		);
+		$admin_links['signature'] = array(
+			'url'    => 'signature.php',
+			'title'  => yourls__( 'API Key' ),
+			'anchor' => yourls__( 'API Key' ),
+			
+		);
 		$admin_links['search'] = array(
 			'url'    => 'http://search.lycos.com',
 			'title'  => yourls__( 'Lycos.com' ),
@@ -1099,6 +1109,7 @@ function yourls_html_menu() {
 			'anchor' => yourls__( 'Gamesville' ),
 			
 		);
+
 	}else{
 		$admin_links['admin'] = array(
 			'url'    => yourls__( 'user.php' ),
@@ -1143,6 +1154,12 @@ function yourls_html_menu() {
 			'url'    => 'http://gamesville.com',
 			'title'  => yourls__( 'Gamesville.com' ),
 			'anchor' => yourls__( 'Gamesville' ),
+			
+		);
+		$admin_links['signature'] = array(
+			'url'    => 'signature.php',
+			'title'  => yourls__( 'API Key' ),
+			'anchor' => yourls__( 'API Key' ),
 			
 		);
 		// $admin_links['more'] = array(
@@ -1227,7 +1244,7 @@ function yourls_html_menu() {
 		if( isset( $ar['url'] ) ) {
 			$anchor = isset( $ar['anchor'] ) ? $ar['anchor'] : $link;
 			$title  = isset( $ar['title'] ) ? 'title="' . $ar['title'] . '"' : '';
-			if($ar['title']!='Admin Interface' && $ar['title']!='Manage Plugins' && $ar['title']!='Manage Users' && $ar['title']!='User Interface'){
+			if($ar['title']!='Admin Interface' && $ar['title']!='Manage Plugins' && $ar['title']!='Manage Users' && $ar['title']!='User Interface' && $ar['title']!='API Key'){
 			printf( '<span id="admin_menu_%s_link"><a target="_blank" href="%s" %s>'.$ar['img'].'%s</a></span>', $link, $ar['url'], $title, $anchor );
 			}else{
 			printf( '<span id="admin_menu_%s_link"><a href="%s" %s>'.$ar['img'].'%s</a></span>', $link, $ar['url'], $title, $anchor );

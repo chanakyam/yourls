@@ -21,7 +21,7 @@ function edit_user_data($userid) {
 <tr id="edit-$id" class="edit-row"><td colspan="5" class="edit-row"><strong>First Name</strong>:<input type="text" id="edit-fname-$id" name="edit-fname-$id" value="$fname" class="text" size="70" /><br/><strong>Last Name</strong>:<input type="text" id="edit-lname-$id" name="edit-lname-$id" value="$lname" class="text" size="10" /><br/><strong>Email</strong>: <input type="text" id="edit-email-$id" name="edit-email-$id" value="$email" class="text" size="60" /><br/><strong>Role</strong>: <input type="text" id="edit-role-$id" name="edit-role-$id" value="$role" class="text" size="60" /><br/><strong>Status</strong>: <input type="text" id="edit-status-$id" name="edit-status-$id" value="$status" class="text" size="60" /></td><td colspan="1"><input type="button" id="edit-submit-$id" name="edit-submit-$id" value="Save" title="Save" class="button" onclick="edit_user_save('$id');" />&nbsp;<input type="button" id="edit-close-$id" name="edit-close-$id" value="Cancel" title="Cancel" class="button" onclick="edit_user_hide('$id');" /><input type="hidden" id="user_id_$id" value="$id"/></td></tr>
 RETURN;*/
 $return = <<<RETURN
-<tr id="edit-$id" class="edit-row"><td colspan="5" class="edit-row"><div class="row"><div class="userwidth11">First Name :</div> <input type="text" id="edit-fname-$id" name="edit-fname-$id" value="$fname" class="text width50" size="25" /></div><div class="row"><div class="userwidth11">Last Name :</div> <input type="text" id="edit-lname-$id" name="edit-lname-$id" value="$lname" class="text width50" size="25" /></div><div class="row"><div class="userwidth11">Email :</div> <input type="text" id="edit-email-$id" name="edit-email-$id" value="$email" class="text width50" size="25" /></div></td><td colspan="1"><input type="button" id="edit-submit-$id" name="edit-submit-$id" value="Save" title="Save" class="button" onclick="edit_user_save('$id');" />&nbsp;<input type="button" id="edit-close-$id" name="edit-close-$id" value="Cancel" title="Cancel" class="button" onclick="edit_user_hide('$id');" /><input type="hidden" id="user_id_$id" value="$id"/></td></tr>
+<tr id="edit-$id" class="edit-row"><td colspan="7" class="edit-row"><div class="row"><div class="width10 margin5_T">First Name :</div> <input type="text" id="edit-fname-$id" name="edit-fname-$id" value="$fname" class="text width50" size="70" /></div><div class="row"><div class="width10 margin5_T">Last Name :</div> <input type="text" id="edit-lname-$id" name="edit-lname-$id" value="$lname" class="text width50" size="10" /></div><div class="row"><div class="width10 margin5_T">Email :</div> <input type="text" id="edit-email-$id" name="edit-email-$id" value="$email" class="text width50" size="60" /></div><div class="row"><div class="width10 margin5_T">Role :</div><select id="edit-role-$id" name="edit-role-$id" class="text width50"><option value="$role">User</option><option value='Admin'>Admin</option><option value='Admin User'>Admin User</option><option value='User'>User</option></select></div><div class="row"><div class="width10 margin5_T">Status :</div><select id="edit-status-$id" name="edit-status-$id" class="text width50" size="0" ><option value="$status">Active</option><option value="Inactive">Inactive</option></select><input type="button" id="edit-submit-$id" name="edit-submit-$id" value="Save" title="Save" class="button margin10_L" onclick="edit_user_save('$id');" /> <input type="button" id="edit-close-$id" name="edit-close-$id" value="Cancel" title="Cancel" class="button margin10_L" onclick="edit_user_hide('$id');" /><input type="hidden" id="user_id_$id" value="$id"/></td></tr>
 RETURN;
 		$return = urldecode( $return );
 		} else {
@@ -32,11 +32,11 @@ RETURN;
 }
 
 //adding users
-function save_user_data( $id,$fname, $lname, $email) {
+function save_user_data( $id,$fname, $lname, $email,$role, $status) {
 	$q1 = "SELECT user_id from yourls_users WHERE email = '".$email."' AND user_id != ".$id;
 	$sql = mysql_query($q1);
 	if (mysql_num_rows($sql) == 0){
-		$query = "UPDATE yourls_users SET firstname='".$fname."',lastname='".$lname."',email='".$email."' WHERE user_id=".$id;
+		$query = "UPDATE yourls_users SET firstname='".$fname."', lastname='".$lname."', email='".$email."', role='".$role."', status='".$status."'  WHERE user_id=".$id;
 		mysql_query($query);
 	//if($query){
 		$response['status'] = "success";
@@ -110,7 +110,7 @@ switch( $action ) {
 		break;
 
 	case 'edit_user_save':
-		$return = save_user_data( $_REQUEST['id'],$_REQUEST['fname'], $_REQUEST['lname'], $_REQUEST['email']);
+		$return = save_user_data( $_REQUEST['id'],$_REQUEST['fname'], $_REQUEST['lname'], $_REQUEST['email'], $_REQUEST['role'], $_REQUEST['status']);
 		echo json_encode($return);
 		break;
 

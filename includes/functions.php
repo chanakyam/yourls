@@ -144,7 +144,7 @@ function yourls_delete_link_by_keyword( $keyword ) {
  */
 function yourls_insert_link_in_db( $url, $keyword, $title = '' ) {
 	global $ydb;
-	
+	$obj_user = new user();
 	$url     = yourls_escape( yourls_sanitize_url( $url ) );
 	$keyword = yourls_escape( yourls_sanitize_keyword( $keyword ) );
 	$title   = yourls_escape( yourls_sanitize_title( $title ) );
@@ -152,12 +152,16 @@ function yourls_insert_link_in_db( $url, $keyword, $title = '' ) {
 	$table = YOURLS_DB_TABLE_URL;
 	$timestamp = date('Y-m-d H:i:s');
 	$ip = yourls_get_IP();
-	if(isset($_SESSION['username']) && $_SESSION['username'] != "") {
-		$obj_user = new user();
+	if(isset($_SESSION['username']) && $_SESSION['username'] != "") {		
 		$user_data = $obj_user->getUserDetails();
 		$user_id = $user_data['user_id'];
 	}else{
 		$user_id = "";
+		//new code for inserting userid through api call
+		if(isset($_REQUEST['signature']) && $_REQUEST['signature']!=''){			
+			$user_sign_data = $obj_user->getUserDetailsThruSignature();
+			$user_id = $user_sign_data['user_id'];
+		}
 	}
 	$insert = $ydb->query("INSERT INTO `$table` (`user_id`,`keyword`, `url`, `title`, `timestamp`, `ip`, `clicks`) VALUES('$user_id','$keyword', '$url', '$title', '$timestamp', '$ip', 0);");
 	
@@ -225,7 +229,7 @@ function yourls_add_new_link( $url, $keyword = '', $title = '' ) {
 
 	// duplicates allowed or new URL => store it
 	if( yourls_allow_duplicate_longurls() || !( $url_exists = yourls_url_exists( $url ) ) ) {
-	
+		
 		if( isset( $title ) && !empty( $title ) ) {
 			$title = yourls_sanitize_title( $title );
 		} else {

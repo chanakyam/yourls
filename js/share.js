@@ -42,16 +42,43 @@ function share(dest) {
 }
 
 function init_clipboard() {
-	$('#copylink').click(function(){
+	// $('#copylink').click(function(){
+	// 	$(this).select();
+	// })
+
+	// $('#copylink').zclip({
+	// 	path: zclipurl,
+	// 	copy: $('#copylink').val(),
+	// 	afterCopy:function(){
+	// 		html_pulse( '#copybox h2, #copybox h3', 'Copied!' );
+	// 	}
+	// });
+
+	// $("#copylink").bind("click",function(){
+	//   $(this).select();
+	  
+	// });
+
+	$('#copylink').bind("click",function(){
 		$(this).select();
-	})
-	
-	$('#copylink').zclip({
+		$('#copylink').zclip({
 		path: zclipurl,
 		copy: $('#copylink').val(),
 		afterCopy:function(){
 			html_pulse( '#copybox h2, #copybox h3', 'Copied!' );
 		}
-	});
+	  });
+	})
+
+	// $('#copylink').live("click",function(){alert('click')
+	// 	$(this).select();
+	// 	$('#copylink').zclip({
+	// 	path: zclipurl,
+	// 	copy: $('#copylink').val(),
+	// 	afterCopy:function(){
+	// 		html_pulse( '#copybox h2, #copybox h3', 'Copied!' );
+	// 	}
+	// });
+	// });
 };                     
 

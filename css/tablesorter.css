@@ -225,7 +225,7 @@ input[type="button"], input[type="submit"] {border-bottom:1px solid #7096a9; bac
 	*zoom: 1;
 	content: "";
     display: table;
-    padding-bottom: 20px; width: 100%;
+    padding-bottom:40px; width: 100%;
 }
 
 .dataTables_length {
@@ -312,4 +312,8 @@ margin-bottom:10px;
 	cursor:pointer; position: absolute; left: 10px;
 
 	
+}
+/*added user edit 15-05-2014*/
+table.tblSorter tbody tr.highlight td {
+    background:#ccc;
 }

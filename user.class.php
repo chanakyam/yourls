@@ -173,6 +173,13 @@ class user{
 		$data = mysql_fetch_assoc($result);
 		return $data;
 	}
+	//new function for inserting userid through api call
+	public function getUserDetailsThruSignature(){
+		$query  = "SELECT user_id FROM yourls_users WHERE signature='".$_REQUEST['signature']."'";
+		$result = mysql_query($query);
+		$data   = mysql_fetch_assoc($result);
+		return $data;
+	}
 
 	//forgotpassword
 	public function forgotpassword($email_to=""){
@@ -259,4 +266,32 @@ class user{
 		$result = mysql_query($query);
 		return $result;
 	}
+
+	//getting user signature
+	public function get_user_signature(){
+		$query  = "SELECT signature FROM yourls_users WHERE email='".$_SESSION['username']."'";
+		$result = mysql_query($query);
+		$data   = mysql_fetch_assoc($result);
+		return $data['signature'];
+	}
+
+	
+	//generating random string
+	function generateRandomString($length = 10) {
+	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	    $randomString = '';
+	    for ($i = 0; $i < $length; $i++) {
+	        $randomString .= $characters[rand(0, strlen($characters) - 1)];
+	    }
+	    return $randomString;
+	}
+	
+	//updating the suer signature
+	public function update_user_signature($signature){
+		$update_query="UPDATE yourls_users SET signature='".$signature."' WHERE email='".$_SESSION['username']."'" ;
+		$result=mysql_query($update_query);
+		return true;
+
+	}
+
 }
