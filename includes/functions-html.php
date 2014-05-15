@@ -189,6 +189,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 			$(document).ready(function() {
 				var oTable= $('#users_main_table').dataTable({
 					aaSorting : [[0, 'desc']],
+					"bStateSave": true,
 					"bProcessing": true,
 					"bServerSide": true,
 					//"sPaginationType": "iFullNumbersShowPages",
@@ -463,7 +464,7 @@ function yourls_html_addnew( $url = '', $keyword = '' ) {
 				<div><strong><?php yourls_e( 'Enter the URL' ); ?></strong> : <input type="text" id="add-url" name="url" value="<?php echo $url; ?>" class="text" size="80" />
 				<?php yourls_e( 'Optional '); ?>: <strong><?php yourls_e('Custom short URL'); ?> : </strong><input type="text" id="add-keyword" name="keyword" value="<?php echo $keyword; ?>" class="text" size="8" />
 				<?php yourls_nonce_field( 'add_url', 'nonce-add' ); ?>
-				<input type="button" id="add-button" name="add-button" value="<?php yourls_e( 'Shorten The URL' ); ?>" class="button" onclick="add_link();" /></div>
+				<input type="button" id="add-button" name="add-button" value="<?php yourls_e( 'Shorten the URL' ); ?>" class="button" onclick="add_link();" /></div>
 			</form>
 			<div id="feedback" style="display:none"></div>
 		</div>
