@@ -919,7 +919,7 @@ class yourls_table_add_row_callback {
  *
  */
 function yourls_table_head() {
-	$start = '<table id="dashboard_main_table" class="tblSorter" cellpadding="0" cellspacing="1"><input type="hidden" name="show_row" id="show_row" value="" /><input type="hidden" name="show_share" id="show_share" value="" /><thead><tr>'."\n";
+	$start = '<table id="dashboard_main_table" class="tblSorter" cellpadding="0" cellspacing="1"><input type="hidden" name="show_row" id="show_row" value="" /><input type="hidden" name="show_share" id="show_share" value="" /><input type="hidden" name="tr_class" id="tr_class" value="" /><thead><tr>'."\n";
 	echo yourls_apply_filter( 'table_head_start', $start );
 	
 	$cells = yourls_apply_filter( 'table_head_cells', array(

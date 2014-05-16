@@ -143,7 +143,13 @@ function edit_link_display(id) {
 		$('#share-'+hid_val1).remove()
 		//$('#show_share').val('');
 	}
-	if( $('#edit-'+id).length ==0){	 	
+	if( $('#edit-'+id).length ==0){
+		//code for highlighting the editing row start		
+		var tr_class = $('#id-'+id).attr('class');
+		$('#id-'+id).removeClass(tr_class);
+		$('#id-'+id).addClass("highlight");		
+		$('#tr_class').val(tr_class);
+		//end	 	
 		add_loading('#actions-'+id+' .button');
 		var keyword = $('#keyword_'+id).val();
 		var nonce = get_var_from_query( $('#edit-button-'+id).attr('href'), 'nonce' );
@@ -190,7 +196,13 @@ function edit_user_display(id) {
 		$('#user_hid').val('');
 	}
 	//new code
-	if( $('#edit-'+id).length ==0){	 	
+	if( $('#edit-'+id).length ==0){	
+		//code for highlighting the editing row start		
+		var tr_class = $('#id-'+id).attr('class');
+		$('#id-'+id).removeClass(tr_class);
+		$('#id-'+id).addClass("highlight");		
+		$('#tr_class').val(tr_class);
+		//end	 	
 		add_loading('#actions-'+id+' .button');
 		//var keyword = $('#keyword_'+id).val();
 		//var nonce = get_var_from_query( $('#edit-button-'+id).attr('href'), 'nonce' );
@@ -288,6 +300,12 @@ function edit_link_hide(id) {
 	// $("#edit-" + id).fadeOut(200, function(){
 	// 	end_disable('#actions-'+id+' .button');
 	// });
+	//code for highlighting the editing row start
+	$('#id-'+id).removeClass('highlight');
+	$('#id-'+id).addClass($('#tr_class').val());
+	//var tr_class = $('#id-'+id).attr('class');
+	$('#tr_class').val('');
+	//end
 }
 
 // Cancel edition of a link
@@ -297,6 +315,12 @@ function edit_user_hide(id) {
 	// $("#edit-" + id).fadeOut(200, function(){
 	// 	end_disable('#actions-'+id+' .button');
 	// });
+	//code for highlighting the editing row start
+	$('#id-'+id).removeClass('highlight');
+	$('#id-'+id).addClass($('#tr_class').val());
+	//var tr_class = $('#id-'+id).attr('class');
+	$('#tr_class').val('');
+	//end
 }
 
 // Save edition of a link
@@ -334,6 +358,13 @@ function edit_link_save(id) {
 				$('#id-'+id+' .url a').html(title);//link.attr('title');
 				var anchor_val = '<a href="'+newurl+'">'+newurl+'</a>'
 				$('#longurl-'+id).html(anchor_val);//link.attr('title');
+				//end
+
+				//code for highlighting the editing row start
+				$('#id-'+id).removeClass('highlight');
+				$('#id-'+id).addClass($('#tr_class').val());
+				//var tr_class = $('#id-'+id).attr('class');
+				$('#tr_class').val('');
 				//end
 
 				//var table = $('#dashboard_main_table').dataTable();
@@ -422,19 +453,34 @@ function edit_user_save(id) {
 				$("tr-#id"+id+" td.email").text(email);
 				$("tr-#id"+id+" td.role").text(role);
 				$("tr-#id"+id+" td.status").val(status);
-				var table = $('#users_main_table').dataTable();
-				var pos = table.fnGetPosition( $("#id-"+id)[0] );
+				// var table = $('#users_main_table').dataTable();
+				// var pos = table.fnGetPosition( $("#id-"+id)[0] );
 				// table.fnUpdate([id,fname,lname,email,role,status],pos);
 				// to update a cell
-				table.fnUpdate(fname,1,pos);
-				table.fnUpdate(lname,2,pos);
-				table.fnUpdate(email,3,pos);
-				table.fnUpdate(role,4,pos);
-				table.fnUpdate(status,5,pos);
+				// table.fnUpdate(fname,1,pos);
+				// table.fnUpdate(lname,2,pos);
+				// table.fnUpdate(email,3,pos);
+				// table.fnUpdate(role,4,pos);
+				// table.fnUpdate(status,5,pos);
+
+				//new code for updating values to reflect start
+				$('#id-'+id+' .first_name').html(fname);
+				$('#id-'+id+' .last_name').html(lname);
+				$('#id-'+id+' .user_email').html(email);
+				$('#id-'+id+' .user_role').html(role);
+				$('#id-'+id+' .user_status').html(status);
+ 				//end
+
+				//code for highlighting the editing row start
+				$('#id-'+id).removeClass('highlight');
+				$('#id-'+id).addClass($('#tr_class').val());
+				//var tr_class = $('#id-'+id).attr('class');
+				$('#tr_class').val('');
+				//end
 
 				$('#users_main_table tbody').trigger("update");
 				$("#edit-" + id).fadeOut(200, function(){
-					$('#users_main_table tbody').trigger("update");
+				$('#users_main_table tbody').trigger("update");
 				});
 			}
 			feedback(data.message, data.status);

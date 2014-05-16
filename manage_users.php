@@ -152,8 +152,10 @@ RETURN;
 		<?php /* //translators: "you have '3 plugins' installed and '1' activated" */ //yourls_se( 'You currently have <strong>%1$s</strong> installed, and <strong>%2$s</strong> activated', $plugins_count, $count_active ); ?>
 	<!--</p>-->
 <?php echo $message ;?>
+	<input type="hidden" name="tr_class" id="tr_class" value="" />
 	<table id="users_main_table" class="tblSorter" cellpadding="0" cellspacing="1">
 	<input type="hidden" name="user_hid" id="user_hid" value="" />
+
 	<thead>
 		<tr>
 			<th>ID</th>
