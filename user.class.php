@@ -294,4 +294,108 @@ class user{
 
 	}
 
+	/* functions related to webservices */
+
+	//checking user through  webservice
+	public function chk_user_exists($username){
+		$user_chk_qry = "select user_id from yourls_users where email='".$username."'";
+		$result = mysql_query($user_chk_qry);
+		if(mysql_num_rows($result) ==0){
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	//checking user through  webservice
+	public function chk_user_with_email_pwd($username,$pwd){
+		$user_chk_qry = "select user_id from yourls_users where email='".$username."' and password='".$password."'";
+		$result = mysql_query($user_chk_qry);
+		if(mysql_num_rows($result) ==0){
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	//checking user of lycos.com through webservice
+	public function chk_lycos_user($email){
+		$ws_call = "https://registration.lycos.com/usernameassistant.php?validate=1&m_U=".$email;
+		$available = file_get_contents($ws_call);
+		return $available;
+	}
+
+	//checking user of lycos.com through webservice
+	public function chk_lycos_user_with_email_pwd($email,$pwd){
+		$ws_call = "https://registration.lycos.com/usernameassistant.php?validate=1&m_U=".$email."&m_AID=".$pwd;
+		$available = file_get_contents($ws_call);
+		return $available;
+	}
+
+	// user register through webservice
+	public function ws_register(){
+		$firstname    = $_REQUEST["u_fname"];
+		$lastname     = $_REQUEST["u_lname"];
+		$email        = $_REQUEST["u_email"];
+		$password     = $_REQUEST["u_password"];
+		$md5		  = md5($password);
+		$status		  = "inactive";
+		$role		  = "User";
+		$signature	  = yourls_auth_signature_new_user( $_REQUEST["u_email"]);		
+		// insert query
+		$query   = "INSERT INTO yourls_users (firstname, lastname, email, password, status, signature, role) VALUES ('".$firstname."','".$lastname."','".$email."','".$md5."','".$status."','".$signature."','".$role."')";
+		$result  = mysql_query($query);
+		$user_id = mysql_insert_id();		
+		if(is_numeric($user_id) && $user_id!='' && $user_id>0){
+			return $user_id;
+		}else{
+			return -1;
+		}
+
+	}
+
+	//validating data
+	public function check_valid_data(){
+		$err_msg = array();
+		//checking empty fname
+		if(empty($_REQUEST['m_fname']))
+			$err_msg['fname_empty'] ='First name cant not be empty';		
+
+		//checking first name (min(2) & max length(64))
+		if(strlen($_REQUEST['m_fname'])<2 && strlen($_REQUEST['m_fname'])>64)
+			$err_msg['fname_min_max'] = 'First name should be minimum of 2 and maxjmum of 64 characters';
+
+		//checking empty for lname
+		if(empty($_REQUEST['m_lname']))
+			$err_msg['lname_empty'] ='Last name cant not be empty';
+
+		//checking last name (min(2) & max length(64))
+		if(strlen($_REQUEST['m_lname'])<2 && strlen($_REQUEST['m_lname'])>64)
+			$err_msg['lname_min_max'] = 'Last name should be of min of 2 and max of 64';
+
+		//validating email address
+		if (!filter_var($_REQUEST['m_email'], FILTER_VALIDATE_EMAIL)) {
+			$err_msg['email_error'] = 'Not a valid email address';
+		}else{
+			//checking email address min max
+			if(strlen($_REQUEST['m_email'])<7 && strlen($_REQUEST['m_email'])>128)
+				$err_msg['email_min_max'] = 'Email address should be minimun of 7 and maximum of 128 characters';
+
+		}
+		//validating password
+		//checking empty
+		if(empty($_REQUEST['m_password'])){
+			$err_msg['pwd_empty'] = 'Password can not be empty';
+		}else{
+			if (!preg_match("/[0-9a-zA-Z_.!@#$%^()+]/", $_REQUEST['m_password'])) {
+				$err_msg['pwd_empty'] = 'Invalid password';
+			}
+		}
+
+		if(empty($err_msg))
+			return true;
+		else
+			return $err_msg;
+
+	}
 }

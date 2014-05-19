@@ -132,6 +132,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 		var zclipurl = '<?php yourls_site_url(); ?>/js/ZeroClipboard.swf';
 	//]]>
 	</script>
+
 	
 	<?php if ( yourls_is_admin()) { ?>
 	<script type="text/javascript" charset="utf-8">
@@ -445,6 +446,18 @@ function yourls_html_footer() {
 		<span class="margin20_L">Lycos URL Shortener developed by lycos.com</span> <span class="margin20_L">Copyright © <?php echo $year;?> lycos.com</span>
 	</div>
 <!--footer end-->
+<!-- OwnerIQ Analytics tag -->
+	<script type="text/javascript">
+	var _oiqq = _oiqq || [];
+	_oiqq.push(['oiq_doTag']);
+
+	(function() {
+	var oiq = document.createElement('script'); oiq.type = 'text/javascript'; oiq.async = true;
+	oiq.src = document.location.protocol + '//px.owneriq.net/stas/s/lycoss.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(oiq, s);
+	})();
+	</script>
+<!-- End OwnerIQ tag -->
     
 </body>
 </html>
