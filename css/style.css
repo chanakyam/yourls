@@ -203,7 +203,7 @@ span#recaptcha_privacy {
 
 /* 22-04-2014 */
 
-input[type="password"] {border:1px solid #cccccc; padding:10px;}
+input[type="password"] {border:1px solid #cccccc; padding:6px;}
 
 
 .lurl{ padding-top: 20px;}
@@ -214,4 +214,5 @@ input[type="password"] {border:1px solid #cccccc; padding:10px;}
 .homeinner {display: table-cell; float: none; vertical-align: middle;}
 
 .width90 {width: 90%;}
+.width75 {width: 75%;}
 

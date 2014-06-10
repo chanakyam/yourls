@@ -481,7 +481,7 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 					<?php
 					if ( $number_of_sites > 1 )
 						$referrer_sort[ yourls__( 'Others' ) ] = count( $referrers );
-					yourls_stats_pie( $referrer_sort, 5, '440x220', 'stat_tab_source_ref' );
+					yourls_stats_pie( $referrer_sort, 5, '440x250', 'stat_tab_source_ref' );
 					unset( $referrer_sort['Others'] );
 					?>
 					<div class="subtitle"><?php yourls_e( 'Referrers' ); ?></div>
@@ -517,7 +517,7 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 				<td valign="top">
 					<div class="subtitle"><?php yourls_e( 'Direct vs Referrer Traffic' ); ?></div>
 					<?php
-					yourls_stats_pie( array( yourls__( 'Direct' ) => $direct, yourls__( 'Referrers' ) => $notdirect ), 5, '440x220', 'stat_tab_source_direct' );
+					yourls_stats_pie( array( yourls__( 'Direct' ) => $direct, yourls__( 'Referrers' ) => $notdirect ), 5, '440x250', 'stat_tab_source_direct' );
 					?>
 					<p><?php yourls_e( 'Direct traffic:' ); echo ' ' . sprintf( yourls_n( '<strong>%s</strong> hit', '<strong>%s</strong> hits', $direct ), $direct ); ?> </p>
 					<p><?php yourls_e( 'Referrer traffic:' ); echo ' ' . sprintf( yourls_n( '<strong>%s</strong> hit', '<strong>%s</strong> hits', $notdirect ), $notdirect ); ?> </p>

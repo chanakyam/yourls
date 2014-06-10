@@ -131,3 +131,6 @@ ul.no_bullet li {
     border: 1px solid #555555 !important;
     color: #FFFFFF;
 }
+
+.no_bullet li a {float: none !important; padding: 5px !important; color:#000 !important;}
+.no_bullet li a:hover {background:none !important;}

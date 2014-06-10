@@ -74,7 +74,7 @@ yourls_html_head();
 					<tr>
 						<td width="25%">Please Enter your Email id<span class="error_message" >*</span>:</td>
 						<td>
-							<input type="text" name="email" id="email" class="width90">
+							<input type="text" name="email" id="email" class="width75">
 							<span class="error_message" id="label_email"></span>
 						</td>
 					</tr>

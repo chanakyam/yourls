@@ -436,7 +436,7 @@ font-size:12px;
 #submit-clear-filter{ background:#000; border-radius:3px; color:#fff; cursor:pointer; box-shadow:none; min-width:80px;}
 
 #informations{ background:#dddddd; border:1px solid #d2d2d2; border-top-color:#bcbcbc; padding:5px; color:#343637; font-size:15px; font-family: 'Source Sans Pro', sans-serif;}
-.label{ font-size:12px; font-family: 'Source Sans Pro', sans-serif;}
+.label{ font-size:12px; font-family: 'Source Sans Pro', sans-serif; margin-top: 2px;}
 .shorturl, .longurl{ color:#666; font-size:12px; font-family: 'Source Sans Pro', sans-serif; font-weight:normal;}
 .shorturl a{color:#666; text-decoration:none; background:url(../images/link-icon.png) no-repeat left top; padding:4px 0 3px 25px;}
 .shorturl img{ display:inline-block;}

@@ -298,7 +298,7 @@ class user{
 
 	//checking user through  webservice
 	public function chk_user_exists($username){
-		$user_chk_qry = "select user_id from yourls_users where email='".$username."'";
+		$user_chk_qry = "SELECT user_id FROM yourls_users WHERE email='".$username."'";
 		$result = mysql_query($user_chk_qry);
 		if(mysql_num_rows($result) ==0){
 			return false;
@@ -309,7 +309,7 @@ class user{
 
 	//checking user through  webservice
 	public function chk_user_with_email_pwd($username,$pwd){
-		$user_chk_qry = "select user_id from yourls_users where email='".$username."' and password='".$password."'";
+		$user_chk_qry = "SELECT user_id FROM yourls_users WHERE email='".$username."' AND password='".$pwd."' AND status='Active'";
 		$result = mysql_query($user_chk_qry);
 		if(mysql_num_rows($result) ==0){
 			return false;
@@ -319,31 +319,54 @@ class user{
 	}
 
 	//checking user of lycos.com through webservice
-	public function chk_lycos_user($email){
-		$ws_call = "https://registration.lycos.com/usernameassistant.php?validate=1&m_U=".$email;
+	public function chk_lycos_user($fname,$email,$pwd){		
+		//$ws_call = "https://registration.lycos.com/usernameassistant.php?validate=1&m_U=".$email;
+		$ws_call   = "https://registration.lycos.com/messenger_api.php?m_CMD=create&m_U=".$fname."&m_EMAIL=".$email."&m_P=".$pwd;
 		$available = file_get_contents($ws_call);
-		return $available;
+		$data      = simplexml_load_string($available);
+		// var_dump($data);
+		// echo '<pre>';print_r($data);
+		//echo 'code-->'.$data->result->status->code.'<br>';
+		//echo 'message-->'.$data->result->status->message.'<br>';		
+		//echo $available;exit;
+		return $data;
 	}
 
 	//checking user of lycos.com through webservice
-	public function chk_lycos_user_with_email_pwd($email,$pwd){
-		$ws_call = "https://registration.lycos.com/usernameassistant.php?validate=1&m_U=".$email."&m_AID=".$pwd;
+	public function chk_lycos_user_with_email_pwd($email,$pwd){		
+		//$ws_call = "https://registration.lycos.com/usernameassistant.php?validate=1&m_U=".$email."&m_AID=".$pwd;
+		$ws_call = "https://registration.lycos.com/messenger_api.php?m_CMD=login&m_U=".$email."&m_P=".$pwd;
+		//$ws_call = "https://registration.lycos.com/messenger_api.php?m_CMD=login&m_U=shreekavi&m_EMAIL=shree@ybrantdigital.com&m_P=qwerty123";
 		$available = file_get_contents($ws_call);
-		return $available;
+		$data = simplexml_load_string($available);
+		// echo '<pre>';print_r($data);
+		// //print_r($data->result->status->code);
+		// echo 'code->'.$data->result->status->code.'<br>';
+		// echo 'member_name->'.$data->data->user_data->member_name;
+		// exit;
+		return $data;
+	}
+
+	//getting lycos user data
+	public function get_lycos_user_data(){
+		$ws_call = "https://registration.lycos.com/messenger_api.php?m_CMD=login&m_U=".$_REQUEST['m_fname']."&m_P=".$_REQUEST['m_password']."&m_EMAIL=".$_REQUEST['m_email'];
+		$available = file_get_contents($ws_call);
+		$data = simplexml_load_string($available);
+		//echo '<pre>';print_r($data);
+		return $data;
 	}
 
 	// user register through webservice
-	public function ws_register(){
-		$firstname    = $_REQUEST["u_fname"];
-		$lastname     = $_REQUEST["u_lname"];
-		$email        = $_REQUEST["u_email"];
-		$password     = $_REQUEST["u_password"];
-		$md5		  = md5($password);
-		$status		  = "inactive";
-		$role		  = "User";
-		$signature	  = yourls_auth_signature_new_user( $_REQUEST["u_email"]);		
+	public function ws_register($user_data){
+		$firstname    = $user_data["fname"];
+		$lastname     = $user_data["lname"];
+		$email        = $user_data["email"];
+		$password     = $user_data["password"];
+		$status		  = $user_data["status"];
+		$role		  = $user_data["role"];
+		$signature	  = $user_data["signature"];		
 		// insert query
-		$query   = "INSERT INTO yourls_users (firstname, lastname, email, password, status, signature, role) VALUES ('".$firstname."','".$lastname."','".$email."','".$md5."','".$status."','".$signature."','".$role."')";
+		$query   = "INSERT INTO yourls_users (firstname, lastname, email, password, status, signature, role) VALUES ('".$firstname."','".$lastname."','".$email."','".$password."','".$status."','".$signature."','".$role."')";
 		$result  = mysql_query($query);
 		$user_id = mysql_insert_id();		
 		if(is_numeric($user_id) && $user_id!='' && $user_id>0){
@@ -362,24 +385,24 @@ class user{
 			$err_msg['fname_empty'] ='First name cant not be empty';		
 
 		//checking first name (min(2) & max length(64))
-		if(strlen($_REQUEST['m_fname'])<2 && strlen($_REQUEST['m_fname'])>64)
-			$err_msg['fname_min_max'] = 'First name should be minimum of 2 and maxjmum of 64 characters';
+		if(strlen($_REQUEST['m_fname'])<2 || strlen($_REQUEST['m_fname'])>64)
+			$err_msg['fname_min_max'] = 'First name should be minimum of 2 and maximum of 64 characters';
 
 		//checking empty for lname
 		if(empty($_REQUEST['m_lname']))
 			$err_msg['lname_empty'] ='Last name cant not be empty';
 
 		//checking last name (min(2) & max length(64))
-		if(strlen($_REQUEST['m_lname'])<2 && strlen($_REQUEST['m_lname'])>64)
-			$err_msg['lname_min_max'] = 'Last name should be of min of 2 and max of 64';
+		if(strlen($_REQUEST['m_lname'])<2 || strlen($_REQUEST['m_lname'])>64)
+			$err_msg['lname_min_max'] = 'Last name should be minimum of 2 and maximum of 64';
 
 		//validating email address
-		if (!filter_var($_REQUEST['m_email'], FILTER_VALIDATE_EMAIL)) {
+		if(!filter_var($_REQUEST['m_email'], FILTER_VALIDATE_EMAIL)) {
 			$err_msg['email_error'] = 'Not a valid email address';
 		}else{
 			//checking email address min max
-			if(strlen($_REQUEST['m_email'])<7 && strlen($_REQUEST['m_email'])>128)
-				$err_msg['email_min_max'] = 'Email address should be minimun of 7 and maximum of 128 characters';
+			if(strlen($_REQUEST['m_email'])<7 || strlen($_REQUEST['m_email'])>128)
+				$err_msg['email_min_max'] = 'Email address should be minimum of 7 and maximum of 128 characters';
 
 		}
 		//validating password
