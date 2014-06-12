@@ -31,7 +31,7 @@ if ( isset( $_POST['submit-bt'] ) && $_POST['submit-bt'] == 'Shorten' ) {
 		 }else{
 		 	$err_msg = '';
 		 }
-	   }
+	   //}
 		 //else{
 	 // 	$err_msg = "Please enter URL";
 	 // } 
