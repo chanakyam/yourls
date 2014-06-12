@@ -255,6 +255,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 
 	<?php yourls_do_action( 'html_head', $context ); ?>
 </head>
+
 <?php if( yourls_is_admin() ) {?>
 
 <body class="<?php echo $context; ?> <?php echo $bodyclass; ?>">
@@ -704,7 +705,7 @@ function yourls_share_box( $longurl, $shorturl, $title = '', $text='', $shortlin
 		<div id="sharebox" class="share">
 			<?php echo $share_title; ?>
 			<div id="tweet">
-				<span id="charcount" class="hide-if-no-js"><?php echo $count; ?></span>
+				<!-- <span id="charcount" class="hide-if-no-js"><?php //echo $count; ?></span> -->
 				<textarea id="tweet_body"><?php echo $share; ?></textarea>
 			</div>
 			<p id="share_links"><?php yourls_e( 'Share with' ); ?> 
