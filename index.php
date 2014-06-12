@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// $_GLOBAL_MSG = '';
+ $_GLOBAL_MSG = '';
 
 if ( isset($_REQUEST['css_type']) && $_REQUEST['css_type'] === '1' ) {
 	$_FORM_TYPE = 1;// Vertical
@@ -15,7 +15,7 @@ require_once( dirname(__FILE__).'/includes/recaptchalib.php' );
 //if ( isset($_REQUEST['form_submit']) && $_REQUEST['form_submit'] === '1' ) {
 
 if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
-	// if(!empty(trim($_REQUEST['url']))) {
+	if(!empty(trim($_REQUEST['url']))) {
 		//recaptcha code
 		 //$privatekey = CAPTCHA_PVT_KEY;
 		 $privatekey ="6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
@@ -29,11 +29,13 @@ if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
 		 }else{
 		 	$_GLOBAL_MSG = '';
 		 }
-	 // }else{
-	 // 	$_GLOBAL_MSG = "Please enter URL";
-	 // } 
+	  }else{
+	 	$_GLOBAL_MSG = "Please enter URL";
+	 } 
 	
 }
+
+echo 'gmsg-->'.$_GLOBAL_MSG;
 
 //$_SESSION['visualCaptcha-fieldName'] = $_FIELD_NAME;
 
