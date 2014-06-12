@@ -22,8 +22,8 @@ if ( isset( $_POST['submit-bt'] ) && $_POST['submit-bt'] == 'Shorten' ) {
 	$url_val = trim($_POST['url']);
 	echo 'url val->'.$url_val;
 	if(empty($url_val)){echo 'empty';}else{echo 'not empty';}
-	echo '<br>empty-->'.empty($url_val);exit;
-	  // if( ! empty( trim($_POST['url']) ) ) {echo 'not empty';exit;
+	echo '<br>empty-->'.empty($url_val);
+	  if(!empty( $url_val ) ) {echo 'not empty';exit;
 		// //recaptcha code
 		 //$privatekey = CAPTCHA_PVT_KEY;
 		 // $privatekey ="6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
@@ -37,10 +37,10 @@ if ( isset( $_POST['submit-bt'] ) && $_POST['submit-bt'] == 'Shorten' ) {
 		 // }else{
 		 // 	$err_msg = '';
 		 // }
-	    // }
-		//  else{
-	 // 	$err_msg = "Please enter URL";
-	 // } 
+	    }
+		 else{echo 'empty';exit;
+	 	$err_msg = "Please enter URL";
+	 } 
 	
 }
 
