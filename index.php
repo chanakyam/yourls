@@ -106,7 +106,7 @@ yourls_html_head();
 		
 		<div class="gap"></div>
 		
-			<p><a href="<?php yourls_site_url(); ?>" title="lyc.so"><img src="images/lycsoLogo.png" alt="lyc.so" title="lyc.so" /></a></p>
+			<p class="urlrow"><a href="<?php yourls_site_url(); ?>" title="lyc.so"><img src="images/lycsoLogo.png" alt="lyc.so" title="lyc.so" /></a></p>
 			<?php
 			//if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
 			if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' && $_GLOBAL_MSG=='') {
