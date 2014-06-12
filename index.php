@@ -21,6 +21,7 @@ if ( isset( $_POST['submit-bt'] ) && $_POST['submit-bt'] == 'Shorten' ) {
 	echo 'trim-->'.trim($_POST['url']);
 	$url_val = trim($_POST['url']);
 	echo 'url val->'.$url_val;
+	if(empty($url_val)){echo 'empty';}else{echo 'not empty';}
 	echo '<br>empty-->'.empty($url_val);exit;
 	  // if( ! empty( trim($_POST['url']) ) ) {echo 'not empty';exit;
 		// //recaptcha code
