@@ -16,8 +16,10 @@ require_once( dirname(__FILE__).'/includes/recaptchalib.php' );
 // echo '<pre>';print_r($_REQUEST);
 // if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
 if ( isset( $_POST['submit-bt'] ) && $_POST['submit-bt'] == 'Shorten' ) {
-	echo '<pre>';print_r($_POST);exit;
-	 //  if( ! empty( trim($_POST['url']) ) ) {
+	echo '<pre>';print_r($_POST);
+	echo 'trim-->'.trim($_POST['url']);
+	echo '<br>'.empty(trim($_POST['url']));
+	  if( ! empty( trim($_POST['url']) ) ) {echo 'not empty';exit;
 		// //recaptcha code
 		//  //$privatekey = CAPTCHA_PVT_KEY;
 		//  $privatekey ="6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
@@ -31,7 +33,7 @@ if ( isset( $_POST['submit-bt'] ) && $_POST['submit-bt'] == 'Shorten' ) {
 		//  }else{
 		//  	$err_msg = '';
 		//  }
-	 //   }
+	    }
 		//  else{
 	 // 	$err_msg = "Please enter URL";
 	 // } 
