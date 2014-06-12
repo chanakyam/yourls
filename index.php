@@ -40,7 +40,7 @@ if ( isset( $_POST['submit-bt'] ) && $_POST['submit-bt'] == 'Shorten' ) {
 
 
 
-echo 'gmsg-->'.$_GLOBAL_MSG;exit;
+// echo 'gmsg-->'.$_GLOBAL_MSG;exit;
 
 //$_SESSION['visualCaptcha-fieldName'] = $_FIELD_NAME;
 
