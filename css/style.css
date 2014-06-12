@@ -5,7 +5,9 @@
 #wrap{}
 
 a {text-decoration: none;}
-body {padding:0; margin:0; font-family: 'Source Sans Pro', sans-serif; font-size:14px; background:#fff;}
+body {padding:0; margin:0; font-family: 'Source Sans Pro', sans-serif; font-size:14px; 
+
+}
 
 #shareboxes{padding:10px 0; width:70%; margin:10px auto;}
 
@@ -51,8 +53,17 @@ font-size:13px;
 .module {padding:10px;}
 
 
-.footer {background:#343637; padding:10px 0; color:#919191; position:fixed; bottom:0; width:100%; text-align:center; z
-6; left:0; z-index:20; height: 18px;}
+.footer {
+background:#343637; 
+padding:10px 0; color:#919191; 
+position:fixed; bottom:0; 
+width:100%; 
+text-align:center; 
+left:0; 
+z-index:20; 
+height: 18px;
+}
+
 .footer a {color:#fff; text-decoration:none; margin:0 5px;}
 
 
@@ -233,5 +244,8 @@ font-weight:normal;
 
 }
 
-.urlrow {height:45px;}
+.urlrow {height:45px; position: relative;}
+.shorten-btn {position:absolute; right:0; top:0;}
+
+img {border:0; line-height: 0;}
 
