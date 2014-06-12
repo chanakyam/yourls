@@ -16,25 +16,25 @@ require_once( dirname(__FILE__).'/includes/recaptchalib.php' );
 // echo '<pre>';print_r($_REQUEST);
 // if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
 if ( isset( $_POST['submit-bt'] ) && $_POST['submit-bt'] == 'Shorten' ) {
-	 echo '<pre>';print_r($_REQUEST);exit;
-	 // if( ! empty( trim($_POST['url']) ) ) {
+	 echo '<pre>';print_r($_REQUEST);
+	  if( ! empty( trim($_POST['url']) ) ) {
 		//recaptcha code
 		 //$privatekey = CAPTCHA_PVT_KEY;
-		 $privatekey ="6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
-		 $resp = recaptcha_check_answer ($privatekey,
-		                                 $_SERVER["REMOTE_ADDR"],
-		                                 $_POST["recaptcha_challenge_field"],
-		                                 $_POST["recaptcha_response_field"]);
-		 if (!$resp->is_valid) {
-		   // What happens when the CAPTCHA was entered incorrectly	   
-		   $err_msg = "CAPTCHA entered incorrectly, Try again";
-		 }else{
-		 	$err_msg = '';
-		 }
-	   //}
-		 //else{
-	 // 	$err_msg = "Please enter URL";
-	 // } 
+		 // $privatekey ="6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
+		 // $resp = recaptcha_check_answer ($privatekey,
+		 //                                 $_SERVER["REMOTE_ADDR"],
+		 //                                 $_POST["recaptcha_challenge_field"],
+		 //                                 $_POST["recaptcha_response_field"]);
+		 // if (!$resp->is_valid) {
+		 //   // What happens when the CAPTCHA was entered incorrectly	   
+		 //   $err_msg = "CAPTCHA entered incorrectly, Try again";
+		 // }else{
+		 // 	$err_msg = '';
+		 // }
+	   }
+		 else{echo 'empty';exit;
+	 	$err_msg = "Please enter URL";
+	 } 
 	
 }
 
