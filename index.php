@@ -1,7 +1,7 @@
 <?php
 session_start();
 
- $_GLOBAL_MSG = '';
+ $err_msg = '';
 
 if ( isset($_REQUEST['css_type']) && $_REQUEST['css_type'] === '1' ) {
 	$_FORM_TYPE = 1;// Vertical
@@ -16,8 +16,8 @@ require_once( dirname(__FILE__).'/includes/recaptchalib.php' );
 // echo '<pre>';print_r($_REQUEST);
 // if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
 if ( isset( $_POST['submit-bt'] ) && $_POST['submit-bt'] == 'Shorten' ) {
-	// echo '<pre>';print_r($_REQUEST);exit;
-	// if( ! empty( trim($_POST['url']) ) ) {
+	 echo '<pre>';print_r($_REQUEST);exit;
+	if( ! empty( trim($_POST['url']) ) ) {
 		//recaptcha code
 		 //$privatekey = CAPTCHA_PVT_KEY;
 		 $privatekey ="6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
@@ -27,20 +27,23 @@ if ( isset( $_POST['submit-bt'] ) && $_POST['submit-bt'] == 'Shorten' ) {
 		                                 $_POST["recaptcha_response_field"]);
 		 if (!$resp->is_valid) {
 		   // What happens when the CAPTCHA was entered incorrectly	   
-		   $_GLOBAL_MSG = "CAPTCHA entered incorrectly, Try again";
+		   $err_msg = "CAPTCHA entered incorrectly, Try again";
 		 }else{
-		 	$_GLOBAL_MSG = '';
+		 	$err_msg = '';
 		 }
-	 //  }else{
-	 // 	$_GLOBAL_MSG = "Please enter URL";
-	 // } 
+	  }else{
+	 	$err_msg = "Please enter URL";
+	 } 
 	
 }
 
 
 
 
-// echo 'gmsg-->'.$_GLOBAL_MSG;exit;
+
+
+
+// echo 'gmsg-->'.$err_msg;exit;
 
 //$_SESSION['visualCaptcha-fieldName'] = $_FIELD_NAME;
 
@@ -66,7 +69,8 @@ $page = YOURLS_SITE . '/index.php';
 
 // Part to be executed if FORM has been submitted
 //if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
-if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' && $_GLOBAL_MSG=='') {
+// if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' && $err_msg=='') {
+if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' && empty($err_msg)) {
 	// Get parameters -- they will all be sanitized in yourls_add_new_link()
 	$url     = $_REQUEST['url'];
 	$keyword = isset( $_REQUEST['keyword'] ) ? $_REQUEST['keyword'] : '' ;
@@ -112,7 +116,8 @@ yourls_html_head();
 			<p class="urlrow"><a href="<?php yourls_site_url(); ?>" title="lyc.so"><img src="images/lycsoLogo.png" alt="lyc.so" title="lyc.so" /></a></p>
 			<?php
 			//if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
-			if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' && $_GLOBAL_MSG=='') {
+			// if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' && $err_msg=='') {
+			if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' && empty($err_msg)) {
 				// Display result message of short link creation
 				($status == 'success')?$class = 'successtext':$class = 'warning';
 				if( isset( $message ) && $class=='success') {					
@@ -138,9 +143,9 @@ yourls_html_head();
 			}else{
 			?>
 			<?php
-			if ( ! empty($_GLOBAL_MSG) ) {
+			if ( ! empty($err_msg) ) {
 			?>
-				<div class="warning"><span><?php echo $_GLOBAL_MSG; ?></span></div>
+				<div class="warning"><span><?php echo $err_msg; ?></span></div>
 			<?php
 			}
 			?>
