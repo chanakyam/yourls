@@ -216,3 +216,20 @@ input[type="password"] {border:1px solid #cccccc; padding:6px;}
 .width90 {width: 90%;}
 .width75 {width: 75%;}
 
+.homecontent .recaptcha_nothad_incorrect_sol {margin-top: 20px;}
+
+/* added for safari related issues*/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+
+.strong {
+font-weight:normal;
+-bracket-:hack[;
+font-weight:bold;
+];}
+
+strong, th {font-weight:normal; 
+-bracket-:hack[;
+font-weight:bold;
+];}
+
+}
