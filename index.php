@@ -13,18 +13,25 @@ if ( isset($_REQUEST['css_type']) && $_REQUEST['css_type'] === '1' ) {
 //$_FIELD_NAME = isset($_SESSION['visualCaptcha-fieldName']) ? $_SESSION['visualCaptcha-fieldName'] : uniqid();
 require_once( dirname(__FILE__).'/includes/recaptchalib.php' );
 //if ( isset($_REQUEST['form_submit']) && $_REQUEST['form_submit'] === '1' ) {
+$_GLOBAL_MSG = '';
 if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
-	//recaptcha code
-	 //$privatekey = CAPTCHA_PVT_KEY;
-	 $privatekey ="6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
-	 $resp = recaptcha_check_answer ($privatekey,
-	                                 $_SERVER["REMOTE_ADDR"],
-	                                 $_POST["recaptcha_challenge_field"],
-	                                 $_POST["recaptcha_response_field"]);
-	 if (!$resp->is_valid) {
-	   // What happens when the CAPTCHA was entered incorrectly	   
-	   $_GLOBAL_MSG = "The CAPTCHA wasn't entered correctly. Try it again.";
-	 }else{$_GLOBAL_MSG = '';} 
+	if(!empty(trim($_REQUEST['url']))) {
+		//recaptcha code
+		 //$privatekey = CAPTCHA_PVT_KEY;
+		 $privatekey ="6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
+		 $resp = recaptcha_check_answer ($privatekey,
+		                                 $_SERVER["REMOTE_ADDR"],
+		                                 $_POST["recaptcha_challenge_field"],
+		                                 $_POST["recaptcha_response_field"]);
+		 if (!$resp->is_valid) {
+		   // What happens when the CAPTCHA was entered incorrectly	   
+		   $_GLOBAL_MSG = "CAPTCHA entered incorrectly, Try again";
+		 }else{
+		 	$_GLOBAL_MSG = '';
+		 }
+	 }else{
+	 	$_GLOBAL_MSG = "Please enter URL";
+	 } 
 	
 }
 
@@ -138,8 +145,8 @@ yourls_html_head();
 			<form name="frm_sample" id="frm_sample" method="post" action="">				
 				<div class="margin20_T">
 					<div class="urlrow">
-					<label class="strong">Paste long URL here</label>
-					<input type="text" name="url" class="span6 margin5_L"/>
+					<label class="strong">Paste URL :</label>
+					<input type="text" name="url" value="<?php echo $_REQUEST['url'];?>" class="span6 margin5_L"/>
 					<input type="submit" name="submit-bt" class="btn" value="Shorten"/>
 					</div>
 					<?php //printCaptcha( 'frm_sample', $_FORM_TYPE, $_FIELD_NAME ); ?>					
@@ -147,7 +154,7 @@ yourls_html_head();
 				     $publickey = CAPTCHA_PUB_KEY;
 				     echo recaptcha_get_html($publickey);
 				    ?>	
-				    <!-- <p><strong>Please enter the captcha <span class="red">*</span></strong></p>		 -->
+				    
 				</div>			
 			</form>				
 			<?php }?>
@@ -155,6 +162,8 @@ yourls_html_head();
 	</div>	
 </div>
 <!--contentarea end-->
+
+
 
 <div class="add">
 	<!-- new code -->
@@ -172,26 +181,7 @@ yourls_html_head();
 	<!-- end -->
 </div>
 
-
-<?php
-
-// Display page footer
-yourls_html_footer();
-
-// These functions aren't needed, but we recommend you to use them (or similar), so you can start/get multiple captcha instances with two simple functions.
-
-// function printCaptcha( $formId = NULL, $type = NULL, $fieldName = NULL, $accessibilityFieldName = NULL ) {
-// 	require_once( 'inc/visualcaptcha.class.php' );	
-// 	$visualCaptcha = new \visualCaptcha\Captcha( $formId, $type, $fieldName, $accessibilityFieldName );
-// 	$visualCaptcha->show();
-// }
-
-// function validCaptcha( $formId = NULL, $type = NULL, $fieldName = NULL, $accessibilityFieldName = NULL ) {
-// 	require_once( 'inc/visualcaptcha.class.php' );
-// 	$visualCaptcha = new \visualCaptcha\Captcha( $formId, $type, $fieldName, $accessibilityFieldName );
-// 	return $visualCaptcha->isValid();
-// }
-
-?>	
+<!--Display page footer -->
+<?php yourls_html_footer(); ?>	
 
 
