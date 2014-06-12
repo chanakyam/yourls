@@ -20,7 +20,7 @@ if ( isset( $_POST['submit-bt'] ) && $_POST['submit-bt'] == 'Shorten' ) {
 	echo '<pre>';print_r($_POST);
 	echo 'trim-->'.trim($_POST['url']);
 	echo '<br>'.empty(trim($_POST['url']));exit;
-	  if( ! empty( trim($_POST['url']) ) ) {echo 'not empty';exit;
+	  // if( ! empty( trim($_POST['url']) ) ) {echo 'not empty';exit;
 		// //recaptcha code
 		//  //$privatekey = CAPTCHA_PVT_KEY;
 		//  $privatekey ="6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
@@ -34,7 +34,7 @@ if ( isset( $_POST['submit-bt'] ) && $_POST['submit-bt'] == 'Shorten' ) {
 		//  }else{
 		//  	$err_msg = '';
 		//  }
-	    }
+	    // }
 		//  else{
 	 // 	$err_msg = "Please enter URL";
 	 // } 
