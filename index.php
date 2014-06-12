@@ -199,17 +199,17 @@ yourls_html_footer();
 
 // These functions aren't needed, but we recommend you to use them (or similar), so you can start/get multiple captcha instances with two simple functions.
 
-function printCaptcha( $formId = NULL, $type = NULL, $fieldName = NULL, $accessibilityFieldName = NULL ) {
-	require_once( 'inc/visualcaptcha.class.php' );	
-	$visualCaptcha = new \visualCaptcha\Captcha( $formId, $type, $fieldName, $accessibilityFieldName );
-	$visualCaptcha->show();
-}
+// function printCaptcha( $formId = NULL, $type = NULL, $fieldName = NULL, $accessibilityFieldName = NULL ) {
+// 	require_once( 'inc/visualcaptcha.class.php' );	
+// 	$visualCaptcha = new \visualCaptcha\Captcha( $formId, $type, $fieldName, $accessibilityFieldName );
+// 	$visualCaptcha->show();
+// }
 
-function validCaptcha( $formId = NULL, $type = NULL, $fieldName = NULL, $accessibilityFieldName = NULL ) {
-	require_once( 'inc/visualcaptcha.class.php' );
-	$visualCaptcha = new \visualCaptcha\Captcha( $formId, $type, $fieldName, $accessibilityFieldName );
-	return $visualCaptcha->isValid();
-}
+// function validCaptcha( $formId = NULL, $type = NULL, $fieldName = NULL, $accessibilityFieldName = NULL ) {
+// 	require_once( 'inc/visualcaptcha.class.php' );
+// 	$visualCaptcha = new \visualCaptcha\Captcha( $formId, $type, $fieldName, $accessibilityFieldName );
+// 	return $visualCaptcha->isValid();
+// }
 
 ?>	
 

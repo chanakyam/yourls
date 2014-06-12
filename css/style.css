@@ -1,8 +1,8 @@
 /*lycos css*/
 * {padding:0; margin:0; outline: none;}
 
-body, html, .contentarea, .ltpannel{ height: 100%;}
-#wrap{ height: 90%;}
+
+#wrap{}
 
 a {text-decoration: none;}
 body {padding:0; margin:0; font-family: 'Source Sans Pro', sans-serif; font-size:14px; background:#fff;}
@@ -41,7 +41,7 @@ font-size:13px;
 
 .menu {float:right; color:#fff;}
 
-.ltpannel {background:#fff; float:left; width:100%; display:table; height:100%;}
+.ltpannel {background:#fff; float:left; width:100%; display:table;}
 
 
 .rightad{ display: table-cell;width: 28%; padding: 10px;}
@@ -52,7 +52,7 @@ font-size:13px;
 
 
 .footer {background:#343637; padding:10px 0; color:#919191; position:fixed; bottom:0; width:100%; text-align:center; z
-6;}
+6; left:0; z-index:20; height: 18px;}
 .footer a {color:#fff; text-decoration:none; margin:0 5px;}
 
 
@@ -141,7 +141,7 @@ input[type="text"] {border:1px solid #cccccc; padding:6px;}
     padding-right: 25px;
     line-height:22px;
     margin: 0;
-    outline: none;
+    outline: none; 
 
 }
 
@@ -163,7 +163,7 @@ input[type="text"] {border:1px solid #cccccc; padding:6px;}
 
 .strong {font-weight: bold;}
 
-.add {background-color: #000; padding:10px 0; width:100%; line-height:0; position:fixed; bottom:38px;}
+.add {background:#000; height:90px; padding:10px 0; width:100%; line-height:0; position:fixed; bottom:38px;}
 .red{color:#FF0000}
 
 iframe {
@@ -173,7 +173,7 @@ iframe {
 
 #recaptcha_area, #recaptcha_table {margin:10px auto;}
 span#recaptcha_privacy {
-    display:none;
+    
 }
 
 .userside #recaptcha_area, .userside #recaptcha_table {margin:10px 0;}
@@ -210,8 +210,8 @@ input[type="password"] {border:1px solid #cccccc; padding:6px;}
 .settingmenu .dropDown {padding-right: 0;}
 
 /**/
-.homecontent {display: table; height: 80%; width: 100%;}
-.homeinner {display: table-cell; float: none; vertical-align: middle;}
+.homecontent {width: 100%; padding-top:100px;}
+.homeinner {vertical-align:top;}
 
 .width90 {width: 90%;}
 .width75 {width: 75%;}
