@@ -19,7 +19,7 @@ require_once( dirname(__FILE__).'/includes/recaptchalib.php' );
 if ( isset( $_POST['submit-bt'] ) && $_POST['submit-bt'] == 'Shorten' ) {
 	echo '<pre>';print_r($_POST);
 	echo 'trim-->'.trim($_POST['url']);
-	echo '<br>'.empty(trim($_POST['url']));
+	echo '<br>'.empty(trim($_POST['url']));exit;
 	  if( ! empty( trim($_POST['url']) ) ) {echo 'not empty';exit;
 		// //recaptcha code
 		//  //$privatekey = CAPTCHA_PVT_KEY;
