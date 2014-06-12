@@ -163,7 +163,7 @@ input[type="text"] {border:1px solid #cccccc; padding:6px;}
 
 .strong {font-weight: bold;}
 
-.add {background:#000; height:90px; padding:10px 0; width:100%; line-height:0; position:fixed; bottom:38px;}
+.add {text-align:center; background:#000; height:90px; padding:10px 0; width:100%; line-height:0; position:fixed; bottom:38px;}
 .red{color:#FF0000}
 
 iframe {
@@ -210,7 +210,7 @@ input[type="password"] {border:1px solid #cccccc; padding:6px;}
 .settingmenu .dropDown {padding-right: 0;}
 
 /**/
-.homecontent {width: 100%;}
+.homecontent {width: 100%; padding-bottom: 120px;}
 .homeinner {vertical-align:top;}
 
 .width90 {width: 90%;}
@@ -221,14 +221,14 @@ input[type="password"] {border:1px solid #cccccc; padding:6px;}
 @media screen and (-webkit-min-device-pixel-ratio:0) {
 
 .strong {
-font-weight:normal;
--bracket-:hack[;
 font-weight:bold;
+-bracket-:hack[;
+font-weight:normal;
 ];}
 
-strong, th {font-weight:normal; 
+strong, th {font-weight:bold; 
 -bracket-:hack[;
-font-weight:bold;
+font-weight:normal;
 ];}
 
 }

@@ -24,6 +24,7 @@ div.share {
 	
 	width:183px;
 	overflow:hidden;
+	word-wrap:break-word;
 	
 }
 #copybox {
@@ -34,7 +35,7 @@ div.share {
 }
 #tweet_body {
 	float:left;
-	width:450px;
+	width:450px !important;
 	height:4em;
 	font-size:12px;
 }
