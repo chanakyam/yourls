@@ -35,7 +35,7 @@ if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
 	
 }
 
-echo 'gmsg-->'.$_GLOBAL_MSG;exit;
+// echo 'gmsg-->'.$_GLOBAL_MSG;exit;
 
 //$_SESSION['visualCaptcha-fieldName'] = $_FIELD_NAME;
 
