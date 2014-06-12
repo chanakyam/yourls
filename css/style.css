@@ -29,10 +29,10 @@ font-weight: bold;
 font-family: 'Source Sans Pro', sans-serif;
 font-size:13px;
 }
-
+.gap {height:80px;}
 .contentarea {margin:0;}
 
-.header {background:#343637 url(../images/headerbg.png) repeat-x 0 bottom; padding-bottom:10px; border-top:1px solid #0f1010;}
+.header {background:#343637 url(../images/headerbg.png) repeat-x 0 bottom; padding-bottom:10px; border-top:1px solid #0f1010; height:35px;}
 
 .contentarea:after, .contentarea:before, .header:after, .header:before { display:table; content:"";}
 .contentarea:after, .header:after {clear:both}
@@ -41,7 +41,7 @@ font-size:13px;
 
 .menu {float:right; color:#fff;}
 
-.ltpannel {background:#fff; float:left; width:100%; display:table;}
+.ltpannel {background:#fff;}
 
 
 .rightad{ display: table-cell;width: 28%; padding: 10px;}
@@ -210,13 +210,12 @@ input[type="password"] {border:1px solid #cccccc; padding:6px;}
 .settingmenu .dropDown {padding-right: 0;}
 
 /**/
-.homecontent {width: 100%; padding-top:100px;}
+.homecontent {width: 100%;}
 .homeinner {vertical-align:top;}
 
 .width90 {width: 90%;}
 .width75 {width: 75%;}
 
-.homecontent .recaptcha_nothad_incorrect_sol {margin-top: 20px;}
 
 /* added for safari related issues*/
 @media screen and (-webkit-min-device-pixel-ratio:0) {
@@ -233,3 +232,6 @@ font-weight:bold;
 ];}
 
 }
+
+.urlrow {height:45px;}
+

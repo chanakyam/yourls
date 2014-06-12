@@ -104,7 +104,7 @@ yourls_html_head();
 <div class="contentarea homecontent">
 	<div class="ltpannel homeinner center">
 		
-
+		<div class="gap"></div>
 		
 			<p><a href="<?php yourls_site_url(); ?>" title="lyc.so"><img src="images/lycsoLogo.png" alt="lyc.so" title="lyc.so" /></a></p>
 			<?php
@@ -148,9 +148,11 @@ yourls_html_head();
 			</script>			
 			<form name="frm_sample" id="frm_sample" method="post" action="">				
 				<div class="margin20_T">
+					<div class="urlrow">
 					<label class="strong">Paste long URL here</label>
 					<input type="text" name="url" class="span6 margin5_L"/>
 					<input type="submit" name="submit-bt" class="btn" value="Shorten"/>
+					</div>
 					<?php //printCaptcha( 'frm_sample', $_FORM_TYPE, $_FIELD_NAME ); ?>					
 					<?php
 				     $publickey = CAPTCHA_PUB_KEY;
