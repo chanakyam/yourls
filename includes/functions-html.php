@@ -255,7 +255,6 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 
 	<?php yourls_do_action( 'html_head', $context ); ?>
 </head>
-
 <?php if( yourls_is_admin() ) {?>
 
 <body class="<?php echo $context; ?> <?php echo $bodyclass; ?>">

@@ -145,7 +145,7 @@ yourls_html_head();
 				<div class="margin20_T">
 					<div class="urlrow">
 					<label class="strong">Paste URL :</label>
-					<input type="text" name="url" value="<?php echo $_REQUEST['url'];?>" class="span6 margin5_L"/>
+					<input type="text" name="url" value="" class="span6 margin5_L"/>
 					<input type="submit" name="submit-bt" class="btn" value="Shorten"/>
 					</div>
 					<?php //printCaptcha( 'frm_sample', $_FORM_TYPE, $_FIELD_NAME ); ?>					
@@ -153,7 +153,7 @@ yourls_html_head();
 				     $publickey = CAPTCHA_PUB_KEY;
 				     echo recaptcha_get_html($publickey);
 				    ?>	
-				    
+				    <!-- <p><strong>Please enter the captcha <span class="red">*</span></strong></p>		 -->
 				</div>			
 			</form>				
 			<?php }?>
@@ -162,25 +162,25 @@ yourls_html_head();
 </div>
 <!--contentarea end-->
 
+<div class="bottom">
 
+	<div class="add">
+		<!-- new code -->
+		<script type="text/javascript">
+			if (!window.OX_ads)
+			{ OX_ads = []; }
+			OX_ads.push(
+			{ "auid" : "537094873" }
+			);
+		</script>
+		<script type="text/javascript">
+			document.write('<scr'+'ipt src="http://ox-d.lycos.com/w/1.0/jstag"><\/scr'+'ipt>');
+		</script>
+		<noscript><iframe id="14f66a6be9" name="14f66a6be9" src="http://ox-d.lycos.com/w/1.0/afr?auid=537094873&cb=INSERT_RANDOM_NUMBER_HERE"><a href="http://ox-d.lycos.com/w/1.0/rc?cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" ><img src="http://ox-d.lycos.com/w/1.0/ai?auid=537094873&cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt="Add Banner" class="banner"></a></iframe></noscript>
+		<!-- end -->
+	</div>
 
-<div class="add">
-	<!-- new code -->
-	<script type="text/javascript">
-		if (!window.OX_ads)
-		{ OX_ads = []; }
-		OX_ads.push(
-		{ "auid" : "537094873" }
-		);
-	</script>
-	<script type="text/javascript">
-		document.write('<scr'+'ipt src="http://ox-d.lycos.com/w/1.0/jstag"><\/scr'+'ipt>');
-	</script>
-	<noscript><iframe id="14f66a6be9" name="14f66a6be9" src="http://ox-d.lycos.com/w/1.0/afr?auid=537094873&cb=INSERT_RANDOM_NUMBER_HERE"><a href="http://ox-d.lycos.com/w/1.0/rc?cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" ><img src="http://ox-d.lycos.com/w/1.0/ai?auid=537094873&cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt="Add Banner" class="banner"></a></iframe></noscript>
-	<!-- end -->
+	<!--Display page footer -->
+	<?php yourls_html_footer(); ?>	
+
 </div>
-
-<!--Display page footer -->
-<?php yourls_html_footer(); ?>	
-
-
