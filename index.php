@@ -14,23 +14,17 @@ if ( isset($_REQUEST['css_type']) && $_REQUEST['css_type'] === '1' ) {
 require_once( dirname(__FILE__).'/includes/recaptchalib.php' );
 //if ( isset($_REQUEST['form_submit']) && $_REQUEST['form_submit'] === '1' ) {
 if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
-	if(!empty(trim($_REQUEST['url']))) {
-		//recaptcha code
-		 //$privatekey = CAPTCHA_PVT_KEY;
-		 $privatekey ="6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
-		 $resp = recaptcha_check_answer ($privatekey,
-		                                 $_SERVER["REMOTE_ADDR"],
-		                                 $_POST["recaptcha_challenge_field"],
-		                                 $_POST["recaptcha_response_field"]);
-		 if (!$resp->is_valid) {
-		   // What happens when the CAPTCHA was entered incorrectly	   
-		   $_GLOBAL_MSG = "The CAPTCHA wasn't entered correctly. Try it again.";
-		 }else{
-		 	$_GLOBAL_MSG = '';
-		 }
-	 }else{
-	 	$_GLOBAL_MSG = "Please enter URL";
-	 } 
+	//recaptcha code
+	 //$privatekey = CAPTCHA_PVT_KEY;
+	 $privatekey ="6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
+	 $resp = recaptcha_check_answer ($privatekey,
+	                                 $_SERVER["REMOTE_ADDR"],
+	                                 $_POST["recaptcha_challenge_field"],
+	                                 $_POST["recaptcha_response_field"]);
+	 if (!$resp->is_valid) {
+	   // What happens when the CAPTCHA was entered incorrectly	   
+	   $_GLOBAL_MSG = "The CAPTCHA wasn't entered correctly. Try it again.";
+	 }else{$_GLOBAL_MSG = '';} 
 	
 }
 
@@ -144,8 +138,8 @@ yourls_html_head();
 			<form name="frm_sample" id="frm_sample" method="post" action="">				
 				<div class="margin20_T">
 					<div class="urlrow">
-					<label class="strong">Paste URL :</label>
-					<input type="text" name="url" value="" class="span6 margin5_L"/>
+					<label class="strong">Paste long URL here</label>
+					<input type="text" name="url" class="span6 margin5_L"/>
 					<input type="submit" name="submit-bt" class="btn" value="Shorten"/>
 					</div>
 					<?php //printCaptcha( 'frm_sample', $_FORM_TYPE, $_FIELD_NAME ); ?>					
@@ -162,25 +156,42 @@ yourls_html_head();
 </div>
 <!--contentarea end-->
 
-<div class="bottom">
-
-	<div class="add">
-		<!-- new code -->
-		<script type="text/javascript">
-			if (!window.OX_ads)
-			{ OX_ads = []; }
-			OX_ads.push(
-			{ "auid" : "537094873" }
-			);
-		</script>
-		<script type="text/javascript">
-			document.write('<scr'+'ipt src="http://ox-d.lycos.com/w/1.0/jstag"><\/scr'+'ipt>');
-		</script>
-		<noscript><iframe id="14f66a6be9" name="14f66a6be9" src="http://ox-d.lycos.com/w/1.0/afr?auid=537094873&cb=INSERT_RANDOM_NUMBER_HERE"><a href="http://ox-d.lycos.com/w/1.0/rc?cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" ><img src="http://ox-d.lycos.com/w/1.0/ai?auid=537094873&cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt="Add Banner" class="banner"></a></iframe></noscript>
-		<!-- end -->
-	</div>
-
-	<!--Display page footer -->
-	<?php yourls_html_footer(); ?>	
-
+<div class="add">
+	<!-- new code -->
+	<script type="text/javascript">
+		if (!window.OX_ads)
+		{ OX_ads = []; }
+		OX_ads.push(
+		{ "auid" : "537094873" }
+		);
+	</script>
+	<script type="text/javascript">
+		document.write('<scr'+'ipt src="http://ox-d.lycos.com/w/1.0/jstag"><\/scr'+'ipt>');
+	</script>
+	<noscript><iframe id="14f66a6be9" name="14f66a6be9" src="http://ox-d.lycos.com/w/1.0/afr?auid=537094873&cb=INSERT_RANDOM_NUMBER_HERE"><a href="http://ox-d.lycos.com/w/1.0/rc?cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" ><img src="http://ox-d.lycos.com/w/1.0/ai?auid=537094873&cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt="Add Banner" class="banner"></a></iframe></noscript>
+	<!-- end -->
 </div>
+
+
+<?php
+
+// Display page footer
+yourls_html_footer();
+
+// These functions aren't needed, but we recommend you to use them (or similar), so you can start/get multiple captcha instances with two simple functions.
+
+// function printCaptcha( $formId = NULL, $type = NULL, $fieldName = NULL, $accessibilityFieldName = NULL ) {
+// 	require_once( 'inc/visualcaptcha.class.php' );	
+// 	$visualCaptcha = new \visualCaptcha\Captcha( $formId, $type, $fieldName, $accessibilityFieldName );
+// 	$visualCaptcha->show();
+// }
+
+// function validCaptcha( $formId = NULL, $type = NULL, $fieldName = NULL, $accessibilityFieldName = NULL ) {
+// 	require_once( 'inc/visualcaptcha.class.php' );
+// 	$visualCaptcha = new \visualCaptcha\Captcha( $formId, $type, $fieldName, $accessibilityFieldName );
+// 	return $visualCaptcha->isValid();
+// }
+
+?>	
+
+
