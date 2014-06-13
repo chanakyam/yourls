@@ -14,7 +14,6 @@ require_once( dirname(__FILE__).'/includes/recaptchalib.php' );
 // if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
 if ( isset( $_POST['submit-bt'] ) && $_POST['submit-bt'] == 'Shorten' ) {
 	$url_val = trim($_POST['url']);
-	echo 'trim val-->'.$url_val;
 	  if(!empty($url_val) ) {
 	  	//validating the 
 		if (!preg_match("/\b(https:\/\/|http:\/\/|www|)?[\.]?+[a-z0-9A-Z]+\.[com|co.in|.net]+[a-z0-9A-Z\/?]+/i", $url_val)) {			
