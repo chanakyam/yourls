@@ -16,8 +16,8 @@ div.share {
 	background:#FAFAF7;
 	margin-left:1em;
 	padding:0 1em;
-	/*float:left;
-	height:140px;*/
+	/*float:left;*/
+	min-height:170px;
 	display: table-cell;
 }
 #origlink{
@@ -38,6 +38,7 @@ div.share {
 	width:450px !important;
 	height:4em;
 	font-size:12px;
+	border:1px solid #ccc;
 }
 #charcount {
 	padding-left:5px;
@@ -59,7 +60,7 @@ div.share {
 
 #copylink{
 	cursor:pointer;
-	background:transparent url(../images/copy.png) 130% center no-repeat; padding:8px;
+	background:transparent url(../images/copy.png) 130% center no-repeat; padding:8px; border:1px solid #ccc;
 }
 
 #copylink:hover, #copylink.hover {

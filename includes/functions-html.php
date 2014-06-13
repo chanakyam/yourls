@@ -369,7 +369,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 
 	//$logout_link ?></span>
 </div>
-
+<body class="home">
 	<?php }else { ?>
 <body class="<?php echo $context; ?> <?php echo $bodyclass; ?>">
 <?php }?>
@@ -1000,6 +1000,11 @@ function yourls_login_screen( $error_msg = '' ) {
 
 	//yourls_html_logo();
 	?>
+	<style type="text/css">
+	body, html {height: 100%;}
+	.home {background:url(../images/bg.jpg) repeat-x 0 bottom;}
+	#wrap {height:90%;}
+	</style>
 	<div class="contentarea homecontent">
 	<div class="homeinner">
 	<p class="center"><a href="<?php yourls_site_url(); ?>" title="lyc.so"><img src="images/lycsoLogo.png" alt="lyc.so" title="lyc.so" /></a></p>
@@ -1049,26 +1054,27 @@ function yourls_login_screen( $error_msg = '' ) {
 </div>
 </div>
 
-	<!-- new code -->
 
-	<div class="moduler center">
-		<div class="add">			
-			<script type="text/javascript">
-				if (!window.OX_ads)
-				{ OX_ads = []; }
-				OX_ads.push(
-				{ "auid" : "537094873" }
-				);
-			</script>
-			<script type="text/javascript">
-				document.write('<scr'+'ipt src="http://ox-d.lycos.com/w/1.0/jstag"><\/scr'+'ipt>');
-			</script>
-			<noscript><iframe id="14f66a6be9" name="14f66a6be9" src="http://ox-d.lycos.com/w/1.0/afr?auid=537094873&cb=INSERT_RANDOM_NUMBER_HERE"><a href="http://ox-d.lycos.com/w/1.0/rc?cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" ><img src="http://ox-d.lycos.com/w/1.0/ai?auid=537094873&cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt="Add Banner" class="banner"></a></iframe></noscript>			
-		</div>
-	</div>
-	<!-- end -->
 	<?php
 	yourls_html_footer();
+	?>
+	<!-- new code -->
+	<div class="add">			
+		<script type="text/javascript">
+			if (!window.OX_ads)
+			{ OX_ads = []; }
+			OX_ads.push(
+			{ "auid" : "537094873" }
+			);
+		</script>
+		<script type="text/javascript">
+			document.write('<scr'+'ipt src="http://ox-d.lycos.com/w/1.0/jstag"><\/scr'+'ipt>');
+		</script>
+		<noscript><iframe id="14f66a6be9" name="14f66a6be9" src="http://ox-d.lycos.com/w/1.0/afr?auid=537094873&cb=INSERT_RANDOM_NUMBER_HERE"><a href="http://ox-d.lycos.com/w/1.0/rc?cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" ><img src="http://ox-d.lycos.com/w/1.0/ai?auid=537094873&cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt="Add Banner" class="banner"></a></iframe></noscript>			
+	</div>
+
+<!-- end -->
+<?php
 	die();
 }
 

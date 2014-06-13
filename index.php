@@ -1,6 +1,5 @@
 <?php
 session_start();
-
  $err_msg = '';
 
 if ( isset($_REQUEST['css_type']) && $_REQUEST['css_type'] === '1' ) {
@@ -20,7 +19,7 @@ if ( isset( $_POST['submit-bt'] ) && $_POST['submit-bt'] == 'Shorten' ) {
 	// echo 'url val->'.$url_val;
 	  if(!empty( $url_val ) ) {
 		// //recaptcha code
-		 $privatekey = CAPTCHA_PVT_KEY;
+		 // $privatekey = CAPTCHA_PVT_KEY;
 		 $privatekey ="6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
 		 $resp = recaptcha_check_answer ($privatekey,
 		                                 $_SERVER["REMOTE_ADDR"],
@@ -159,16 +158,27 @@ yourls_html_head();
 			<form name="frm_sample" id="frm_sample" method="post" action="">				
 				<div class="margin20_T">
 					<div class="urlrow">
-					<label class="strong">Paste URL :</label>
-					<input type="text" name="url" value="<?php echo $_REQUEST['url'];?>" class="span6 margin5_L"/>
-					<input type="submit" name="submit-bt" class="btn" value="Shorten"/>
-					</div>
-					<?php //printCaptcha( 'frm_sample', $_FORM_TYPE, $_FIELD_NAME ); ?>					
-					<?php
-				     $publickey = CAPTCHA_PUB_KEY;
-				     echo recaptcha_get_html($publickey);
-				    ?>	
-				    
+					<table class="shorten-table">
+						<td width="11%" align="right" valign="top"><label class="strong">Paste URL :</label></td>
+						<td width="80%" valign="top">
+							<input type="text" name="url" value="<?php echo $_REQUEST['url'];?>" class="fullwidth"/>
+							<div class="margin20_T">
+								<?php //printCaptcha( 'frm_sample', $_FORM_TYPE, $_FIELD_NAME ); ?>					
+									<?php
+								     $publickey = CAPTCHA_PUB_KEY;
+								     echo recaptcha_get_html($publickey);
+								    ?>
+							</div>
+						</td>
+						<td width="10%" align="left" valign="top">
+						<input type="submit" name="submit-bt" class="btn" value="Shorten"/>
+						</td>
+
+					</table>
+					
+					
+					
+				   </div>
 				</div>			
 			</form>				
 			<?php }?>

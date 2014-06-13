@@ -359,15 +359,8 @@ visibility:hidden;
 tr:hover.plugin td.plugin_desc small {
 visibility:visible;
 }
-.footer {
-background:#28292b;
-bottom:0;
-color:#fff;
-padding:10px 0;
-position:fixed;
-text-align:center;
-width:100%;
-}
+
+
 .footer a {
 color:#FFFFFF;
 margin:0 5px;
@@ -490,7 +483,17 @@ border-radius: 5px;
 .module {padding:10px;}
 
 
-.footer {background:#343637; padding:10px 0; color:#919191; position:fixed; bottom:0; width:100%; text-align:center;}
+.footer {
+background:#343637; 
+padding:10px 0; color:#919191; 
+position:fixed; bottom:0; 
+width:100%; 
+text-align:center; 
+left:0; 
+z-index:20; 
+height:18px;
+}
+
 .footer a {color:#fff; text-decoration:none; margin:0 5px;}
 
 
