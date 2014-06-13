@@ -67,3 +67,11 @@ div.share {
 	background-position:100% 50%;
 }
 
+
+@media (min-width:800px) (max-width:1024px) {
+#sharebox {
+width: 56%;
+}
+#tweet_body {width:370px !important;}
+
+}

@@ -43,7 +43,7 @@ yourls_html_head();
  echo "<div class='errormessage'>Signup failed. Please try again.</div>";
  }?>
  <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 3 ){
- echo "<div class='errormessage'>The CAPTCHA wasn't entered correctly. Try it again.</div>";
+ echo "<div class='errormessage'>CAPTCHA entered incorrectly, Try again</div>";
  }?>
 
 

@@ -9,16 +9,18 @@ if ( isset($_REQUEST['css_type']) && $_REQUEST['css_type'] === '1' ) {
 }
 
 // The fact we're not using the default visualCaptcha's fieldname is just to show part of visualCaptcha's flexibility
-//$_FIELD_NAME = isset($_SESSION['visualCaptcha-fieldName']) ? $_SESSION['visualCaptcha-fieldName'] : uniqid();
 require_once( dirname(__FILE__).'/includes/recaptchalib.php' );
 //if ( isset($_REQUEST['form_submit']) && $_REQUEST['form_submit'] === '1' ) {
-// echo '<pre>';print_r($_REQUEST);
 // if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
 if ( isset( $_POST['submit-bt'] ) && $_POST['submit-bt'] == 'Shorten' ) {
 	$url_val = trim($_POST['url']);
-	// echo 'url val->'.$url_val;
-	  if(!empty( $url_val ) ) {
-		// //recaptcha code
+	echo 'trim val-->'.$url_val;
+	  if(!empty($url_val) ) {
+	  	//validating the 
+		if (!preg_match("/\b(https:\/\/|http:\/\/|www|)?[\.]?+[a-z0-9A-Z]+\.[com|co.in|.net]+[a-z0-9A-Z\/?]+/i", $url_val)) {			
+			$err_msg.= "Invalid URL<br>";
+		 }
+		 //recaptcha code
 		 // $privatekey = CAPTCHA_PVT_KEY;
 		 $privatekey ="6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
 		 $resp = recaptcha_check_answer ($privatekey,
@@ -27,29 +29,16 @@ if ( isset( $_POST['submit-bt'] ) && $_POST['submit-bt'] == 'Shorten' ) {
 		                                 $_POST["recaptcha_response_field"]);
 		 if (!$resp->is_valid) {
 		   // What happens when the CAPTCHA was entered incorrectly	   
-		   $err_msg = "CAPTCHA entered incorrectly, Try again";
-		 }else{
-		 	$err_msg = '';
-		 }
+		 	$err_msg.= "CAPTCHA entered incorrectly, Try again<br>";
+		  }
+		  
 	    }
 		 else{
-	 	$err_msg = "Please enter URL";
-	 } 
+	 		$err_msg.= "Please enter URL";
+	 	} 
 	
 }
 
-
-
-
-
-
-
-// echo 'gmsg-->'.$err_msg;exit;
-
-//$_SESSION['visualCaptcha-fieldName'] = $_FIELD_NAME;
-
-?>
-<?php
 //session_start();
 /*
  * This is an example file for a public interface and a bookmarklet. It
@@ -107,13 +96,9 @@ yourls_html_head();
 
 ?>
 
-
-
 <div class="contentarea homecontent">
-	<div class="ltpannel homeinner center">
-		
-		<div class="gap"></div>
-		
+	<div class="ltpannel homeinner center">		
+		<div class="gap"></div>		
 			<p class="urlrow"><a href="<?php yourls_site_url(); ?>" title="lyc.so"><img src="images/lycsoLogo.png" alt="lyc.so" title="lyc.so" /></a></p>
 			<?php
 			//if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' ) {
@@ -129,8 +114,7 @@ yourls_html_head();
 				}
 				if( isset($shorturl) && $shorturl!=''){
 					echo "<div class='successtext lurl'>Shorten URL <span>$shorturl</span></div><br>";
-				}
-				
+				}				
 				
 				if( $status == 'success' ) {
 					// Include the Copy box and the Quick Share box
@@ -146,7 +130,13 @@ yourls_html_head();
 			<?php
 			if ( ! empty($err_msg) ) {
 			?>
-				<div class="warning"><span><?php echo $err_msg; ?></span></div>
+				<div class="warning">
+					<span>
+						<?php 
+							echo $err_msg;							
+						?>
+					</span>
+				</div>
 			<?php
 			}
 			?>
@@ -154,6 +144,11 @@ yourls_html_head();
 			 var RecaptchaOptions = {
 			    theme : 'blackglass'
 			 };
+			 
+			function trimText(){
+				var uval = $.trim($('#url').val());
+				$("#url").val(uval);
+			}
 			</script>			
 			<form name="frm_sample" id="frm_sample" method="post" action="">				
 				<div class="margin20_T">
@@ -161,34 +156,25 @@ yourls_html_head();
 					<table class="shorten-table">
 						<td width="11%" align="right" valign="top"><label class="strong">Paste URL :</label></td>
 						<td width="80%" valign="top">
-							<input type="text" name="url" value="<?php echo $_REQUEST['url'];?>" class="fullwidth"/>
-							<div class="margin20_T">
-								<?php //printCaptcha( 'frm_sample', $_FORM_TYPE, $_FIELD_NAME ); ?>					
-									<?php
-								     $publickey = CAPTCHA_PUB_KEY;
-								     echo recaptcha_get_html($publickey);
-								    ?>
+							<input onkeypress="trimText();" type="text" name="url" id="url" value="<?php echo $_REQUEST['url'];?>" class="fullwidth"/>
+							<div class="margin20_T">													
+								<?php
+							     $publickey = CAPTCHA_PUB_KEY;
+							     echo recaptcha_get_html($publickey);
+							    ?>
 							</div>
 						</td>
 						<td width="10%" align="left" valign="top">
 						<input type="submit" name="submit-bt" class="btn" value="Shorten"/>
 						</td>
-
-					</table>
-					
-					
-					
+					</table>					
 				   </div>
 				</div>			
 			</form>				
-			<?php }?>
-			
+			<?php }?>			
 	</div>	
 </div>
 <!--contentarea end-->
-
-
-
 <div class="add">
 	<!-- new code -->
 	<script type="text/javascript">
@@ -204,7 +190,6 @@ yourls_html_head();
 	<noscript><iframe id="14f66a6be9" name="14f66a6be9" src="http://ox-d.lycos.com/w/1.0/afr?auid=537094873&cb=INSERT_RANDOM_NUMBER_HERE"><a href="http://ox-d.lycos.com/w/1.0/rc?cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" ><img src="http://ox-d.lycos.com/w/1.0/ai?auid=537094873&cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt="Add Banner" class="banner"></a></iframe></noscript>
 	<!-- end -->
 </div>
-
 <!--Display page footer -->
 <?php yourls_html_footer(); ?>	
 

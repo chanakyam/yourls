@@ -205,7 +205,9 @@ span#recaptcha_privacy {
 .span6 {width:auto; clear:both;}
 .footer > span {display:block; margin-top:5px; text-align:center;
 }
+
 }
+
 @media (max-width:380px) {
 
 .span6 {display:block; width:80%; margin:10px;}
