@@ -11,8 +11,9 @@ $obj_user = new user();
 $_GLOBAL_MSG = '';
 // if request comes from registration form
 if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="Signup"){
+	if(!empty($_POST['recaptcha_response_field'])){
 	//valdating captcha
-	$privatekey ="6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
+	 $privatekey ="6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
 	 $resp = recaptcha_check_answer ($privatekey,
 	                                 $_SERVER["REMOTE_ADDR"],
 	                                 $_POST["recaptcha_challenge_field"],
@@ -20,7 +21,14 @@ if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="Signup"){
 	 if (!$resp->is_valid) {
 	   // What happens when the CAPTCHA was entered incorrectly	   
 	   $_GLOBAL_MSG = "The CAPTCHA wasn't entered correctly. Try it again.";
-	 }else{$_GLOBAL_MSG = '';}
+	 }else{
+	 	$_GLOBAL_MSG = '';
+	 }
+	 }else{
+			$_GLOBAL_MSG = "Please enter CAPTCHA";
+		}
+
+
 	 if($_GLOBAL_MSG == ''){
 		// prepare data array
 		$data['firstname'] 	  = $_POST['firstname'];
@@ -45,9 +53,12 @@ if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="Signup"){
 			// already exist
 			header('location: register.php?status=2');exit;
 		}
-	}else{
+	}elseif($_GLOBAL_MSG == "Please enter CAPTCHA"){
 		// captcha error
 		header('location: register.php?status=3');exit;
+	}else{
+		header('location: register.php?status=4');exit;
+
 	}	
 	
 }	
@@ -100,10 +111,10 @@ if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="Add"){
 if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="Update"){
 	$response = $obj_user->showuser();
 	if($response){
-		header('location: myprofile.php?status=1');exit;
+		header('location: editprofile.php?status=1');exit;
 			//echo "Updated Succesfully!!";
 		}else{
-			header('location: myprofile.php?status=0');exit;
+			header('location: editprofile.php?status=0');exit;
 			//echo "Updation Failed!!";
 		}
 }	

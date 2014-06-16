@@ -12,26 +12,30 @@ yourls_html_head();
 <div class="contentarea">
 	<title>Change Password</title>
 	<script type="text/javascript">
-
+	
 	function validatechangepwd(){		
 		//validate old password
 		if(document.forms["changepwd"]["password"]){
    			var password=document.forms["changepwd"]["password"].value;
   			if (password==null || password==""){
-    			errorMessage("label_password", "(This field is required)");
+    			//errorMessage("label_password", "(This field is required)");
+    			$('input#password').addClass('required');
     			invalid = true;
    			}else{
-   			errorMessage("label_password", "");
+   			//errorMessage("label_password", "");
+   			$('input#password').removeClass('required');
    			}
     	}
 		//validate new password
     	if(document.forms["changepwd"]["newpwd"]){
    			var newpwd=document.forms["changepwd"]["newpwd"].value;
   			if (newpwd==null || newpwd==""){
-    			errorMessage("label_newpwd", "(This field is required)");
+    			//errorMessage("label_newpwd", "(This field is required)");
+    			$('input#newpwd').addClass('required');
     			invalid = true;
    			}else{
-   			errorMessage("label_newpwd", "");
+   			//errorMessage("label_newpwd", "");
+   			$('input#newpwd').removeClass('required');
    			}
     	}
     	//special characters validation for password
@@ -49,10 +53,12 @@ yourls_html_head();
 
       		var cnew=document.forms["changepwd"]["cnew"].value;
       		if (cnew != newpwd){
-          		errorMessage("label_cnew", "(Password not matching)");
+          		//errorMessage("label_cnew", "(Password not matching)");
+          		$('input#cnew').addClass('required');
           		invalid = true;
       		}else{
-        		errorMessage("label_cnew", "");
+        		//errorMessage("label_cnew", "");
+        		$('input#cnew').removeClass('required');
       		}
     	}
 
@@ -84,21 +90,21 @@ yourls_html_head();
           }?> 
 				<table  width="100%" border="0" cellpadding="0" cellspacing="0"e>
 				<tr>
-					<td width="28%">Old Password<span class="error_message" >*</span>:</td>
+					<td width="28%">Old Password<!-- <span class="error_message" >*</span> -->:</td>
 					<td>
 						<input class="width50" type="password" id="password" name="password" >
 						<span class="error_message" id="label_password"></span>
 					</td>
 				</tr>
 				<tr>
-					<td>New Password<span class="error_message" >*</span>:</td>
+					<td>New Password<!-- <span class="error_message" >*</span> -->:</td>
 					<td>
 						<input class="width50" type="password" id="newpwd" name="newpwd" >
 						<span class="error_message" id="label_newpwd"></span>
 					</td>
 				</tr>
 				<tr>
-					<td>Confirm New Password<span class="error_message" >*</span>:</td>
+					<td>Confirm New Password<!-- <span class="error_message" >*</span> -->:</td>
 					<td>
 						<input class="width50" type="password" id="cnew" name="cnew" >
 						<span class="error_message" id="label_cnew"></span>

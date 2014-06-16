@@ -84,7 +84,7 @@ yourls_html_head();
 					<table border="0" cellpadding="3" cellspacing="0" width="100%">
 						
 						<tr>
-							<td width="20%">Email<span class="error_message" >*</span>:</td>
+							<td width="20%">Email<!-- <span class="error_message" >*</span> -->:</td>
 							<td>
 								<input type="text" id="email" name="email">
 								
@@ -93,7 +93,7 @@ yourls_html_head();
 							</td>
 						</tr>
 						<tr>
-							<td>Password<span class="error_message" >*</span>:</td>
+							<td>Password<!-- <span class="error_message" >*</span> -->:</td>
 							<td>
 								<input type="password" id="password" name="password">
 							

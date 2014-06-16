@@ -9,8 +9,8 @@ function yourls_html_logo() {
 	yourls_do_action( 'pre_html_logo' );
 	?>
 	<h1>
-		<a href="<?php echo yourls_admin_url( 'index.php' ) ?>" title="YOURLS"><span>YOURLS</span>: <span>Y</span>our <span>O</span>wn <span>URL</span> <span>S</span>hortener<br/>
-		<img src="<?php yourls_site_url(); ?>/images/yourls-logo.png" alt="YOURLS" title="YOURLS" border="0" style="border: 0px;" /></a>
+		<a href="<?php echo yourls_admin_url( 'index.php' ) ?>" title="lyc.so"><span>Lycos</span>: <span>URL</span> <span>S</span>hortener<br/>
+		<img src="<?php yourls_site_url(); ?>/images/yourls-logo.png" alt="lyc.so" title="lyc.so" border="0" style="border: 0px;" /></a>
 	</h1>
 	<?php
 	yourls_do_action( 'html_logo' );
@@ -157,7 +157,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 								    },
 								      { "fnRender": function ( oObj ) {
 								        if ( oObj.aData[1] != "" ) {
-								            return '<td id="url-'+oObj.aData["id"]+'" class="url "><a title="'+oObj.aData[1]+'" href="'+oObj.aData[1]+'">'+oObj.aData["short_title"]+'</a><br><small id="longurl-'+oObj.aData["id"]+'"><a href="'+oObj.aData[1]+'">'+oObj.aData["short_url"]+'</a></small></td>';
+								            return '<td id="url-'+oObj.aData["id"]+'" class="url "><a target="_blank" title="'+oObj.aData[1]+'" href="'+oObj.aData[1]+'">'+oObj.aData["short_title"]+'</a><br><small id="longurl-'+oObj.aData["id"]+'"><a target="_blank" href="'+oObj.aData[1]+'">'+oObj.aData["short_url"]+'</a></small></td>';
 								            }
 								        else {
 								            return oObj.aData[1];
@@ -292,7 +292,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
         	<div class="moremenu settingmenu">
         	<a  class="dropDown" title="' . yourls_esc_attr__( 'Settings' ) . '"><img src="/images/setting.png"> </a>
         	<ul style="display: none;" class="hide ddMenu lyGrey boxShadow1">
-                <li><a href="myprofile.php" title="My Profile">My Profile</a></li>                
+                <li><a href="editprofile.php" title="Edit Profile">Edit Profile</a></li>                
 				<li><a href="changepwd.php" title="Change Password" id="changepwd">Change Password</a></li>
             </ul>
 	</div>' );
@@ -347,7 +347,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 			 <div class="moremenu settingmenu">		  
 	        	<a class="dropDown" title="Settings"><img src="/images/setting.png"> </a>
 	        	<ul style="display: none;" class="hide ddMenu lyGrey boxShadow1">
-	               	<li><a href="myprofile.php" title="My Profile">My Profile</a></li>                
+	               	<li><a href="editprofile.php" title="Edit Profile">Edit Profile</a></li>                
 					<li><a href="changepwd.php" title="Change Password" id="changepwd">Change Password</a></li>
 	           	</ul>
 			 </div>
@@ -403,7 +403,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 			 <div class="moremenu settingmenu">		  
 	        	<a class="dropDown" title="Settings"><img src="/images/setting.png"> </a>
 	        	<ul style="display: none;" class="hide ddMenu lyGrey boxShadow1">
-	               	<li><a href="myprofile.php" title="My Profile">My Profile</a></li>                
+	               	<li><a href="editprofile.php" title="Edit Profile">Edit Profile</a></li>               
 					<li><a href="changepwd.php" title="Change Password" id="changepwd">Change Password</a></li>
 	           	</ul>
 			 </div>
@@ -1003,7 +1003,7 @@ function yourls_login_screen( $error_msg = '' ) {
 	<style type="text/css">
 	body, html {height: 100%;}
 	.home {background:url(../images/bg.jpg) repeat-x 0 bottom;}
-	#wrap {height:90%;}
+	#wrap {height:auto; padding:90px 0 140px 0; max-width: 100%;}
 	</style>
 	<div class="contentarea homecontent">
 	<div class="homeinner">
@@ -1019,7 +1019,7 @@ function yourls_login_screen( $error_msg = '' ) {
           //echo "<div class='errormessage'>Activation Failed/. Please try again.</div>";
           echo "<div class='errormessage'>Activation Link Expired.</div>";
           }?>
-		<form method="post" action="<?php echo $action; ?>"> <?php // reset any QUERY parameters ?>
+		<form method="post" name="loginpage" action="<?php echo $action; ?>" onsubmit="return loginValidateForm();"> <?php // reset any QUERY parameters ?>
 			<?php
 				//if( !empty( $error_msg ) ) {
 				if( !empty( $error_msg ) && $error_msg!='Please log in') {

@@ -82,7 +82,7 @@ class user{
     	$subject="Activate your account";
     	$header = "Content-Type: text/html; charset=ISO-8859-1\r\n"; 
     	$header.="from: Admin <noreply-lycso@lycos-inc.com>"; 
-    	$link ="<a href='http://".$domain."/process.php?form_type=authenticate&id=".base64_encode($user_id)."'>Please Click Here To Activate Your Account.</a>";
+    	$link ="<a href='http://".$domain."/process.php?form_type=authenticate&id=".base64_encode($user_id)."'>Please click here to activate your account.</a>";
     	$messages = "Hi ".$name.",<br><br>";
     	$messages .= $link."<br><br><br>";
     	$messages .= "Thanks,<br>";

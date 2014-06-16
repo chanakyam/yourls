@@ -29,17 +29,21 @@ yourls_html_head();
 			<script src="<?php yourls_site_url(); ?>/js/jquery-1.8.2.min.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
 			<script type="text/javascript">
 			//email validation
+			
 			function emailvalidation(){
 				var email=document.forms["forgotpassword"]["email"].value;
 					if (email==null || email=="")
 			  		{
-			  			errorMessage("label_email", "(This field is required)");
+			  			//errorMessage("label_email", "(This field is required)");
+			  			$('input#email').addClass('required');
 			  			invalid = true;
 			 		}else if(!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
-			 			errorMessage("label_email", "Please enter valid Email");
+			 			//errorMessage("label_email", "Please enter valid Email");
+			 			$('input#email').addClass('required');
 			 			invalid = true;
 			 		}else{
-			 			errorMessage("label_email", "");
+			 			//errorMessage("label_email", "");
+			 			$('input#email').removeClass('required');
 			 			invalid = false;
 			 		}				
 
@@ -72,9 +76,9 @@ yourls_html_head();
 
 				<table width="100%">
 					<tr>
-						<td width="25%">Please Enter your Email id<span class="error_message" >*</span>:</td>
+						<td width="20%">Email Address<!-- <span class="error_message" >*</span> -->:</td>
 						<td>
-							<input type="text" name="email" id="email" class="width75">
+							<input type="text" name="email" id="email" class="width97">
 							<span class="error_message" id="label_email"></span>
 						</td>
 					</tr>

@@ -76,7 +76,7 @@ $user_data = $obj_user->getUserDetails();
 				
 </div>
 
-
+</div>
 
 <div class="add center">
 	<!-- new code -->

@@ -25,7 +25,7 @@ yourls_html_head();
         
         <table border="0" cellpadding="3" cellspacing="0" width="100%">
         <tr>
-          <td width="25%">First Name<span class="error_message" >*</span>:</td>
+          <td width="25%">First Name<!-- <span class="error_message" >*</span> -->:</td>
           <td>
             <input type="text" name="firstname" id="firstname">
             
@@ -35,7 +35,7 @@ yourls_html_head();
         </tr>       
 
         <tr>
-          <td>Last Name<span class="error_message" >*</span>:</td>
+          <td>Last Name<!-- <span class="error_message" >*</span> -->:</td>
           <td>
             <input type="text" name="lastname" id="lastname">
          
@@ -44,7 +44,7 @@ yourls_html_head();
         </tr>       
 
         <tr>
-          <td>Email Address<span class="error_message" >*</span>:</td>
+          <td>Email Address<!-- <span class="error_message" >*</span> -->:</td>
           <td>
             <input type="text" name="email"  id="email">
           
@@ -53,7 +53,7 @@ yourls_html_head();
         </tr>       
 
         <tr>
-          <td>Password<span class="error_message" >*</span>:</td>
+          <td>Password<!-- <span class="error_message" >*</span> -->:</td>
           <td>
             <input type="password" name="password" id="password">
           
@@ -62,7 +62,7 @@ yourls_html_head();
         </tr>       
 
         <tr>
-          <td>Confirm Password<span class="error_message" >*</span>:</td>
+          <td>Confirm Password<!-- <span class="error_message" >*</span> -->:</td>
           <td>
             <input type="password" name="confpassword" id="confpassword">
           

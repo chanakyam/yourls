@@ -21,6 +21,7 @@ if ( isset( $_POST['submit-bt'] ) && $_POST['submit-bt'] == 'Shorten' ) {
 		 }
 		 //recaptcha code
 		 // $privatekey = CAPTCHA_PVT_KEY;
+		 if(!empty($_POST['recaptcha_response_field'])){
 		 $privatekey ="6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
 		 $resp = recaptcha_check_answer ($privatekey,
 		                                 $_SERVER["REMOTE_ADDR"],
@@ -30,6 +31,9 @@ if ( isset( $_POST['submit-bt'] ) && $_POST['submit-bt'] == 'Shorten' ) {
 		   // What happens when the CAPTCHA was entered incorrectly	   
 		 	$err_msg.= "CAPTCHA entered incorrectly, Try again<br>";
 		  }
+		}else{
+			$err_msg.= "Please enter CAPTCHA";
+		}
 		  
 	    }
 		 else{
@@ -84,6 +88,7 @@ if ( isset( $_REQUEST['url'] ) && $_REQUEST['url'] != 'http://' && empty($err_ms
 		die();
 	}
 }
+
 // Insert <head> markup and all CSS & JS files
 yourls_html_head();
 
@@ -94,7 +99,7 @@ yourls_html_head();
 //yourls_html_menu() ;
 
 ?>
-
+<?php yourls_html_footer();?>
 <div class="contentarea homecontent">
 	<div class="ltpannel homeinner center">		
 		<div class="gap"></div>		
@@ -142,12 +147,13 @@ yourls_html_head();
 			<script type="text/javascript">
 			 var RecaptchaOptions = {
 			    theme : 'blackglass'
-			 };
-			 
-			function trimText(){
-				var uval = $.trim($('#url').val());
-				$("#url").val(uval);
-			}
+			 };		 
+			
+			$('#submit-bt').live('click', function() {
+				var uval = $('#url').val();
+				uval = $.trim(uval);
+				$("#url").val(uval); 
+			});
 			</script>			
 			<form name="frm_sample" id="frm_sample" method="post" action="">				
 				<div class="margin20_T">
@@ -155,7 +161,7 @@ yourls_html_head();
 					<table class="shorten-table">
 						<td width="11%" align="right" valign="top"><label class="strong">Paste URL :</label></td>
 						<td width="80%" valign="top">
-							<input onkeypress="trimText();" type="text" name="url" id="url" value="<?php echo $_REQUEST['url'];?>" class="fullwidth"/>
+							<input type="text" name="url" id="url" value="<?php echo $_REQUEST['url'];?>" class="fullwidth"/>
 							<div class="margin20_T">													
 								<?php
 							     $publickey = CAPTCHA_PUB_KEY;
@@ -164,16 +170,18 @@ yourls_html_head();
 							</div>
 						</td>
 						<td width="10%" align="left" valign="top">
-						<input type="submit" name="submit-bt" class="btn" value="Shorten"/>
+						<input type="submit" name="submit-bt" id="submit-bt" class="btn" value="Shorten"/>
 						</td>
 					</table>					
 				   </div>
 				</div>			
 			</form>				
-			<?php }?>			
+			<?php } ?>	
+
 	</div>	
 </div>
 <!--contentarea end-->
+
 <div class="add">
 	<!-- new code -->
 	<script type="text/javascript">
@@ -189,7 +197,8 @@ yourls_html_head();
 	<noscript><iframe id="14f66a6be9" name="14f66a6be9" src="http://ox-d.lycos.com/w/1.0/afr?auid=537094873&cb=INSERT_RANDOM_NUMBER_HERE"><a href="http://ox-d.lycos.com/w/1.0/rc?cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" ><img src="http://ox-d.lycos.com/w/1.0/ai?auid=537094873&cs=14f66a6be9&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt="Add Banner" class="banner"></a></iframe></noscript>
 	<!-- end -->
 </div>
+
 <!--Display page footer -->
-<?php yourls_html_footer(); ?>	
+	
 
 

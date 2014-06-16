@@ -737,3 +737,6 @@ font-weight:bold;
 ];}
 
 }
+
+/*added for showing error message*/
+.required {border:1px solid #FF0000 !important;}

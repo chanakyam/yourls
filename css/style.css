@@ -62,8 +62,8 @@ position:fixed; bottom:0;
 width:100%; 
 text-align:center; 
 left:0; 
-z-index:20; 
-height: 18px;
+z-index:200; 
+height:20px;
 }
 
 .footer a {color:#fff; text-decoration:none; margin:0 5px;}
@@ -176,7 +176,11 @@ input[type="text"] {border:1px solid #cccccc; padding:6px;}
 
 .strong {font-weight: bold;}
 
-.add {text-align:center; background:#000; height:90px; padding:10px 0; width:100%; line-height:0; position:fixed; bottom:38px;}
+.add {text-align:center; background:#000; height:90px;
+ padding:10px 0; width:100%; line-height:0; position:fixed;
+  bottom:38px;
+  z-index:1;
+}
 .red{color:#FF0000}
 
 iframe {
@@ -268,3 +272,14 @@ margin-top: 5px;
 }
 
 .recaptcha_only_if_privacy {display: none;}
+
+/*added for showing error message*/
+
+.required {border:1px solid #FF0000 !important;}
+.width98 {width:98%;}
+/*captcha error css*/
+div.required {
+    border:2px solid #FF0000 !important;
+    border-radius:6px;
+
+}

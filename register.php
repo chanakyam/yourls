@@ -37,60 +37,60 @@ yourls_html_head();
  echo "<div class='success'>Please Check your Email to Activate your account.</div>";
  }?>
  <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 2 ){
- echo "<div class='errormessage'>User Already Exist</div>";
+ echo "<div class='errormessage'>Email already exist</div>";
  }?>
  <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 0 ){
  echo "<div class='errormessage'>Signup failed. Please try again.</div>";
  }?>
  <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 3 ){
+ echo "<div class='errormessage'>Please enter CAPTCHA</div>";
+ }?>
+ <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 4 ){
  echo "<div class='errormessage'>CAPTCHA entered incorrectly, Try again</div>";
  }?>
 
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
-  <td width="22%">First Name<span class="error_message" >*</span>:</td>
-  <td>
-    <input class="width50" type="text" name="firstname" id="firstname" >
-    
-  
-		<span class="error_message" id="label_firstname"></span>
-	</td>
-</tr>
-
-<tr>
-  <td>Last Name<span class="error_message" >*</span>:</td>
-  <td>
-    <input class="width50" type="text" name="lastname" id="lastname" >
+  <td width="25%">First Name<!-- <span class="error_message" >*</span> -->:</td>
+  <td width="75%">
+    <input class="width97" type="text" name="firstname" id="firstname" >
  
-    	<span class="error_message" id="label_lastname"></span>	
 	</td>
 </tr>
 
 <tr>
-  <td>Email Address<span class="error_message" >*</span>:</td>
+  <td>Last Name<!-- <span class="error_message" >*</span> -->:</td>
   <td>
-    <input class="width50" type="text" name="email"  id="email" >
-  
-    	<span class="error_message" id="label_email"></span>
+    <input class="width97" type="text" name="lastname" id="lastname" >
+   
 	</td>
 </tr>
 
 <tr>
-  <td>Password<span class="error_message" >*</span>:</td>
+  <td>Email Address<!-- <span class="error_message" >*</span> -->:</td>
   <td>
-    <input class="width50" type="password" name="password" id="password" >
+    <input class="width97" type="text" name="email"  id="email" >
   
-    	<span class="error_message" id="label_password"></span>
+    	<!-- <span class="error_message" id="label_email"></span> -->
 	</td>
 </tr>
 
 <tr>
-  <td>Confirm Password<span class="error_message" >*</span>:</td>
+  <td>Password<!-- <span class="error_message" >*</span> -->:</td>
   <td>
-    <input class="width50" type="password" name="confpassword" id="confpassword" >
+    <input class="width97" type="password" name="password" id="password" >
   
-    	<span class="error_message" id="label_confpassword"></span>
+    	<!-- <span class="error_message" id="label_password"></span> -->
+	</td>
+</tr>
+
+<tr>
+  <td>Confirm Password<!-- <span class="error_message" >*</span> -->:</td>
+  <td>
+    <input class="width97" type="password" name="confpassword" id="confpassword" >
+  
+    	<!-- <span class="error_message" id="label_confpassword"></span> -->
 	</td>  
 </tr>
 

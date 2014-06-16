@@ -84,7 +84,7 @@ yourls_html_head();
 
 						<table>
 							<tr>
-								<td>New Password<span class="error_message" >*</span>:</td>
+								<td>New Password<!-- <span class="error_message" >*</span> -->:</td>
 								<td>
 									<input type="password" id="newpwd" name="newpwd">
 									<span class="error_message" id="label_newpwd"></span>
@@ -92,7 +92,7 @@ yourls_html_head();
 							</tr>
 
 							<tr>
-								<td>Confirm New Password<span class="error_message" >*</span>:</td>
+								<td>Confirm New Password<!-- <span class="error_message" >*</span> -->:</td>
 								<td>
 									<input type="password" id="cnew" name="cnew">
 									<span class="error_message" id="label_cnew"></span>
