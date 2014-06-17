@@ -215,9 +215,9 @@ padding:0;
 .logintitle {
 background:#61acc5;
 font-size:22px;
-text-align:center;
+text-align:left;
 font-weight:normal;
-padding:3px 0 4px;
+padding:5px 10px;
 color:#fff;
 margin:0;
 }

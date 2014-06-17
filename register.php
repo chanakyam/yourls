@@ -34,7 +34,7 @@ yourls_html_head();
 <div class="title">Sign Up</div>
 
  <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 1 ){
- echo "<div class='success'>Please Check your Email to Activate your account.</div>";
+ echo "<div class='success'>Please check your inbox to activate your account.</div>";
  }?>
  <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 2 ){
  echo "<div class='errormessage'>Email already exist</div>";
