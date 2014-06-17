@@ -131,7 +131,7 @@ function edit_link_display(id) {
 	if( $('#edit-button-'+id).hasClass('disabled') ) {
 		return false;
 	}
-	
+		
 	//new code for show/hide for edit
 	var hid_val = $('#show_row').val()
 	if($('#edit-'+hid_val).length ==1){
