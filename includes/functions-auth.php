@@ -103,7 +103,7 @@ function yourls_is_valid_user() {
 	yourls_do_action( 'login_failed' );
 
 	if ( isset( $_REQUEST['username'] ) || isset( $_REQUEST['password'] ) ) {
-		return yourls__( 'Invalid username or password' );
+		return yourls__( 'Invalid email address or password' );
 	} else {
 		return yourls__( 'Please log in' );
 	}

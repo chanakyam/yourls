@@ -81,7 +81,7 @@ yourls_html_head();
   <td>
     <input class="width97" type="password" name="password" id="password" >
   
-    	<!-- <span class="error_message" id="label_password"></span> -->
+    	<span class="error_message" id="label_password"></span>
 	</td>
 </tr>
 

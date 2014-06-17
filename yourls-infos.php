@@ -226,7 +226,11 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 	if( isset( $keyword_list ) && count( $keyword_list ) > 1 )
 		echo ' <a href="'. yourls_link($keyword).'+all" title="' . yourls_esc_attr__( 'Aggregate stats for duplicate short URLs' ) . '"><img src="' . yourls_match_current_protocol( YOURLS_SITE ) . '/images/chart_bar_add.png" border="0" /></a>';
 } ?></div>
-<div class="subtitle" id="longurl"><span class="label left"><?php yourls_e( 'Long URL'); ?> :</span> <img class="fix_images" src="<?php echo yourls_get_favicon_url( $longurl );?>" /> <?php yourls_html_link( $longurl, yourls_trim_long_string( $longurl ), 'longurl' ); ?></div>
+<div class="subtitle" id="longurl">
+<span class="label left"><?php yourls_e( 'Long URL'); ?> :</span> 
+<img class="fix_images" src="<?php echo yourls_get_favicon_url( $longurl );?>" /> 
+<a target="_blank" <?php yourls_html_link( $longurl, yourls_trim_long_string( $longurl ), 'longurl' );?>></a>
+</div>
 
 <div id="tabs">
 	<div class="wrap_unfloat">

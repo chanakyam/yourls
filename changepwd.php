@@ -92,21 +92,21 @@ yourls_html_head();
 				<tr>
 					<td width="28%">Old Password<!-- <span class="error_message" >*</span> -->:</td>
 					<td>
-						<input class="width50" type="password" id="password" name="password" >
+						<input class="width96" type="password" id="password" name="password" >
 						<span class="error_message" id="label_password"></span>
 					</td>
 				</tr>
 				<tr>
 					<td>New Password<!-- <span class="error_message" >*</span> -->:</td>
 					<td>
-						<input class="width50" type="password" id="newpwd" name="newpwd" >
+						<input class="width96" type="password" id="newpwd" name="newpwd" >
 						<span class="error_message" id="label_newpwd"></span>
 					</td>
 				</tr>
 				<tr>
 					<td>Confirm New Password<!-- <span class="error_message" >*</span> -->:</td>
 					<td>
-						<input class="width50" type="password" id="cnew" name="cnew" >
+						<input class="width96" type="password" id="cnew" name="cnew" >
 						<span class="error_message" id="label_cnew"></span>
 					</td>
 				</tr>

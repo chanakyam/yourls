@@ -68,7 +68,7 @@ yourls_html_head();
 				<div class="title">Forgot Password</div>
 				
 				<?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 1 ){
-				 echo "<div class='success'>Please Check your email to reset your password.</div>";
+				 echo "<div class='success'>Your new activation link sent to inbox for password reset</div>";
 				 }?>
 				 <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 0 ){
 				 echo "<div class='errormessage'>Email not found in our database.</div>";

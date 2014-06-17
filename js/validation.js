@@ -101,16 +101,16 @@ var invalid = '';
           //errorMessage("label_password", "(This field is required)");
           $('input#password').addClass('required');
           invalid = true;
-       }//else if(!password.match(/^.*(?=.{6,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[_.!@#$%^()+ "]).*$/)){
-      //     //errorMessage("label_password", "Please enter valid password");
-      //     $('input#password').addClass('required');
-      //     invalid = true;
-      // }
-      else if(password.length > password_max_length || password.length < password_min_length){
-          //errorMessage("label_password", "(Required minimum "+password_min_length+" characters)");
+       }else if(password.length > password_max_length || password.length < password_min_length){
           $('input#password').addClass('required');
+          errorMessage("label_password", "(Required minimum "+password_min_length+" characters)");          
           invalid = true;
-      }else{
+      }//else if(!password.match(/^.*(?=.{6,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[_.!@#$%^()+ "]).*$/)){
+        else if(!password.match(((/^\S |^[a-zA-Z0-9~!@#$%^&*\(\)_+}{\|\":?><`\-=\\\]\[';\/\.\,]{6,}$/)))){
+           //errorMessage("label_password", "Please enter valid password");
+           $('input#password').addClass('required');
+           invalid = true;
+       }else{
         //errorMessage("label_password", "");
         $('input#password').removeClass('required');
       }
@@ -184,7 +184,7 @@ var invalid = '';
         $('input#firstname').addClass('required');
         invalid = true;
     }else{
-      errorMessage("label_firstname", "");
+      //errorMessage("label_firstname", "");
       $('input#firstname').removeClass('required');
     }
 
@@ -263,10 +263,10 @@ var invalid = '';
   
 
 	//dynamic error message 
-    // function errorMessage(label_id, message){
-    // 	// document.getElementById("label_fusername").innerHTML = "Please enter username";
-    //   document.getElementById(label_id).innerHTML = message;
-    // }
+    function errorMessage(label_id, message){
+    	// document.getElementById("label_fusername").innerHTML = "Please enter username";
+      document.getElementById(label_id).innerHTML = message;
+    }
 
   // Ajax Edit
 function showUser()

@@ -42,21 +42,21 @@ $user_data = $obj_user->getUserDetails();
 <tr>
 	<td width="20%">First Name<!-- <span class="error_message" >*</span> -->:</td>
 	<td>
-		<input class="width50" type="text" name="firstname" id="firstname"  value="<?php echo $user_data['firstname']; ?>">
+		<input class="width96" type="text" name="firstname" id="firstname"  value="<?php echo $user_data['firstname']; ?>">
 		<span class="error_message" id="label_firstname"></span>	
 	</td>
 </tr>
 <tr>
 	<td>Last Name<!-- <span class="error_message" >*</span> -->:</td>
 	<td>
-		<input class="width50" type="text" name="lastname" id="lastname"  value="<?php echo $user_data['lastname']; ?>">
+		<input class="width96" type="text" name="lastname" id="lastname"  value="<?php echo $user_data['lastname']; ?>">
 		<span class="error_message" id="label_lastname"></span>
 	</td>
 </tr>
 <tr>
 	<td>Email<!-- <span class="error_message" >*</span> -->:</td>
 	<td>
-		<input class="width50" type="text" name="email" id="email"  value="<?php echo $user_data['email']; ?>">
+		<input class="width96" type="text" name="email" id="email"  value="<?php echo $user_data['email']; ?>">
 		<span class="error_message" id="label_email"></span>
 	</td>
 </tr>
