@@ -17,8 +17,9 @@ div.share {
 	margin-left:1em;
 	padding:0 1em;
 	/*float:left;*/
-	min-height:170px;
+	height:200px;
 	display: table-cell;
+	overflow: auto;
 }
 #origlink{
 	

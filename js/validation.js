@@ -111,7 +111,7 @@ var invalid = '';
            $('input#password').addClass('required');
            invalid = true;
        }else{
-        //errorMessage("label_password", "");
+        errorMessage("label_password", "");
         $('input#password').removeClass('required');
       }
     }

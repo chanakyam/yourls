@@ -1,5 +1,5 @@
 <?php
-
+header('Cache-Control: max-age=900');
 /**
  * Display <h1> header and logo
  *

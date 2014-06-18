@@ -31,35 +31,41 @@ function add_link() {
 	}
 	var newurl = $("#add-url").val();
 	var nonce = $("#nonce-add").val();
-	if ( !newurl || newurl == 'http://' || newurl == 'https://' ) {
+	if ( !newurl || newurl == 'http://' || newurl == 'https://' ) {		
 		return;
 	}
-	var keyword = $("#add-keyword").val();
-	add_loading("#add-button");
-	$.getJSON(
-		ajaxurl,
-		{action:'add', url: newurl, keyword: keyword, nonce: nonce},
-		function(data){
-			if(data.status == 'success') {
-				$('#dashboard_main_table tbody').prepend( data.html ).trigger("update");
-				$('#nourl_found').css('display', 'none');
-				zebra_table();
-				increment_counter();
-				toggle_share_fill_boxes( data.url.url, data.shorturl, data.url.title );
-			}
+	//validating url	
+	regexp = /^(https:\/\/|http:\/\/)?(www)?[\.]?[a-z0-9A-Z-]+\.[com|co.in|.net]?/
+	if(regexp.test(newurl)){	
+		var keyword = $("#add-keyword").val();
+		add_loading("#add-button");
+		$.getJSON(
+			ajaxurl,
+			{action:'add', url: newurl, keyword: keyword, nonce: nonce},
+			function(data){
+				if(data.status == 'success') {
+					$('#dashboard_main_table tbody').prepend( data.html ).trigger("update");
+					$('#nourl_found').css('display', 'none');
+					zebra_table();
+					increment_counter();
+					toggle_share_fill_boxes( data.url.url, data.shorturl, data.url.title );
+				}
 
-			add_link_reset();
-			end_loading("#add-button");
-			end_disable("#add-button");
-			//new code for displaying shorturl if already exists
-			if(data.status=='fail'){
-				feedback(data.shorturl, 'success');				
-			}else{
-				feedback(data.message, data.status);
+				add_link_reset();
+				end_loading("#add-button");
+				end_disable("#add-button");
+				//new code for displaying shorturl if already exists
+				if(data.status=='fail'){
+					feedback(data.shorturl, 'success');				
+				}else{
+					feedback(data.message, data.status);
+				}
+				window.setTimeout('location.reload()', 2000); //reloads after 1 seconds
 			}
-			window.setTimeout('location.reload()', 2000); //reloads after 1 seconds
-		}
-	);
+		);
+	}else{
+		feedback('Invalid URl', 'fail');
+	}
 }
 
 // function toggle_share_fill_boxes( url, shorturl, title ) {
@@ -131,6 +137,7 @@ function edit_link_display(id) {
 	if( $('#edit-button-'+id).hasClass('disabled') ) {
 		return false;
 	}
+
 		
 	//new code for show/hide for edit
 	var hid_val = $('#show_row').val()
@@ -176,12 +183,14 @@ function edit_link_display(id) {
 
 				$("#id-" + id).after( data.html );
 				$("#edit-url-"+ id).focus();
-				end_loading('#actions-'+id+' .button');
+				//end_loading('#actions-'+id+' .button');
+				$('#edit-button-'+id).attr('disabled','disabled');
 			}
 		);
 	}
 	//new code for show/hide for edit
 	$('#show_row').val(id);
+
 }
 
 // Display the edition interface
@@ -332,60 +341,65 @@ function edit_link_save(id) {
 	var keyword = $('#old_keyword_'+id).val();
 	var nonce = $('#nonce_'+id).val();
 	var www = $('#yourls-site').val();
-	$.getJSON(
-		ajaxurl,
-		{action:'edit_save', url: newurl, id: id, keyword: keyword, newkeyword: newkeyword, title: title, nonce: nonce },
-		function(data){
-			if(data.status == 'success') {
-				if( data.url.title != '' ) {
-					var display_link = '<a href="' + data.url.url + '" title="' + data.url.url + '">' + data.url.display_title + '</a><br/><small><a href="' + data.url.url + '">' + data.url.display_url + '</a></small>';
-				} else {
-					var display_link = '<a href="' + data.url.url + '" title="' + data.url.url + '">' + data.url.display_url + '</a>';
+	if(newurl!='' && newkeyword!=''){
+		$.getJSON(
+			ajaxurl,
+			{action:'edit_save', url: newurl, id: id, keyword: keyword, newkeyword: newkeyword, title: title, nonce: nonce },
+			function(data){
+				if(data.status == 'success') {
+					if( data.url.title != '' ) {
+						var display_link = '<a href="' + data.url.url + '" title="' + data.url.url + '">' + data.url.display_title + '</a><br/><small><a href="' + data.url.url + '">' + data.url.display_url + '</a></small>';
+					} else {
+						var display_link = '<a href="' + data.url.url + '" title="' + data.url.url + '">' + data.url.display_url + '</a>';
+					}
+
+					$("#url-" + id).html(display_link);
+					$("#keyword-" + id).html('<a href="' + data.url.shorturl + '" title="' + data.url.shorturl + '">' + data.url.keyword + '</a>');
+					$("#timestamp-" + id).html(data.url.date);
+					$("#edit-" + id).fadeOut(200, function(){
+					$('#dashboard_main_table tbody').trigger("update");
+					});
+					$('#keyword_'+id).val( newkeyword );
+					$('#statlink-'+id).attr( 'href', data.url.shorturl+'+' );
+
+					//for updating the table start
+					//var link = $('#id-'+id+' .url').html();
+					$('#id-'+id+' .keyword').html(newkeyword);
+					$('#id-'+id+' .url a').html(title);//link.attr('title');
+					var anchor_val = '<a href="'+newurl+'">'+newurl+'</a>'
+					$('#longurl-'+id).html(anchor_val);//link.attr('title');
+					//end
+
+					//code for highlighting the editing row start
+					$('#id-'+id).removeClass('highlight');
+					$('#id-'+id).addClass($('#tr_class').val());
+					//var tr_class = $('#id-'+id).attr('class');
+					$('#tr_class').val('');
+					//end
+
+					//var table = $('#dashboard_main_table').dataTable();
+					//var pos = table.fnGetPosition( $("#id-"+id)[0] );
+					//$('#dashboard_main_table').dataTable().fnUpdate('Zebra' , $('#id-'+id+)[0], 1 );
+					//table.fnUpdate(keyword,10,pos);
+					// to update a cell
+					//table.fnUpdate(keyword);
+					//table.fnUpdate(url,2,pos);
+					//table.fnUpdate(email,3,pos);
 				}
+				window.setTimeout('location.reload()', 1000); //reloads after 1 seconds
+				feedback(data.message, data.status);
+				end_loading("#edit-close-" + id);
+				//end_disable("#actions-" + id + ' .button');
+				//new code
+				$("#edit-" +id).remove();
 
-				$("#url-" + id).html(display_link);
-				$("#keyword-" + id).html('<a href="' + data.url.shorturl + '" title="' + data.url.shorturl + '">' + data.url.keyword + '</a>');
-				$("#timestamp-" + id).html(data.url.date);
-				$("#edit-" + id).fadeOut(200, function(){
-				$('#dashboard_main_table tbody').trigger("update");
-				});
-				$('#keyword_'+id).val( newkeyword );
-				$('#statlink-'+id).attr( 'href', data.url.shorturl+'+' );
-
-				//for updating the table start
-				//var link = $('#id-'+id+' .url').html();
-				$('#id-'+id+' .keyword').html(newkeyword);
-				$('#id-'+id+' .url a').html(title);//link.attr('title');
-				var anchor_val = '<a href="'+newurl+'">'+newurl+'</a>'
-				$('#longurl-'+id).html(anchor_val);//link.attr('title');
-				//end
-
-				//code for highlighting the editing row start
-				$('#id-'+id).removeClass('highlight');
-				$('#id-'+id).addClass($('#tr_class').val());
-				//var tr_class = $('#id-'+id).attr('class');
-				$('#tr_class').val('');
-				//end
-
-				//var table = $('#dashboard_main_table').dataTable();
-				//var pos = table.fnGetPosition( $("#id-"+id)[0] );
-				//$('#dashboard_main_table').dataTable().fnUpdate('Zebra' , $('#id-'+id+)[0], 1 );
-				//table.fnUpdate(keyword,10,pos);
-				// to update a cell
-				//table.fnUpdate(keyword);
-				//table.fnUpdate(url,2,pos);
-				//table.fnUpdate(email,3,pos);
+				//location.reload();
 			}
-			window.setTimeout('location.reload()', 1000); //reloads after 1 seconds
-			feedback(data.message, data.status);
-			end_loading("#edit-close-" + id);
-			//end_disable("#actions-" + id + ' .button');
-			//new code
-			$("#edit-" +id).remove();
-
-			//location.reload();
-		}
-	);
+		);
+	}else{
+		feedback('Long URL or Short URL can not be empty', 'fail');
+		$('#edit-close-'+id).attr('disabled',false);
+	}
 }
 
 // Save edition of a link

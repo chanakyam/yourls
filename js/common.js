@@ -30,7 +30,7 @@ function html_pulse( el, newtext ){
 // Update feedback message
 function feedback(msg, type, delay) {
 	closeme = ( type == 'fail' || type == 'error' ) ? true : false;		
-	delay = delay || ( closeme == true ? 10000 : 3500 );
+	delay = delay || ( closeme == true ? 1000 : 3500 );
 	$.notifyBar({
 		html: '<span>'+msg+'</span>',
 		delay: delay,

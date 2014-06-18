@@ -12,29 +12,59 @@ yourls_html_head();
 <div class="contentarea">
 	<title>Change Password</title>
 	<script type="text/javascript">
+	$(document).ready(function(){
+   		$("form[name='changepwd'] input").on('blur',validatechangepwd);
+	});
 	
 	function validatechangepwd(){		
 		//validate old password
 		if(document.forms["changepwd"]["password"]){
    			var password=document.forms["changepwd"]["password"].value;
+   			password = $.trim(password);
+      		$("#password").val(password);
+      		var password_max_length= 64;
+      		var password_min_length= 6;
   			if (password==null || password==""){
     			//errorMessage("label_password", "(This field is required)");
     			$('input#password').addClass('required');
     			invalid = true;
-   			}else{
-   			//errorMessage("label_password", "");
-   			$('input#password').removeClass('required');
+   			}else if(password.length > password_max_length || password.length < password_min_length){
+ 				$('input#password').addClass('required');
+ 				errorMessage("label_password", "(Required minimum "+ password_min_length +" characters)");
+ 				invalid = true;
+			}//else if(!password.match(/^.*(?=.{6,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[_.!@#$%^()+ "]).*$/)){
+ 			 else if(!password.match(((/^\S |^[a-zA-Z0-9~!@#$%^&*\(\)_+}{\|\":?><`\-=\\\]\[';\/\.\,]{6,}$/)))){
+ 				//errorMessage("label_newpwd", "Please enter valid password");
+ 				$('input#password').addClass('required');
+ 				invalid = true;
+ 			}else{
+   				errorMessage("label_password", "");
+   				$('input#password').removeClass('required');
    			}
     	}
 		//validate new password
     	if(document.forms["changepwd"]["newpwd"]){
    			var newpwd=document.forms["changepwd"]["newpwd"].value;
+   			newpwd = $.trim(newpwd);
+      		$("#newpwd").val(newpwd);
+      		var newpwd_max_length= 64;
+      		var newpwd_min_length= 6;
   			if (newpwd==null || newpwd==""){
     			//errorMessage("label_newpwd", "(This field is required)");
     			$('input#newpwd').addClass('required');
     			invalid = true;
-   			}else{
-   			//errorMessage("label_newpwd", "");
+   			}else if(newpwd.length > newpwd_max_length || newpwd.length < newpwd_min_length){
+		        $('input#newpwd').addClass('required');
+		        errorMessage("label_newpwd", "(Required minimum "+ newpwd_min_length +" characters)");
+		        invalid = true;
+	
+		    }//else if(!newpwd.match(/^.*(?=.{6,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[_.!@#$%^()+ "]).*$/)){
+		     else if(!newpwd.match(((/^\S |^[a-zA-Z0-9~!@#$%^&*\(\)_+}{\|\":?><`\-=\\\]\[';\/\.\,]{6,}$/)))){
+		        //errorMessage("label_newpwd", "Please enter valid password");
+		        $('input#newpwd').addClass('required');
+		        invalid = true;
+		    }else{
+   			errorMessage("label_newpwd", "");
    			$('input#newpwd').removeClass('required');
    			}
     	}
@@ -76,7 +106,7 @@ yourls_html_head();
 	</script>
 	
 	<!-- body -->
-	<div class="signup">
+	<div class="signup changepwd">
 
 <form name="changepwd" method="post" action="process.php" onsubmit="return validatechangepwd();">
 <div class="title">Change Password</div>
@@ -90,7 +120,7 @@ yourls_html_head();
           }?> 
 				<table  width="100%" border="0" cellpadding="0" cellspacing="0"e>
 				<tr>
-					<td width="28%">Old Password<!-- <span class="error_message" >*</span> -->:</td>
+					<td width="35%">Old Password<!-- <span class="error_message" >*</span> -->:</td>
 					<td>
 						<input class="width96" type="password" id="password" name="password" >
 						<span class="error_message" id="label_password"></span>
