@@ -45,6 +45,7 @@ yourls_html_head();
 		//validate new password
     	if(document.forms["changepwd"]["newpwd"]){
    			var newpwd=document.forms["changepwd"]["newpwd"].value;
+   			var invalid = '';
    			newpwd = $.trim(newpwd);
       		$("#newpwd").val(newpwd);
       		var newpwd_max_length= 64;
@@ -91,6 +92,15 @@ yourls_html_head();
         		$('input#cnew').removeClass('required');
       		}
     	}
+
+    	//reset button
+        $("input[type='reset']").click(function(){
+        	$("form[name='changepwd'] input").each(function(){
+          		$(this).removeClass('required');
+          		errorMessage("label_newpwd", "");
+           		errorMessage("label_password", "");          
+        	});
+      	});
 
     	if(invalid){
  			return false;

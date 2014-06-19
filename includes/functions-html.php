@@ -694,7 +694,7 @@ function yourls_share_box( $longurl, $shorturl, $title = '', $text='', $shortlin
 			<p><input id="copylink" class="text width90"  value="<?php echo yourls_esc_url( $shorturl ); ?>" /></p>
 			<p><small><?php yourls_e( 'Long link' ); ?>: <a target="_blank" id="origlink" href="<?php echo yourls_esc_url( $longurl ); ?>"><?php echo yourls_esc_url( $longurl ); ?></a></small>
 			<?php if( yourls_do_log_redirect() ) { ?>
-			<br/><small><?php yourls_e( 'Stats' ); ?>: <a id="statlink" href="<?php echo yourls_esc_url( $shorturl ); ?>+"><?php echo yourls_esc_url( $shorturl ); ?>+</a></small>
+			<br/><small><?php yourls_e( 'Stats' ); ?>: <a id="statlink" target="_blank" href="<?php echo yourls_esc_url( $shorturl ); ?>+"><?php echo yourls_esc_url( $shorturl ); ?>+</a></small>
 			<input type="hidden" id="titlelink" value="<?php echo yourls_esc_attr( $title ); ?>" />
 			<?php } ?>
 			</p>

@@ -81,7 +81,7 @@ class user{
 		$name=$firstname; 
     	$subject="Activate your account";
     	$header = "Content-Type: text/html; charset=ISO-8859-1\r\n"; 
-    	$header.="from: Admin <noreply-lycso@lycos-inc.com>"; 
+    	$header.="from: Lyc.so <noreply-lycso@lycos-inc.com>"; 
     	$link ="<a href='http://".$domain."/process.php?form_type=authenticate&id=".base64_encode($user_id)."'>Please click here to activate your account.</a>";
     	$messages = "Hi ".$name.",<br><br>";
     	$messages .= $link."<br><br><br>";
@@ -198,8 +198,8 @@ class user{
 				$to=$email_to; 
 		    	$subject="Reset Password";
 		    	$header = "Content-Type: text/html; charset=ISO-8859-1\r\n"; 
-    			$header.="from: Admin <noreply-lycso@lycos-inc.com>";  
-		    	$link ="<a href='".$domain."/resetpwd.php?user_id=".base64_encode($user_id)."'>Please click here to reset your password.</a>";
+    			$header.="from: Lyc.so <noreply-lycso@lycos-inc.com>";  
+		    	$link ="<a href='".$domain."/resetpwd.php?user_id=".base64_encode($user_id)."'>Please Click Here To Reset Your Password.</a>";
 		    	$messages= "Hi ".$name.",<br><br>";
 		    	//echo $messages=	"Your Password is:".$your_password.".<br><br><br>";
 		    	$messages.= $link."<br><br><br>";

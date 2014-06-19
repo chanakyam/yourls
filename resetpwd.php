@@ -25,6 +25,7 @@ yourls_html_head();
 
 				function validatePassword(){		
 					//validate new password
+					var invalid = '';
 			    	if(document.forms["resetpwd"]["newpwd"]){
 			   		var newpwd=document.forms["resetpwd"]["newpwd"].value;
 			   		newpwd = $.trim(newpwd);

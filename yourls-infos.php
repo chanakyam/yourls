@@ -209,27 +209,35 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 <h2 id="informations"><?php echo yourls_esc_html( $title ); ?></h2></br>
 
 <div class="subtitle"><span class="label left"><?php yourls_e( 'Short URL'); ?> :</span> <img src="<?php yourls_favicon() ?>" class="doglogo"/>
+<!-- <a target="_blank" -->
 <?php if( $aggregate ) {
 	$i = 0;
 	foreach( $keyword_list as $k ) {
 		$i++;
-		if ( $i == 1 ) {
-			yourls_html_link( yourls_link($k) );
-		} else {
-			yourls_html_link( yourls_link($k), "/$k" );
-		}
+		if ( $i == 1 ) {?>
+			 <!-- yourls_html_link( yourls_link($k) ); -->
+			<a href="<?php yourls_site_url(); ?>/<?php echo $keyword;?>" target="_blank"><?php yourls_site_url(); ?>/<?php echo $keyword;?></a>
+			
+		<?php } else {?>
+			<!-- yourls_html_link( yourls_link($k), "/$k" ); -->
+			<a href="<?php yourls_site_url(); ?>/<?php echo $keyword;?>" target="_blank"><?php yourls_site_url(); ?>/<?php echo $keyword;?></a>
+		<?php }
 		if ( $i < count( $keyword_list ) )
 			echo ' + ';
 	}
 } else {
-	yourls_html_link( yourls_link($keyword) );
+	// yourls_html_link( yourls_link($keyword) );
+	?>
+	<a href="<?php yourls_site_url(); ?>/<?php echo $keyword;?>" target="_blank"><?php yourls_site_url(); ?>/<?php echo $keyword;?></a>
+	<?php
 	if( isset( $keyword_list ) && count( $keyword_list ) > 1 )
 		echo ' <a href="'. yourls_link($keyword).'+all" title="' . yourls_esc_attr__( 'Aggregate stats for duplicate short URLs' ) . '"><img src="' . yourls_match_current_protocol( YOURLS_SITE ) . '/images/chart_bar_add.png" border="0" /></a>';
 } ?></div>
 <div class="subtitle" id="longurl">
 <span class="label left"><?php yourls_e( 'Long URL'); ?> :</span> 
 <img class="fix_images" src="<?php echo yourls_get_favicon_url( $longurl );?>" /> 
-<a target="_blank" <?php yourls_html_link( $longurl, yourls_trim_long_string( $longurl ), 'longurl' );?>></a>
+<!-- <a target="_blank" <?php yourls_html_link( $longurl, yourls_trim_long_string( $longurl ), 'longurl' );?></a> -->
+<a href="<?php echo $longurl;?>" target="_blank"><?php echo $longurl;?></a>
 </div>
 
 <div id="tabs">

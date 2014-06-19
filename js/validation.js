@@ -2,6 +2,7 @@ $(document).ready(function(){
    $("form[name='Registration'] input").on('blur',validateForm);
    $("form[name='loginpage'] input").on('blur',loginValidateForm);
 });
+
 //  validation 
 function validateForm(){
 var iChars = "!@#$%^&*()+=-[]\\\';,./{}|\":<>?";
@@ -156,6 +157,16 @@ var invalid = '';
           
       }
 
+    //reset button
+      $("input[type='reset']").click(function(){
+        $("form[name='Registration'] input").each(function(){
+          $(this).removeClass('required');
+           errorMessage("label_password", ""); 
+           $('#recaptcha_area').removeClass('required');         
+        });
+      });
+
+
     if(invalid){
       //console.log("validation failed");
       return false;
@@ -163,7 +174,7 @@ var invalid = '';
 
  		return true;
 
-	}
+}
   
   //validate login.php
 
