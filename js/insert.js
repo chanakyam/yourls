@@ -138,6 +138,8 @@ function edit_link_display(id) {
 		return false;
 	}
 
+
+
 		
 	//new code for show/hide for edit
 	var hid_val = $('#show_row').val()
@@ -164,6 +166,12 @@ function edit_link_display(id) {
 			ajaxurl,
 			{ action: "edit_display", keyword: keyword, nonce: nonce, id: id },
 			function(data){
+				//new code for show/hide for edit
+				var hid_val = $('#show_row').val()
+				if($('#edit-'+hid_val).length ==1){
+					$('#edit-'+hid_val).remove()
+					$('#show_row').val('');
+				}
 				//new code displaying action icons
 				$('#statlink-'+id).removeAttr("disabled")
 				$('#statlink-'+id).removeClass("button button_stats disabled")
@@ -183,7 +191,7 @@ function edit_link_display(id) {
 
 				$("#id-" + id).after( data.html );
 				$("#edit-url-"+ id).focus();
-				//end_loading('#actions-'+id+' .button');
+				//end_loading('#actions-'+id+' .button');				
 				$('#edit-button-'+id).attr('disabled','disabled');
 			}
 		);

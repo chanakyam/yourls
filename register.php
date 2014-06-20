@@ -31,7 +31,7 @@ yourls_html_head();
 <div id="myDiv" class="signup userside">
 
 <form  method="post" name="Registration" action="process.php" onsubmit="return validateForm();">
-<div class="title">Sign Up</div>
+<div class="title">Sign up</div>
 
  <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 1 ){
  echo "<div class='success'>Please check your inbox to activate your account.</div>";

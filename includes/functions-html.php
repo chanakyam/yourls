@@ -287,7 +287,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 	<span class="menu">
 <?php 
  if( defined( 'YOURLS_USER' ) ) {
-		$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('<span class="left margin12_T">Hello <strong>%s</strong>'), $_SESSION['name'] ) . '</span><a href="?action=logout" title="' . yourls_esc_attr__( 'Logout' ) . '" class="logout"><img src="/images/logout-icon.png">' . '</a>
+		$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('<span class="left margin12_T">Hello <strong>%s</strong>'), $_SESSION['name'] ) . '</span><a href="?action=logout" title="' . yourls_esc_attr__( 'Sign out' ) . '" class="logout"><img src="/images/logout-icon.png">' . '</a>
 			
         	<div class="moremenu settingmenu">
         	<a  class="dropDown" title="' . yourls_esc_attr__( 'Settings' ) . '"><img src="/images/setting.png"> </a>
@@ -356,12 +356,12 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 		 
 		<?php }else{
 		?>
-		<a href="register.php" title="Sign Up">Sign Up</a>
-		<a href="user.php" title="Login">Login</a>
+		<a href="register.php" title="Sign Up">Sign up</a>
+		<a href="user.php" title="Login">Sign in</a>
 		<?php }?>
 <?php 
  // if( defined( 'YOURLS_USER' ) ) {
-	// 	$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('Hello <strong>%s</strong>'), YOURLS_USER ) . ' <a href="?action=logout" title="' . yourls_esc_attr__( 'Logout' ) . '"><img align="absmiddle" src="/images/logout-icon.png">' . '</a>' );
+	// 	$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('Hello <strong>%s</strong>'), YOURLS_USER ) . ' <a href="?action=logout" title="' . yourls_esc_attr__( 'Sign out' ) . '"><img align="absmiddle" src="/images/logout-icon.png">' . '</a>' );
 	// } else {
 	// 	$logout_link = yourls_apply_filter( 'logout_link', '' );
 	// }
@@ -412,12 +412,12 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 		 
 		<?php }else{
 		?>
-		<a href="register.php" title="Sign Up">Sign Up</a>
-		<a href="user.php" title="Login">Login</a>
+		<a href="register.php" title="Sign Up">Sign up</a>
+		<a href="user.php" title="Login">Sign in</a>
 		<?php }?>
 <?php 
  // if( defined( 'YOURLS_USER' ) ) {
-	// 	$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('Hello <strong>%s</strong>'), YOURLS_USER ) . ' <a href="?action=logout" title="' . yourls_esc_attr__( 'Logout' ) . '"><img align="absmiddle" src="/images/logout-icon.png">' . '</a>' );
+	// 	$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('Hello <strong>%s</strong>'), YOURLS_USER ) . ' <a href="?action=logout" title="' . yourls_esc_attr__( 'Signout' ) . '"><img align="absmiddle" src="/images/logout-icon.png">' . '</a>' );
 	// } else {
 	// 	$logout_link = yourls_apply_filter( 'logout_link', '' );
 	// }
@@ -1086,7 +1086,7 @@ function yourls_html_menu() {
 
 	// Build menu links
 	if( defined( 'YOURLS_USER' ) ) {
-		$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('Hello <strong class="hellouser">%s</strong>'), $firstname ) . '<a class="logout" title="Logout" href="?action=logout"' . yourls_esc_attr__( 'Logout' ) . '">' . yourls__( 'Logout' ) . '</a>' );
+		$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('Hello <strong class="hellouser">%s</strong>'), $firstname ) . '<a class="logout" title="Logout" href="?action=logout"' . yourls_esc_attr__( 'Sign out' ) . '">' . yourls__( 'Logout' ) . '</a>' );
 	} else {
 		$logout_link = yourls_apply_filter( 'logout_link', '' );
 	}
