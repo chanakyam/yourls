@@ -142,11 +142,11 @@ function edit_link_display(id) {
 
 		
 	//new code for show/hide for edit
-	// var hid_val = $('#show_row').val()
-	// if($('#edit-'+hid_val).length ==1){
-	// 	$('#edit-'+hid_val).remove()
-	// 	$('#show_row').val('');
-	// }
+	var hid_val = $('#show_row').val()
+	if($('#edit-'+hid_val).length ==1){
+		$('#edit-'+hid_val).remove()
+		$('#show_row').val('');
+	}
 	var hid_val1 = $('#show_share').val()
 	if($('#share-'+hid_val1).length ==1){
 		$('#share-'+hid_val1).remove()
