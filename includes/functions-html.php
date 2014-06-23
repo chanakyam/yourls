@@ -356,8 +356,8 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 		 
 		<?php }else{
 		?>
-		<a href="register.php" title="Sign Up">Sign up</a>
-		<a href="user.php" title="Sign in">Sign in</a>
+		<a href="register.php" title="Sign Up">Sign Up</a>
+		<a href="user.php" title="Sign In">Sign In</a>
 		<?php }?>
 <?php 
  // if( defined( 'YOURLS_USER' ) ) {
@@ -412,8 +412,8 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 		 
 		<?php }else{
 		?>
-		<a href="register.php" title="Sign Up">Sign up</a>
-		<a href="user.php" title="Sign in">Sign in</a>
+		<a href="register.php" title="Sign Up">Sign Uup</a>
+		<a href="user.php" title="Sign In">Sign In</a>
 		<?php }?>
 <?php 
  // if( defined( 'YOURLS_USER' ) ) {
@@ -1009,10 +1009,10 @@ function yourls_login_screen( $error_msg = '' ) {
 	<div class="homeinner">
 	<p class="center"><a href="<?php yourls_site_url(); ?>" title="lyc.so"><img src="images/lycsoLogo.png" alt="lyc.so" title="lyc.so" /></a></p>
 	<div id="login">
-		<div class="logintitle">Please Login</div>
+		<div class="logintitle">Please Sign In</div>
 	
 		  <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 1 ){
-          echo "<div class='success'>Activated Successfully. Please login.</div>";
+          echo "<div class='success'>Activated Successfully. Please Sign In.</div>";
           }?>
 
           <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 0 ){
@@ -1022,7 +1022,7 @@ function yourls_login_screen( $error_msg = '' ) {
 		<form method="post" name="loginpage" action="<?php echo $action; ?>" onsubmit="return loginValidateForm();"> <?php // reset any QUERY parameters ?>
 			<?php
 				//if( !empty( $error_msg ) ) {
-				if( !empty( $error_msg ) && $error_msg!='Please log in') {
+				if( !empty( $error_msg ) && $error_msg!='Please Sign In') {
 					echo '<p class="error">'.$error_msg.'</p>';
 				}
 			?>
@@ -1036,7 +1036,7 @@ function yourls_login_screen( $error_msg = '' ) {
 			</p>
 			<p>
 				<label>&nbsp;</label>
-				<input type="submit" id="submit" name="submit" value="<?php yourls_e( 'Login' ); ?>" />
+				<input type="submit" id="submit" name="submit" value="<?php yourls_e( 'Sign In' ); ?>" />
 			</p>
 			<p>
 				<label>&nbsp;</label>
@@ -1046,7 +1046,7 @@ function yourls_login_screen( $error_msg = '' ) {
 			<p>
 				
 				
-				 <strong>Please <a href="register.php">Signup</a> if you dont have an account</strong>
+				 <strong>Please <a href="register.php">Sign Up</a> if you dont have an account</strong>
 			</p>
 		</form>
 		<script type="text/javascript">$('#username').focus();</script>
