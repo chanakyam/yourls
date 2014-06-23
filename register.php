@@ -107,7 +107,7 @@ yourls_html_head();
 <tr>    
   <td></td>
   <td>
-  	<input  type="submit" value="Signup" name="form_type" id="submit">
+  	<input  type="submit" value="Sign Up" name="form_type" id="submit">
   	<input  type = "reset" value="Reset" name="form_type" id="reset" class="reset">
   </td>
   <tr></tr>

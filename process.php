@@ -10,7 +10,7 @@ include_once "user.class.php";
 $obj_user = new user();
 $_GLOBAL_MSG = '';
 // if request comes from registration form
-if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="Signup"){
+if(isset($_REQUEST["form_type"]) && $_REQUEST["form_type"]=="Sign Up"){
 	if(!empty($_POST['recaptcha_response_field'])){
 	//valdating captcha
 	 $privatekey ="6LfQBPISAAAAAP5N53TlNuTk-VrVrNwLA7UjpQAK";
