@@ -357,7 +357,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 		<?php }else{
 		?>
 		<a href="register.php" title="Sign Up">Sign up</a>
-		<a href="user.php" title="Login">Sign in</a>
+		<a href="user.php" title="Sign in">Sign in</a>
 		<?php }?>
 <?php 
  // if( defined( 'YOURLS_USER' ) ) {
@@ -413,7 +413,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 		<?php }else{
 		?>
 		<a href="register.php" title="Sign Up">Sign up</a>
-		<a href="user.php" title="Login">Sign in</a>
+		<a href="user.php" title="Sign in">Sign in</a>
 		<?php }?>
 <?php 
  // if( defined( 'YOURLS_USER' ) ) {
