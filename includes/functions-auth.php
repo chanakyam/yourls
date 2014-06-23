@@ -106,7 +106,7 @@ function yourls_is_valid_user() {
 		return yourls__( 'Invalid email address or password' );
 	} else {
 		// return yourls__( 'Please log in' );
-		return yourls__( 'Please Sign in' );
+		return yourls__( 'Please Sign In' );
 	}
 }
 
