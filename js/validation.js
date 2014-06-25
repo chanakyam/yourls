@@ -321,7 +321,7 @@ return false;
 
 //login validation
 function loginValidateForm(){
-    var invalid = '';
+    var invalid = false;
       //validate username
       var username=document.forms["loginpage"]["username"].value;
       var username_max_length=128;
