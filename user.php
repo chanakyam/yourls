@@ -1,8 +1,12 @@
 <?php
 
 session_start();
-if(isset($_SESSION) && !empty($_SESSION)) 
+if(isset($_SESSION['username']) && !empty($_SESSION['username'])){
 	define( 'YOURLS_ADMIN', true );
+}else{
+	define( 'YOURLS_ADMIN', false );
+}
+
 
 require_once(dirname(__FILE__).'/includes/load-yourls.php' );
 

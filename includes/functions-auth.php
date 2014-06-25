@@ -26,7 +26,8 @@ function yourls_is_valid_user() {
 		//new code for validating username & pwd from db
 		 // session_start();
 	  //    session_unset();
-		session_destroy(); 
+		session_destroy();
+		define( 'YOURLS_ADMIN', false );
 		//return yourls__( 'Logged out successfully' );
 		header('location: '.yourls_site_url());exit;
 	}
@@ -123,6 +124,7 @@ function yourls_check_username_password() {
 	$user_results = $ydb->get_results( "SELECT * FROM yourls_users WHERE email='".$_REQUEST['username']."' AND password='".$_REQUEST['password']."' AND status='Active'" );	
 	if($user_results[0]->email == $_REQUEST['username'] && $user_results[0]->password == $_REQUEST['password']){
 		//assigning username to session
+		session_start();
 		$_SESSION['username'] = $_REQUEST['username'];
 		$_SESSION['role'] = $user_results[0]->role;
 		$_SESSION['name'] = $user_results[0]->firstname.' '.$user_results[0]->lastname;
