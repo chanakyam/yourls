@@ -18,69 +18,6 @@ yourls_html_head();
 
 ?>
 	
-			<script type="text/javascript">		
-				$(document).ready(function(){
-   					$("form[name='resetpwd'] input").on('blur',validatePassword);
-				});
-
-				function validatePassword(){		
-					//validate new password
-					var invalid = '';
-			    	if(document.forms["resetpwd"]["newpwd"]){
-			   		var newpwd=document.forms["resetpwd"]["newpwd"].value;
-			   		newpwd = $.trim(newpwd);
-      				$("#newpwd").val(newpwd);
-      				var newpwd_max_length= 64;
-      				var newpwd_min_length= 6;
-			  			if (newpwd==null || newpwd==""){
-			    			//errorMessage("label_newpwd", "(This field is required)");
-			    			$('input#newpwd').addClass('required');
-			    			invalid = true;
-			   			}else if(newpwd.length > newpwd_max_length || newpwd.length < newpwd_min_length){
- 					        $('input#newpwd').addClass('required');
- 					        errorMessage("label_newpwd", "(Required minimum "+ newpwd_min_length +" characters)");
- 					        invalid = true;
-					
- 					    }//else if(!newpwd.match(/^.*(?=.{6,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[_.!@#$%^()+ "]).*$/)){
- 					     else if(!newpwd.match(((/^\S |^[a-zA-Z0-9~!@#$%^&*\(\)_+}{\|\":?><`\-=\\\]\[';\/\.\,]{6,}$/)))){
- 					        //errorMessage("label_newpwd", "Please enter valid password");
- 					        $('input#newpwd').addClass('required');
- 					        invalid = true;
- 					    }else{
-			   				errorMessage("label_newpwd", "");
-			   				$('input#newpwd').removeClass('required');
-			   			}
-			    	}			
-
-			 		//confirm password validation (cnew)
-			    	if(document.forms["resetpwd"]["cnew"]){			
-
-			      		var cnew=document.forms["resetpwd"]["cnew"].value;
-			      		if (cnew != newpwd){
-			          		//'errorMessage("label_cnew", "(Password not matching)");
-			          		$('input#cnew').addClass('required');
-			          		invalid = true;
-			      		}else{
-			        		//errorMessage("label_cnew", "");
-			        		$('input#cnew').removeClass('required');
-
-			      		}
-			    	}			
-
-			    	if(invalid){
-			 			return false;
-			 		}else{
-			 			return true;
-			 		}
-				}			
-
-				function errorMessage(label_id, message){
-			    	// document.getElementById("label_fusername").innerHTML = "Please enter username";
-			    	document.getElementById(label_id).innerHTML = message;			
-
-			    }	
-			
-			</script>
 		</head>
 		<!-- Required CSS -->	
 		<div class="contentarea">

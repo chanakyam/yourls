@@ -1,6 +1,8 @@
 $(document).ready(function(){
    $("form[name='Registration'] input").on('blur',validateForm);
    $("form[name='loginpage'] input").on('blur',loginValidateForm);
+   $("form[name='changepwd'] input").on('blur',validatechangepwd);
+   $("form[name='resetpwd'] input").on('blur',validatePassword);
 });
 
 //  validation 
@@ -161,8 +163,7 @@ var invalid = '';
       $("input[type='reset']").click(function(){
         $("form[name='Registration'] input").each(function(){
           $(this).removeClass('required');
-           errorMessage("label_password", ""); 
-           $('#recaptcha_area').removeClass('required');         
+           errorMessage("label_password", "");          
         });
       });
 
@@ -362,3 +363,178 @@ function loginValidateForm(){
       return true;
 
   }
+
+   /*added scripts*/
+
+    //email validation for forgot password page
+      
+      function emailvalidation(){
+        var email=document.forms["forgotpassword"]["email"].value;
+          if (email==null || email=="")
+            {
+              //errorMessage("label_email", "(This field is required)");
+              $('input#email').addClass('required');
+              invalid = true;
+          }else if(!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
+            //errorMessage("label_email", "Please enter valid Email");
+            $('input#email').addClass('required');
+            invalid = true;
+          }else{
+            //errorMessage("label_email", "");
+            $('input#email').removeClass('required');
+            invalid = false;
+          }       
+
+          if(invalid){
+            return false;
+          }else{
+            return true;
+          }       
+
+       }      
+
+  // validation to change password page
+
+  function validatechangepwd(){   
+    //validate old password
+    if(document.forms["changepwd"]["password"]){
+        var password=document.forms["changepwd"]["password"].value;
+        password = $.trim(password);
+          $("#password").val(password);
+          var password_max_length= 64;
+          var password_min_length= 6;
+        if (password==null || password==""){
+          //errorMessage("label_password", "(This field is required)");
+          $('input#password').addClass('required');
+          invalid = true;
+        }else if(password.length > password_max_length || password.length < password_min_length){
+        $('input#password').addClass('required');
+        errorMessage("label_password", "(Required minimum "+ password_min_length +" characters)");
+        invalid = true;
+      }//else if(!password.match(/^.*(?=.{6,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[_.!@#$%^()+ "]).*$/)){
+       else if(!password.match(((/^\S |^[a-zA-Z0-9~!@#$%^&*\(\)_+}{\|\":?><`\-=\\\]\[';\/\.\,]{6,}$/)))){
+        //errorMessage("label_newpwd", "Please enter valid password");
+        $('input#password').addClass('required');
+        invalid = true;
+      }else{
+          errorMessage("label_password", "");
+          $('input#password').removeClass('required');
+        }
+      }
+    //validate new password
+      if(document.forms["changepwd"]["newpwd"]){
+        var newpwd=document.forms["changepwd"]["newpwd"].value;
+        var invalid = '';
+        newpwd = $.trim(newpwd);
+          $("#newpwd").val(newpwd);
+          var newpwd_max_length= 64;
+          var newpwd_min_length= 6;
+        if (newpwd==null || newpwd==""){
+          //errorMessage("label_newpwd", "(This field is required)");
+          $('input#newpwd').addClass('required');
+          invalid = true;
+        }else if(newpwd.length > newpwd_max_length || newpwd.length < newpwd_min_length){
+            $('input#newpwd').addClass('required');
+            errorMessage("label_newpwd", "(Required minimum "+ newpwd_min_length +" characters)");
+            invalid = true;
+  
+        }//else if(!newpwd.match(/^.*(?=.{6,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[_.!@#$%^()+ "]).*$/)){
+         else if(!newpwd.match(((/^\S |^[a-zA-Z0-9~!@#$%^&*\(\)_+}{\|\":?><`\-=\\\]\[';\/\.\,]{6,}$/)))){
+            //errorMessage("label_newpwd", "Please enter valid password");
+            $('input#newpwd').addClass('required');
+            invalid = true;
+        }else{
+        errorMessage("label_newpwd", "");
+        $('input#newpwd').removeClass('required');
+        }
+      }
+      //special characters validation for password
+      
+      // for (var i = 0; i < document.changepwd.newpwd.value.length; i++) {
+      //   if (iChars.indexOf(document.changepwd.newpwd.value.charAt(i)) != -1) 
+      //     {
+      //       errorMessage("label_newpwd", "(Special characters are not allowed)");
+      //       return false;
+      //     }
+      // }
+
+    //confirm password validation (cnew)
+      if(document.forms["changepwd"]["cnew"]){
+
+          var cnew=document.forms["changepwd"]["cnew"].value;
+          if (cnew != newpwd){
+              //errorMessage("label_cnew", "(Password not matching)");
+              $('input#cnew').addClass('required');
+              invalid = true;
+          }else{
+            //errorMessage("label_cnew", "");
+            $('input#cnew').removeClass('required');
+          }
+      }
+
+      //reset button
+        $("input[type='reset']").click(function(){
+          $("form[name='changepwd'] input").each(function(){
+              $(this).removeClass('required');
+              errorMessage("label_newpwd", "");
+              errorMessage("label_password", "");          
+          });
+        });
+
+      if(invalid){
+      return false;
+    }
+  } 
+
+  // validation for resetpwd.php
+
+  function validatePassword(){
+          //validate new password
+            if(document.forms["resetpwd"]["newpwd"]){
+            var newpwd=document.forms["resetpwd"]["newpwd"].value;
+            var invalid = '';
+            newpwd = $.trim(newpwd);
+              $("#newpwd").val(newpwd);
+              var newpwd_max_length= 64;
+              var newpwd_min_length= 6;
+              if (newpwd==null || newpwd==""){
+                //errorMessage("label_newpwd", "(This field is required)");
+                $('input#newpwd').addClass('required');
+                invalid = true;
+              }else if(newpwd.length > newpwd_max_length || newpwd.length < newpwd_min_length){
+                  $('input#newpwd').addClass('required');
+                  errorMessage("label_newpwd", "(Required minimum "+ newpwd_min_length +" characters)");
+                  invalid = true;
+          
+              }//else if(!newpwd.match(/^.*(?=.{6,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[_.!@#$%^()+ "]).*$/)){
+               else if(!newpwd.match(((/^\S |^[a-zA-Z0-9~!@#$%^&*\(\)_+}{\|\":?><`\-=\\\]\[';\/\.\,]{6,}$/)))){
+                  //errorMessage("label_newpwd", "Please enter valid password");
+                  $('input#newpwd').addClass('required');
+                  invalid = true;
+              }else{
+                errorMessage("label_newpwd", "");
+                $('input#newpwd').removeClass('required');
+              }
+            }     
+
+          //confirm password validation (cnew)
+            if(document.forms["resetpwd"]["cnew"]){     
+
+                var cnew=document.forms["resetpwd"]["cnew"].value;
+                if (cnew != newpwd){
+                    //'errorMessage("label_cnew", "(Password not matching)");
+                    $('input#cnew').addClass('required');
+                    invalid = true;
+                }else{
+                  //errorMessage("label_cnew", "");
+                  $('input#cnew').removeClass('required');
+
+                }
+            }     
+
+            if(invalid){
+            return false;
+          }else{
+            return true;
+          }
+        } 

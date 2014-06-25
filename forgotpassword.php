@@ -21,47 +21,7 @@ yourls_html_head();
 		
 
 		<div class="signup">
-		<?php
-			//include_once "config.php";
-			//include_once "session.php";
-		?>
-		
-			<script src="<?php yourls_site_url(); ?>/js/jquery-1.8.2.min.js?v=<?php echo YOURLS_VERSION; ?>" type="text/javascript"></script>
-			<script type="text/javascript">
-			//email validation
 			
-			function emailvalidation(){
-				var email=document.forms["forgotpassword"]["email"].value;
-					if (email==null || email=="")
-			  		{
-			  			//errorMessage("label_email", "(This field is required)");
-			  			$('input#email').addClass('required');
-			  			invalid = true;
-			 		}else if(!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
-			 			//errorMessage("label_email", "Please enter valid Email");
-			 			$('input#email').addClass('required');
-			 			invalid = true;
-			 		}else{
-			 			//errorMessage("label_email", "");
-			 			$('input#email').removeClass('required');
-			 			invalid = false;
-			 		}				
-
-			 		if(invalid){
-			 			return false;
-			 		}else{
-			 			return true;
-			 		}				
-
-			 }				
-
-			 	//dynamic error message 
-			    function errorMessage(label_id, message){
-			    	// document.getElementById("label_fusername").innerHTML = "Please enter username";
-			    	document.getElementById(label_id).innerHTML = message;
-			    }				
-
-			</script>	
 			<p class="center"><a href="<?php yourls_site_url(); ?>" title="lyc.so"><img src="images/lycsoLogo.png" alt="lyc.so" title="lyc.so" /></a></p>
 			
 			<form name="forgotpassword" method="post" action="process.php" onsubmit="return emailvalidation();">
