@@ -26,7 +26,7 @@ function yourls_is_valid_user() {
 		//new code for validating username & pwd from db
 		 // session_start();
 	  //    session_unset();
-		session_destroy();
+		session_destroy(); 
 		//return yourls__( 'Logged out successfully' );
 		header('location: '.yourls_site_url());exit;
 	}
