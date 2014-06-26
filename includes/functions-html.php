@@ -1003,7 +1003,7 @@ function yourls_login_screen( $error_msg = '' ) {
 	?>
 	<style type="text/css">
 	body, html {height: 100%;}
-	.home {background:url(../images/bg.jpg) repeat-x 0 bottom;}
+	.home {background:url(../images/bg.jpg) repeat-x 0 bottom; background-attachment:fixed;}
 	#wrap {height:auto; padding:90px 0 140px 0; max-width: 100%;}
 	</style>
 	<div class="contentarea homecontent">

@@ -260,7 +260,7 @@ font-weight:normal;
 
 img {border:0; line-height: 0;}
 
-.home {background:url(../images/bg.jpg) repeat-x 0 bottom;}
+.home {background:url(../images/bg.jpg) repeat-x 0 bottom; background-attachment:fixed;}
 
 .shorten-table {margin:0 auto; width:80%;}
 .fullwidth {width:96%;}
