@@ -22,13 +22,18 @@ function yourls_is_valid_user() {
 	// Logout request
 	if( isset( $_GET['action'] ) && $_GET['action'] == 'logout' ) {
 		yourls_do_action( 'logout' );
-		yourls_store_cookie( null );
+		// yourls_store_cookie( null );
+		// setcookie('yourls_username', '', 1, '/', '', false, true);
+		setcookie ('yourls_username', null, time()-3600, '/');
+		unset($_COOKIE['yourls_username']);
+		$_COOKIE['yourls_username']='';
 		//new code for validating username & pwd from db
 		 // session_start();
 	  //    session_unset();
+		 // echo '<pre>';print_r($_COOKIE);exit;
 		session_destroy();
-		define( 'YOURLS_ADMIN', false );
-		//return yourls__( 'Logged out successfully' );
+		// define( 'YOURLS_ADMIN', false );
+		// return yourls__( 'Please Sign In' );
 		header('location: '.yourls_site_url());exit;
 	}
 	

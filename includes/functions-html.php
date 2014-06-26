@@ -254,6 +254,14 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 
 
 	<?php yourls_do_action( 'html_head', $context ); ?>
+	<script>
+		$(document).ready(function() {
+		if (navigator.userAgent.search("MSIE") >= 0) {
+	           // alert("Browser is InternetExplorer");
+	           window.location.reload(true);
+	      }
+	  });
+	</script>
 </head>
 
 <?php if( yourls_is_admin() ) {?>
