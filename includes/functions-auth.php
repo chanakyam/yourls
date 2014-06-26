@@ -78,7 +78,7 @@ function yourls_is_valid_user() {
 		// Normal only: cookies
 		( !yourls_is_API() && isset( $_COOKIE['yourls_username'] ) )
 		{
-			// yourls_do_action( 'pre_login_cookie' );
+			yourls_do_action( 'pre_login_cookie' );
 			$unfiltered_valid = yourls_check_auth_cookie();
 			// $unfiltered_valid = true;
 		}
