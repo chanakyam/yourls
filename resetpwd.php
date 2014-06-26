@@ -26,7 +26,7 @@ yourls_html_head();
 						<div class="title">Reset Password</div>
 						<?php 
 							if (isset($_REQUEST['status']) && $_REQUEST['status']== 1 ){
- 	 			       		echo "<div class='success'>Password reset succesfully.</div>";
+ 	 			       		echo "<div class='success'>Password reset Successfully.</div>";
  	 			       		}
  	 			       	?>
 	

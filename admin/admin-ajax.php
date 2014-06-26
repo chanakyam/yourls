@@ -40,7 +40,7 @@ function save_user_data( $id,$fname, $lname, $email,$role, $status) {
 		mysql_query($query);
 	//if($query){
 		$response['status'] = "success";
-		$response['message'] = "Updated Succesfully ";
+		$response['message'] = "Updated Successfully ";
 	}else{
 		$response['status'] = "fail";
 		$response['message'] = "Email Already Exists";
@@ -55,7 +55,7 @@ function delete_user( $id) {
 	$delete_result = mysql_query($delete_query);
 	if ($delete_result){
 		$response['status']	= "success";
-		$response['message'] = "Deleted Succesfully ";
+		$response['message'] = "Deleted Successfully ";
 	}else{
 
 		$response['status']	= "fail";

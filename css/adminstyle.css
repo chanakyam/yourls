@@ -103,7 +103,19 @@ tr.edit-row td {
 background:#337291 !important;
 color: #fff !important;
 }
-#new_url {text-align:center; border:1px solid #0e607a; clear:both; background:url(../images/titlebg.jpg) repeat-x 0 0; padding:2px; color:#fff; margin-bottom: 5px;}
+#new_url {text-align:center; 
+    border:1px solid #0e607a; 
+    background:url(../images/titlebg.jpg) repeat-x 0 0; 
+    padding:4px 2px; color:#fff; 
+    margin-bottom: 5px;
+    width:99%;
+}
+
+#new_url:after, #new_url:before{display: table; content:"";}
+#new_url:after, {clear:both;}
+
+#new_url input[type="text"] {margin-bottom:0;}
+
 #new_url_form {padding:3px;}
 
 #new_url #feedback {

@@ -120,7 +120,7 @@ RETURN;
 	
 		<?php 
 			if (isset($_REQUEST['status']) && $_REQUEST['status']== 1 ){
-	        	echo "<center><strong>Added succesfully.</strong></center>";
+	        	echo "<center><strong>Added Successfully.</strong></center>";
 	        }
 	    ?>
 

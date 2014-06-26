@@ -9,7 +9,13 @@ table.tblSorter thead tr th, table.tblSorter th.header {
 background-color:#343637;
 padding:8px 15px;
 color:#fff;
+border-right:1px solid #fff;
 }
+
+table.tblSorter thead tr th:last-child, table.tblSorter th.header:last-child {
+border-right:0;
+}
+
 table.tblSorter tfoot tr th {}
 
 table.tblSorter thead tr .tablesorter-header {
