@@ -76,7 +76,7 @@ function yourls_is_valid_user() {
 		{
 			yourls_do_action( 'pre_login_cookie' );
 			$unfiltered_valid = yourls_check_auth_cookie();
-			$unfiltered_valid = true;
+			// $unfiltered_valid = true;
 		}
 	
 	// Regardless of validity, allow plugins to filter the boolean and have final word
@@ -336,8 +336,12 @@ function yourls_check_auth_cookie() {
 	//if(yourls_check_username_password())
 		//yourls_set_user( $_COOKIE['yourls_username'] );
 		session_start();
-		yourls_set_user( $_SESSION['username'] );
-		return true;
+		if(isset($_SESSION['username']) && $_SESSION['username']!=''){
+			yourls_set_user( $_SESSION['username'] );
+			return true;
+		}else{
+			return false;
+		}
 	//return false;
 }
 
