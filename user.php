@@ -1,21 +1,18 @@
 <?php
 
 session_start();
-if(isset($_SESSION) && !empty($_SESSION)){
-	define( 'YOURLS_ADMIN', true );
-}
 
-// session_start();
-// if(isset($_SESSION['username']) && !empty($_SESSION['username'])){
-// 	define( 'YOURLS_ADMIN', true );
-// }else{
-// 	define( 'YOURLS_ADMIN', false );
-// }
 
 
 require_once(dirname(__FILE__).'/includes/load-yourls.php' );
 
 yourls_maybe_require_auth();
+
+if(isset($_SESSION['username']) && !empty($_SESSION['username'])){
+	define( 'YOURLS_ADMIN', true );
+}else{
+	define( 'YOURLS_ADMIN', false );
+}
 
 // Variables
 $table_url = YOURLS_DB_TABLE_URL;

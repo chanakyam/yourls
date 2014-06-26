@@ -18,7 +18,7 @@ yourls_html_head();
 <form name="changepwd" method="post" action="process.php" onsubmit="return validatechangepwd();">
 <div class="title">Change Password</div>
           <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 1 ){
-          echo "<div class='success'>Changed Password succesfully.</div>";
+          echo "<div class='success'>Changed Password Successfully.</div>";
           }?>
 
           <?php if (isset($_REQUEST['status']) && $_REQUEST['status']== 0 ){

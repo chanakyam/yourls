@@ -26,7 +26,7 @@ $user_data = $obj_user->getUserDetails();
 <div class="title">Edit Profile</div>
 		<?php 
 			if (isset($_REQUEST['status']) && $_REQUEST['status']== 1 ){
-	        	echo "<div class='success'>Updated succesfully.</div>";
+	        	echo "<div class='success'>Updated Successfully.</div>";
 	        }
 	    ?>
 
