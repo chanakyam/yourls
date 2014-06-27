@@ -1,4 +1,4 @@
-/*lycos css*/
+d/*lycos css*/
 * {padding:0; margin:0; outline: none;}
 
 html {height:100%;}
@@ -284,3 +284,23 @@ div.required {
     border-radius:6px;
 
 }
+
+
+@media screen and (max-width:1024px){
+
+body {font-size:12px;}
+.shorten-table {width:90%;}
+.userside form {width:55%;}
+
+.signup td {padding:2px; font-size:12px;}
+.title {font-size:18px;}
+.logintitle {font-size:18px;}
+
+input[type="reset"], input[type="button"], 
+input[type="submit"] {min-width:70px;}
+
+
+}
+
+
+

@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
  $err_msg = '';
 
 if ( isset($_REQUEST['css_type']) && $_REQUEST['css_type'] === '1' ) {

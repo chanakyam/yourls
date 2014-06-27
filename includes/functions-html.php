@@ -767,7 +767,7 @@ function yourls_table_edit_row( $keyword ) {
 	
 	if( $url ) {
 		$return = <<<RETURN
-<tr id="edit-$id" class="edit-row"><td colspan="5" class="edit-row"><div class="row"><div class="width10 margin7_T">%s : </div><input type="text" id="edit-url-$id" name="edit-url-$id" value="$safe_url" class="text" size="70" /></div><div class="row"><div class="width10 margin7_T">%s : </div> <div class="width90">$www<input type="text" id="edit-keyword-$id" name="edit-keyword-$id" value="$keyword" class="text" size="10" /></div></div><div class="row"><div class="width10 margin7_T">%s : </div> <input type="text" id="edit-title-$id" name="edit-title-$id" value="$safe_title" class="text" size="60" /></div></td><td colspan="1" align="center"><input type="button" id="edit-submit-$id" name="edit-submit-$id" value="%s" title="%s" class="button" onclick="edit_link_save('$id');" />&nbsp;<input type="button" id="edit-close-$id" name="edit-close-$id" value="%s" title="%s" class="button" onclick="edit_link_hide('$id');" /><input type="hidden" id="old_keyword_$id" value="$keyword"/><input type="hidden" id="nonce_$id" value="$nonce"/></td></tr>
+<tr id="edit-$id" class="edit-row"><td colspan="5" class="edit-row"><div class="row"><div class="width10 margin7_T">%s : </div><input type="text" id="edit-url-$id" name="edit-url-$id" value="$safe_url" class="text" size="70" /></div><div class="row"><div class="width10 margin7_T">%s : </div> <div class="width90">$www<input type="text" id="edit-keyword-$id" name="edit-keyword-$id" value="$keyword" class="text" size="10" /></div></div><div class="row"><div class="width10 margin7_T">%s : </div> <input type="text" id="edit-title-$id" name="edit-title-$id" value="$safe_title" class="text" size="60" /></div></td><td colspan="1" align="center" class="btnstd"><input type="button" id="edit-submit-$id" name="edit-submit-$id" value="%s" title="%s" class="button" onclick="edit_link_save('$id');" />&nbsp;<input type="button" id="edit-close-$id" name="edit-close-$id" value="%s" title="%s" class="button" onclick="edit_link_hide('$id');" /><input type="hidden" id="old_keyword_$id" value="$keyword"/><input type="hidden" id="nonce_$id" value="$nonce"/></td></tr>
 RETURN;
 		$return = sprintf( urldecode( $return ), yourls__( 'Long URL' ), yourls__( 'Short URL' ), yourls__( 'Title' ), yourls__( 'Save' ), yourls__( 'Save new values' ), yourls__( 'Cancel' ), yourls__( 'Cancel editing' ) );
 	} else {
@@ -1028,11 +1028,11 @@ function yourls_login_screen( $error_msg = '' ) {
 				}
 			?>
 			<p>
-				<label for="username"><?php yourls_e( 'Email Address' ); ?></label>
+				<label for="username"><?php yourls_e( 'Email Address' ); ?>:</label>
 				<input type="text" id="username" name="username" size="30" class="text" />
 			</p>
 			<p>
-				<label for="password"><?php yourls_e( 'Password' ); ?></label>
+				<label for="password"><?php yourls_e( 'Password' ); ?>:</label>
 				<input type="password" id="password" name="password" size="30" class="text" />
 			</p>
 			<p>
