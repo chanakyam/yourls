@@ -1,0 +1,32 @@
+
+
+body {font-size:12px;}
+.shorten-table {width:90%;}
+.userside form {width:55%;}
+
+.signup td {padding:2px; font-size:12px;}
+.title {font-size:18px;}
+.logintitle {font-size:18px;}
+
+input[type="reset"], input[type="button"], 
+input[type="submit"] {min-width:70px;}
+
+.logintitle {font-size:18px;}
+
+input[type="reset"], input[type="button"], 
+input[type="submit"] {min-width:60px;}
+
+#login .text {padding:6px;}
+p, td {font-size:12px;}
+
+table.tblSorter tbody td {padding:3px;}
+
+table.tblSorter tbody td.btnstd {vertical-align: middle;}
+#login p {
+font-weight:normal;
+margin-bottom: 5px;
+}
+
+
+
+

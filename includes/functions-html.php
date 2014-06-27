@@ -254,7 +254,9 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 
 
 	<?php yourls_do_action( 'html_head', $context ); ?>
-	
+	<!--[if lte IE 8]>
+ <link rel="stylesheet" type="text/css" href="<?php yourls_site_url(); ?>/css/ie8.css" />
+<![endif]-->
 </head>
 
 <?php if( yourls_is_admin() ) {?>
