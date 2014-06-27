@@ -354,7 +354,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 					<li><a href="changepwd.php" title="Change Password" id="changepwd">Change Password</a></li>
 	           	</ul>
 			 </div>
-			 <a href="<?php yourls_site_url(); ?>/user.php?action=logout" title="Logout"><img src="/images/logout-icon.png"></a>
+			 <a href="<?php yourls_site_url(); ?>/user.php?action=logout" title="Sign Out"><img src="/images/logout-icon.png"></a>
 		  
 		 
 		<?php }else{
@@ -410,7 +410,7 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 					<li><a href="changepwd.php" title="Change Password" id="changepwd">Change Password</a></li>
 	           	</ul>
 			 </div>
-			 <a href="<?php yourls_site_url(); ?>/user.php?action=logout" title="Logout"><img src="/images/logout-icon.png"></a>
+			 <a href="<?php yourls_site_url(); ?>/user.php?action=logout" title="Sign Out"><img src="/images/logout-icon.png"></a>
 		  
 		 
 		<?php }else{
@@ -1006,7 +1006,7 @@ function yourls_login_screen( $error_msg = '' ) {
 	<style type="text/css">
 	body, html {height: 100%;}
 	.home {background:url(../images/bg.jpg) repeat-x 0 bottom; background-attachment:fixed;}
-	#wrap {height:auto; padding:90px 0 140px 0; max-width: 100%;}
+	#wrap {height:auto; padding:60px 0 150px 0; max-width: 100%;}
 	</style>
 	<div class="contentarea homecontent">
 	<div class="homeinner">
@@ -1089,7 +1089,7 @@ function yourls_html_menu() {
 
 	// Build menu links
 	if( defined( 'YOURLS_USER' ) ) {
-		$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('Hello <strong class="hellouser">%s</strong>'), $firstname ) . '<a class="logout" title="Logout" href="?action=logout"' . yourls_esc_attr__( 'Sign out' ) . '">' . yourls__( 'Logout' ) . '</a>' );
+		$logout_link = yourls_apply_filter( 'logout_link', sprintf( yourls__('Hello <strong class="hellouser">%s</strong>'), $firstname ) . '<a class="logout" title="Sign Out" href="?action=logout"' . yourls_esc_attr__( 'Sign out' ) . '">' . yourls__( 'Logout' ) . '</a>' );
 	} else {
 		$logout_link = yourls_apply_filter( 'logout_link', '' );
 	}
