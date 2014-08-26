@@ -44,7 +44,8 @@ if( isset( $_REQUEST['callback'] ) )
 	$return['callback'] = $_REQUEST['callback'];
 
 $format = ( isset( $_REQUEST['format'] ) ? $_REQUEST['format'] : 'xml' );
-
+unset($return[message]);
+unset($return[code]);
 yourls_api_output( $format, $return );
 
 die();

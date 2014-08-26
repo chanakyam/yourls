@@ -298,7 +298,8 @@ function yourls_add_new_link( $url, $keyword = '', $title = '' ) {
 			
 		yourls_do_action( 'add_new_link_already_stored', $url, $keyword, $title );
 		
-		$return['status']   = 'fail';
+		// $return['status']   = 'fail';
+		$return['status']   = 'success';
 		$return['code']     = 'error:url';
 		$return['url']      = array( 'keyword' => $url_exists->keyword, 'url' => $strip_url, 'title' => $url_exists->title, 'date' => $url_exists->timestamp, 'ip' => $url_exists->ip, 'clicks' => $url_exists->clicks );
 		$return['message']  = /* //translators: eg "http://someurl/ already exists" */ yourls_s( '%s already exists in database', yourls_trim_long_string( $strip_url ) );
