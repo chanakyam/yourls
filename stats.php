@@ -23,10 +23,12 @@ if( yourls_do_log_redirect() ) {
 	$last_24h = array();
 	
 	// Define keyword query range : either a single keyword or a list of keywords
-	$keyword_range= " IN (select `keyword` from yourls_url where user_id = ".$session_user_id." )";
+	$keyword_range ='';
 
 	if($session_role=="admin" || $session_role=="Admin User"){
 		$keyword_range= " IN (select `keyword` from yourls_url )";
+	}else{
+		$keyword_range= " IN (select `keyword` from yourls_url where user_id = ".$session_user_id." )";
 	}
 
 	// *** Referrers ***
