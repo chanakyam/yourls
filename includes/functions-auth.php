@@ -130,6 +130,7 @@ function yourls_check_username_password() {
 		//assigning username to session
 		session_start();
 		$_SESSION['username'] = $_REQUEST['username'];
+		$_SESSION['user_id'] = $user_results[0]->user_id;
 		$_SESSION['role'] = $user_results[0]->role;
 		$_SESSION['name'] = $user_results[0]->firstname.' '.$user_results[0]->lastname;
 		yourls_set_user( $_REQUEST['username'] );		

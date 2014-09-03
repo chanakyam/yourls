@@ -134,3 +134,6 @@ ul.no_bullet li {
 
 .no_bullet li a {float: none !important; padding: 5px !important; color:#000 !important;}
 .no_bullet li a:hover {background:none !important;}
+#tabs ul.TSList li a{ padding: 10px 18px;}
+.detail_list{ margin-left: 40px;}
+.detail_list, .detail_list li{clear:both;}

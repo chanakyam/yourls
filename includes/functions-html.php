@@ -313,7 +313,8 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 	<?php 
 		if(isset($_SESSION['role']) && $_SESSION['role']=='User'){?>
 			<span id="admin_menu_user_link"><a href="<?php yourls_site_url(); ?>/user.php" title="User Interface">User Interface</a></span>
-			<span id="admin_menu_user_link"><a href="<?php yourls_site_url(); ?>/signature.php" title="API Interface">API Interface</a></span>
+			<span id="admin_menu_user_link"><a href="<?php yourls_site_url(); ?>/signature.php" title="API Key">API Key</a></span>
+			<span id="admin_menu_user_link"><a href="<?php yourls_site_url(); ?>/stats.php" title="Stats">Stats</a></span>
 
 	<?php }	?>
 	<?php 
@@ -321,7 +322,8 @@ function yourls_html_head( $context = 'index', $title = '' ) {
 			<span id="admin_menu_admin_link"><a href="<?php yourls_site_url(); ?>/user.php" title="Admin Interface">Admin Interface</a></span>
 			<span id="admin_menu_plugins_link"><a href="<?php yourls_site_url(); ?>/plugins.php" title="Manage Plugins">Manage Plugins</a></span>
 			<span id="admin_menu_users_link"><a href="<?php yourls_site_url(); ?>/manage_users.php" title="Manage Users">Manage Users</a></span>
-			<span id="admin_menu_user_link"><a href="<?php yourls_site_url(); ?>/signature.php" title="API Interface">API Interface</a></span>
+			<span id="admin_menu_user_link"><a href="<?php yourls_site_url(); ?>/signature.php" title="API Key">API Key</a></span>
+			<span id="admin_menu_user_link"><a href="<?php yourls_site_url(); ?>/stats.php" title="Stats">Stats</a></span>
 	<?php }	?>
 	<span id="admin_menu_search_link"><a target="_blank" title="Lycos.com" href="http://search.lycos.com">Search</a></span>
 	<span id="admin_menu_mail_link"><a target="_blank" title="mail.lycos.com" href="http://mail.lycos.com">Mail</a></span>
@@ -1110,6 +1112,12 @@ function yourls_html_menu() {
 			'anchor' => yourls__( 'API Key' ),
 			
 		);
+		$admin_links['stats'] = array(
+			'url'    => 'stats.php',
+			'title'  => yourls__( 'Stats' ),
+			'anchor' => yourls__( 'Stats' ),
+			
+		);
 		$admin_links['search'] = array(
 			'url'    => 'http://search.lycos.com',
 			'title'  => yourls__( 'Lycos.com' ),
@@ -1157,6 +1165,18 @@ function yourls_html_menu() {
 			'anchor' => yourls__( 'Manage Users' ),
 			
 		);
+		$admin_links['signature'] = array(
+			'url'    => 'signature.php',
+			'title'  => yourls__( 'API Key' ),
+			'anchor' => yourls__( 'API Key' ),
+			
+		);
+		$admin_links['stats'] = array(
+			'url'    => 'stats.php',
+			'title'  => yourls__( 'Stats' ),
+			'anchor' => yourls__( 'Stats' ),
+			
+		);
 		$admin_links['search'] = array(
 			'url'    => 'http://search.lycos.com',
 			'title'  => yourls__( 'Lycos.com' ),
@@ -1181,12 +1201,8 @@ function yourls_html_menu() {
 			'anchor' => yourls__( 'Gamesville' ),
 			
 		);
-		$admin_links['signature'] = array(
-			'url'    => 'signature.php',
-			'title'  => yourls__( 'API Key' ),
-			'anchor' => yourls__( 'API Key' ),
-			
-		);
+		
+		
 		// $admin_links['more'] = array(
 		// 	'url'    => 'http://domains.lycos.com',			
 		// 	'title'  => yourls__( 'More Lycos Sites' ),
@@ -1269,7 +1285,7 @@ function yourls_html_menu() {
 		if( isset( $ar['url'] ) ) {
 			$anchor = isset( $ar['anchor'] ) ? $ar['anchor'] : $link;
 			$title  = isset( $ar['title'] ) ? 'title="' . $ar['title'] . '"' : '';
-			if($ar['title']!='Admin Interface' && $ar['title']!='Manage Plugins' && $ar['title']!='Manage Users' && $ar['title']!='User Interface' && $ar['title']!='API Key'){
+			if($ar['title']!='Admin Interface' && $ar['title']!='Manage Plugins' && $ar['title']!='Manage Users' && $ar['title']!='User Interface' && $ar['title']!='API Key' && $ar['title']!='Stats'){
 			printf( '<span id="admin_menu_%s_link"><a target="_blank" href="%s" %s>'.$ar['img'].'%s</a></span>', $link, $ar['url'], $title, $anchor );
 			}else{
 			printf( '<span id="admin_menu_%s_link"><a href="%s" %s>'.$ar['img'].'%s</a></span>', $link, $ar['url'], $title, $anchor );
