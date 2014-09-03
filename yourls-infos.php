@@ -1,6 +1,7 @@
 <?php
 // TODO: make things cleaner. This file is an awful HTML/PHP soup.
-define( 'YOURLS_INFOS', true );
+// define( 'YOURLS_INFOS', true );
+define( 'YOURLS_ADMIN', true );
 require_once( dirname( __FILE__ ).'/includes/load-yourls.php' );
 require_once( YOURLS_INC.'/functions-infos.php' );
 yourls_maybe_require_auth();
