@@ -118,7 +118,7 @@ class user{
 		$password     = $user["password"];
 		$md5		  = md5($password);
 		$status		  = "active";
-		$role		  = "Admin_User";
+		$role		  = "User";
 		$signature	  = $user["signature"];
 
 		// If user already exist skip registration.

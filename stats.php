@@ -10,6 +10,7 @@ $session_user_email = $_SESSION["username"];
 $session_user_id = $_SESSION["user_id"];
 $session_role = $_SESSION["role"];
 
+
 if( yourls_do_log_redirect() ) {
 
 	$table = YOURLS_DB_TABLE_LOG;
@@ -23,16 +24,16 @@ if( yourls_do_log_redirect() ) {
 	$last_24h = array();
 	
 	// Define keyword query range : either a single keyword or a list of keywords
-	$keyword_range ='';
+	$keyword_range= " IN (select `keyword` from yourls_url where user_id = ".$session_user_id." )";
+	//$keyword_range= " IN (select `clicks` from yourls_url where user_id = ".$session_user_id." ) ";
 
 	if($session_role=="admin" || $session_role=="Admin User"){
 		$keyword_range= " IN (select `keyword` from yourls_url )";
-	}else{
-		$keyword_range= " IN (select `keyword` from yourls_url where user_id = ".$session_user_id." )";
 	}
 
 	// *** Referrers ***
 	$query = "SELECT `referrer`, COUNT(*) AS `count` FROM `$table` WHERE `shorturl` $keyword_range GROUP BY `referrer`;";
+	//print_r($query);
 	$rows = $ydb->get_results( yourls_apply_filter( 'stat_query_referrer', $query ) );
 	
 	// Loop through all results and build list of referrers, countries and hits per day
@@ -191,7 +192,6 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 		<li><a href="#stat_tab_fbcount"><h2><?php yourls_e( 'Facebook Count'); ?></h2></a></li>
 		<li><a href="#stat_tab_twittercount"><h2><?php yourls_e( 'Twitter Count'); ?></h2></a></li>
 		<?php } ?>
-		<!-- <li><a href="#stat_tab_share"><h2><?php //yourls_e( 'Share'); ?></h2></a></li> -->
 	</ul>
 	</div>
 
@@ -494,7 +494,13 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 			//echo '<p>' . yourls__( 'No referrer data.' ) . '</p>';
 			//$fquery  = "SELECT share_count FROM link_stat WHERE url = '".yourls_link($longurl)."'";
 
-			$query_get_keywords = "SELECT `keyword` FROM `yourls_url` WHERE `user_id` = ".$session_user_id." ;";
+			if($session_role=="admin" || $session_role=="Admin User"){
+				$query_get_keywords = "SELECT `keyword` FROM `yourls_url`";
+			}else{
+				$query_get_keywords = "SELECT `keyword` FROM `yourls_url` WHERE `user_id` = ".$session_user_id." ;";
+			}
+			
+
 			$keywords_rows = $ydb->get_results( $query_get_keywords );
 
 			$facebook_share_count = 0;
@@ -538,6 +544,14 @@ yourls_html_head( 'infos', yourls_s( 'Statistics for %s', YOURLS_SITE.'/'.$keywo
 	</div>
 
 <?php } // endif do log redirect ?>
+
+
+	<!-- <div id="stat_tab_share" class="tab">
+		<h2><?php //yourls_e( 'Share' ); ?></h2>
+		
+		<?php //yourls_share_box( $longurl, yourls_link($keyword), $title, '', '<div class="subtitle">' . yourls__( 'Short link' ) . '</div>', '<div class="subtitle">' . yourls__( 'Quick Share' ) . '</div>'); ?>
+
+	</div> -->
 	
 </div>
 
