@@ -27,7 +27,7 @@ if( yourls_do_log_redirect() ) {
 	$keyword_range= " IN (select `keyword` from yourls_url where user_id = ".$session_user_id." )";
 	//$keyword_range= " IN (select `clicks` from yourls_url where user_id = ".$session_user_id." ) ";
 
-	if($session_role=="admin" || $session_role=="Admin User"){
+	if($session_role=="Admin" || $session_role=="Admin User"){
 		$keyword_range= " IN (select `keyword` from yourls_url )";
 	}
 
